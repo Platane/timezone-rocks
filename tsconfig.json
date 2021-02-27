@@ -2,6 +2,7 @@
   "compilerOptions": {
     "jsx": "preserve",
     "moduleResolution": "node",
+    "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true

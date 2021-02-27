@@ -8,6 +8,7 @@
   "dependencies": {
     "base-64": "1.0.0",
     "cannon-es": "0.16.0",
+    "deep-equal": "2.0.5",
     "drei": "2.2.21",
     "lodash.deburr": "4.1.0",
     "react": "17.0.1",
