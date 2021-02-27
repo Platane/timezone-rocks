@@ -72,17 +72,13 @@ const webpackConfiguration: WebpackConfiguration = {
     // new CopyPlugin({ patterns: [] }),
 
     new HtmlPlugin({
-      title: "-",
+      title: "🌐",
     }),
 
-    ...(!false
-      ? [
-          new BundleAnalyzerPlugin({
-            openAnalyzer: false,
-            analyzerMode: "static",
-          }),
-        ]
-      : []),
+    new BundleAnalyzerPlugin({
+      openAnalyzer: false,
+      analyzerMode: "static",
+    }),
   ],
 };
 
