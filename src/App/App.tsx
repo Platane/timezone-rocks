@@ -9,7 +9,9 @@ import * as THREE from "three";
 
 export const App = () => {
   const [query, setQuery] = useState("");
-  const results = useSearchResults(useSearch(useCities() ?? []), query);
+  const cities = useCities();
+  const { list, addCity, removeCity } = useList(cities);
+  const results = useSearchResults(useSearch(cities ?? []), query);
 
   return (
     <>
@@ -20,9 +22,31 @@ export const App = () => {
       />
 
       {results.map((c) => (
-        <div key={c.name}>
+        <ResultItem
+          href="#"
+          key={c.name}
+          onClick={(event) => {
+            event.preventDefault();
+            addCity(c);
+          }}
+        >
           {getFlagEmoji(c.countryCode)} {c.name}
-        </div>
+        </ResultItem>
+      ))}
+
+      <span>----</span>
+
+      {list.map((c) => (
+        <ResultItem
+          href="#"
+          key={c.name}
+          onClick={(event) => {
+            event.preventDefault();
+            removeCity(c);
+          }}
+        >
+          {getFlagEmoji(c.countryCode)} {c.name}
+        </ResultItem>
       ))}
 
       <WorldCanvas style={{ height: "500px" }}>
@@ -34,9 +58,7 @@ export const App = () => {
           <meshPhysicalMaterial color={"orange"} metalness={0} roughness={0} />
         </mesh>
 
-        {results.map(({ name, countryCode, longitude, latitude }) => {
-          console.log(latitude, longitude);
-
+        {list.map(({ name, countryCode, longitude, latitude }) => {
           const s = new THREE.Spherical(
             1,
             (latitude / 180) * Math.PI,
@@ -45,7 +67,7 @@ export const App = () => {
           const p = new THREE.Vector3().setFromSpherical(s);
 
           return (
-            <group key={name} position={p.toArray()}>
+            <group key={name + countryCode} position={p.toArray()}>
               <mesh>
                 <sphereBufferGeometry args={[0.01, 16, 16]} />
                 <meshBasicMaterial color={"red"} />
@@ -76,6 +98,10 @@ export const globals = css`
       box-sizing: inherit;
     }
   }
+`;
+
+const ResultItem = styled.a`
+  display: block;
 `;
 
 const WorldCanvas = styled(Canvas)`
@@ -149,6 +175,61 @@ const useSearch = (cities: City[]) => {
   );
 
   return search;
+};
+
+const useList = (cities?: City[]) => {
+  const [list, setList] = useState<City[]>([]);
+
+  const map = useMemo(() => createMap(cities ?? []), [cities]);
+
+  useEffect(() => {
+    if (!cities) return;
+
+    const list = window.location.hash
+      .split(",")
+      .map((m) => cities[map.indexOf(m)])
+      .filter(Boolean);
+
+    setList(list);
+  }, [cities, map]);
+
+  useEffect(() => {
+    if (!cities) return;
+
+    window.location.hash = list
+      .map((c) => map[cities.indexOf(c)])
+      .filter(Boolean)
+      .join(",");
+  }, [cities, map, list]);
+
+  return {
+    list,
+    addCity: (c: City) => setList((l) => [...l.filter((cc) => c !== cc), c]),
+    removeCity: (c: City) => setList((l) => l.filter((cc) => c !== cc)),
+    clear: () => setList([]),
+  };
+};
+
+const createMap = (cities: City[]) => {
+  debugger;
+
+  const fullSlugs = cities.map(({ name, countryCode, longitude }) =>
+    deburr((name + countryCode + longitude).toLowerCase()).replace(
+      /[^a-z0-9]+/g,
+      ""
+    )
+  );
+
+  return cities.map((city, i) => {
+    let slug = fullSlugs[i].slice(0, 3);
+
+    while (
+      fullSlugs.some((fullSlug, j) => i !== j && fullSlug.startsWith(slug))
+    )
+      slug = fullSlugs[i].slice(0, slug.length + 1);
+
+    return slug;
+  });
 };
 
 const useSearchResults = (search: ReturnType<typeof useSearch>, query = "") =>
