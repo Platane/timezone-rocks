@@ -27,7 +27,8 @@ export const App = () => {
           key={c.key}
           onClick={(event) => {
             event.preventDefault();
-            addCity(c as any);
+            addCity(c);
+            setQuery("");
           }}
         >
           {getFlagEmoji(c.countryCode)} {c.name}
@@ -37,16 +38,19 @@ export const App = () => {
       <span>----</span>
 
       {list.map((c) => (
-        <ResultItem
-          href="#"
-          key={c.key}
-          onClick={(event) => {
-            event.preventDefault();
-            removeCity(c);
-          }}
-        >
+        <div key={c.key}>
           {getFlagEmoji(c.countryCode)} {c.name}
-        </ResultItem>
+          <a
+            href="#"
+            style={{ marginLeft: "10px" }}
+            onClick={(event) => {
+              event.preventDefault();
+              removeCity(c);
+            }}
+          >
+            ×
+          </a>
+        </div>
       ))}
 
       <WorldCanvas style={{ height: "500px" }}>
@@ -73,7 +77,9 @@ export const App = () => {
                 <meshBasicMaterial color={"red"} />
               </mesh>
 
-              <Html>{getFlagEmoji(countryCode)}</Html>
+              <Html style={{ pointerEvents: "none" }}>
+                {getFlagEmoji(countryCode)}
+              </Html>
             </group>
           );
         })}
