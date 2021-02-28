@@ -24,10 +24,10 @@ export const App = () => {
       {results.map((c) => (
         <ResultItem
           href="#"
-          key={c.name}
+          key={c.key}
           onClick={(event) => {
             event.preventDefault();
-            addCity(c);
+            addCity(c as any);
           }}
         >
           {getFlagEmoji(c.countryCode)} {c.name}
@@ -39,7 +39,7 @@ export const App = () => {
       {list.map((c) => (
         <ResultItem
           href="#"
-          key={c.name}
+          key={c.key}
           onClick={(event) => {
             event.preventDefault();
             removeCity(c);
@@ -58,7 +58,7 @@ export const App = () => {
           <meshPhysicalMaterial color={"orange"} metalness={0} roughness={0} />
         </mesh>
 
-        {list.map(({ name, countryCode, longitude, latitude }) => {
+        {list.map(({ key, name, countryCode, longitude, latitude }) => {
           const s = new THREE.Spherical(
             1,
             (latitude / 180) * Math.PI,
@@ -67,7 +67,7 @@ export const App = () => {
           const p = new THREE.Vector3().setFromSpherical(s);
 
           return (
-            <group key={name + countryCode} position={p.toArray()}>
+            <group key={key} position={p.toArray()}>
               <mesh>
                 <sphereBufferGeometry args={[0.01, 16, 16]} />
                 <meshBasicMaterial color={"red"} />
@@ -130,57 +130,47 @@ const parseCities = (csv: string) =>
     };
   });
 type City = ReturnType<typeof parseCities>[number];
+type CityWithKey = ReturnType<typeof createKey>[number];
 
 const useCities = () => {
-  const [cities, setCities] = useState<City[]>();
+  const [cities, setCities] = useState<CityWithKey[]>();
 
   useEffect(() => {
     import(
       /* webpackPrefetch: true */
       // @ts-ignore
       "../cities/cities.csv"
-    ).then((m) => setCities(parseCities(m.default)));
+    ).then((m) => setCities(createKey(parseCities(m.default))));
   }, []);
 
   return cities;
 };
 
-const useSearch = (cities: City[]) => {
-  const slugs = useMemo(
-    () =>
-      cities.map((value) => ({
-        value,
-        slug: deburr(value.name.toLocaleLowerCase()),
-      })),
-    [cities]
-  );
-
+const useSearch = (cities: CityWithKey[]) => {
   const search = useCallback(
     (query: string) => {
-      const res: City[] = [];
+      const res: CityWithKey[] = [];
 
       if (!query) return res;
 
       const qSlug = deburr(query.toLocaleLowerCase());
 
-      for (const { value, slug } of slugs) {
-        if (slug.includes(qSlug)) {
-          res.push(value);
+      for (const city of cities) {
+        if (city.normalizedName.includes(qSlug)) {
+          res.push(city);
           if (res.length >= 16) return res;
         }
       }
       return res;
     },
-    [slugs]
+    [cities]
   );
 
   return search;
 };
 
-const useList = (cities?: City[]) => {
-  const [list, setList] = useState<City[]>([]);
-
-  const map = useMemo(() => createMap(cities ?? []), [cities]);
+const useList = (cities?: CityWithKey[]) => {
+  const [list, setList] = useState<CityWithKey[]>([]);
 
   useEffect(() => {
     if (!cities) return;
@@ -188,48 +178,43 @@ const useList = (cities?: City[]) => {
     const list = window.location.hash
       .slice(1)
       .split(",")
-      .map((m) => cities[map.indexOf(m)])
+      .map((key) => cities.find((c) => c.key === key)!)
       .filter(Boolean);
 
     setList(list);
-  }, [cities, map]);
+  }, [cities]);
 
   useEffect(() => {
     if (!cities) return;
 
-    window.location.hash = list
-      .map((c) => map[cities.indexOf(c)])
-      .filter(Boolean)
-      .join(",");
-  }, [cities, map, list]);
+    window.location.hash = list.map((c) => c.key).join(",");
+  }, [cities, list]);
 
   return {
     list,
-    addCity: (c: City) => setList((l) => [...l.filter((cc) => c !== cc), c]),
-    removeCity: (c: City) => setList((l) => l.filter((cc) => c !== cc)),
+    addCity: (c: CityWithKey) =>
+      setList((l) => [...l.filter((cc) => c.key !== cc.key), c]),
+    removeCity: (c: CityWithKey) =>
+      setList((l) => l.filter((cc) => c.key !== cc.key)),
     clear: () => setList([]),
   };
 };
 
-const createMap = (cities: City[]) => {
-  debugger;
-
-  const fullSlugs = cities.map(({ name, countryCode, longitude }) =>
-    deburr((name + countryCode + longitude).toLowerCase()).replace(
+const createKey = (cities: City[]) => {
+  const fullKeys = cities.map(({ name, countryCode, longitude, latitude }) =>
+    deburr((name + countryCode + longitude + latitude).toLowerCase()).replace(
       /[^a-z0-9]+/g,
       ""
     )
   );
 
   return cities.map((city, i) => {
-    let slug = fullSlugs[i].slice(0, 3);
+    let key = fullKeys[i].slice(0, 3);
 
-    while (
-      fullSlugs.some((fullSlug, j) => i !== j && fullSlug.startsWith(slug))
-    )
-      slug = fullSlugs[i].slice(0, slug.length + 1);
+    while (fullKeys.some((fullKey, j) => i !== j && fullKey.startsWith(key)))
+      key = fullKeys[i].slice(0, key.length + 1);
 
-    return slug;
+    return { key, normalizedName: deburr(city.name.toLowerCase()), ...city };
   });
 };
 
