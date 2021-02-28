@@ -186,6 +186,7 @@ const useList = (cities?: City[]) => {
     if (!cities) return;
 
     const list = window.location.hash
+      .slice(1)
       .split(",")
       .map((m) => cities[map.indexOf(m)])
       .filter(Boolean);
