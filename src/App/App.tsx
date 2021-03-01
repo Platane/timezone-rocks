@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import deburr from "lodash.deburr";
 import { styled } from "@linaria/react";
 import { css } from "@linaria/core";
@@ -6,6 +6,7 @@ import { getFlagEmoji } from "../emojiFlagSequence";
 import { Canvas } from "react-three-fiber";
 import { OrbitControls, Html } from "drei";
 import * as THREE from "three";
+import { Earth } from "./Earth";
 
 export const App = () => {
   const [query, setQuery] = useState("");
@@ -56,6 +57,10 @@ export const App = () => {
       <WorldCanvas style={{ height: "500px" }}>
         <OrbitControls />
         <directionalLight position={[10, 8, 6]} intensity={1} />
+
+        <Suspense fallback={null}>
+          <Earth />
+        </Suspense>
 
         <mesh>
           <sphereBufferGeometry args={[1, 64, 64]} />

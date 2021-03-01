@@ -16,9 +16,9 @@ const mode =
 const webpackConfiguration: WebpackConfiguration = {
   mode,
   devtool: false,
-  entry: path.join(__dirname, "./src/index"),
+  entry: path.join(__dirname, "src/index"),
   output: {
-    path: path.join(__dirname, "./build"),
+    path: path.join(__dirname, "build"),
     filename: "[contenthash].js",
     publicPath: "",
   },
@@ -41,7 +41,8 @@ const webpackConfiguration: WebpackConfiguration = {
         test: [
           /\.(bmp|gif|png|jpeg|jpg|svg)$/,
           /\.(otf|ttf|woff|woff2)$/,
-          /\.(hdr)/,
+          /\.(hdr)$/,
+          /\.(glb|gltf)$/,
         ],
         loader: "file-loader",
         options: { name: "[contenthash].[ext]" },
@@ -69,7 +70,14 @@ const webpackConfiguration: WebpackConfiguration = {
 
     new EnvironmentPlugin({}),
 
-    // new CopyPlugin({ patterns: [] }),
+    // new CopyPlugin({
+    //   patterns: [
+    //     {
+    //       from: path.join(__dirname, "src/assets/**/*"),
+    //       to: "./assets/",
+    //     },
+    //   ],
+    // }),
 
     new HtmlPlugin({
       title: "🌐",
