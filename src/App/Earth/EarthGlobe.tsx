@@ -15,8 +15,10 @@ export const EarthGlobe = (props: any) => {
   const gltf = useGLTF(modelPath);
   const { materials, nodes } = gltf;
 
+  const s = 1 / 8.5;
+
   return (
-    <group {...props} dispose={null} scale={[1 / 8, 1 / 8, 1 / 8]}>
+    <group {...props} dispose={null} scale={[s, s, s]}>
       <mesh
         material={materials.blinn1}
         geometry={(nodes.earth4_blinn1_0 as any).geometry}

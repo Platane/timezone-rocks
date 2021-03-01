@@ -1,24 +1,25 @@
 import { useEffect, useState } from "react";
 import type { Location } from "./useLocationStore";
 
-export const useList = (cities?: Location[]) => {
+export const useList = (locations?: Location[]) => {
   const [list, setList] = useState<Location[]>([]);
 
   useEffect(() => {
-    if (!cities) return;
+    if (!locations) return;
 
     const list = split(window.location.hash.slice(1), 3)
-      .map((key) => cities.find((c) => c.key === key)!)
+      .map((key) => locations.find((c) => c.key === key)!)
       .filter(Boolean);
 
     setList(list);
-  }, [cities]);
+    // setList(locations.slice(0, 200));
+  }, [locations]);
 
   useEffect(() => {
-    if (!cities) return;
+    if (!locations) return;
 
     window.location.hash = list.map((c) => c.key).join("");
-  }, [cities, list]);
+  }, [locations, list]);
 
   return {
     list,
