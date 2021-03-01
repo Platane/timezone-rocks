@@ -5,10 +5,10 @@ import { OrbitControls, Html } from "drei";
 import * as THREE from "three";
 import { EarthGlobe } from "./EarthGlobe";
 import { getFlagEmoji } from "../../emojiFlagSequence";
-import type { CityWithKey } from "../App";
+import type { Location } from "../useLocationStore";
 
 type Props = {
-  list: CityWithKey[];
+  list: Location[];
 };
 
 export const Earth = ({ list }: Props) => {
