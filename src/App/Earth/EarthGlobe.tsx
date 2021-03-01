@@ -9,9 +9,9 @@ title: Earth
 import { useGLTF } from "drei/useGLTF";
 
 // @ts-ignore
-import modelPath from "../assets/earth/scene.glb";
+import modelPath from "../../assets/earth/scene.glb";
 
-export const Earth = (props: any) => {
+export const EarthGlobe = (props: any) => {
   const gltf = useGLTF(modelPath);
   const { materials, nodes } = gltf;
 

@@ -85,7 +85,7 @@ export const run = async () => {
     })
     .join("\n");
 
-  const outFilename = path.join(__dirname, "..", "cities.csv");
+  const outFilename = path.join(__dirname, "../assets/locations.csv");
   fs.writeFileSync(outFilename, content);
 };
 

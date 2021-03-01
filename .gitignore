@@ -3,4 +3,4 @@ web_modules
 build
 .env
 .linaria-cache
-src/cities/cities.csv
+src/assets/locations.csv

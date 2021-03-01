@@ -33,16 +33,17 @@ const webpackConfiguration: WebpackConfiguration = {
   },
   module: {
     rules: [
-      {
-        test: [/\.(csv)/],
-        loader: "raw-loader",
-      },
+      // {
+      //   test: [/\.(csv)/],
+      //   loader: "raw-loader",
+      // },
       {
         test: [
           /\.(bmp|gif|png|jpeg|jpg|svg)$/,
           /\.(otf|ttf|woff|woff2)$/,
           /\.(hdr)$/,
-          /\.(glb|gltf)$/,
+          /\.(csv)$/,
+          /\.(glb)$/,
         ],
         loader: "file-loader",
         options: { name: "[contenthash].[ext]" },
