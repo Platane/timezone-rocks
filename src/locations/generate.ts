@@ -47,7 +47,7 @@ const getCities = async () => {
       };
     })
     .sort((a, b) => b.population - a.population)
-    .slice(0, 1000);
+    .slice(0, 3000);
 };
 
 const getTimeZones = async () => {
