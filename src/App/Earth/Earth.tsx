@@ -13,7 +13,7 @@ type Props = {
 
 export const Earth = ({ list }: Props) => {
   return (
-    <WorldCanvas style={{ height: "500px" }}>
+    <WorldCanvas style={{ height: "400px" }}>
       <OrbitControls />
       <directionalLight position={[10, 8, 6]} intensity={0.1} />
       <ambientLight />

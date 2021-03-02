@@ -6,11 +6,13 @@ type Props = {
   list: Location[];
 };
 
+const n = 4;
+
 export const Lines = ({ list }: Props) => {
   const [x, setX] = useState(Date.now());
   const [[a, b]] = useState([
-    Date.now() - 2 * 24 * 60 * 60 * 1000,
-    Date.now() + 2 * 24 * 60 * 60 * 1000,
+    Date.now() - (n / 2) * 24 * 60 * 60 * 1000,
+    Date.now() + (n / 2) * 24 * 60 * 60 * 1000,
   ]);
 
   const [width] = useState(window.innerWidth);
@@ -20,9 +22,33 @@ export const Lines = ({ list }: Props) => {
       <Cursor
         style={{ transform: `translateX(${((x - a) / (b - a)) * width}px)` }}
       />
+
+      {list.map((l) => {
+        return (
+          <Row key={l.key}>
+            {Array.from({ length: n + 2 }, (_, i) => (
+              <Block key={i} />
+            ))}
+          </Row>
+        );
+      })}
     </Container>
   );
 };
+
+const Row = styled.div`
+  margin: 10px 0;
+  overflow: hidden;
+  display: flex;
+`;
+
+const Block = styled.div`
+  background-color: #ddd;
+  border-radius: 4px;
+  width: ${100 / n}%;
+  height: 40px;
+  display: inline-block;
+`;
 
 const Container = styled.div`
   position: relative;

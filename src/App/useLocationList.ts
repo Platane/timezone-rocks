@@ -12,7 +12,6 @@ export const useList = (locations?: Location[]) => {
       .filter(Boolean);
 
     setList(list);
-    // setList(locations.slice(0, 200));
   }, [locations]);
 
   useEffect(() => {
@@ -25,8 +24,7 @@ export const useList = (locations?: Location[]) => {
     list,
     add: (c: Location) =>
       setList((l) => [...l.filter((cc) => c.key !== cc.key), c]),
-    remove: (c: Location | string) =>
-      setList((l) => l.filter((cc) => (c as any)?.key || c !== cc.key)),
+    remove: (c: Location) => setList((l) => l.filter((cc) => c !== cc)),
     clear: () => setList([]),
   };
 };
