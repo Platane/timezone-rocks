@@ -20,7 +20,7 @@ export const useSearch = (locations: Location[]) => {
       for (const { value, normalized } of normalizedList) {
         if (normalized.includes(q)) {
           res.push(value);
-          if (res.length >= 16) return res;
+          if (res.length >= 9) return res;
         }
       }
       return res;
