@@ -9,6 +9,7 @@ import {
 import type { Configuration as WebpackDevServerConfiguration } from "webpack-dev-server";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import TerserPlugin from "terser-webpack-plugin";
+import { GenerateSW } from "workbox-webpack-plugin";
 
 const mode =
   process.env.NODE_ENV === "production" ? "production" : "development";
@@ -82,6 +83,11 @@ const webpackConfiguration: WebpackConfiguration = {
 
     new HtmlPlugin({
       title: "🌐",
+    }),
+
+    new GenerateSW({
+      swDest: "service-worker.js",
+      exclude: [/\.LICENSE\.txt/],
     }),
 
     new BundleAnalyzerPlugin({
