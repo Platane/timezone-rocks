@@ -1906,7 +1906,7 @@
   dependencies:
     "@types/webpack" "*"
 
-"@types/deep-equal@^1.0.1":
+"@types/deep-equal@1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@types/deep-equal/-/deep-equal-1.0.1.tgz#71cfabb247c22bcc16d536111f50c0ed12476b03"
   integrity sha512-mMUu4nWHLBlHtxXY17Fg6+ucS/MnndyOWyOe7MmwkoMYxvfQU2ajtRaEvqSUv+aVkMqH/C0NCI8UoVfRNQ10yg==
@@ -2029,7 +2029,7 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.6.tgz#f4c7ec43e81b319a9815115031709f26987891f0"
   integrity sha512-3c+yGKvVP5Y9TYBEibGNR+kLtijnj7mYrXRg+WpFb2X9xm04g/DXYkfg4hmzJQosc9snFNUPkbYIhu+KAm6jJw==
 
-"@types/lodash.deburr@^4.1.6":
+"@types/lodash.deburr@4.1.6":
   version "4.1.6"
   resolved "https://registry.yarnpkg.com/@types/lodash.deburr/-/lodash.deburr-4.1.6.tgz#18b3bebd941c4b622cd2278fed18017dfc32ce3f"
   integrity sha512-LsdZUIBM/YDQ4+w4/PSq2KTRRuCmBic48vzzKD7PHw1uIsKMWizwDtk0fMdqYmo9/iLMhHiFh2ol0eqhjT0VTg==
@@ -2215,7 +2215,7 @@
     "@types/webpack-sources" "*"
     source-map "^0.6.0"
 
-"@types/workbox-webpack-plugin@^5.1.5":
+"@types/workbox-webpack-plugin@5.1.5":
   version "5.1.5"
   resolved "https://registry.yarnpkg.com/@types/workbox-webpack-plugin/-/workbox-webpack-plugin-5.1.5.tgz#3c54ebf8864b4039dab7fe7cb5cf6acd7fbc31fd"
   integrity sha512-FLFbhnilR3MXCkaRx7D9rxeRlvHwTl6bMnRa1gJux1wSFbTRb9E1K1kQeyxCYuuUAqk3C/QABCg1FAl4onZrDQ==
@@ -9435,7 +9435,7 @@ workbox-sw@^6.1.1:
   resolved "https://registry.yarnpkg.com/workbox-sw/-/workbox-sw-6.1.1.tgz#203ce4611309df1bf9c142d1e3b3a214b1b62944"
   integrity sha512-t6LLSx/rOS8d6w4+fsJOHDqGrjO89iBF0F8nBQgBleEPjvs9Be5j4B11y34Fw7s0CggeA3Kciutr4CqnQtPQUg==
 
-workbox-webpack-plugin@^6.1.1:
+workbox-webpack-plugin@6.1.1:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/workbox-webpack-plugin/-/workbox-webpack-plugin-6.1.1.tgz#4648c2593c4b82330c7d6972a2f5c53ceee29e0e"
   integrity sha512-yb864G6XmSY/vdIlzBTGkISsCiL/NL6LM2UZoiX80MS/OrSxOysJULi0L26uU8q3w9TMg1ip927N/PabgJyLHw==
