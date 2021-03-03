@@ -23,6 +23,7 @@ export const Search = ({ add, locations }: Props) => {
         if (top) {
           add(top);
           setQuery("");
+          setHover(null);
         }
       }}
     >
@@ -69,6 +70,7 @@ export const Search = ({ add, locations }: Props) => {
                 event.preventDefault();
                 add(c);
                 setQuery("");
+                setHover(null);
               }}
             >
               {getFlagEmoji(c.countryCode)} {c.name}
