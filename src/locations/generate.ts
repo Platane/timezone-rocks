@@ -3,7 +3,7 @@ import * as fs from "fs";
 import fetch from "node-fetch";
 import * as unzipper from "unzipper";
 
-const getCities = async () => {
+export const getCities = async () => {
   const arraybuffer = await fetch(
     `http://download.geonames.org/export/dump/cities15000.zip`
   ).then((res) => res.arrayBuffer());
@@ -50,7 +50,7 @@ const getCities = async () => {
     .slice(0, 3000);
 };
 
-const getTimeZones = async () => {
+export const getTimeZones = async () => {
   const text = await fetch(
     `http://download.geonames.org/export/dump/timeZones.txt`
   ).then((res) => res.text());
@@ -65,22 +65,16 @@ const getTimeZones = async () => {
 };
 
 export const run = async () => {
-  const timezones = await getTimeZones();
-
   const cities = await getCities();
   const content = cities
     .map((c) => {
-      const { offset, offsetDST } = timezones.find(
-        (tz) => tz.timezone === c.timezone
-      )!;
-
       return [
+        //
         c.name,
         c.countryCode,
         c.longitude,
         c.latitude,
-        offset,
-        offsetDST,
+        c.timezone,
       ].join(",");
     })
     .join("\n");

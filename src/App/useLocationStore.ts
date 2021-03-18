@@ -5,7 +5,7 @@ import locationListPath from "../assets/locations.csv";
 
 const parseLocations = (csv: string) =>
   csv.split("\n").map((s, i) => {
-    const [name, countryCode, lo, la, offset, offsetDST] = s.split(",");
+    const [name, countryCode, lo, la, timezone] = s.split(",");
     return {
       key: i.toString(36).padStart(3, "0"),
       type: "city" as const,
@@ -13,11 +13,7 @@ const parseLocations = (csv: string) =>
       countryCode,
       longitude: +lo,
       latitude: +la,
-      timezone: {
-        label: [offset, offsetDST].join("/"),
-        offset: +offset,
-        offsetDST: +offsetDST,
-      },
+      timezone: timezone.toLowerCase(),
     };
   });
 

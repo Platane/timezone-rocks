@@ -29,12 +29,14 @@ export const getUtcTimestampAt = (timezone: string, date: Date) => {
   const second = (0 | (date.hour * 60 * 60)) % 60;
   const millisecond = (0 | (date.hour * 60 * 60 * 1000)) % 1000;
 
-  const d = DateTime.fromObject({
-    ...date,
-    hour,
-    minute,
-    second,
-    millisecond,
-  }).setZone(timezone);
+  const d = DateTime.now()
+    .setZone(timezone)
+    .set({
+      ...date,
+      hour,
+      minute,
+      second,
+      millisecond,
+    });
   return d.toMillis();
 };

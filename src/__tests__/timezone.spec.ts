@@ -58,6 +58,17 @@ describe("getUtcTimestampAt", () => {
 
     expect(
       new Date(
+        getUtcTimestampAt("europe/london", {
+          year: 2021,
+          month: 3,
+          day: 18,
+          hour: 9,
+        })
+      )
+    ).toEqual(new Date("2021-03-18T09:00:00.000Z"));
+
+    expect(
+      new Date(
         getUtcTimestampAt("europe/paris", {
           year: 2021,
           month: 3,
