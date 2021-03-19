@@ -15,3 +15,8 @@ yarn dev
 ```
 
 ## TODO
+
+- [] custom and persit office hour
+- [] earth toon shader
+- [] add countries / state to locations
+  - states makes more sense for US, use states if the country span over more that one timezone ?

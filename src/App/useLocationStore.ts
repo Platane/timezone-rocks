@@ -13,7 +13,7 @@ const parseLocations = (csv: string) =>
       countryCode,
       longitude: +lo,
       latitude: +la,
-      timezone: timezone.toLowerCase(),
+      timezone: timezone,
     };
   });
 

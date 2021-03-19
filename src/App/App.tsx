@@ -48,6 +48,7 @@ export const globals = css`
     html {
       box-sizing: border-box;
       user-select: none;
+      font-family: Helvetica, Arial, sans-serif;
     }
 
     body {

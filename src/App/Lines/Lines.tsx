@@ -1,32 +1,38 @@
 import { styled } from "@linaria/react";
 import { useState } from "react";
+import { Label } from "./Label";
 import { getDate } from "../../timezone";
-import type { Location } from "../useLocationStore";
 import { AWAKE_HOURS, DAY_HOURS, getInterval, OFFICE_HOURS } from "./interval";
+import { useSlide } from "./useSlide";
+import type { Location } from "../useLocationStore";
 
 type Props = {
   list: Location[];
   onSelectLocation?: (l: Location) => void;
 };
 
-const n = 4;
+const n = 3;
 
 export const Lines = ({ list, onSelectLocation }: Props) => {
   const [x, setX] = useState(Date.now());
   const [[a, b]] = useState([
-    Date.now() - (n / 2) * 24 * 60 * 60 * 1000,
-    Date.now() + (n / 2) * 24 * 60 * 60 * 1000,
+    x - (n / 2) * 24 * 60 * 60 * 1000,
+    x + (n / 2) * 24 * 60 * 60 * 1000,
   ]);
 
   const [width] = useState(window.innerWidth);
 
   const toScreenSpace = (t: number) => ((t - a) / (b - a)) * width;
 
+  const bind = useSlide((x) => setX(a + (b - a) * x));
+
   return (
     <Container>
-      {list.map((l) => {
-        console.log(l.timezone);
+      <CursorContainer {...bind}>
+        <Cursor style={{ transform: `translateX(${toScreenSpace(x)}px)` }} />
+      </CursorContainer>
 
+      {list.map((l) => {
         const date = getDate(l.timezone, x);
 
         const o = getInterval(l.timezone, OFFICE_HOURS, date).map(
@@ -39,8 +45,8 @@ export const Lines = ({ list, onSelectLocation }: Props) => {
           <Row key={l.key} onClick={() => onSelectLocation?.(l)}>
             <DayBlock
               style={{
-                left: d[0] + "px",
-                right: d[1] + "px",
+                left: d[0] - 5 + "px",
+                right: d[1] + 5 + "px",
                 width: d[1] - d[0] + "px",
               }}
             />
@@ -58,30 +64,34 @@ export const Lines = ({ list, onSelectLocation }: Props) => {
                 width: o[1] - o[0] + "px",
               }}
             />
+            <Label
+              style={{ left: toScreenSpace(x) + 2 + "px" }}
+              hour={date.hour}
+              countryCode={l.countryCode}
+            />
           </Row>
         );
       })}
 
-      <Cursor style={{ transform: `translateX(${toScreenSpace(x)}px)` }} />
+      <CursorLine style={{ transform: `translateX(${toScreenSpace(x)}px)` }} />
     </Container>
   );
 };
 
 const Row = styled.div`
-  margin: 10px 0;
   overflow: hidden;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 40px;
+  height: 50px;
 `;
 
 const Block = styled.div`
   position: absolute;
   border-radius: 4px;
-  display: inline-block;
 `;
+
 const DayBlock = styled(Block)`
   height: 20px;
   background-color: #ddd6;
@@ -92,19 +102,40 @@ const AwakeBlock = styled(Block)`
 `;
 const OfficeBlock = styled(Block)`
   height: 30px;
+  border-radius: 0px;
   background-color: #48ac55;
 `;
 
 const Container = styled.div`
   position: relative;
+  overflow: hidden;
   width: 100%;
 `;
 
+const CursorContainer = styled.div`
+  background-color: #ddd4;
+  height: 24px;
+  width: 100%;
+
+  cursor: pointer;
+`;
+
 const Cursor = styled.div`
-  width: 20px;
-  height: 20px;
+  position: absolute;
+  width: 32px;
+  height: 24px;
   border-radius: 2px;
   background-color: lightgreen;
+  left: -${32 / 2}px;
+  pointer-events: none;
+`;
+
+const CursorLine = styled.div`
   position: absolute;
-  top: -10px;
+  width: 2px;
+  height: 100%;
+  background-color: lightgreen;
+  left: -1px;
+  top: 0;
+  pointer-events: none;
 `;
