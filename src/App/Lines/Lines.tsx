@@ -4,6 +4,7 @@ import { Label } from "./Label";
 import { getDate } from "../../timezone";
 import { getBlocks } from "./interval";
 import { useSlide } from "./useSlide";
+import { useStore } from "../store/store";
 import type { Location } from "../useLocationStore";
 
 type Props = {
@@ -11,29 +12,27 @@ type Props = {
   onSelectLocation?: (l: Location) => void;
 };
 
-const n = 3;
-
 export const Lines = ({ list, onSelectLocation }: Props) => {
-  const [x, setX] = useState(Date.now());
-  const [[a, b]] = useState([
-    x - (n / 2) * 24 * 60 * 60 * 1000,
-    x + (n / 2) * 24 * 60 * 60 * 1000,
-  ]);
+  const {
+    t,
+    setT,
+    tWindow: [a, b],
+  } = useStore();
 
   const [width] = useState(window.innerWidth);
 
   const toScreenSpace = (t: number) => ((t - a) / (b - a)) * width;
 
-  const bind = useSlide((x) => setX(a + (b - a) * x));
+  const bind = useSlide((x) => setT(a + (b - a) * x));
 
   return (
     <Container>
       <CursorContainer {...bind}>
-        <Cursor style={{ transform: `translateX(${toScreenSpace(x)}px)` }} />
+        <Cursor style={{ transform: `translateX(${toScreenSpace(t)}px)` }} />
       </CursorContainer>
 
       {list.map((l) => {
-        const date = getDate(l.timezone, x);
+        const date = getDate(l.timezone, t);
 
         const blocks = getBlocks(l.timezone, date, [a, b]);
 
@@ -57,7 +56,7 @@ export const Lines = ({ list, onSelectLocation }: Props) => {
             ))}
 
             <Label
-              style={{ left: toScreenSpace(x) + 2 + "px" }}
+              style={{ left: toScreenSpace(t) + 2 + "px" }}
               hour={date.hour}
               countryCode={l.countryCode}
             />
@@ -65,7 +64,7 @@ export const Lines = ({ list, onSelectLocation }: Props) => {
         );
       })}
 
-      <CursorLine style={{ transform: `translateX(${toScreenSpace(x)}px)` }} />
+      <CursorLine style={{ transform: `translateX(${toScreenSpace(t)}px)` }} />
     </Container>
   );
 };

@@ -49,6 +49,7 @@ export const globals = css`
       box-sizing: border-box;
       user-select: none;
       font-family: Helvetica, Arial, sans-serif;
+      background-color: #203b53;
     }
 
     body {

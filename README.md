@@ -16,6 +16,7 @@ yarn dev
 
 ## TODO
 
+- [] Lazy load the three scene
 - [] lines performance optimization
 - [] custom and persit office hour
 - [] earth toon shader

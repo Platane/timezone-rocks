@@ -7,35 +7,99 @@ title: Earth
 */
 
 import { useGLTF } from "drei/useGLTF";
+import { useMemo, useRef } from "react";
+import { useFrame, useThree } from "react-three-fiber";
+import * as THREE from "three";
 
 // @ts-ignore
 import modelPath from "../../assets/earth/scene.glb";
 
 export const EarthGlobe = (props: any) => {
   const gltf = useGLTF(modelPath);
-  const { materials, nodes } = gltf;
+  const { nodes } = gltf;
+
+  const gradientMap = useMemo(() => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 18;
+    canvas.height = 1;
+
+    const context = canvas.getContext("2d")!;
+    context.fillStyle = "#888";
+    context.fillRect(0, 0, 100, 1);
+
+    context.fillStyle = "#444";
+    context.fillRect(0, 0, 10, 1);
+
+    context.fillStyle = "#000";
+    context.fillRect(0, 0, 8, 1);
+
+    const gradientMap = new THREE.Texture(canvas);
+    gradientMap.minFilter = THREE.NearestFilter;
+    gradientMap.magFilter = THREE.NearestFilter;
+    gradientMap.needsUpdate = true;
+
+    return gradientMap;
+  }, []);
+
+  const n = 64;
+  const gradientMapNTone = useMemo(() => {
+    const canvas = document.createElement("canvas");
+    canvas.width = n;
+    canvas.height = 1;
+
+    // canvas.style.width = "100px";
+    // canvas.style.height = "100px";
+    // canvas.style.imageRendering = "pixelated";
+    // canvas.style.border = "solid 1px orange";
+    // document.body.appendChild(canvas);
+
+    const context = canvas.getContext("2d")!;
+
+    for (let i = n; i--; ) {
+      const k = i / (n - 1);
+      const a = (0.45 < k && k < 0.8 ? 0.72 : k) * 255;
+      context.fillStyle = `rgb(${a},${a},${a})`;
+      context.fillRect(i, 0, 1, 1);
+    }
+
+    const gradientMap = new THREE.Texture(canvas);
+    gradientMap.minFilter = THREE.NearestFilter;
+    gradientMap.magFilter = THREE.NearestFilter;
+    gradientMap.needsUpdate = true;
+
+    return gradientMap;
+  }, [n]);
+
+  const landGeometry = useMemo(() => {
+    const geo: THREE.BufferGeometry = (nodes.earth4_lambert1_0 as any).geometry.clone();
+
+    return geo;
+  }, [nodes.earth4_lambert1_0]);
 
   const s = 1 / 8.5;
 
+  const outLineRef = useRef<THREE.Object3D>();
+  const { camera } = useThree();
+  useFrame(() => {
+    const d = camera.position.length();
+    outLineRef.current?.scale.setScalar(1 + d * 0.01);
+  });
+
   return (
     <group {...props} dispose={null}>
-      {false && (
-        <mesh
-          material={materials.blinn1}
-          geometry={(nodes.earth4_blinn1_0 as any).geometry}
-        />
-      )}
-
       <mesh>
         <sphereBufferGeometry args={[1, 32, 32]} />
-        <meshStandardMaterial color={"#97ceff"} />
+        <meshToonMaterial color={"#97ceff"} gradientMap={gradientMap} />
       </mesh>
 
-      <mesh
-        scale={[s, s, s]}
-        material={materials.lambert1}
-        geometry={(nodes.earth4_lambert1_0 as any).geometry}
-      />
+      <mesh ref={outLineRef}>
+        <sphereBufferGeometry args={[1, 32, 32]} />
+        <meshBasicMaterial color={"#769550"} side={THREE.BackSide} />
+      </mesh>
+
+      <mesh scale={[s, s, s]} geometry={landGeometry}>
+        <meshToonMaterial color={"#ceff97"} gradientMap={gradientMapNTone} />
+      </mesh>
     </group>
   );
 };
