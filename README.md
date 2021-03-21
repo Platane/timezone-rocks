@@ -16,6 +16,7 @@ yarn dev
 
 ## TODO
 
+- [] lines performance optimization
 - [] custom and persit office hour
 - [] earth toon shader
 - [] add countries / state to locations

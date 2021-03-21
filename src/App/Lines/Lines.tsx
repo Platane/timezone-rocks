@@ -1,8 +1,8 @@
 import { styled } from "@linaria/react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Label } from "./Label";
 import { getDate } from "../../timezone";
-import { AWAKE_HOURS, DAY_HOURS, getInterval, OFFICE_HOURS } from "./interval";
+import { getBlocks } from "./interval";
 import { useSlide } from "./useSlide";
 import type { Location } from "../useLocationStore";
 
@@ -35,35 +35,27 @@ export const Lines = ({ list, onSelectLocation }: Props) => {
       {list.map((l) => {
         const date = getDate(l.timezone, x);
 
-        const o = getInterval(l.timezone, OFFICE_HOURS, date).map(
-          toScreenSpace
-        );
-        const a = getInterval(l.timezone, AWAKE_HOURS, date).map(toScreenSpace);
-        const d = getInterval(l.timezone, DAY_HOURS, date).map(toScreenSpace);
+        const blocks = getBlocks(l.timezone, date, [a, b]);
 
         return (
           <Row key={l.key} onClick={() => onSelectLocation?.(l)}>
-            <DayBlock
-              style={{
-                left: d[0] - 5 + "px",
-                right: d[1] + 5 + "px",
-                width: d[1] - d[0] + "px",
-              }}
-            />
-            <AwakeBlock
-              style={{
-                left: a[0] + "px",
-                right: a[1] + "px",
-                width: a[1] - a[0] + "px",
-              }}
-            />
-            <OfficeBlock
-              style={{
-                left: o[0] + "px",
-                right: o[1] + "px",
-                width: o[1] - o[0] + "px",
-              }}
-            />
+            {blocks.map(({ day, awake, office, primary }, i) => (
+              <React.Fragment key={i}>
+                <DayBlock
+                  style={toPosition(toScreenSpace, day, 2)}
+                  primary={primary}
+                />
+                <AwakeBlock
+                  style={toPosition(toScreenSpace, awake)}
+                  primary={primary}
+                />
+                <OfficeBlock
+                  style={toPosition(toScreenSpace, office)}
+                  primary={primary}
+                />
+              </React.Fragment>
+            ))}
+
             <Label
               style={{ left: toScreenSpace(x) + 2 + "px" }}
               hour={date.hour}
@@ -78,6 +70,17 @@ export const Lines = ({ list, onSelectLocation }: Props) => {
   );
 };
 
+const toPosition = (
+  toScreenSpace: (x: number) => number,
+  [a, b]: [number, number],
+  margin = 0
+) => {
+  const sa = toScreenSpace(a) + margin;
+  const sb = toScreenSpace(b) - margin;
+
+  return { left: sa + "px", right: sb + "px", width: sb - sa + "px" };
+};
+
 const Row = styled.div`
   overflow: hidden;
   display: flex;
@@ -87,9 +90,11 @@ const Row = styled.div`
   height: 50px;
 `;
 
-const Block = styled.div`
+const Block = styled.div<{ primary?: boolean }>`
   position: absolute;
   border-radius: 4px;
+  filter: ${(props) => (props.primary ? "" : " grayscale(0.9) brightness(1)")};
+  transition: filter 100ms;
 `;
 
 const DayBlock = styled(Block)`
