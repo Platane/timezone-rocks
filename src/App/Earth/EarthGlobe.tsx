@@ -18,12 +18,21 @@ export const EarthGlobe = (props: any) => {
   const s = 1 / 8.5;
 
   return (
-    <group {...props} dispose={null} scale={[s, s, s]}>
+    <group {...props} dispose={null}>
+      {false && (
+        <mesh
+          material={materials.blinn1}
+          geometry={(nodes.earth4_blinn1_0 as any).geometry}
+        />
+      )}
+
+      <mesh>
+        <sphereBufferGeometry args={[1, 32, 32]} />
+        <meshStandardMaterial color={"#97ceff"} />
+      </mesh>
+
       <mesh
-        material={materials.blinn1}
-        geometry={(nodes.earth4_blinn1_0 as any).geometry}
-      />
-      <mesh
+        scale={[s, s, s]}
         material={materials.lambert1}
         geometry={(nodes.earth4_lambert1_0 as any).geometry}
       />
