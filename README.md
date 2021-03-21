@@ -8,7 +8,7 @@
 
 ```sh
 # generate autocomplete suggestion
-yarn ts-node src/locations/generate.ts
+yarn generateLocations
 
 # start dev server
 yarn dev

@@ -17,7 +17,8 @@ jobs:
       - run: yarn type
       - run: yarn lint
       - run: yarn test
-      - run: yarn ts-node ./src/locations/generate.ts ; yarn build
+      - run: yarn generateLocations
+      - run: yarn build
       - run: yarn surge ./build february-platane.surge.sh
         env:
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
