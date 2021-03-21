@@ -73,13 +73,19 @@ export const Search = ({ add, locations }: Props) => {
                 setHover(null);
               }}
             >
-              {getFlagEmoji(c.countryCode)} {c.name}
+              {getFlagEmoji(c.countryCode)} {getEmojiType(c.type)} {c.name}
             </SuggestionItem>
           ))}
         </SuggestionContainer>
       )}
     </Container>
   );
+};
+
+const getEmojiType = (type: string) => {
+  if (type === "city") return "🏙";
+  if (type === "admin") return "🏛";
+  if (type === "country") return "🌐";
 };
 
 const Container = styled.form`

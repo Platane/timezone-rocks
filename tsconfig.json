@@ -5,7 +5,8 @@
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "lib": ["dom", "es2019"]
   },
   "exclude": ["node_modules"]
 }

@@ -70,6 +70,7 @@
     "workbox-webpack-plugin": "6.1.2"
   },
   "scripts": {
+    "generateLocations": "yarn ts-node src/locations/generate.ts",
     "type": "tsc --noEmit",
     "lint": "prettier -c '**/*.{ts,tsx,js,jsx,json,md,html}' '!**/{build,web_modules}/**'",
     "dev": "webpack serve",
