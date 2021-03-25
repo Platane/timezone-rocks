@@ -6,7 +6,7 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
-    "lib": ["dom", "es2019"]
+    "lib": ["dom", "es2019", "WebWorker"]
   },
   "exclude": ["node_modules"]
 }

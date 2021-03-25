@@ -1,19 +1,15 @@
 import React, { useState } from "react";
 import { styled } from "@linaria/react";
 import { getFlagEmoji } from "../emojiFlagSequence";
-import { useList } from "./useLocationList";
-import { useSearch, useSearchResults } from "./useSearchLocation";
-import { Location } from "./useLocationStore";
+import { useSearchResults } from "./useSearchLocation";
+import { useStore } from "./store/store";
+import { usePreviousUntilTruthy } from "../hooks/usePreviousUntilTruthy";
 
-type Props = { locations: Location[] } & Pick<
-  ReturnType<typeof useList>,
-  "add"
->;
-
-export const Search = ({ add, locations }: Props) => {
+export const Search = () => {
   const [query, setQuery] = useState("");
   const [hover, setHover] = useState<null | number>(null);
-  const results = useSearchResults(useSearch(locations ?? []), query);
+  const results = usePreviousUntilTruthy(useSearchResults(query), [])!;
+  const addLocation = useStore((s) => s.addLocation);
 
   return (
     <Container
@@ -21,7 +17,7 @@ export const Search = ({ add, locations }: Props) => {
         e.preventDefault();
         const top = results[hover as any] ?? results[0];
         if (top) {
-          add(top);
+          addLocation(top);
           setQuery("");
           setHover(null);
         }
@@ -68,7 +64,7 @@ export const Search = ({ add, locations }: Props) => {
               onMouseEnter={() => setHover(i)}
               onClick={(event) => {
                 event.preventDefault();
-                add(c);
+                addLocation(c);
                 setQuery("");
                 setHover(null);
               }}

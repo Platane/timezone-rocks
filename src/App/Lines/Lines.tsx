@@ -5,7 +5,7 @@ import { getDate } from "../../timezone";
 import { getBlocks } from "./interval";
 import { useSlide } from "./useSlide";
 import { useStore } from "../store/store";
-import type { Location } from "../useLocationStore";
+import type { Location } from "../../locations";
 
 type Props = {
   list: Location[];

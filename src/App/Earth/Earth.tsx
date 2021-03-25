@@ -5,9 +5,9 @@ import { OrbitControls } from "drei";
 import * as THREE from "three";
 import { EarthGlobe } from "./EarthGlobe";
 import { getFlagEmoji } from "../../emojiFlagSequence";
-import type { Location } from "../useLocationStore";
 import { Lights } from "./Lights";
 import { Html } from "../../Html";
+import type { Location } from "../../locations";
 
 type Props = {
   list: Location[];

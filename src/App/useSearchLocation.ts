@@ -1,39 +1,23 @@
-import { useCallback, useMemo } from "react";
-import deburr from "lodash.deburr";
-import type { Location } from "./useLocationStore";
+import { useEffect, useState } from "react";
+import { getMatchingLocation } from "../locations";
+import type { Location } from "../locations";
 
-export const useSearch = (locations: Location[]) => {
-  const normalizedList = useMemo(
-    () =>
-      locations.map((value) => ({ value, normalized: normalize(value.name) })),
-    [locations]
-  );
+export const useSearchResults = (query = "") => {
+  const [result, setResult] = useState<{
+    query: string;
+    locations: Location[];
+  }>();
 
-  const search = useCallback(
-    (query: string) => {
-      const res: Location[] = [];
+  useEffect(() => {
+    if (query.length)
+      getMatchingLocation(query).then((locations) =>
+        setResult({ query, locations })
+      );
+  }, [query]);
 
-      if (!query) return res;
+  if (!query) return [];
 
-      const q = normalize(query);
+  if (result?.query === query) return result.locations;
 
-      for (const { value, normalized } of normalizedList) {
-        if (normalized.includes(q)) {
-          res.push(value);
-          if (res.length >= 9) return res;
-        }
-      }
-      return res;
-    },
-    [normalizedList]
-  );
-
-  return search;
+  return null;
 };
-
-const normalize = (s: string) => deburr(s.toLowerCase());
-
-export const useSearchResults = (
-  search: ReturnType<typeof useSearch>,
-  query = ""
-) => useMemo(() => search(query), [query, search]);

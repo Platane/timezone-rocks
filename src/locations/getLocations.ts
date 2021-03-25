@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 // @ts-ignore
 import locationListPath from "../assets/locations.csv";
 
@@ -19,15 +17,7 @@ const parseLocations = (csv: string) =>
 
 export type Location = ReturnType<typeof parseLocations>[number];
 
-export const useLocations = () => {
-  const [locations, setLocations] = useState<Location[]>();
-
-  useEffect(() => {
-    fetch(locationListPath)
-      .then((res) => res.text())
-      .then(parseLocations)
-      .then(setLocations);
-  }, []);
-
-  return locations;
-};
+export const getLocations = () =>
+  fetch(locationListPath)
+    .then((res) => res.text())
+    .then(parseLocations);

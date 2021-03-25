@@ -17,7 +17,10 @@ const mode =
 const webpackConfiguration: WebpackConfiguration = {
   mode,
   devtool: false,
-  entry: path.join(__dirname, "src/index"),
+  entry: {
+    app: path.join(__dirname, "src/index"),
+    worker: path.join(__dirname, "src/locations/worker.ts"),
+  },
   output: {
     path: path.join(__dirname, "build"),
     filename: "[contenthash].js",
@@ -34,10 +37,6 @@ const webpackConfiguration: WebpackConfiguration = {
   },
   module: {
     rules: [
-      // {
-      //   test: [/\.(csv)/],
-      //   loader: "raw-loader",
-      // },
       {
         test: [
           /\.(bmp|gif|png|jpeg|jpg|svg)$/,

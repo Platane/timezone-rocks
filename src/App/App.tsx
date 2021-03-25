@@ -1,44 +1,21 @@
 import React from "react";
 import { styled } from "@linaria/react";
 import { css } from "@linaria/core";
-import { getFlagEmoji } from "../emojiFlagSequence";
 import { Earth } from "./Earth/Earth";
-import { useList } from "./useLocationList";
-import { useLocations } from "./useLocationStore";
 import { Lines } from "./Lines/Lines";
 import { Search } from "./Search";
+import { useStore } from "./store/store";
 
 export const App = () => {
-  const locations = useLocations();
-  const { list, add, remove } = useList(locations);
+  const locations = useStore((s) => s.locations);
 
   return (
     <>
-      <Search add={add} locations={locations ?? []} />
+      <Search />
 
-      <span>----</span>
+      <Earth list={locations} />
 
-      <div style={{ maxHeight: "200px", overflow: "scroll" }}>
-        {list.map((c) => (
-          <div key={c.key}>
-            {getFlagEmoji(c.countryCode)} {c.name}
-            <a
-              href="#"
-              style={{ marginLeft: "10px" }}
-              onClick={(event) => {
-                event.preventDefault();
-                remove(c);
-              }}
-            >
-              ×
-            </a>
-          </div>
-        ))}
-      </div>
-
-      <Earth list={list} />
-
-      <Lines list={list} />
+      <Lines list={locations} />
     </>
   );
 };
