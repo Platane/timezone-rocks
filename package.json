@@ -74,7 +74,7 @@
     "workerize-loader": "1.3.0"
   },
   "scripts": {
-    "generateLocations": "yarn ts-node src/locations/generate.ts",
+    "generateLocations": "yarn ts-node src/locations/generate/generate.ts",
     "type": "tsc --noEmit",
     "lint": "prettier -c '**/*.{ts,tsx,js,jsx,json,md,html}' '!**/{build,web_modules}/**'",
     "dev": "webpack serve",
