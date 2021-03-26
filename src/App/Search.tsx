@@ -25,6 +25,7 @@ export const Search = () => {
     >
       <Input
         type="text"
+        placeholder="Add a location"
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         onKeyDownCapture={(e) => {

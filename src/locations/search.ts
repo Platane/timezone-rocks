@@ -6,6 +6,11 @@ const generateIndex = (locations: Location[]) =>
 
 const normalize = (s: string) => deburr(s.toLowerCase());
 
+export const getLocationByTimezone = async (timezone: string) => {
+  const locations = await locationsPromise;
+  return locations.find((l) => l.timezone === timezone);
+};
+
 export const getLocationsByKey = async (keys: string[]) => {
   const locations = await locationsPromise;
 

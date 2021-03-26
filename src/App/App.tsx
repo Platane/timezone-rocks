@@ -11,9 +11,9 @@ export const App = () => {
 
   return (
     <>
-      <Search />
-
       <Earth list={locations} />
+
+      <Search />
 
       <Lines list={locations} />
     </>

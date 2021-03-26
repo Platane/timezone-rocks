@@ -27,7 +27,12 @@ export const useStore = create<State & Api>((set) => ({
   setT: (t) => set({ t }),
   initLocations: (locations) => set({ locations, locationStoreReady: true }),
   addLocation: (location) =>
-    set((s) => ({ locations: [...s.locations, location] })),
+    set((s) => ({
+      locations: [
+        ...s.locations.filter((l) => l.key === location.key),
+        location,
+      ],
+    })),
   removeLocation: (location) =>
     set((s) => ({
       locations: s.locations.filter((l) => l.key === location.key),

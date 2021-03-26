@@ -16,3 +16,13 @@ export const formatTime = (hour: number) => {
   } else
     return `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}`;
 };
+
+export const getClientTimezone = () => {
+  const defaultTimeZone = "Europe/Stockholm";
+  try {
+    const dt = new Intl.DateTimeFormat();
+    return dt.resolvedOptions().timeZone ?? defaultTimeZone;
+  } catch (err) {
+    return defaultTimeZone;
+  }
+};

@@ -16,14 +16,17 @@ yarn dev
 
 ## TODO
 
+- [x] starting locations
 - [ ] search design
 - [ ] 3d on earth avatar
-- [ ] Lazy load the three scene
-- [ ] lines performance optimization
 - [ ] custom and persit office hour
 - [x] earth toon shader
 - [ ] earth land geometry flatten + smooth normal
 - [ ] round date on release
 - [x] add countries / state to locations
+
   - states makes more sense for US, use states if the country span over more that one timezone ?
+
 - [ ] 3d label, avoid overlap
+- [ ] lines performance optimization
+- [ ] Lazy load the three scene
