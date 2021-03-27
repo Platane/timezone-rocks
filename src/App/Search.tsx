@@ -28,8 +28,9 @@ export const Search = () => {
       }}
     >
       <Input
-        type="text"
+        type="search"
         placeholder="Add a location"
+        spellCheck={false}
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         onFocus={() => setFocused(true)}
