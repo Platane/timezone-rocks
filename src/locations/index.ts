@@ -15,6 +15,10 @@ export const getMatchingLocation: (
   query: string
 ) => Promise<Location[]> = createRemote(worker, "getMatchingLocation");
 
-export const getLocationByTimezone: (
-  query: string
-) => Promise<Location> = createRemote(worker, "getLocationByTimezone");
+export const getLocationByTimezoneAndCountryCode: (
+  timezone: string,
+  countryCode: string
+) => Promise<Location> = createRemote(
+  worker,
+  "getLocationByTimezoneAndCountryCode"
+);

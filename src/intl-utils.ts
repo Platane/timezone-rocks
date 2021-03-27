@@ -1,9 +1,3 @@
-const formatter =
-  (typeof Intl !== "undefined" &&
-    Intl?.DateTimeFormat &&
-    new Intl.DateTimeFormat(undefined, { timeStyle: "short" } as any)) ??
-  undefined;
-
 export const formatTime = (hour: number) => {
   const h = 0 | hour;
   const m = 0 | (hour * 60) % 60;
@@ -20,9 +14,29 @@ export const formatTime = (hour: number) => {
 export const getClientTimezone = () => {
   const defaultTimeZone = "Europe/Stockholm";
   try {
-    const dt = new Intl.DateTimeFormat();
-    return dt.resolvedOptions().timeZone ?? defaultTimeZone;
+    return formatter?.resolvedOptions().timeZone ?? defaultTimeZone;
   } catch (err) {
     return defaultTimeZone;
   }
 };
+
+export const getClientLocaleCountryCode = () =>
+  navigator.language.split("-").slice(-1)[0];
+
+const createFormatter = () => {
+  try {
+    const formatter = new Intl.DateTimeFormat(undefined, {
+      timeStyle: "short",
+    } as any);
+
+    if ((formatter.resolvedOptions() as any).timeStyle === "short")
+      return formatter;
+    else
+      return new Intl.DateTimeFormat(undefined, {
+        hour: "numeric",
+        minute: "numeric",
+      });
+  } catch (e) {}
+};
+
+const formatter = createFormatter();
