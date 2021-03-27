@@ -1,6 +1,7 @@
 import * as path from "path";
 import CopyPlugin from "copy-webpack-plugin";
 import HtmlPlugin from "html-webpack-plugin";
+import HtmlWebpackInjectPreload from "@principalstudio/html-webpack-inject-preload";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import {
   Configuration as WebpackConfiguration,
@@ -82,6 +83,27 @@ const webpackConfiguration: WebpackConfiguration = {
 
     new HtmlPlugin({
       title: "🌐",
+    }),
+
+    new HtmlWebpackInjectPreload({
+      files: [
+        {
+          match: /.*\.csv$/,
+          attributes: { rel: "preload", as: "fetch" },
+        },
+        {
+          match: /.*\.glb$/,
+          attributes: { rel: "preload", as: "fetch" },
+        },
+        {
+          match: /.*\.js$/,
+          attributes: {
+            rel: "preload",
+            as: "script",
+            type: "application/javascript",
+          },
+        },
+      ],
     }),
 
     new GenerateSW({
