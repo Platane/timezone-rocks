@@ -29,7 +29,7 @@ export const useStore = create<State & Api>((set) => ({
   addLocation: (location) =>
     set((s) => ({
       locations: [
-        ...s.locations.filter((l) => l.key === location.key),
+        ...s.locations.filter((l) => l.key !== location.key),
         location,
       ],
     })),

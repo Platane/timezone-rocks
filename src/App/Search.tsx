@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { styled } from "@linaria/react";
+import { css } from "@linaria/core";
 import { getFlagEmoji } from "../emojiFlagSequence";
 import { useSearchResults } from "./useSearchLocation";
 import { useStore } from "./store/store";
 import { usePreviousUntilTruthy } from "../hooks/usePreviousUntilTruthy";
+import { useExtendedTruthiness } from "../hooks/useExtendedTruthiness";
 
 export const Search = () => {
   const [query, setQuery] = useState("");
+  const [focused, setFocused] = useState(false);
+  const focusedPlus = useExtendedTruthiness(focused, 100);
   const [hover, setHover] = useState<null | number>(null);
   const results = usePreviousUntilTruthy(useSearchResults(query), [])!;
   const addLocation = useStore((s) => s.addLocation);
@@ -28,6 +32,8 @@ export const Search = () => {
         placeholder="Add a location"
         value={query}
         onChange={(event) => setQuery(event.target.value)}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
         onKeyDownCapture={(e) => {
           switch (e.code) {
             case "ArrowUp":
@@ -52,16 +58,13 @@ export const Search = () => {
         }}
       />
 
-      {results.length > 0 && (
+      {results.length > 0 && focusedPlus && (
         <SuggestionContainer onMouseLeave={() => setHover(null)}>
           {results.map((c, i) => (
             <SuggestionItem
               href="#"
               key={c.key}
-              style={{
-                backgroundColor:
-                  hover !== null && hover === i ? "#eeb" : "transparent",
-              }}
+              className={hover !== null && hover === i ? hoverCss : ""}
               onMouseEnter={() => setHover(i)}
               onClick={(event) => {
                 event.preventDefault();
@@ -97,7 +100,7 @@ const SuggestionContainer = styled.div`
   left: 0;
   right: 0;
   box-shadow: 2px 4px 5px 0 #3333;
-  border-radius: 4px;
+  border-radius: 0 0 4px 4px;
   background-color: #fff;
   padding: 4px 0;
   z-index: 3;
@@ -108,8 +111,22 @@ const SuggestionItem = styled.a`
   padding: 4px 4px 4px 4px;
 `;
 
+const hoverCss = css`
+  background-color: -webkit-focus-ring-color;
+  background-color: Highlight;
+`;
+
 const Input = styled.input`
-  padding: 10px;
-  height: 40px;
+  font-size: 1.2em;
+  padding: 10px 16px;
+  height: 50px;
   width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+
+  &:focus {
+    box-shadow: 0 0 0 2px -webkit-focus-ring-color;
+    box-shadow: 0 0 0 2px Highlight;
+  }
 `;

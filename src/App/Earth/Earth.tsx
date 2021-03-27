@@ -14,8 +14,16 @@ type Props = {
 };
 
 export const Earth = ({ list }: Props) => (
-  <WorldCanvas style={{ height: "400px" }} camera={{ near: 0.1, far: 20 }}>
-    <OrbitControls minDistance={2} maxDistance={10} />
+  <WorldCanvas
+    style={{ height: "400px" }}
+    camera={{ near: 0.1, far: 20, position: [0, 0, 1.95] }}
+  >
+    <OrbitControls
+      minDistance={1.95}
+      maxDistance={10}
+      enableZoom={false}
+      enablePan={false}
+    />
 
     <Lights />
 
