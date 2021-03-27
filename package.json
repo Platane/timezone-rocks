@@ -48,6 +48,7 @@
     "@types/webpack-dev-server": "3.11.3",
     "@types/workbox-webpack-plugin": "5.1.6",
     "@types/worker-plugin": "4.0.1",
+    "@vue/preload-webpack-plugin": "^2.0.0",
     "babel-loader": "8.2.2",
     "copy-webpack-plugin": "8.1.0",
     "core-js": "3.9.1",
