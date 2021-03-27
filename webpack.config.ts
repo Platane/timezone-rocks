@@ -96,8 +96,7 @@ const webpackConfiguration: WebpackConfiguration = {
           attributes: { rel: "preload", as: "fetch", crossorigin: "anonymous" },
         },
         {
-          match: /(\W|^)(?!(worker)).*\.js$/,
-          // match: /.*\.js$/,
+          match: /^(?!.*\.worker).*\.js$/,
           attributes: {
             rel: "preload",
             as: "script",
