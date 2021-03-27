@@ -6,10 +6,9 @@ import { Lines } from "./Lines/Lines";
 import { Search } from "./Search";
 import { useStore } from "./store/store";
 
-const Earth = loadable(() => import("./Earth"));
+const Earth = loadable(() => import("./Earth/Earth"));
 
 export const App = () => {
-  const locations = useStore((s) => s.locations);
   const locationStoreReady = useStore((s) => s.locationStoreReady);
 
   if (!locationStoreReady) return null;

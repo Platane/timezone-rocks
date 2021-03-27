@@ -1,5 +1,4 @@
 import * as path from "path";
-import CopyPlugin from "copy-webpack-plugin";
 import HtmlPlugin from "html-webpack-plugin";
 import HtmlWebpackInjectPreload from "@principalstudio/html-webpack-inject-preload";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
@@ -72,15 +71,6 @@ const webpackConfiguration: WebpackConfiguration = {
 
     new EnvironmentPlugin({}),
 
-    // new CopyPlugin({
-    //   patterns: [
-    //     {
-    //       from: path.join(__dirname, "src/assets/**/*"),
-    //       to: "./assets/",
-    //     },
-    //   ],
-    // }),
-
     new HtmlPlugin({
       title: "🌐",
     }),
@@ -94,22 +84,6 @@ const webpackConfiguration: WebpackConfiguration = {
         {
           match: /\.glb$/,
           attributes: { rel: "preload", as: "fetch", crossorigin: "anonymous" },
-        },
-        {
-          match: /^(?!.*\.worker).*\.js$/,
-          attributes: {
-            rel: "preload",
-            as: "script",
-            type: "application/javascript",
-          },
-        },
-        {
-          match: /\.css$/,
-          attributes: {
-            rel: "preload",
-            as: "style",
-            type: "text/css",
-          },
         },
       ],
     }),

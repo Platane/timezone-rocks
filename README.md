@@ -20,6 +20,7 @@ yarn dev
 - [x] earth toon shader
 - [x] round date on release
 - [x] add countries / state to locations
+- [x] Lazy load the three scene
 
 - [ ] 3d on earth avatar
 - [ ] earth land geometry flatten + smooth normal
@@ -30,4 +31,3 @@ yarn dev
 - [ ] lines performance optimization
 - [ ] 3d label, avoid overlap
 - [ ] custom and persist office hour
-- [ ] Lazy load the three scene

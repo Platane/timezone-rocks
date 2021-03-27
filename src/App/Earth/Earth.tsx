@@ -12,7 +12,7 @@ export const Earth = () => {
   const ready = useStore((s) => s.earthReady);
 
   return (
-    <WorldCanvas camera={{ near: 0.1, far: 20, position: [0, 0, 1.95] }}>
+    <Canvas camera={{ near: 0.1, far: 20, position: [0, 0, 1.95] }}>
       <OrbitControls
         minDistance={1.95}
         maxDistance={10}
@@ -29,13 +29,9 @@ export const Earth = () => {
       </Suspense>
 
       {false && <axesHelper args={[2]} />}
-    </WorldCanvas>
+    </Canvas>
   );
 };
-
-const WorldCanvas = styled(Canvas)`
-  width: 100%;
-`;
 
 const springConfig = { tension: 80, friction: 12 };
 const AppearScaleNode = ({
@@ -56,3 +52,5 @@ const AppearScaleNode = ({
 
   return <group ref={ref}>{children}</group>;
 };
+
+export default Earth;
