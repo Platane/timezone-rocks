@@ -10,7 +10,17 @@ const setT = (x: number) => {
     setT,
     tWindow: [a, b],
   } = useStore.getState();
-  setT(a + (b - a) * x);
+  const t = a + (b - a) * x;
+  setT(t);
+};
+const setRoundedT = (x: number) => {
+  const r = 5 * 60 * 1000;
+  const {
+    setT,
+    tWindow: [a, b],
+  } = useStore.getState();
+  const t = a + (b - a) * x;
+  setT(Math.floor(t / r) * r);
 };
 
 export const CursorLine = () => {
@@ -23,7 +33,7 @@ export const CursorLine = () => {
     (s) => projectDate(s, s.t)
   );
 
-  const bind = useSlide(setT);
+  const bind = useSlide(setT, setRoundedT);
 
   return (
     <CursorContainer {...bind}>
