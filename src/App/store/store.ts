@@ -4,6 +4,7 @@ import { init } from "./persist";
 
 export type Api = {
   setT: (t: number) => void;
+  onEarthReady: () => void;
   initLocations: (locations: Location[]) => void;
   addLocation: (location: Location) => void;
   removeLocation: (location: Location) => void;
@@ -11,6 +12,7 @@ export type Api = {
 export type State = {
   t: number;
   locationStoreReady: boolean;
+  earthReady: boolean;
   tWindow: [number, number];
   locations: Location[];
 };
@@ -23,9 +25,11 @@ export const useStore = create<State & Api>((set) => ({
   tWindow: [t - day * 1.3, t + day * 1.3],
   locations: [],
   locationStoreReady: false,
+  earthReady: false,
 
   setT: (t) => set({ t }),
   initLocations: (locations) => set({ locations, locationStoreReady: true }),
+  onEarthReady: () => set({ earthReady: true }),
   addLocation: (location) =>
     set((s) => ({
       locations: [

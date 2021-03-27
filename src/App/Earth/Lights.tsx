@@ -1,14 +1,14 @@
 import React, { useRef } from "react";
 import * as THREE from "three";
-import { useStore } from "../store/store";
 import { selectHour } from "../store/selector";
+import { useSubscribe } from "../store/useSubscribe";
 
 export const Lights = () => {
   const refLight = useRef<THREE.DirectionalLight>();
   const refSun = useRef<THREE.Object3D>();
   const refMoon = useRef<THREE.Object3D>();
 
-  useStore.subscribe((h) => {
+  useSubscribe((h) => {
     const a = (h / 24) * (Math.PI * 2) + Math.PI;
     refLight.current?.position.set(Math.sin(a), 0, Math.cos(a));
 

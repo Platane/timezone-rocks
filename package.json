@@ -6,6 +6,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "@loadable/component": "5.14.1",
     "base-64": "1.0.0",
     "deep-equal": "2.0.5",
     "drei": "2.2.21",
@@ -33,6 +34,7 @@
     "@types/copy-webpack-plugin": "6.4.1",
     "@types/deep-equal": "1.0.1",
     "@types/jest": "26.0.22",
+    "@types/loadable__component": "5.13.3",
     "@types/lodash.deburr": "4.1.6",
     "@types/luxon": "1.26.2",
     "@types/mini-css-extract-plugin": "1.2.3",
