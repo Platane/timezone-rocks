@@ -15,7 +15,7 @@ export const App = () => {
 
       <Search />
 
-      <Lines list={locations} />
+      <Lines />
     </>
   );
 };

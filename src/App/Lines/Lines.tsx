@@ -14,6 +14,7 @@ type Props = {
 
 export const Lines = ({ onSelectLocation }: Props) => {
   const { t } = useStore();
+  // const t = Date.now();
   const removeLocation = useStore((s) => s.removeLocation);
 
   const locations = useStore((s) => s.locations);
