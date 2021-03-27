@@ -88,11 +88,11 @@ const webpackConfiguration: WebpackConfiguration = {
     new HtmlWebpackInjectPreload({
       files: [
         {
-          match: /.*\.csv$/,
+          match: /\.csv$/,
           attributes: { rel: "preload", as: "fetch", crossorigin: "anonymous" },
         },
         {
-          match: /.*\.glb$/,
+          match: /\.glb$/,
           attributes: { rel: "preload", as: "fetch", crossorigin: "anonymous" },
         },
         {
@@ -101,6 +101,14 @@ const webpackConfiguration: WebpackConfiguration = {
             rel: "preload",
             as: "script",
             type: "application/javascript",
+          },
+        },
+        {
+          match: /\.css$/,
+          attributes: {
+            rel: "preload",
+            as: "style",
+            type: "text/css",
           },
         },
       ],
