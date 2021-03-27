@@ -100,15 +100,16 @@ const SuggestionContainer = styled.div`
   left: 0;
   right: 0;
   box-shadow: 2px 4px 5px 0 #3333;
-  border-radius: 0 0 4px 4px;
+  border-radius: 0 0 2px 2px;
   background-color: #fff;
-  padding: 4px 0;
+  padding: 6px 0;
   z-index: 3;
 `;
 
 const SuggestionItem = styled.a`
   display: block;
-  padding: 4px 4px 4px 4px;
+  font-size: 1.1em;
+  padding: 6px 4px 6px 4px;
 `;
 
 const hoverCss = css`

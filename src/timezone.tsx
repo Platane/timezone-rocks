@@ -40,3 +40,8 @@ export const getUtcTimestampAt = (timezone: string, date: Date) => {
     });
   return d.toMillis();
 };
+
+export const getTimezoneOffset = (timezone: string, timestamp: number) => {
+  const d = DateTime.fromMillis(timestamp).setZone(timezone);
+  return d.offset;
+};

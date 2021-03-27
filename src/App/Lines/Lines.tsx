@@ -1,37 +1,33 @@
 import { styled } from "@linaria/react";
 import React, { useState } from "react";
-import { Label } from "./Label";
-import { getDate } from "../../timezone";
+import { Label as FlyingLabel } from "./Label";
+import { getDate, getTimezoneOffset } from "../../timezone";
 import { getBlocks } from "./interval";
-import { useSlide } from "./useSlide";
 import { useStore } from "../store/store";
 import type { Location } from "../../locations";
+import { CursorArm, CursorLine } from "./Cursor";
+import { getFlagEmoji } from "../../emojiFlagSequence";
 
 type Props = {
-  list: Location[];
   onSelectLocation?: (l: Location) => void;
 };
 
-export const Lines = ({ list, onSelectLocation }: Props) => {
-  const {
-    t,
-    setT,
-    tWindow: [a, b],
-  } = useStore();
+export const Lines = ({ onSelectLocation }: Props) => {
+  const { t } = useStore();
+  const removeLocation = useStore((s) => s.removeLocation);
+
+  const locations = useStore((s) => s.locations);
+  const [a, b] = useStore((s) => s.tWindow);
 
   const [width] = useState(window.innerWidth);
 
   const toScreenSpace = (t: number) => ((t - a) / (b - a)) * width;
 
-  const bind = useSlide((x) => setT(a + (b - a) * x));
-
   return (
     <Container>
-      <CursorContainer {...bind}>
-        <Cursor style={{ transform: `translateX(${toScreenSpace(t)}px)` }} />
-      </CursorContainer>
+      <CursorLine />
 
-      {list.map((l) => {
+      {locations.map((l) => {
         const date = getDate(l.timezone, t);
 
         const blocks = getBlocks(l.timezone, date, [a, b]);
@@ -55,7 +51,26 @@ export const Lines = ({ list, onSelectLocation }: Props) => {
               </React.Fragment>
             ))}
 
-            <Label
+            <LocationLabel>
+              <div>
+                {getFlagEmoji(l.countryCode)}
+                {l.name}
+              </div>
+              <OffsetLabel>
+                {formatOffset(getTimezoneOffset(l.timezone, t))}
+              </OffsetLabel>
+
+              <RemoveButton
+                onClick={(e) => {
+                  e.preventDefault();
+                  removeLocation(l);
+                }}
+              >
+                ×
+              </RemoveButton>
+            </LocationLabel>
+
+            <FlyingLabel
               style={{ left: toScreenSpace(t) + 2 + "px" }}
               hour={date.hour}
               countryCode={l.countryCode}
@@ -64,8 +79,21 @@ export const Lines = ({ list, onSelectLocation }: Props) => {
         );
       })}
 
-      <CursorLine style={{ transform: `translateX(${toScreenSpace(t)}px)` }} />
+      <CursorArm />
     </Container>
+  );
+};
+
+const formatOffset = (minute: number) => {
+  const sign = minute > 0;
+  const hour = 0 | (Math.abs(minute) / 60);
+  const min = 0 | Math.abs(minute) % 60;
+
+  return (
+    "GMT " +
+    ((sign ? "+" : "-") + hour).padStart(3, " ") +
+    ":" +
+    min.toString().padStart(2, "0")
   );
 };
 
@@ -81,12 +109,12 @@ const toPosition = (
 };
 
 const Row = styled.div`
+  height: 50px;
   overflow: hidden;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 50px;
 `;
 
 const Block = styled.div<{ primary?: boolean }>`
@@ -116,30 +144,28 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const CursorContainer = styled.div`
-  background-color: #ddd4;
-  height: 24px;
-  width: 100%;
-
-  cursor: pointer;
+const OffsetLabel = styled.span`
+  font-family: monospace;
+  font-size: 0.9em;
+  margin-left: auto;
+`;
+const LocationLabel = styled.div`
+  width: 180px;
+  left: 0;
+  position: absolute;
+  background-color: #203b53;
+  z-index: 1;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 14px 0 10px;
 `;
 
-const Cursor = styled.div`
+const RemoveButton = styled.a`
+  display: block;
   position: absolute;
-  width: 32px;
-  height: 24px;
-  border-radius: 2px;
-  background-color: lightgreen;
-  left: -${32 / 2}px;
-  pointer-events: none;
-`;
-
-const CursorLine = styled.div`
-  position: absolute;
-  width: 2px;
-  height: 100%;
-  background-color: lightgreen;
-  left: -1px;
-  top: 0;
-  pointer-events: none;
+  right: 2px;
+  top: 0px;
 `;

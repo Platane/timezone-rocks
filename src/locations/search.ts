@@ -1,8 +1,24 @@
 import deburr from "lodash.deburr";
 import { Location, getLocations } from "./getLocations";
 
-const generateIndex = (locations: Location[]) =>
-  locations.map((value) => ({ value, normalized: normalize(value.name) }));
+const createSearch = (locations: Location[]) => {
+  const normalizedNames = locations.map((l) => normalize(l.name));
+
+  return (query: string) => {
+    const res: Location[] = [];
+
+    const q = normalize(query);
+
+    for (let i = 0; i < normalizedNames.length; i++) {
+      if (normalizedNames[i].startsWith(q)) {
+        res.push(locations[i]);
+        if (res.length >= 9) return res;
+      }
+    }
+
+    return res;
+  };
+};
 
 const normalize = (s: string) => deburr(s.toLowerCase());
 
@@ -21,23 +37,9 @@ export const getLocationsByKey = async (keys: string[]) => {
   return (l as any) as Location[];
 };
 
-export const getMatchingLocation = async (query: string) => {
-  const index = await indexPromise;
-
-  const q = normalize(query);
-
-  const res: Location[] = [];
-
-  for (const { value, normalized } of index) {
-    if (normalized.startsWith(q)) {
-      res.push(value);
-      if (res.length >= 9) return res;
-    }
-  }
-
-  return res;
-};
+export const getMatchingLocation = async (query: string) =>
+  (await searchPromise)(query);
 
 const locationsPromise = getLocations();
 
-const indexPromise = locationsPromise.then(generateIndex);
+const searchPromise = locationsPromise.then(createSearch);

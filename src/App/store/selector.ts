@@ -14,6 +14,9 @@ const day = hour * 24;
 
 export const selectHour = createSelector(selectT, (t) => (t % day) / hour);
 
+export const projectDate = ({ tWindow: [a, b] }: State, x: number) =>
+  (x - a) / (b - a);
+
 export const selectTWindowLerp = createSelector(
   selectTWindow,
   ([a, b]) => (x: number) => (x - a) / (b - a)
