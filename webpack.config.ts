@@ -79,11 +79,19 @@ const webpackConfiguration: WebpackConfiguration = {
       files: [
         {
           match: /\.csv$/,
-          attributes: { rel: "preload", as: "fetch", crossorigin: "anonymous" },
+          attributes: {
+            rel: "prefetch",
+            as: "fetch",
+            crossorigin: "anonymous",
+          },
         },
         {
           match: /\.glb$/,
-          attributes: { rel: "preload", as: "fetch", crossorigin: "anonymous" },
+          attributes: {
+            rel: "prefetch",
+            as: "fetch",
+            crossorigin: "anonymous",
+          },
         },
       ],
     }),
