@@ -6,7 +6,7 @@ import { Lines } from "./Lines/Lines";
 import { Search } from "./Search";
 import { useStore } from "./store/store";
 // @ts-ignore
-import modelPath from "../../assets/earth/scene.glb";
+import modelPath from "../assets/earth/scene.glb";
 
 const Earth = loadable(() => import("./Earth/Earth"));
 
