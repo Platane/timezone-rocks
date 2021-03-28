@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { State, useStore } from "./store";
 
 export const useSubscribe = <T>(
@@ -7,7 +7,7 @@ export const useSubscribe = <T>(
   dependencies: any[] = [],
   equalityFn?: any
 ) => {
-  useEffect(() => {
+  useLayoutEffect(() => {
     listener(selector(useStore.getState()));
     return useStore.subscribe(listener, selector, equalityFn);
   }, dependencies);

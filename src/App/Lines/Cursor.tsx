@@ -44,7 +44,7 @@ const Cursor = styled.div`
   width: 32px;
   height: 24px;
   border-radius: 2px;
-  background-color: lightgreen;
+  background-color: #e88a28;
   left: -${32 / 2}px;
   pointer-events: none;
 `;
@@ -52,8 +52,8 @@ const Cursor = styled.div`
 export const CursorArm = styled.div`
   position: absolute;
   width: 2px;
-  height: 100%;
-  background-color: lightgreen;
+  height: calc(100% + 14px);
+  background-color: #e88a28;
   left: -1px;
   top: 0;
   z-index: 2;
