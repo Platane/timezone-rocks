@@ -58,6 +58,7 @@
     "gltfjsx": "3.1.4",
     "html-inline-css-webpack-plugin": "1.11.0",
     "html-webpack-plugin": "5.3.1",
+    "html-webpack-skip-assets-plugin": "1.0.1",
     "jest": "26.6.3",
     "mini-css-extract-plugin": "1.4.0",
     "node-fetch": "2.6.1",

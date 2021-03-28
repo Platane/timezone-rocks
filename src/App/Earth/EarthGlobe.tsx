@@ -10,10 +10,10 @@ import { useGLTF } from "drei/useGLTF";
 import { useEffect, useMemo, useRef } from "react";
 import { useFrame, useThree } from "react-three-fiber";
 import * as THREE from "three";
+import { useStore } from "../store/store";
 
 // @ts-ignore
 import modelPath from "../../assets/earth/scene.glb";
-import { useStore } from "../store/store";
 
 export const EarthGlobe = (props: any) => {
   const gltf = useGLTF(modelPath);

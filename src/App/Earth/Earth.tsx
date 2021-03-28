@@ -1,5 +1,4 @@
 import React, { Suspense, useRef } from "react";
-import { styled } from "@linaria/react";
 import { Canvas, useFrame } from "react-three-fiber";
 import { OrbitControls } from "drei";
 import { EarthGlobe } from "./EarthGlobe";

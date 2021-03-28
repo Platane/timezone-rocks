@@ -5,6 +5,8 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import HTMLInlineCSSWebpackPlugin from "html-inline-css-webpack-plugin";
 // @ts-ignore
 import PreloadWebpackPlugin from "@vue/preload-webpack-plugin";
+// @ts-ignore
+import { HtmlWebpackSkipAssetsPlugin } from "html-webpack-skip-assets-plugin";
 import {
   Configuration as WebpackConfiguration,
   EnvironmentPlugin,
@@ -26,7 +28,7 @@ const webpackConfiguration: WebpackConfiguration = {
   },
   output: {
     path: path.join(__dirname, "build"),
-    filename: "[contenthash].js",
+    filename: "[contenthash]-[name].js",
     publicPath: "",
   },
   resolve: { extensions: [".tsx", ".ts", ".js"] },
@@ -76,6 +78,7 @@ const webpackConfiguration: WebpackConfiguration = {
 
     new HtmlPlugin({
       title: "🌐",
+      excludeAssets: [/\-worker\.js/],
       templateContent: ({ htmlWebpackPlugin }) => `
         <!DOCTYPE html>
         <html>
@@ -95,21 +98,31 @@ const webpackConfiguration: WebpackConfiguration = {
     `,
     }),
 
+    new HtmlWebpackSkipAssetsPlugin(),
+
     new HTMLInlineCSSWebpackPlugin(),
 
-    new PreloadWebpackPlugin({
-      rel: "prefetch",
-      as: (entry: string) => {
-        if (/\.css$/.test(entry)) return "style";
-        if (/\.js$/.test(entry)) return "script";
-      },
-      fileBlacklist: [/\.(csv|glb)$/],
-    }),
+    // new PreloadWebpackPlugin({
+    //   rel: "prefetch",
+    //   as: (entry: string) => {
+    //     if (/\.css$/.test(entry)) return "style";
+    //     if (/\.js$/.test(entry)) return "script";
+    //   },
+    //   fileBlacklist: [/\.(csv|glb)$/,],
+    // }),
 
     new HtmlWebpackInjectPreload({
       files: [
         {
           match: /\.(csv|glb)$/,
+          attributes: {
+            rel: "prefetch",
+            as: "fetch",
+            crossorigin: "anonymous",
+          },
+        },
+        {
+          match: /\-(worker\.worker)\.js$/,
           attributes: {
             rel: "prefetch",
             as: "fetch",
