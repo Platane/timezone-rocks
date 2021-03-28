@@ -1,9 +1,7 @@
 import { styled } from "@linaria/react";
-import React, { useRef } from "react";
+import React from "react";
 import { useSlide } from "./useSlide";
 import { useStore } from "../store/store";
-import { useSubscribe } from "../store/useSubscribe";
-import { projectDate } from "../store/selector";
 
 const setT = (x: number) => {
   const {
@@ -24,35 +22,13 @@ const setRoundedT = (x: number) => {
 };
 
 export const CursorLine = () => {
-  const ref = useRef<HTMLElement | undefined>(undefined);
-  useSubscribe(
-    (x: number) => {
-      if (!ref.current) return;
-      ref.current.style.transform = `translateX(${window.innerWidth * x}px)`;
-    },
-    (s) => projectDate(s, s.t)
-  );
-
   const bind = useSlide(setT, setRoundedT);
 
   return (
     <CursorContainer {...bind}>
-      <Cursor ref={ref as any} />
+      <Cursor />
     </CursorContainer>
   );
-};
-
-export const CursorArm = () => {
-  const ref = useRef<HTMLElement | undefined>(undefined);
-  useSubscribe(
-    (x: number) => {
-      if (!ref.current) return;
-      ref.current.style.transform = `translateX(${window.innerWidth * x}px)`;
-    },
-    (s) => projectDate(s, s.t)
-  );
-
-  return <CursorArmContainer ref={ref as any} />;
 };
 
 const CursorContainer = styled.div`
@@ -73,7 +49,7 @@ const Cursor = styled.div`
   pointer-events: none;
 `;
 
-const CursorArmContainer = styled.div`
+export const CursorArm = styled.div`
   position: absolute;
   width: 2px;
   height: 100%;

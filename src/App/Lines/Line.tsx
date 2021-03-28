@@ -1,5 +1,5 @@
 import { styled } from "@linaria/react";
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { getDate, getTimezoneOffset } from "../../timezone";
 import { AWAKE_HOURS, getBlocks, OFFICE_HOURS } from "./interval";
 import { useStore } from "../store/store";
@@ -22,45 +22,12 @@ export const Line = ({ location }: Props) => {
   ]);
   const [width] = useState(window.innerWidth);
 
-  const flyingLabelRef = useRef<HTMLElement | null>(null);
-  const nameLabelRef = useRef<HTMLElement | null>(null);
-
-  const toScreenSpace = useCallback(
-    (t: number) => ((t - tWindow[0]) / (tWindow[1] - tWindow[0])) * width,
-    [tWindow, width]
-  );
-
-  useSubscribe(
-    (t) => {
-      const date = getDate(location.timezone, t);
-
-      if (nameLabelRef.current)
-        nameLabelRef.current.children[1].innerHTML = formatOffset(
-          getTimezoneOffset(location.timezone, t)
-        );
-
-      if (flyingLabelRef.current) {
-        flyingLabelRef.current.style.left = toScreenSpace(t) + 2 + "px";
-
-        flyingLabelRef.current.children[0].innerHTML = getActivity(date.hour);
-        flyingLabelRef.current.children[1].innerHTML = formatTime(date.hour);
-      }
-    },
-    selectT,
-    [location.timezone, toScreenSpace]
-  );
+  const toScreenSpace = (t: number) =>
+    ((t - tWindow[0]) / (tWindow[1] - tWindow[0])) * width;
 
   return (
     <Container>
-      {blocks.map(({ day, awake, office }, i) => (
-        <React.Fragment key={i}>
-          <DayBlock style={toPosition(toScreenSpace, day, 2)} />
-          <AwakeBlock style={toPosition(toScreenSpace, awake)} />
-          <OfficeBlock style={toPosition(toScreenSpace, office)} />
-        </React.Fragment>
-      ))}
-
-      <NameLabel ref={nameLabelRef as any}>
+      <NameLabel>
         <div>
           {getFlagEmoji(location.countryCode)}
           {location.name}
@@ -79,11 +46,19 @@ export const Line = ({ location }: Props) => {
         </RemoveButton>
       </NameLabel>
 
-      <FlyingLabel ref={flyingLabelRef as any}>
+      <FlyingLabel>
         <Avatar></Avatar>
         <Flag>{getFlagEmoji(location.countryCode)}</Flag>
-        <span></span>
+        <HourLabel></HourLabel>
       </FlyingLabel>
+
+      {blocks.map(({ day, awake, office }, i) => (
+        <React.Fragment key={i}>
+          <DayBlock style={toPosition(toScreenSpace, day, 2)} />
+          <AwakeBlock style={toPosition(toScreenSpace, awake)} />
+          <OfficeBlock style={toPosition(toScreenSpace, office)} />
+        </React.Fragment>
+      ))}
     </Container>
   );
 };
@@ -148,6 +123,11 @@ const NameLabel = styled.div`
   padding: 0 14px 0 10px;
 `;
 
+const HourLabel = styled.div`
+  width: 50px;
+  overflow: hidden;
+`;
+
 const RemoveButton = styled.a`
   display: block;
   position: absolute;
@@ -180,9 +160,11 @@ const Flag = styled.div`
 const FlyingLabel = styled.div`
   white-space: nowrap;
   position: absolute;
+  left: 0;
   font-family: monospace;
   font-size: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
+  z-index: 2;
 `;
