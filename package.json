@@ -8,8 +8,6 @@
   "dependencies": {
     "@loadable/component": "5.14.1",
     "@react-three/drei": "3.11.2",
-    "base-64": "1.0.0",
-    "deep-equal": "2.0.5",
     "lodash.deburr": "4.1.0",
     "luxon": "1.26.0",
     "react": "17.0.2",
@@ -43,7 +41,7 @@
     "@types/react": "17.0.3",
     "@types/react-dom": "17.0.3",
     "@types/terser-webpack-plugin": "5.0.3",
-    "@types/three": "0.126.2",
+    "@types/three": "^0.126.2",
     "@types/unzipper": "0.10.3",
     "@types/webpack-bundle-analyzer": "3.9.2",
     "@types/webpack-dev-server": "3.11.3",

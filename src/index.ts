@@ -11,4 +11,9 @@ useStore.subscribe(
   (s) => s.locationStoreReady
 );
 
-window.navigator?.serviceWorker?.register("service-worker.js");
+useStore.subscribe(
+  () => {
+    window.navigator?.serviceWorker?.register("service-worker.js");
+  },
+  (s) => s.locationStoreReady && s.earthReady
+);
