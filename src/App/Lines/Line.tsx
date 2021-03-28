@@ -1,5 +1,5 @@
 import { styled } from "@linaria/react";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { getDate, getTimezoneOffset } from "../../timezone";
 import { AWAKE_HOURS, getBlocks, OFFICE_HOURS } from "./interval";
 import { useStore } from "../store/store";
@@ -25,8 +25,10 @@ export const Line = ({ location }: Props) => {
   const flyingLabelRef = useRef<HTMLElement | null>(null);
   const nameLabelRef = useRef<HTMLElement | null>(null);
 
-  const toScreenSpace = (t: number) =>
-    ((t - tWindow[0]) / (tWindow[1] - tWindow[0])) * width;
+  const toScreenSpace = useCallback(
+    (t: number) => ((t - tWindow[0]) / (tWindow[1] - tWindow[0])) * width,
+    [tWindow, width]
+  );
 
   useSubscribe(
     (t) => {
