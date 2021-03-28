@@ -8,6 +8,8 @@ import { useStore } from "./store/store";
 
 const Earth = loadable(() => import("./Earth/Earth"));
 
+Earth.preload();
+
 export const App = () => {
   const locationStoreReady = useStore((s) => s.locationStoreReady);
 

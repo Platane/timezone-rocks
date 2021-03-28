@@ -2,6 +2,7 @@ import * as path from "path";
 import HtmlPlugin from "html-webpack-plugin";
 import HtmlWebpackInjectPreload from "@principalstudio/html-webpack-inject-preload";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import HTMLInlineCSSWebpackPlugin from "html-inline-css-webpack-plugin";
 // @ts-ignore
 import PreloadWebpackPlugin from "@vue/preload-webpack-plugin";
 import {
@@ -75,7 +76,22 @@ const webpackConfiguration: WebpackConfiguration = {
 
     new HtmlPlugin({
       title: "🌐",
+      templateContent: ({ htmlWebpackPlugin }) => `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width,initial-scale=1">
+            <title>${htmlWebpackPlugin.options.title}</title>
+          </head>
+          <body>
+            <div id="root"></div>
+          </body>
+        </html>
+    `,
     }),
+
+    new HTMLInlineCSSWebpackPlugin(),
 
     new PreloadWebpackPlugin({
       rel: "prefetch",
