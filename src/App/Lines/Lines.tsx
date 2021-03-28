@@ -1,5 +1,5 @@
 import { styled } from "@linaria/react";
-import React, { useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { useStore } from "../store/store";
 import type { Location } from "../../locations";
 import { CursorArm, CursorLine } from "./Cursor";
@@ -21,8 +21,10 @@ export const Lines = ({ onSelectLocation }: Props) => {
 
   const ref = useRef<HTMLElement | null>(null);
 
-  const toScreenSpace = (t: number) =>
-    ((t - tWindow[0]) / (tWindow[1] - tWindow[0])) * width;
+  const toScreenSpace = useCallback(
+    (t: number) => ((t - tWindow[0]) / (tWindow[1] - tWindow[0])) * width,
+    [tWindow, width]
+  );
 
   useSubscribe(
     (t) => {
