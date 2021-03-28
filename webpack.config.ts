@@ -114,7 +114,7 @@ const webpackConfiguration: WebpackConfiguration = {
     new HtmlWebpackInjectPreload({
       files: [
         {
-          match: /\.(csv|glb)$/,
+          match: /\.(csv)$/,
           attributes: {
             rel: "prefetch",
             as: "fetch",
@@ -125,8 +125,7 @@ const webpackConfiguration: WebpackConfiguration = {
           match: /\-(worker\.worker)\.js$/,
           attributes: {
             rel: "prefetch",
-            as: "fetch",
-            crossorigin: "anonymous",
+            as: "script",
           },
         },
       ],
