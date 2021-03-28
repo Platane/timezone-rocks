@@ -1,24 +1,27 @@
 import { createRemote } from "../worker/utils";
-import type { Location } from "./getLocations";
 export type { Location } from "./getLocations";
+import * as api from "./api";
+
+type Api = typeof api;
 
 // @ts-ignore
 import Worker from "worker-loader!./worker.ts";
 
 const worker = new Worker();
 
-export const getLocationsByKey: (
-  keys: string[]
-) => Promise<Location[]> = createRemote(worker, "getLocationsByKey");
+export const getLocationsByKey: Api["getLocationsByKey"] = createRemote(
+  worker,
+  "getLocationsByKey"
+);
 
-export const getMatchingLocation: (
-  query: string
-) => Promise<Location[]> = createRemote(worker, "getMatchingLocation");
+export const getMatchingLocation: Api["getMatchingLocation"] = createRemote(
+  worker,
+  "getMatchingLocation"
+);
 
-export const getLocationByTimezoneAndCountryCode: (
-  timezone: string,
-  countryCode: string
-) => Promise<Location> = createRemote(
+export const getLocationByTimezoneAndCountryCode: Api["getLocationByTimezoneAndCountryCode"] = createRemote(
   worker,
   "getLocationByTimezoneAndCountryCode"
 );
+
+createRemote(worker, "preload")();

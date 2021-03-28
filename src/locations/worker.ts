@@ -1,4 +1,4 @@
 import { createWorkerHandler } from "../worker/utils";
-import * as api from "./search";
+import * as api from "./api";
 
 createWorkerHandler(api);

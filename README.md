@@ -21,6 +21,8 @@ yarn dev
 - [x] round date on release
 - [x] add countries / state to locations
 - [x] Lazy load the three scene
+- [x] lines performance optimization
+- [x] fix worker execution
 
 - [ ] 3d on earth avatar
 - [ ] earth land geometry flatten + smooth normal
@@ -28,6 +30,5 @@ yarn dev
 
   - states makes more sense for US, use states if the country span over more that one timezone ?
 
-- [ ] lines performance optimization
 - [ ] 3d label, avoid overlap
 - [ ] custom and persist office hour
