@@ -1,6 +1,6 @@
 import React, { Suspense, useRef } from "react";
 import { Canvas, useFrame } from "react-three-fiber";
-import { OrbitControls } from "drei";
+import { OrbitControls } from "@react-three/drei";
 import { EarthGlobe } from "./EarthGlobe";
 import { Lights } from "./Lights";
 import { Locations } from "./Locations";

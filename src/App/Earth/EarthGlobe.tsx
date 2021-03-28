@@ -6,7 +6,7 @@ source: https://sketchfab.com/3d-models/earth-0caafb7e837047a688a3e504c0ea74af
 title: Earth
 */
 
-import { useGLTF } from "drei/useGLTF";
+import { useGLTF } from "@react-three/drei";
 import { useEffect, useMemo, useRef } from "react";
 import { useFrame, useThree } from "react-three-fiber";
 import * as THREE from "three";
