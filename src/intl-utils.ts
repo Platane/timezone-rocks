@@ -23,6 +23,19 @@ export const getClientTimezone = () => {
 export const getClientLocaleCountryCode = () =>
   navigator.language.split("-").slice(-1)[0];
 
+export const formatOffset = (minute: number) => {
+  const sign = minute > 0;
+  const hour = 0 | (Math.abs(minute) / 60);
+  const min = 0 | Math.abs(minute) % 60;
+
+  return (
+    "GMT " +
+    ((sign ? "+" : "-") + hour).padStart(3, " ") +
+    ":" +
+    min.toString().padStart(2, "0")
+  );
+};
+
 const createFormatter = () => {
   try {
     const formatter = new Intl.DateTimeFormat(undefined, {

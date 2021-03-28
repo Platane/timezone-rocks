@@ -51,4 +51,8 @@ export const globals = css`
 const EarthContainer = styled.div`
   height: 400px;
   width: 100%;
+
+  @media (max-width: 500px) {
+    height: 300px;
+  }
 `;

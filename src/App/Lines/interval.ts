@@ -6,22 +6,21 @@ export const DAY_HOURS = [0, 23.9999] as Interval;
 export const AWAKE_HOURS = [7, 21] as Interval;
 export const OFFICE_HOURS = [9, 18] as Interval;
 
-export const getBlocks = (
-  timezone: string,
-  { year, month, day }: { year: number; month: number; day: number },
-  [min, max]: Interval
-) => {
-  const blocks: ({ primary?: boolean } & Block)[] = [];
+export const getBlocks = (timezone: string, [min, max]: Interval) => {
+  const blocks: Block[] = [];
 
-  const d = set(DateTime.now().setZone(timezone), year, month, day);
+  let d = DateTime.fromMillis(min).setZone(timezone);
+  d = setHour(d, 0);
 
-  blocks.push({ primary: true, ...getBlock(d) });
+  do {
+    blocks.push(getBlock(d));
 
-  for (let k = 2; k--; ) {
-    const h = 1000 * 60 * 60 * 24 * (k + 1);
-    blocks.push(getBlock(set(d, year, month, day).plus(h)));
-    blocks.push(getBlock(set(d, year, month, day).minus(h)));
-  }
+    const h = 1000 * 60 * 60 * 12;
+    d = setHour(d, 23.99).plus(h);
+    d = setHour(d, 0);
+  } while (d.toMillis() < max);
+
+  blocks.push(getBlock(d));
 
   return blocks;
 };
@@ -52,19 +51,8 @@ const setHour = (d: DateTime, hour: number = 0) =>
     year: d.year,
     month: d.month,
     day: d.day,
-    ...hourToObject(hour),
-  });
-
-const set = (
-  d: DateTime,
-  year: number,
-  month: number,
-  day: number,
-  hour: number = 0
-) =>
-  d.set({
-    year,
-    month,
-    day,
-    ...hourToObject(hour),
+    hour: 0 | hour,
+    minute: (0 | (hour * 60)) % 60,
+    second: (0 | (hour * 60 * 60)) % 60,
+    millisecond: (0 | (hour * 60 * 60 * 1000)) % 1000,
   });
