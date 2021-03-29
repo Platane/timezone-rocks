@@ -7,8 +7,8 @@ on:
         description: "Ref to deploy"
         required: true
         default: "master"
-      target_url:
-        description: "Url to deploy to"
+      target_domain:
+        description: "Domain to deploy to"
         required: true
         default: "timezone.rocks"
 
@@ -22,7 +22,6 @@ jobs:
         id: deployment
         with:
           token: ${{ github.token }}
-          target_url: timezone.rocks
           environment: production
           ref: ${{ github.event.inputs.ref }}
 
@@ -38,22 +37,24 @@ jobs:
 
       - run: yarn generateLocations
       - run: yarn build
-      - run: yarn surge ./build timezone.rocks
+      - run: yarn surge ./build $TARGET_DOMAIN
         env:
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+          TARGET_DOMAIN: ${{ github.event.inputs.target_domain }}
 
       - name: mark the github deployment as failed
         uses: chrnorm/deployment-status@releases/v1
         if: ${{ failure() }}
         with:
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
           token: ${{ github.token }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
           state: "failure"
 
       - name: mark the github deployment as successful
         uses: chrnorm/deployment-status@releases/v1
         with:
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
           token: ${{ github.token }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          target_url: ${{ github.event.inputs.target_domain }}
           state: "success"
