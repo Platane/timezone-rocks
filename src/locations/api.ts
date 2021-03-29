@@ -18,18 +18,6 @@ export const getLocationsByKey = async (keys: string[]) =>
 export const getMatchingLocation = async (query: string) =>
   (await searchPromise)(query);
 
-export const preload = async () => {
-  start();
-
-  await searchPromise;
-};
-
-let start: () => void;
-
-const startPromise = new Promise<void>((r) => {
-  start = r;
-});
-
-const locationsPromise = startPromise.then(getLocations);
+const locationsPromise = getLocations();
 
 const searchPromise = locationsPromise.then(createSearch);

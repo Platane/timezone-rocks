@@ -39,13 +39,6 @@ const getBlock = (d: DateTime) => ({
 
 type Block = ReturnType<typeof getBlock>;
 
-const hourToObject = (hour = 0) => ({
-  hour: 0 | hour,
-  minute: (0 | (hour * 60)) % 60,
-  second: (0 | (hour * 60 * 60)) % 60,
-  millisecond: (0 | (hour * 60 * 60 * 1000)) % 1000,
-});
-
 const setHour = (d: DateTime, hour: number = 0) =>
   d.set({
     year: d.year,

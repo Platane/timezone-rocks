@@ -16,31 +16,13 @@ export const getDate = (timezone: string, timestamp: number) => {
   };
 };
 
-type Date = {
-  year: number;
-  month: number;
-  day: number;
-  hour: number;
-};
-
-export const getUtcTimestampAt = (timezone: string, date: Date) => {
-  const hour = 0 | date.hour;
-  const minute = (0 | (date.hour * 60)) % 60;
-  const second = (0 | (date.hour * 60 * 60)) % 60;
-  const millisecond = (0 | (date.hour * 60 * 60 * 1000)) % 1000;
-
-  const d = DateTime.now()
-    .setZone(timezone)
-    .set({
-      ...date,
-      hour,
-      minute,
-      second,
-      millisecond,
-    });
-  return d.toMillis();
-};
-
+/**
+ * return the offset for the time zone ad the given date
+ *
+ * @param timezone
+ * @param timestamp in ms utc
+ * @returns offset in minute
+ */
 export const getTimezoneOffset = (timezone: string, timestamp: number) => {
   const d = DateTime.fromMillis(timestamp).setZone(timezone);
   return d.offset;

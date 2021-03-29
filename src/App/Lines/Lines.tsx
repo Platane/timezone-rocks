@@ -1,5 +1,4 @@
 import { styled } from "@linaria/react";
-import { css } from "@linaria/core";
 import React, {
   useCallback,
   useEffect,
@@ -8,14 +7,14 @@ import React, {
   useState,
 } from "react";
 import { useStore } from "../store/store";
-import type { Location } from "../../locations";
-import { CursorArm, CursorLine } from "./Cursor";
-import { useSubscribe } from "../store/useSubscribe";
-import { getDate, getTimezoneOffset } from "../../timezone";
-import { formatOffset, formatTime } from "../../intl-utils";
 import { selectT } from "../store/selector";
-import { AWAKE_HOURS, getBlocks, OFFICE_HOURS } from "./interval";
+import type { Location } from "../../locations";
+import { useSubscribe } from "../store/useSubscribe";
+import { getDate, getTimezoneOffset } from "../../timezone/timezone";
+import { AWAKE_HOURS, getBlocks, OFFICE_HOURS } from "../../timezone/interval";
+import { formatOffset, formatTime } from "../../intl-utils";
 import { getFlagEmoji } from "../../emojiFlagSequence";
+import { CursorArm, CursorLine } from "./Cursor";
 
 type Props = {
   onSelectLocation?: (l: Location) => void;

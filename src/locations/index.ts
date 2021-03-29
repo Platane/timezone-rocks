@@ -23,5 +23,3 @@ export const getLocationByTimezoneAndCountryCode: Api["getLocationByTimezoneAndC
   worker,
   "getLocationByTimezoneAndCountryCode"
 );
-
-createRemote(worker, "preload")();

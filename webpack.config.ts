@@ -3,18 +3,11 @@ import HtmlPlugin from "html-webpack-plugin";
 import HtmlWebpackInjectPreload from "@principalstudio/html-webpack-inject-preload";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import HTMLInlineCSSWebpackPlugin from "html-inline-css-webpack-plugin";
-// @ts-ignore
-import PreloadWebpackPlugin from "@vue/preload-webpack-plugin";
-// @ts-ignore
-import { HtmlWebpackSkipAssetsPlugin } from "html-webpack-skip-assets-plugin";
-import {
-  Configuration as WebpackConfiguration,
-  EnvironmentPlugin,
-} from "webpack";
-import type { Configuration as WebpackDevServerConfiguration } from "webpack-dev-server";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import TerserPlugin from "terser-webpack-plugin";
 import { GenerateSW } from "workbox-webpack-plugin";
+import type { Configuration as WebpackConfiguration } from "webpack";
+import type { Configuration as WebpackDevServerConfiguration } from "webpack-dev-server";
 
 const mode =
   process.env.NODE_ENV === "production" ? "production" : "development";
@@ -22,23 +15,16 @@ const mode =
 const webpackConfiguration: WebpackConfiguration = {
   mode,
   devtool: false,
-  entry: {
-    app: path.join(__dirname, "src/index"),
-    worker: path.join(__dirname, "src/locations/worker.ts"),
-  },
+  entry: path.join(__dirname, "src/index"),
   output: {
     path: path.join(__dirname, "build"),
-    filename: "[contenthash]-[name].js",
+    filename: "[contenthash].js",
     publicPath: "",
   },
   resolve: { extensions: [".tsx", ".ts", ".js"] },
   optimization: {
     minimize: mode === "production",
-    minimizer: [
-      new TerserPlugin({
-        exclude: [/(draco|basis)\//],
-      }) as any,
-    ],
+    minimizer: [new TerserPlugin({}) as any],
   },
   module: {
     rules: [
@@ -46,7 +32,6 @@ const webpackConfiguration: WebpackConfiguration = {
         test: [
           /\.(bmp|gif|png|jpeg|jpg|svg)$/,
           /\.(otf|ttf|woff|woff2)$/,
-          /\.(hdr)$/,
           /\.(csv)$/,
           /\.(glb)$/,
         ],
@@ -74,11 +59,8 @@ const webpackConfiguration: WebpackConfiguration = {
   plugins: [
     new MiniCssExtractPlugin({ filename: "[contenthash].css" }),
 
-    new EnvironmentPlugin({}),
-
     new HtmlPlugin({
       title: "🌐",
-      excludeAssets: [/\-worker\.js/],
       templateContent: ({ htmlWebpackPlugin }) => `
         <!DOCTYPE html>
         <html lang="en">
@@ -98,18 +80,7 @@ const webpackConfiguration: WebpackConfiguration = {
     `,
     }),
 
-    new HtmlWebpackSkipAssetsPlugin(),
-
     new HTMLInlineCSSWebpackPlugin(),
-
-    // new PreloadWebpackPlugin({
-    //   rel: "prefetch",
-    //   as: (entry: string) => {
-    //     if (/\.css$/.test(entry)) return "style";
-    //     if (/\.js$/.test(entry)) return "script";
-    //   },
-    //   fileBlacklist: [/\.(csv|glb)$/,],
-    // }),
 
     new HtmlWebpackInjectPreload({
       files: [
@@ -122,7 +93,7 @@ const webpackConfiguration: WebpackConfiguration = {
           },
         },
         {
-          match: /\-(worker\.worker)\.js$/,
+          match: /\.worker\.js$/,
           attributes: {
             rel: "prefetch",
             as: "script",

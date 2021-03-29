@@ -1,4 +1,4 @@
-import { getUtcTimestampAt, getDate } from "../timezone";
+import { getDate } from "../timezone/timezone";
 
 describe("getDate", () => {
   it("should get the time for different timezone", () => {
@@ -40,64 +40,5 @@ describe("getDate", () => {
       day: 28,
       hour: 4 + 10 / 60,
     });
-  });
-});
-
-describe("getUtcTimestampAt", () => {
-  it("should get the timestamp for different timezone", () => {
-    expect(
-      new Date(
-        getUtcTimestampAt("europe/paris", {
-          year: 2021,
-          month: 3,
-          day: 18,
-          hour: 9,
-        })
-      )
-    ).toEqual(new Date("2021-03-18T08:00:00.000Z"));
-
-    expect(
-      new Date(
-        getUtcTimestampAt("europe/london", {
-          year: 2021,
-          month: 3,
-          day: 18,
-          hour: 9,
-        })
-      )
-    ).toEqual(new Date("2021-03-18T09:00:00.000Z"));
-
-    expect(
-      new Date(
-        getUtcTimestampAt("europe/paris", {
-          year: 2021,
-          month: 3,
-          day: 18,
-          hour: 9.5,
-        })
-      )
-    ).toEqual(new Date("2021-03-18T08:30:00.000Z"));
-
-    expect(
-      new Date(
-        getUtcTimestampAt("europe/paris", {
-          year: 2021,
-          month: 3,
-          day: 28,
-          hour: 2,
-        })
-      )
-    ).toEqual(new Date("2021-03-28T01:00:00.000Z"));
-
-    expect(
-      new Date(
-        getUtcTimestampAt("europe/paris", {
-          year: 2021,
-          month: 3,
-          day: 28,
-          hour: 4,
-        })
-      )
-    ).toEqual(new Date("2021-03-28T02:00:00.000Z"));
   });
 });
