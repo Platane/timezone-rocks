@@ -56,6 +56,5 @@ jobs:
         with:
           token: ${{ github.token }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-          target_url: ${{ github.event.inputs.target_domain }}
           environment_url: https://${{ github.event.inputs.target_domain }}
           state: "success"
