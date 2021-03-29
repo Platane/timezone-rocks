@@ -1,4 +1,4 @@
-name: Manually triggered deploy
+name: Manually Deploy
 
 on:
   workflow_dispatch:
@@ -7,14 +7,29 @@ on:
         description: "Ref to deploy"
         required: true
         default: "master"
+      target_url:
+        description: "Url to deploy to"
+        required: true
+        default: "timezone.rocks"
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
+      - name: start github deployment
+        uses: chrnorm/deployment-action@releases/v1
+        id: deployment
+        with:
+          token: ${{ github.token }}
+          target_url: timezone.rocks
+          environment: production
+          ref: ${{ github.event.inputs.ref }}
+
       - uses: actions/checkout@v2.3.3
-        ref: ${{ github.event.inputs.ref }}
+        with:
+          ref: ${{ github.event.inputs.ref }}
+
       - uses: actions/setup-node@v1.4.4
         with:
           node-version: 15
@@ -27,3 +42,18 @@ jobs:
         env:
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+
+      - name: mark the github deployment as failed
+        uses: chrnorm/deployment-status@releases/v1
+        if: ${{ failure() }}
+        with:
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          token: ${{ github.token }}
+          state: "failure"
+
+      - name: mark the github deployment as successful
+        uses: chrnorm/deployment-status@releases/v1
+        with:
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          token: ${{ github.token }}
+          state: "success"
