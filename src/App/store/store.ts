@@ -39,6 +39,7 @@ export const useStore = create<State & Api>((set) => ({
   onEarthReady: () => set({ earthReady: true }),
   addLocation: (location) =>
     set((s) => ({
+      selectedLocation: location,
       locations: [
         location,
         ...s.locations.filter((l) => l.key !== location.key),
