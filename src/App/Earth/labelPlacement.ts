@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { getBoxDistance } from "../../math-utils";
 
 const box = new THREE.Vector2(100, 20);
 
@@ -8,7 +9,8 @@ export const computeBestPlacement = (
   sphereRadius: number
 ) => {
   const anchors = positions.map((p) => p.clone());
-  for (let i = 100; i--; ) step(positions, anchors, container, sphereRadius);
+  for (let i = 100; i--; )
+    step(positions, anchors, container, sphereRadius, (i + 5) / 100);
 };
 
 const as: THREE.Vector2[] = [];
@@ -17,7 +19,8 @@ const step = (
   positions: (THREE.Vector2 & { front: boolean })[],
   anchors: THREE.Vector2[],
   container: THREE.Vector2,
-  sphereRadius: number
+  sphereRadius: number,
+  dt = 1
 ) => {
   // prepare
   while (as.length < positions.length) as.push(new THREE.Vector2());
@@ -29,7 +32,7 @@ const step = (
     const a = as[i];
 
     a.set(0, 0);
-    m.copy(p).sub(anchors[i]).multiplyScalar(-0.2);
+    m.copy(p).sub(anchors[i]).multiplyScalar(-0.12);
     a.add(m);
   }
 
@@ -37,14 +40,19 @@ const step = (
   for (let i = 0; i < positions.length; i++)
     for (let j = i + 1; j < positions.length; j++) {
       m.copy(positions[i]).sub(positions[j]);
-      const l = m.length();
-      m.multiplyScalar(1 / l);
 
-      const f = 40 / Math.max(4, l);
-      as[i].addScaledVector(m, f);
-      as[j].addScaledVector(m, -f);
+      if (m.lengthSq() < 0.0001) m.x += 0.01;
+
+      const d = getBoxDistance(positions[i], positions[j], box, box);
+
+      const f = 10 / Math.max(2, d);
+      const l = m.length();
+
+      as[i].addScaledVector(m, f / l);
+      as[j].addScaledVector(m, -f / l);
     }
 
   // apply acceleration
-  for (let i = 0; i < positions.length; i++) positions[i].add(as[i]);
+  for (let i = 0; i < positions.length; i++)
+    positions[i].addScaledVector(as[i], dt);
 };

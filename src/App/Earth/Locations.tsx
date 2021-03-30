@@ -108,16 +108,38 @@ export const Locations = () => {
         : Math.floor(z * (zIndexRange - 1));
       el.style.zIndex = zIndex + "";
     });
+
+    ref.current.children.map((node, i) => {
+      const { x, y, z, front } = positions[i] ?? {};
+
+      const dx = (x / size.width) * 2 - 1;
+      const dy = 1 - (y / size.height) * 2;
+      const d = new THREE.Vector3(dx, dy, 0);
+      d.z = z + (front ? -0.03 : 0);
+      d.unproject(camera);
+      d.sub(node.position);
+
+      const line = node.children[1] as THREE.LineSegments;
+
+      line.geometry.setFromPoints([new THREE.Vector3(0, 0, 0), d]);
+      line.computeLineDistances();
+    });
   });
 
   return (
     <group ref={ref}>
       {locations.map((location) => (
         <group key={location.key} position={toWorld(location).toArray()}>
+          (
           <mesh>
-            <sphereBufferGeometry args={[0.01, 16, 16]} />
-            <meshBasicMaterial color={"red"} />
+            <sphereBufferGeometry args={[0.008, 8, 8]} />
+            <meshBasicMaterial color={"#000"} />
           </mesh>
+          )
+          <lineSegments>
+            <bufferGeometry />
+            <lineDashedMaterial dashSize={0.03} gapSize={0.02} color={"#000"} />
+          </lineSegments>
         </group>
       ))}
     </group>
