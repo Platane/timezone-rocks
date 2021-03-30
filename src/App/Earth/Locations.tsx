@@ -8,6 +8,7 @@ import { useSubscribe } from "../store/useSubscribe";
 import { getDate } from "../../timezone/timezone";
 import { formatTime } from "../../intl-utils";
 import { getActivity } from "../Avatar/activity";
+import { computeBestPlacement } from "./labelPlacement";
 
 export const Locations = () => {
   const locations = useStore((s) => s.locations);
@@ -59,33 +60,54 @@ export const Locations = () => {
   useFrame(({ camera, size }) => {
     if (!ref.current) return;
 
+    camera.updateMatrixWorld();
+
     domElement.style.zIndex = zIndexRange + "";
+    domElement.style.position = "relative";
 
-    for (let i = ref.current.children.length; i--; ) {
-      const el = elementPool.current[i];
-      const node = ref.current.children[i];
-
-      if (!el) return;
-
-      camera.updateMatrixWorld();
-
+    const positions = ref.current.children.map((node, i) => {
       node.getWorldPosition(position);
 
-      const o = a.subVectors(position, camera.position).dot(position) < 0;
+      const front = a.subVectors(position, camera.position).dot(position) < 0;
 
       position.project(camera);
 
-      el.style.zIndex = Math.floor(
-        o
-          ? zIndexRange + 1 + (1 - position.z) * (zIndexRange - 2)
-          : zIndexRange - 1 - position.z * (zIndexRange - 2)
-      ).toString();
+      // let width = 100;
+      // let height = 20;
 
-      const x = (position.x + 1) / 2;
-      const y = (1 - position.y) / 2;
-      el.style.transform =
-        "translate(" + x * size.width + "px," + y * size.height + "px)";
-    }
+      // const el = elementPool.current[i];
+      // if (el) {
+      //   const r = el.getBoundingClientRect();
+      //   width = r.width;
+      //   height = r.height;
+      // }
+
+      const x = ((position.x + 1) / 2) * size.width;
+      const y = ((1 - position.y) / 2) * size.height;
+
+      const p: any = new THREE.Vector2(x, y);
+
+      p.front = front;
+      p.z = position.z;
+
+      return p;
+    });
+
+    computeBestPlacement(
+      positions,
+      new THREE.Vector2(size.width, size.height),
+      0
+    );
+
+    elementPool.current.forEach((el, i) => {
+      const { x, y, z, front } = positions[i] ?? {};
+      el.style.transform = "translate(" + x + "px," + y + "px)";
+
+      const zIndex = front
+        ? zIndexRange + 1 + Math.floor(z * (zIndexRange - 1))
+        : Math.floor(z * (zIndexRange - 1));
+      el.style.zIndex = zIndex + "";
+    });
   });
 
   return (
