@@ -19,7 +19,7 @@ jobs:
       - run: yarn test
       - run: yarn generateLocations
       - run: yarn build
-      - run: yarn surge ./build february-platane.surge.sh
+      - run: yarn surge ./build staging-timezone-rocks.surge.sh
         env:
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
