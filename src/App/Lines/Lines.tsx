@@ -136,7 +136,8 @@ const Container = styled.div`
   position: relative;
   overflow: hidden;
   width: 100%;
-  padding-bottom: 14px;
+  min-height: 200px;
+  padding-bottom: 24px;
 `;
 
 const toPosition = (
@@ -160,11 +161,6 @@ const Block = styled.div`
   position: absolute;
   border-radius: 4px;
   transition: filter 100ms;
-
-  filter: grayscale(0.9) brightness(1);
-  &.primary {
-    filter: none;
-  }
 `;
 
 const DayBlock = styled(Block)`
@@ -177,12 +173,20 @@ const AwakeBlock = styled(Block)`
   height: 26px;
   background-color: #b6cf5a;
   background-color: #86a45d;
+  filter: grayscale(0.9) brightness(1);
+  &.primary {
+    filter: none;
+  }
 `;
 const OfficeBlock = styled(Block)`
   height: 26px;
   border-radius: 0px;
   background-color: #48ac55;
   background-color: #7d9c56;
+  filter: grayscale(0.9) brightness(1);
+  &.primary {
+    filter: none;
+  }
 `;
 
 const LocationLabel = styled.div`
@@ -204,10 +208,6 @@ const OffsetLabel = styled.span`
   font-family: monospace;
   font-size: 0.9em;
   margin-top: auto;
-`;
-
-const HourLabel = styled.div`
-  font-size: 1.1em;
 `;
 
 const RemoveButton = styled.a`
@@ -247,4 +247,11 @@ const FlyingLabel = styled.div`
   flex-direction: row;
   align-items: center;
   z-index: 2;
+  height: 100%;
+`;
+
+const HourLabel = styled.div`
+  font-size: 1.4em;
+  color: #fff;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 1), 0 0 4px rgba(0, 0, 0, 1);
 `;

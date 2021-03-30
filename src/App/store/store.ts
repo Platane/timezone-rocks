@@ -8,10 +8,13 @@ export type Api = {
   initLocations: (locations: Location[]) => void;
   addLocation: (location: Location) => void;
   removeLocation: (location: Location) => void;
+  focusSearch: () => void;
+  blurSearch: () => void;
 };
 export type State = {
   t: number;
   locationStoreReady: boolean;
+  searchFocused: boolean;
   earthReady: boolean;
   tWindow: [number, number];
   locations: Location[];
@@ -25,6 +28,7 @@ export const useStore = create<State & Api>((set) => ({
   tWindow: [t - day * 1.3, t + day * 1.3],
   locations: [],
   locationStoreReady: false,
+  searchFocused: false,
   earthReady: false,
 
   setT: (t) => set({ t }),
@@ -33,14 +37,17 @@ export const useStore = create<State & Api>((set) => ({
   addLocation: (location) =>
     set((s) => ({
       locations: [
-        ...s.locations.filter((l) => l.key !== location.key),
         location,
+        ...s.locations.filter((l) => l.key !== location.key),
       ],
     })),
   removeLocation: (location) =>
     set((s) => ({
       locations: s.locations.filter((l) => l.key !== location.key),
     })),
+
+  focusSearch: () => set({ searchFocused: true }),
+  blurSearch: () => set({ searchFocused: false }),
 }));
 
 init(useStore);

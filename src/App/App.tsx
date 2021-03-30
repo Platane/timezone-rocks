@@ -58,6 +58,12 @@ export const globals = css`
       box-sizing: inherit;
       user-select: inherit;
     }
+
+    @media (max-width: 500px) {
+      #root {
+        padding-bottom: 360px;
+      }
+    }
   }
 `;
 

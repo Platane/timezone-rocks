@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { styled } from "@linaria/react";
 import { css } from "@linaria/core";
 import { getFlagEmoji } from "../emojiFlagSequence";
@@ -6,17 +6,37 @@ import { useSearchResults } from "./useSearchLocation";
 import { useStore } from "./store/store";
 import { usePreviousUntilTruthy } from "../hooks/usePreviousUntilTruthy";
 import { useExtendedTruthiness } from "../hooks/useExtendedTruthiness";
+import { useSubscribe } from "./store/useSubscribe";
 
 export const Search = () => {
+  const focused = useStore((s) => s.searchFocused);
+  const focusSearch = useStore((s) => s.focusSearch);
+  const blurSearch = useStore((s) => s.blurSearch);
+  const addLocation = useStore((s) => s.addLocation);
   const [query, setQuery] = useState("");
-  const [focused, setFocused] = useState(false);
   const focusedPlus = useExtendedTruthiness(focused, 100);
   const [hover, setHover] = useState<null | number>(null);
   const results = usePreviousUntilTruthy(useSearchResults(query), [])!;
-  const addLocation = useStore((s) => s.addLocation);
+
+  const ref = useRef<HTMLFormElement | null>(null);
+  useSubscribe(
+    (focus) => {
+      if (
+        focus &&
+        ref.current &&
+        // likely a device with a virtual keyboard
+        "ontouchend" in document
+      ) {
+        const y = ref.current.getBoundingClientRect().top + window.scrollY - 10;
+        window.scrollTo(0, y);
+      }
+    },
+    (s) => s.searchFocused
+  );
 
   return (
     <Container
+      ref={ref}
       onSubmit={(e) => {
         e.preventDefault();
         const top = results[hover as any] ?? results[0];
@@ -33,8 +53,8 @@ export const Search = () => {
         spellCheck={false}
         value={query}
         onChange={(event) => setQuery(event.target.value)}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
+        onFocus={focusSearch}
+        onBlur={blurSearch}
         onKeyDownCapture={(e) => {
           switch (e.code) {
             case "ArrowUp":

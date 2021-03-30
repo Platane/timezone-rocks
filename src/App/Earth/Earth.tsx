@@ -26,8 +26,6 @@ export const Earth = () => {
           <Lights />
         </AppearScaleNode>
       </Suspense>
-
-      {false && <axesHelper args={[2]} />}
     </Canvas>
   );
 };
