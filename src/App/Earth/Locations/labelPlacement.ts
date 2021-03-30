@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { getBoxDistance } from "../../math-utils";
+import { getBoxDistance } from "../../../math-utils";
 
 const box = new THREE.Vector2(100, 20);
 

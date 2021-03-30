@@ -35,7 +35,7 @@ const CursorContainer = styled.div`
   background-color: #ddd4;
   height: 24px;
   width: 100%;
-
+  user-select: none;
   cursor: pointer;
 `;
 

@@ -26,3 +26,13 @@ export const stepSpring = (
     dt -= interval;
   }
 };
+
+/**
+ * return true if the spring is to be considered in a stable state
+ * ( close enough to the target and with a small enough velocity )
+ */
+export const isStable = (
+  s: { x: number; v: number; target: number },
+  dt = 1 / 60,
+  e = 0.0001
+) => Math.abs(s.x - s.target) < e && Math.abs(s.v * dt) < e;

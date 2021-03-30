@@ -1,23 +1,18 @@
 import React, { Suspense, useRef } from "react";
 import { Canvas, useFrame } from "react-three-fiber";
-import { OrbitControls } from "@react-three/drei";
 import { EarthGlobe } from "./EarthGlobe";
 import { Lights } from "./Lights";
-import { Locations } from "./Locations";
-import { stepSpring } from "../../spring";
+import { Locations } from "./Locations/Locations";
+import { stepSpring } from "../../spring-utils";
 import { useStore } from "../store/store";
+import { Controls } from "./Controls";
 
 export const Earth = () => {
   const ready = useStore((s) => s.earthReady);
 
   return (
     <Canvas camera={{ near: 0.1, far: 20, position: [0, 0, 1.95] }}>
-      <OrbitControls
-        minDistance={1.95}
-        maxDistance={10}
-        enableZoom={false}
-        enablePan={false}
-      />
+      <Controls />
 
       <Suspense fallback={null}>
         <AppearScaleNode scale={ready ? 1 : 0.001}>

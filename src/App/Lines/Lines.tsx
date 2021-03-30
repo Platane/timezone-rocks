@@ -8,7 +8,6 @@ import React, {
 } from "react";
 import { useStore } from "../store/store";
 import { selectT } from "../store/selector";
-import type { Location } from "../../locations";
 import { useSubscribe } from "../store/useSubscribe";
 import { getDate, getTimezoneOffset } from "../../timezone/timezone";
 import { getBlocks } from "../../timezone/interval";
@@ -16,14 +15,10 @@ import { formatOffset, formatTime } from "../../intl-utils";
 import { getFlagEmoji } from "../../emojiFlagSequence";
 import { CursorArm, CursorLine } from "./Cursor";
 import { getActivity } from "../Avatar/activity";
+import { LocationLabel } from "./LocationLabel";
 
-type Props = {
-  onSelectLocation?: (l: Location) => void;
-};
-
-export const Lines = ({ onSelectLocation }: Props) => {
+export const Lines = () => {
   const locations = useStore((s) => s.locations);
-  const removeLocation = useStore((s) => s.removeLocation);
   const tWindow = useStore((s) => s.tWindow);
 
   const [width, setWidth] = useState(window.innerWidth);
@@ -61,7 +56,7 @@ export const Lines = ({ onSelectLocation }: Props) => {
         (container.children[1] as any).style.transform = `translateX(${x}px)`;
 
         const locationLabel = container.children[2 + i * 2];
-        locationLabel.children[1].innerHTML = formatOffset(
+        locationLabel.children[2].innerHTML = formatOffset(
           getTimezoneOffset(location.timezone, t)
         );
 
@@ -94,23 +89,7 @@ export const Lines = ({ onSelectLocation }: Props) => {
 
       {locations.map((location, i) => (
         <React.Fragment key={location.key}>
-          <LocationLabel>
-            <NameLabel>
-              {getFlagEmoji(location.countryCode)} {location.name}
-            </NameLabel>
-            <OffsetLabel></OffsetLabel>
-
-            <RemoveButton
-              href="#"
-              title="remove location"
-              onClick={(e) => {
-                e.preventDefault();
-                removeLocation(location);
-              }}
-            >
-              ×
-            </RemoveButton>
-          </LocationLabel>
+          <LocationLabel location={location} />
 
           <Row>
             <FlyingLabel>
@@ -153,7 +132,7 @@ const toPosition = (
 };
 
 const Row = styled.div`
-  height: 28px;
+  height: 32px;
   overflow: hidden;
   position: relative;
 `;
@@ -165,23 +144,23 @@ const Block = styled.div`
 `;
 
 const DayBlock = styled(Block)`
-  height: 20px;
+  height: 24px;
   top: 4px;
   background-color: #aaa6;
   margin-bottom: 4px;
 `;
 const AwakeBlock = styled(Block)`
-  height: 26px;
+  height: 30px;
   top: 1px;
   transition: background-color 200ms;
   background-color: #8e928b;
   &.primary {
     background-color: #86a45d;
-    /* box-shadow: 0 0 0 1px #ccc; */
+    /* box-shadow: 0 0 0 1px orange; */
   }
 `;
 const OfficeBlock = styled(Block)`
-  height: 26px;
+  height: 30px;
   top: 1px;
   border-radius: 0px;
   transition: background-color 200ms;
@@ -189,34 +168,6 @@ const OfficeBlock = styled(Block)`
   &.primary {
     background-color: #7d9c56;
   }
-`;
-
-const LocationLabel = styled.div`
-  color: #fff;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0 14px;
-  margin-top: 14px;
-  position: relative;
-  z-index: 2;
-`;
-const NameLabel = styled.span`
-  display: inline-block;
-  min-width: 120px;
-`;
-const OffsetLabel = styled.span`
-  margin-left: 10px;
-  font-family: monospace;
-  font-size: 0.9em;
-  margin-top: auto;
-`;
-
-const RemoveButton = styled.a`
-  display: inline-block;
-  margin-left: 10px;
-  color: #fff;
-  text-decoration: none;
 `;
 
 const Avatar = styled.div`
