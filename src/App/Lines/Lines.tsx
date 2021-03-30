@@ -11,10 +11,11 @@ import { selectT } from "../store/selector";
 import type { Location } from "../../locations";
 import { useSubscribe } from "../store/useSubscribe";
 import { getDate, getTimezoneOffset } from "../../timezone/timezone";
-import { AWAKE_HOURS, getBlocks, OFFICE_HOURS } from "../../timezone/interval";
+import { getBlocks } from "../../timezone/interval";
 import { formatOffset, formatTime } from "../../intl-utils";
 import { getFlagEmoji } from "../../emojiFlagSequence";
 import { CursorArm, CursorLine } from "./Cursor";
+import { getActivity } from "../Avatar/activity";
 
 type Props = {
   onSelectLocation?: (l: Location) => void;
@@ -152,7 +153,7 @@ const toPosition = (
 };
 
 const Row = styled.div`
-  height: 26px;
+  height: 28px;
   overflow: hidden;
   position: relative;
 `;
@@ -165,27 +166,28 @@ const Block = styled.div`
 
 const DayBlock = styled(Block)`
   height: 20px;
-  top: 3px;
+  top: 4px;
   background-color: #aaa6;
   margin-bottom: 4px;
 `;
 const AwakeBlock = styled(Block)`
   height: 26px;
-  background-color: #b6cf5a;
-  background-color: #86a45d;
-  filter: grayscale(0.9) brightness(1);
+  top: 1px;
+  transition: background-color 200ms;
+  background-color: #8e928b;
   &.primary {
-    filter: none;
+    background-color: #86a45d;
+    /* box-shadow: 0 0 0 1px #ccc; */
   }
 `;
 const OfficeBlock = styled(Block)`
   height: 26px;
+  top: 1px;
   border-radius: 0px;
-  background-color: #48ac55;
-  background-color: #7d9c56;
-  filter: grayscale(0.9) brightness(1);
+  transition: background-color 200ms;
+  background-color: #848881;
   &.primary {
-    filter: none;
+    background-color: #7d9c56;
   }
 `;
 
@@ -217,13 +219,6 @@ const RemoveButton = styled.a`
   text-decoration: none;
 `;
 
-export const getActivity = (hour: number) =>
-  (hour < AWAKE_HOURS[0] && "😴") ||
-  (hour < OFFICE_HOURS[0] && `☕️`) ||
-  (hour < OFFICE_HOURS[1] && `👨‍💻`) ||
-  (hour < AWAKE_HOURS[1] && "🍻") ||
-  "😴";
-
 const Avatar = styled.div`
   width: 26px;
   font-size: 20px;
@@ -241,7 +236,6 @@ const FlyingLabel = styled.div`
   white-space: nowrap;
   position: absolute;
   left: 0;
-  font-family: monospace;
   font-size: 10px;
   display: flex;
   flex-direction: row;
@@ -252,6 +246,7 @@ const FlyingLabel = styled.div`
 
 const HourLabel = styled.div`
   font-size: 1.4em;
+  font-family: monospace;
   color: #fff;
   text-shadow: 0 0 2px rgba(0, 0, 0, 1), 0 0 4px rgba(0, 0, 0, 1);
 `;
