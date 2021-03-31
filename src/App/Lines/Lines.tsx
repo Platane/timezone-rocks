@@ -12,6 +12,7 @@ import { DateSlider } from "./DateSlider";
 export const Lines = () => {
   const locations = useStore((s) => s.locations);
   const tWindow = useStore(selectTWindow);
+  const selectLocation = useStore((s) => s.selectLocation);
   const width = useWidth();
 
   const ref = useRef<HTMLElement | null>(null);
@@ -72,7 +73,7 @@ export const Lines = () => {
           <React.Fragment key={location.key}>
             <LocationLabel location={location} />
 
-            <Row>
+            <Row onClick={() => selectLocation(location)}>
               <FlyingLabel location={location} />
 
               {blocks[i].map(({ day, awake, office }, i) => (
@@ -94,7 +95,7 @@ const Container = styled.div`
   position: relative;
   overflow: hidden;
   width: 100%;
-  min-height: 200px;
+  min-height: 220px;
   padding-bottom: 24px;
 `;
 

@@ -36,7 +36,7 @@ export const formatDate = ({
   if (dateFormatter) {
     const d = new Date();
     d.setFullYear(year);
-    d.setMonth(-1);
+    d.setMonth(month - 1);
     d.setDate(day);
     d.setHours(0);
     d.setMinutes(0);
@@ -47,6 +47,30 @@ export const formatDate = ({
       month.toString().padStart(2, "0"),
       year.toString().slice(-2),
     ].join("/");
+};
+
+export const formatDateTime = ({
+  year,
+  month,
+  day,
+  hour,
+}: {
+  year: number;
+  month: number;
+  day: number;
+  hour: number;
+}) => {
+  if (dateTimeFormatter) {
+    const d = new Date();
+    d.setFullYear(year);
+    d.setMonth(month - 1);
+    d.setDate(day);
+    d.setMinutes(0);
+    d.setHours(hour);
+    return dateTimeFormatter.format(d);
+  } else {
+    return formatDate({ year, month, day }) + " " + formatTime(hour);
+  }
 };
 
 export const getClientTimezone = () => {
@@ -92,6 +116,26 @@ const createDateFormatter = () => {
       });
   } catch (e) {}
 };
+const createDateTimeFormatter = () => {
+  try {
+    const formatter = new Intl.DateTimeFormat(undefined, {
+      timeStyle: "short",
+      dateStyle: "medium",
+    } as any);
 
+    if ((formatter.resolvedOptions() as any).dateStyle === "medium")
+      return formatter;
+    else
+      return new Intl.DateTimeFormat(undefined, {
+        minute: "numeric",
+        hour: "numeric",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+  } catch (e) {}
+};
+
+const dateTimeFormatter = createDateTimeFormatter();
 const timeFormatter = createTimeFormatter();
 const dateFormatter = createDateFormatter();

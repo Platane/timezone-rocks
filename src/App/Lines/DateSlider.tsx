@@ -34,13 +34,7 @@ const resetT = () => {
 export const DateSlider = () => {
   const tWindow = useStore(selectTWindow);
   const now = useStore((s) => s.now);
-  const location = useStore((s) => s.selectedLocation);
   const width = useWidth();
-
-  const days = useMemo(() => {
-    if (!location) return [];
-    return getDays(location.timezone, tWindow).map(([_, a]) => a);
-  }, []);
 
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -54,14 +48,9 @@ export const DateSlider = () => {
       const container = ref.current;
       if (!container) return;
       container.style.transform = `translateX(${toScreenSpace(t)}px)`;
-
-      if (location)
-        container.children[1].innerHTML = formatDate(
-          getDate(location.timezone, t)
-        );
     },
     selectT,
-    [toScreenSpace, width, location]
+    [toScreenSpace, width]
   );
 
   const bind = useSlide(setT, setRoundedT);
@@ -77,20 +66,8 @@ export const DateSlider = () => {
           }}
         />
 
-        {location &&
-          days.map((a) => (
-            <DayTick
-              key={a}
-              style={{
-                transform: `translateX(${toScreenSpace(a)}px)`,
-              }}
-            />
-          ))}
-
         <Caret ref={ref}>
           <Cursor />
-
-          {location && <DateLabel />}
         </Caret>
       </CursorContainer>
     </Container>
@@ -113,17 +90,8 @@ const Container = styled.div`
   width: 100%;
 `;
 const Caret = styled.div`
-  width: 100%;
   left: -${32 / 2}px;
   position: absolute;
-`;
-const DateLabel = styled.div`
-  display: inline-block;
-  margin-left: 10px;
-  height: 24px;
-  vertical-align: middle;
-  color: orange;
-  text-shadow: 0 0 4px #000a;
 `;
 
 const Cursor = styled.div`
@@ -135,34 +103,12 @@ const Cursor = styled.div`
   display: inline-block;
 `;
 
-const DayTick = styled.div`
-  width: 4px;
-  height: 8px;
-  border-radius: 2px;
-  left: -${4 / 2}px;
-  top: 14px;
-  background-color: #e88a28;
-  pointer-events: none;
-  position: absolute;
-`;
-
 const NowButton = styled.div`
-  width: 18px;
-  height: 18px;
-  border-radius: 10px 4px 4px 4px;
-  left: -${18 / 2}px;
-  top: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px 6px 2px 6px;
+  left: -${16 / 2}px;
+  top: 0px;
   background-color: #e88a28;
   position: absolute;
-`;
-
-export const CursorArm = styled.div`
-  position: absolute;
-  width: 2px;
-  height: calc(100% + 14px);
-  background-color: #e88a28;
-  left: -1px;
-  top: 0;
-  z-index: 2;
-  pointer-events: none;
 `;

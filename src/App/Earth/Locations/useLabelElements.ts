@@ -66,6 +66,7 @@ const createLabel = () => {
   el.style.pointerEvents = "none";
   el.style.fontFamily = "monospace";
   el.style.textShadow = "0 0 2px rgba(0, 0, 0, 1), 0 0 4px rgba(0, 0, 0, 1)";
+  el.style.color = "#fff";
 
   return el;
 };
@@ -81,5 +82,5 @@ const renderLabel = (
   const hour = formatTime(date.hour);
   const activity = getActivity(date.hour);
   el.innerText = `${activity} ${hour}`;
-  el.style.color = selected ? "orange" : "#fff";
+  // el.style.color = selected ? "orange" : "#fff";
 };

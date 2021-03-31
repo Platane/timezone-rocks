@@ -1,7 +1,7 @@
 import { styled } from "@linaria/react";
 import React from "react";
 import { getDate } from "../../timezone/timezone";
-import { formatTime } from "../../intl-utils";
+import { formatDateTime, formatTime } from "../../intl-utils";
 import { getFlagEmoji } from "../../emojiFlagSequence";
 import { getActivity } from "../Avatar/activity";
 import { Location } from "../../locations";
@@ -9,8 +9,6 @@ import { Location } from "../../locations";
 type Props = { location: Location };
 export const FlyingLabel = ({ location }: Props) => (
   <Container>
-    <Avatar></Avatar>
-    <Flag>{getFlagEmoji(location.countryCode)}</Flag>
     <HourLabel></HourLabel>
   </Container>
 );
@@ -19,10 +17,9 @@ export const update = (
   domElement: Element,
   { location, t }: Props & { t: number }
 ) => {
-  const { hour } = getDate(location.timezone, t);
-
-  domElement.children[0].innerHTML = getActivity(hour);
-  domElement.children[2].innerHTML = formatTime(hour);
+  domElement.children[0].innerHTML = formatDateTime(
+    getDate(location.timezone, t)
+  );
 };
 
 const Avatar = styled.div`
@@ -48,6 +45,7 @@ const Container = styled.div`
   align-items: center;
   z-index: 2;
   height: 100%;
+  pointer-events: none;
 `;
 
 const HourLabel = styled.div`

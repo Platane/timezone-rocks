@@ -56,13 +56,13 @@ const Container = styled.div`
   font-size: 1.06em;
   color: #fff;
   padding: 0 16px;
-  margin-top: 14px;
+  margin-top: 18px;
   position: relative;
   z-index: 2;
   cursor: pointer;
 `;
 const locationLabelSelected = css`
-  color: orange;
+  /* color: orange; */
 `;
 const Flag = styled.span`
   display: inline-block;

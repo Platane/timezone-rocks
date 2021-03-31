@@ -26,10 +26,12 @@ export type State = {
 const t = Date.now();
 const day = 24 * 60 * 60 * 1000;
 
+const w = Math.max(2.3, Math.min(3, window.innerWidth / 300));
+
 export const useStore = create<State & Api>((set) => ({
   t,
   now: t,
-  tWindow: [t - day * 1.3, t + day * 1.3],
+  tWindow: [t - (day * w) / 2, t + (day * w) / 2],
   locations: [],
   locationStoreReady: false,
   searchFocused: false,
