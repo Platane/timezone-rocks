@@ -14,7 +14,7 @@
     "react-dom": "17.0.2",
     "react-three-fiber": "5.3.22",
     "reselect": "4.0.0",
-    "three": "0.126.1",
+    "three": "0.127.0",
     "zustand": "3.3.3"
   },
   "devDependencies": {
@@ -33,7 +33,7 @@
     "@types/loadable__component": "5.13.3",
     "@types/lodash.deburr": "4.1.6",
     "@types/luxon": "1.26.2",
-    "@types/mini-css-extract-plugin": "1.4.0",
+    "@types/mini-css-extract-plugin": "1.4.1",
     "@types/node-fetch": "2.5.8",
     "@types/react": "17.0.3",
     "@types/react-dom": "17.0.3",
@@ -45,7 +45,7 @@
     "@types/workbox-webpack-plugin": "5.1.6",
     "@types/worker-plugin": "4.0.1",
     "babel-loader": "8.2.2",
-    "core-js": "3.9.1",
+    "core-js": "3.10.0",
     "css-loader": "5.2.0",
     "file-loader": "6.2.0",
     "html-inline-css-webpack-plugin": "1.11.0",
