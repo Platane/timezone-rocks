@@ -4,6 +4,8 @@ import { css } from "@linaria/core";
 import { useStore } from "../store/store";
 import { getFlagEmoji } from "../../emojiFlagSequence";
 import { Location } from "../../locations";
+import { formatOffset } from "../../intl-utils";
+import { getTimezoneOffset } from "../../timezone/timezone";
 
 type Props = { location: Location };
 export const LocationLabel = ({ location }: Props) => {
@@ -13,7 +15,10 @@ export const LocationLabel = ({ location }: Props) => {
 
   return (
     <Container
-      onClick={() => selectLocation(location)}
+      onClick={(e) => {
+        e.preventDefault();
+        selectLocation(location);
+      }}
       className={
         selectedLocation === location ? locationLabelSelected : undefined
       }
@@ -36,13 +41,20 @@ export const LocationLabel = ({ location }: Props) => {
   );
 };
 
+export const update = (
+  domElement: Element,
+  { location, t }: Props & { t: number }
+) => {
+  domElement.children[2].innerHTML = formatOffset(
+    getTimezoneOffset(location.timezone, t)
+  );
+};
+
 const Container = styled.div`
+  display: inline-block;
   text-shadow: 0 0 2px #000;
   font-size: 1.06em;
   color: #fff;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   padding: 0 16px;
   margin-top: 14px;
   position: relative;

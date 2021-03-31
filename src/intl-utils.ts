@@ -2,26 +2,14 @@ export const formatTime = (hour: number) => {
   const h = 0 | hour;
   const m = 0 | (hour * 60) % 60;
 
-  if (formatter) {
+  if (timeFormatter) {
     const d = new Date();
     d.setHours(h);
     d.setMinutes(m);
-    return formatter.format(d);
+    return timeFormatter.format(d);
   } else
     return `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}`;
 };
-
-export const getClientTimezone = () => {
-  const defaultTimeZone = "Europe/Stockholm";
-  try {
-    return formatter?.resolvedOptions().timeZone ?? defaultTimeZone;
-  } catch (err) {
-    return defaultTimeZone;
-  }
-};
-
-export const getClientLocaleCountryCode = () =>
-  navigator.language.split("-").slice(-1)[0];
 
 export const formatOffset = (minute: number) => {
   const sign = minute > 0;
@@ -36,7 +24,44 @@ export const formatOffset = (minute: number) => {
   );
 };
 
-const createFormatter = () => {
+export const formatDate = ({
+  year,
+  month,
+  day,
+}: {
+  year: number;
+  month: number;
+  day: number;
+}) => {
+  if (dateFormatter) {
+    const d = new Date();
+    d.setFullYear(year);
+    d.setMonth(-1);
+    d.setDate(day);
+    d.setHours(0);
+    d.setMinutes(0);
+    return dateFormatter.format(d);
+  } else
+    return [
+      day.toString().padStart(2, "0"),
+      month.toString().padStart(2, "0"),
+      year.toString().slice(-2),
+    ].join("/");
+};
+
+export const getClientTimezone = () => {
+  const defaultTimeZone = "Europe/Stockholm";
+  try {
+    return timeFormatter?.resolvedOptions().timeZone ?? defaultTimeZone;
+  } catch (err) {
+    return defaultTimeZone;
+  }
+};
+
+export const getClientLocaleCountryCode = () =>
+  navigator.language.split("-").slice(-1)[0];
+
+const createTimeFormatter = () => {
   try {
     const formatter = new Intl.DateTimeFormat(undefined, {
       timeStyle: "short",
@@ -51,5 +76,22 @@ const createFormatter = () => {
       });
   } catch (e) {}
 };
+const createDateFormatter = () => {
+  try {
+    const formatter = new Intl.DateTimeFormat(undefined, {
+      dateStyle: "medium",
+    } as any);
 
-const formatter = createFormatter();
+    if ((formatter.resolvedOptions() as any).dateStyle === "medium")
+      return formatter;
+    else
+      return new Intl.DateTimeFormat(undefined, {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+  } catch (e) {}
+};
+
+const timeFormatter = createTimeFormatter();
+const dateFormatter = createDateFormatter();

@@ -1,32 +1,18 @@
 import { styled } from "@linaria/react";
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useMemo, useRef } from "react";
 import { useStore } from "../store/store";
-import { selectT } from "../store/selector";
+import { selectT, selectTWindow } from "../store/selector";
 import { useSubscribe } from "../store/useSubscribe";
-import { getDate, getTimezoneOffset } from "../../timezone/timezone";
 import { getBlocks } from "../../timezone/interval";
-import { formatOffset, formatTime } from "../../intl-utils";
-import { getFlagEmoji } from "../../emojiFlagSequence";
-import { CursorArm, CursorLine } from "./Cursor";
-import { getActivity } from "../Avatar/activity";
-import { LocationLabel } from "./LocationLabel";
+import { LocationLabel, update as updateLocationLabel } from "./LocationLabel";
+import { FlyingLabel, update as updateFlyingLabel } from "./FlyingLabel";
+import { useWidth } from "./useWidth";
+import { DateSlider } from "./DateSlider";
 
 export const Lines = () => {
   const locations = useStore((s) => s.locations);
-  const tWindow = useStore((s) => s.tWindow);
-
-  const [width, setWidth] = useState(window.innerWidth);
-  useEffect(() => {
-    const onResize = () => setWidth(window.innerWidth);
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, [setWidth]);
+  const tWindow = useStore(selectTWindow);
+  const width = useWidth();
 
   const ref = useRef<HTMLElement | null>(null);
 
@@ -47,26 +33,19 @@ export const Lines = () => {
       if (!container) return;
 
       locations.forEach((location, i) => {
-        const date = getDate(location.timezone, t);
-
         const x = toScreenSpace(t);
 
-        (container.children[0]
-          .children[0] as any).style.transform = `translateX(${x}px)`;
-        (container.children[1] as any).style.transform = `translateX(${x}px)`;
+        const cursorArm = container.children[0] as any;
+        cursorArm.style.transform = `translateX(${x}px)`;
 
-        const locationLabel = container.children[2 + i * 2];
-        locationLabel.children[2].innerHTML = formatOffset(
-          getTimezoneOffset(location.timezone, t)
-        );
+        const locationLabel = container.children[1 + i * 2];
+        updateLocationLabel(locationLabel, { location, t });
 
-        const row = container.children[3 + i * 2];
+        const row = container.children[2 + i * 2];
 
         const flyingLabel = row.children[0];
-        flyingLabel.children[0].innerHTML = getActivity(date.hour);
-        flyingLabel.children[2].innerHTML = formatTime(date.hour);
-
         (flyingLabel as any).style.transform = `translateX(${x + 2}px)`;
+        updateFlyingLabel(flyingLabel, { location, t });
 
         for (let j = 0; j < blocks[i].length; j++) {
           const primary = blocks[i][j].day[0] <= t && t <= blocks[i][j].day[1];
@@ -83,32 +62,31 @@ export const Lines = () => {
   );
 
   return (
-    <Container ref={ref as any}>
-      <CursorLine />
-      <CursorArm />
+    <>
+      <DateSlider />
 
-      {locations.map((location, i) => (
-        <React.Fragment key={location.key}>
-          <LocationLabel location={location} />
+      <Container ref={ref as any}>
+        <CursorArm />
 
-          <Row>
-            <FlyingLabel>
-              <Avatar></Avatar>
-              <Flag>{getFlagEmoji(location.countryCode)}</Flag>
-              <HourLabel></HourLabel>
-            </FlyingLabel>
+        {locations.map((location, i) => (
+          <React.Fragment key={location.key}>
+            <LocationLabel location={location} />
 
-            {blocks[i].map(({ day, awake, office }, i) => (
-              <React.Fragment key={i}>
-                <DayBlock style={toPosition(toScreenSpace, day, 2)} />
-                <AwakeBlock style={toPosition(toScreenSpace, awake)} />
-                <OfficeBlock style={toPosition(toScreenSpace, office)} />
-              </React.Fragment>
-            ))}
-          </Row>
-        </React.Fragment>
-      ))}
-    </Container>
+            <Row>
+              <FlyingLabel location={location} />
+
+              {blocks[i].map(({ day, awake, office }, i) => (
+                <React.Fragment key={i}>
+                  <DayBlock style={toPosition(toScreenSpace, day, 2)} />
+                  <AwakeBlock style={toPosition(toScreenSpace, awake)} />
+                  <OfficeBlock style={toPosition(toScreenSpace, office)} />
+                </React.Fragment>
+              ))}
+            </Row>
+          </React.Fragment>
+        ))}
+      </Container>
+    </>
   );
 };
 
@@ -146,6 +124,10 @@ const Block = styled.div`
 const DayBlock = styled(Block)`
   height: 24px;
   top: 4px;
+
+  height: 30px;
+  top: 1px;
+
   background-color: #aaa6;
   margin-bottom: 4px;
 `;
@@ -170,34 +152,13 @@ const OfficeBlock = styled(Block)`
   }
 `;
 
-const Avatar = styled.div`
-  width: 26px;
-  font-size: 20px;
-  margin-right: 4px;
-`;
-
-const Flag = styled.div`
-  font-size: 12px;
+export const CursorArm = styled.div`
   position: absolute;
-  left: 16px;
-  top: 14px;
-`;
-
-const FlyingLabel = styled.div`
-  white-space: nowrap;
-  position: absolute;
-  left: 0;
-  font-size: 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  width: 2px;
+  height: calc(100% + 14px);
+  background-color: #e88a28;
+  left: -1px;
+  top: -4px;
   z-index: 2;
-  height: 100%;
-`;
-
-const HourLabel = styled.div`
-  font-size: 1.4em;
-  font-family: monospace;
-  color: #fff;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 1), 0 0 4px rgba(0, 0, 0, 1);
+  pointer-events: none;
 `;

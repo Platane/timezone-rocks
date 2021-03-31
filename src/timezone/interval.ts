@@ -6,6 +6,25 @@ export const DAY_HOURS = [0, 23.9999] as Interval;
 export const AWAKE_HOURS = [7, 21] as Interval;
 export const OFFICE_HOURS = [9, 18] as Interval;
 
+export const getDays = (timezone: string, [min, max]: Interval) => {
+  const days: Interval[] = [];
+
+  let d = DateTime.fromMillis(min).setZone(timezone);
+  d = setHour(d, 0);
+
+  do {
+    days.push(getInterval(d, DAY_HOURS));
+
+    const h = 1000 * 60 * 60 * 12;
+    d = setHour(d, 23.99).plus(h);
+    d = setHour(d, 0);
+  } while (d.toMillis() < max);
+
+  days.push(getInterval(d, DAY_HOURS));
+
+  return days;
+};
+
 export const getBlocks = (timezone: string, [min, max]: Interval) => {
   const blocks: Block[] = [];
 

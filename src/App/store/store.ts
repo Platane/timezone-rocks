@@ -14,6 +14,7 @@ export type Api = {
 };
 export type State = {
   t: number;
+  now: number;
   locationStoreReady: boolean;
   searchFocused: boolean;
   earthReady: boolean;
@@ -27,6 +28,7 @@ const day = 24 * 60 * 60 * 1000;
 
 export const useStore = create<State & Api>((set) => ({
   t,
+  now: t,
   tWindow: [t - day * 1.3, t + day * 1.3],
   locations: [],
   locationStoreReady: false,
@@ -35,7 +37,12 @@ export const useStore = create<State & Api>((set) => ({
   selectedLocation: null,
 
   setT: (t) => set({ t }),
-  initLocations: (locations) => set({ locations, locationStoreReady: true }),
+  initLocations: (locations) =>
+    set({
+      locations,
+      locationStoreReady: true,
+      selectedLocation: locations[0],
+    }),
   onEarthReady: () => set({ earthReady: true }),
   addLocation: (location) =>
     set((s) => ({
@@ -47,6 +54,8 @@ export const useStore = create<State & Api>((set) => ({
     })),
   removeLocation: (location) =>
     set((s) => ({
+      selectedLocation:
+        s.selectedLocation === location ? s.selectedLocation : null,
       locations: s.locations.filter((l) => l.key !== location.key),
     })),
 
