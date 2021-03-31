@@ -5,7 +5,7 @@ import { Lights } from "./Lights";
 import { Locations } from "./Locations/Locations";
 import { stepSpring } from "../../spring-utils";
 import { useStore } from "../store/store";
-import { Controls } from "./Controls";
+import { Controls } from "./Controls/Controls";
 
 export const Earth = () => {
   const ready = useStore((s) => s.earthReady);

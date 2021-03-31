@@ -3,7 +3,7 @@ import { useFrame, useThree } from "react-three-fiber";
 import { useSubscribe } from "../../store/useSubscribe";
 import { isStable, stepSpring } from "../../../spring-utils";
 import * as THREE from "three";
-import { setLatLng } from "./utils";
+import { setLatLng } from "../Locations/utils";
 
 export const useSelectedLocation = () => {
   const { camera } = useThree();
