@@ -11,7 +11,10 @@ export const Earth = () => {
   const ready = useStore((s) => s.earthReady);
 
   return (
-    <Canvas camera={{ near: 0.1, far: 20, position: [0, 0, 1.95] }}>
+    <Canvas
+      camera={{ near: 0.1, far: 20, position: [0, 0, 1.95] }}
+      pixelRatio={[1, 2]}
+    >
       <Controls />
 
       <Suspense fallback={null}>
