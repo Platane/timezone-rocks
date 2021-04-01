@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import { DateTime } from "luxon";
 import { Location } from "../../locations";
 import { useStore } from "../store/store";
+import { useExtendedTruthiness } from "../../hooks/useExtendedTruthiness";
 
 type Props = { location: Location };
 export const FlyingLabel = ({ location }: Props) => {
   const [focus, setFocus] = useState(false);
+  const focusPlus = useExtendedTruthiness(focus, 50);
 
   return (
     <Container>
@@ -23,7 +25,7 @@ export const FlyingLabel = ({ location }: Props) => {
         <Form
           style={{
             opacity: focus ? 1 : 0,
-            pointerEvents: focus ? "auto" : "none",
+            pointerEvents: focusPlus ? "auto" : "none",
           }}
           onSubmit={(e) => {
             e.preventDefault();
@@ -125,5 +127,3 @@ const Container = styled.div`
 const DateLabel = styled.span`
   font-size: 0.72em;
 `;
-
-const HourLabel = styled.div``;

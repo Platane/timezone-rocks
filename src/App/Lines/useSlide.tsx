@@ -13,22 +13,22 @@ export const useSlide = (
   onDefinitiveChangeRef.current = onDefinitiveChange;
 
   if (isTouchEventSupported) {
+    const xRef = useRef(0);
+
     const onTouchMove = useCallback(
       ({ currentTarget, touches: [{ clientX }] }) => {
         const { width, left } = currentTarget.getBoundingClientRect();
 
-        onChangeRef.current?.((clientX - left) / width);
-      },
-      []
-    );
-    const onTouchEnd = useCallback(
-      ({ currentTarget, touches: [{ clientX }] }) => {
-        const { width, left } = currentTarget.getBoundingClientRect();
+        const x = (clientX - left) / width;
+        xRef.current = x;
 
-        onDefinitiveChangeRef.current?.((clientX - left) / width);
+        onChangeRef.current?.(x);
       },
       []
     );
+    const onTouchEnd = useCallback(() => {
+      onDefinitiveChangeRef.current?.(xRef.current);
+    }, []);
 
     return {
       onTouchStart: onTouchMove,
