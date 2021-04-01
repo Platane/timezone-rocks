@@ -16,7 +16,7 @@ export const FlyingLabel = ({ location }: Props) => {
         onClick={(e) => {
           e.stopPropagation();
           setFocus(true);
-          e.currentTarget.children[1].children[0].focus();
+          (e.currentTarget.children[1].children[0] as any).focus();
         }}
       >
         <DateLabel />
@@ -90,7 +90,7 @@ export const update = (
 
   domElement.children[0].innerHTML = before;
   domElement.children[1].children[0].innerHTML = date;
-  domElement.children[1].children[1].children[0].value = value;
+  (domElement.children[1].children[1].children[0] as any).value = value;
   domElement.children[2].innerHTML = after;
 };
 

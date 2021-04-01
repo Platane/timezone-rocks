@@ -18,13 +18,13 @@ const setT = (x: number) => {
   setT(t);
 };
 const setRoundedT = (x: number) => {
-  const r = 5 * 60 * 1000;
+  const r = 15 * 60 * 1000;
   const {
     setT,
     tWindow: [a, b],
   } = useStore.getState();
   const t = a + (b - a) * x;
-  setT(Math.floor(t / r) * r);
+  setT(Math.round(t / r) * r);
 };
 const resetT = () => {
   const { setT, now } = useStore.getState();
