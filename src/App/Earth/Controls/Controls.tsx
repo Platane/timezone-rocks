@@ -5,8 +5,8 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useSubscribe } from "../../store/useSubscribe";
 import { isStable, stepSpring } from "../../../spring-utils";
 import { setLatLng } from "../Locations/utils";
-import type { OrbitControls as IOrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { MathUtils } from "three";
+import type { OrbitControls as IOrbitControls } from "three-stdlib";
 
 export const Controls = () => {
   const { camera } = useThree();
@@ -43,7 +43,7 @@ export const Controls = () => {
   );
 
   // handle orbit control
-  const orbitControlsRef = useRef<IOrbitControls>();
+  const orbitControlsRef = useRef<IOrbitControls>(null);
   useEffect(() => {
     const onStart = () => {
       state.current.orbitControlsActive = true;

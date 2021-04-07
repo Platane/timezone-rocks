@@ -13,7 +13,7 @@ export const Earth = () => {
   return (
     <Canvas
       camera={{ near: 0.1, far: 20, position: [0, 0, 1.95] }}
-      pixelRatio={[1, 2]}
+      dpr={[1, 2]}
     >
       <Controls />
 
