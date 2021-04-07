@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import React, { useEffect, useRef } from "react";
 import { OrbitControls } from "@react-three/drei";
-import { useFrame, useThree } from "react-three-fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { useSubscribe } from "../../store/useSubscribe";
 import { isStable, stepSpring } from "../../../spring-utils";
 import { setLatLng } from "../Locations/utils";

@@ -1,5 +1,5 @@
 import React, { Suspense, useRef } from "react";
-import { Canvas, useFrame } from "react-three-fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { EarthGlobe } from "./EarthGlobe";
 import { Lights } from "./Lights";
 import { Locations } from "./Locations/Locations";
