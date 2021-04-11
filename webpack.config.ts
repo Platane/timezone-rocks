@@ -72,11 +72,14 @@ const webpackConfiguration: WebpackConfiguration = {
             <link rel="manifest" href="/manifest.json">
           </head>
           <body>
-            <div id="root">
+            
+          <input type="text" value="123" ></input>
+          <div id="root">
               <div style="display:flex;justify-content:center;align-items:center;min-height:400px;height:100%;width:100%;color:#fff">
                 loading...
               </div>
             </div>
+
           </body>
         </html>
     `,
@@ -119,6 +122,10 @@ const webpackConfiguration: WebpackConfiguration = {
         {
           from: path.join(__dirname, "src/assets/manifest.json"),
           to: "manifest.json",
+        },
+        {
+          from: path.join(__dirname, "src/assets/icons"),
+          to: "",
         },
       ],
     }),
