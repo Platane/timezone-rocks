@@ -10,7 +10,7 @@ import { getTimezoneOffset } from "../../timezone/timezone";
 type Props = { location: Location };
 export const LocationLabel = ({ location }: Props) => {
   const selectLocation = useStore((s) => s.selectLocation);
-  const selectedLocation = useStore((s) => s.selectedLocation);
+  const selectedLocation = useStore((s) => s.selectedLocation?.[0]);
   const removeLocation = useStore((s) => s.removeLocation);
 
   return (

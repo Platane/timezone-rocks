@@ -21,7 +21,7 @@ export type State = {
   earthReady: boolean;
   tWindow: [number, number];
   locations: Location[];
-  selectedLocation: Location | null;
+  selectedLocation: [Location, number] | null;
 };
 
 const t = Date.now();
@@ -49,12 +49,12 @@ export const useStore = create<State & Api>((set) => ({
     set({
       locations,
       locationStoreReady: true,
-      selectedLocation: locations[0],
+      selectedLocation: [locations[0], 1],
     }),
   onEarthReady: () => set({ earthReady: true }),
   addLocation: (location) =>
     set((s) => ({
-      selectedLocation: location,
+      selectedLocation: [location, (s.selectedLocation?.[1] ?? 1) + 1],
       locations: [
         location,
         ...s.locations.filter((l) => l.key !== location.key),
@@ -63,11 +63,14 @@ export const useStore = create<State & Api>((set) => ({
   removeLocation: (location) =>
     set((s) => ({
       selectedLocation:
-        s.selectedLocation === location ? s.selectedLocation : null,
+        s.selectedLocation?.[0] === location ? null : s.selectedLocation,
       locations: s.locations.filter((l) => l.key !== location.key),
     })),
 
-  selectLocation: (selectedLocation) => set({ selectedLocation }),
+  selectLocation: (selectedLocation) =>
+    set((t) => ({
+      selectedLocation: [selectedLocation, (t.selectedLocation?.[1] ?? 1) + 1],
+    })),
   focusSearch: () => set({ searchFocused: true }),
   blurSearch: () => set({ searchFocused: false }),
 }));

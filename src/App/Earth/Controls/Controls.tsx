@@ -23,7 +23,7 @@ export const Controls = () => {
     (location: any) => {
       if (!location) return;
 
-      setLatLng(s, location);
+      setLatLng(s, location[0]);
       state.current.phi.target = Math.max(
         Math.PI / 5,
         Math.min(Math.PI - Math.PI / 4, s.phi)

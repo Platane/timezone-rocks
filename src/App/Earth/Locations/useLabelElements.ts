@@ -12,7 +12,7 @@ import { getActivity } from "../../Avatar/activity";
  */
 export const useLabelElements = (domElement: HTMLElement) => {
   const locations = useStore((s) => s.locations);
-  const selectedLocation = useStore((s) => s.selectedLocation);
+  const selectedLocation = useStore((s) => s.selectedLocation?.[0]);
   const ready = useStore((s) => s.earthReady && s.locationStoreReady);
   const elementPool = useRef<HTMLElement[]>([]);
   useSubscribe(
