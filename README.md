@@ -21,6 +21,7 @@ yarn dev
 - [x] round date on release
 - [x] add countries / state to locations
 - [x] Lazy load the three scene
+  - states makes more sense for US, use states if the country span over more that one timezone ?
 - [x] lines performance optimization
 - [x] fix worker execution
 
@@ -28,7 +29,13 @@ yarn dev
 - [ ] earth land geometry flatten + smooth normal
 - [ ] search design
 
-  - states makes more sense for US, use states if the country span over more that one timezone ?
-
+- [ ] camera rotation spring based
 - [ ] 3d label, avoid overlap
 - [ ] custom and persist office hour
+- [ ] three tree shaking
+
+# Links
+
+[staging](https://staging-timezone-rocks.surge.sh)
+
+[staging stress test](https://staging-timezone-rocks.surge.sh/#00000100200300400500600700800900a00b00c00d00e00f00g00h00i00j00k00l00m00n00o00p00q00r00s00t00u00v00w00x00y00z01001101201301401501601701801901a01b01c01d01e01f01g01h01i01j01k01l01m01n01o01p01q01r01s01t01u01v01w01x01y01z02002102202302402502602702802902a02b02c02d02e02f02g02h02i02j02k02l02m02n02o02p02q02r)
