@@ -12,14 +12,29 @@ export const useShare = (shareParams: {
     if (shareParams.files)
       payload.files = Object.freeze([...shareParams.files]);
 
-    const canShare =
-      // @ts-ignore
-      navigator.canShare?.(payload) || (navigator.share && !payload.files);
+    if (!canShare(payload)) return undefined;
 
-    if (!canShare) return undefined;
-
-    return () => navigator.share(payload);
+    return () => {
+      navigator.share(payload);
+    };
   }, [shareParams.text, shareParams.title, shareParams.url, shareParams.files]);
 
   return share;
+};
+
+const canShare = (payload: { files?: readonly File[] }) => {
+  // can only share video or image files
+  if (
+    payload.files &&
+    !payload.files?.every(
+      (file) => file.type.startsWith("image/") || file.type.startsWith("video/")
+    )
+  )
+    return false;
+
+  // @ts-ignore
+  if (navigator.canShare) return navigator.canShare?.(payload);
+
+  // @ts-ignore
+  return navigator.share && !payload.files;
 };

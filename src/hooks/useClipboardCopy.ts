@@ -20,7 +20,6 @@ export const useClipboardCopy = (text: string) => {
     if (document.execCommand) {
       return () => {
         copyText.innerText = text;
-        copyText.focus();
         copyText.select();
 
         document.execCommand("copy");

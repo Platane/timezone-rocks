@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { styled } from "@linaria/react";
 import { appearAnimation, Button, disappearAnimation } from "./buttons";
 import { useShare } from "../../../hooks/useShare";
@@ -23,13 +23,12 @@ export const ShareICal = ({
   ]);
 
   const files = useMemo(() => {
-    const file = new File([iCal], "invite.ics", { type: "text/calendar" });
+    const blob = new Blob([iCal], { type: "text/calendar" });
+    const file = new File([blob], "file.png", { type: "text/calendar" });
     return [file];
-    // const blob = new Blob([iCal], { type: "text/calendar" });
-    // return [blob];
   }, [url]);
 
-  const share = useShare({ files });
+  const share = useShare({ files, title: "invite" });
 
   return (
     <ButtonICal
