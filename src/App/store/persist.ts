@@ -52,12 +52,12 @@ export const stringify = ({
 };
 
 const parse = (hash: string) => {
-  const [lkeys, lt] = hash.replace(/^#/, "").split("-", 2);
+  const [lkeys, ...lt] = hash.replace(/^#/, "").split("-");
 
   const keys = split(lkeys, 3);
 
   try {
-    const t = new Date(lt).getTime();
+    const t = new Date(lt.join("-")).getTime();
     if (Number.isFinite(t)) return { keys, t };
   } catch (err) {}
 

@@ -61,9 +61,12 @@ export const DateSlider = () => {
           title="Reset to now"
           onClick={resetT}
           style={{
-            transform: `translateX(${toScreenSpace(now)}px) rotate(45deg)`,
+            transform: `translateX(${toScreenSpace(now)}px)`,
           }}
-        />
+        >
+          <NowCarret />
+          <NowLabel>now</NowLabel>
+        </NowButton>
 
         <Caret ref={cursorRef} />
       </CursorContainer>
@@ -77,7 +80,7 @@ export const DateSlider = () => {
 
 const CursorContainer = styled.div`
   background-color: #ddd4;
-  height: 24px;
+  height: 32px;
   width: 100%;
   cursor: pointer;
   user-select: none;
@@ -85,7 +88,8 @@ const CursorContainer = styled.div`
 const ShareContainer = styled.div`
   position: absolute;
   top: 22px;
-  left: 20px;
+  left: 28px;
+  height: 32px;
   user-select: none;
 `;
 
@@ -98,22 +102,34 @@ const Container = styled.div`
   touch-action: pan-y;
 `;
 const Caret = styled.div`
-  left: -${32 / 2}px;
+  left: -${40 / 2}px;
   position: absolute;
-  width: 32px;
-  height: 24px;
+  width: 40px;
+  height: 32px;
   border-radius: 2px;
   background-color: ${accentColor};
   pointer-events: none;
   display: inline-block;
 `;
 
+const nowColor = "#ddd";
 const NowButton = styled.div`
+  top: 0px;
+  position: absolute;
+`;
+
+const NowCarret = styled.div`
   width: 16px;
   height: 16px;
   border-radius: 8px 6px 2px 6px;
   left: -${16 / 2}px;
   top: 0px;
-  background-color: ${accentColor};
+  background-color: ${nowColor};
   position: absolute;
+  transform: rotate(45deg);
+`;
+
+const NowLabel = styled.div`
+  color: ${nowColor};
+  margin-left: 10px;
 `;

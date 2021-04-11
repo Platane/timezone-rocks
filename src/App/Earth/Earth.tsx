@@ -17,13 +17,13 @@ export const Earth = () => {
     >
       <Controls />
 
-      <Suspense fallback={null}>
-        <AppearScaleNode scale={ready ? 1 : 0.001}>
+      <AppearScaleNode scale={ready ? 1 : 0.001}>
+        <Suspense fallback={null}>
           <EarthGlobe />
           <Locations />
           <Lights />
-        </AppearScaleNode>
-      </Suspense>
+        </Suspense>
+      </AppearScaleNode>
     </Canvas>
   );
 };

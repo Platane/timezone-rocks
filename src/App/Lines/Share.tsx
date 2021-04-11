@@ -78,14 +78,15 @@ const Button = styled.a`
   display: inline-block;
   border-radius: 4px;
   border: solid 2px ${accentColor};
-  width: 34px;
-  height: 24px;
-  margin: 0 2px;
+  width: 38px;
+  height: 28px;
+  margin: 2px 4px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 
+  background-color: #3331;
   color: ${accentColor};
   font-size: 0.8em;
 `;
