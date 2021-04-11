@@ -95,6 +95,7 @@ const Container = styled.div`
   padding-top: 22px;
   padding-bottom: 0px;
   width: 100%;
+  touch-action: pan-y;
 `;
 const Caret = styled.div`
   left: -${32 / 2}px;

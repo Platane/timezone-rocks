@@ -146,6 +146,7 @@ const Input = styled.input`
   border: none;
   outline: none;
   border-radius: 2px;
+  user-select: auto;
 
   &:focus {
     box-shadow: 0 0 0 2px -webkit-focus-ring-color;

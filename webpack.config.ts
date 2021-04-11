@@ -76,14 +76,11 @@ const webpackConfiguration: WebpackConfiguration = {
             <link rel="icon" type="image/png" sizes="16x16" href="/icon-16x16.png">
           </head>
           <body>
-            
-          <input type="text" value="123" ></input>
-          <div id="root">
+            <div id="root">
               <div style="display:flex;justify-content:center;align-items:center;min-height:400px;height:100%;width:100%;color:#fff">
                 loading...
               </div>
             </div>
-
           </body>
         </html>
     `,
