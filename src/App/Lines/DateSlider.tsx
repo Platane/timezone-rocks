@@ -5,7 +5,7 @@ import { useStore } from "../store/store";
 import { useWidth } from "./useWidth";
 import { selectT, selectTWindow } from "../store/selector";
 import { useSubscribe } from "../store/useSubscribe";
-import { Share } from "./Share";
+import { Share } from "./Share/Share";
 import { accentColor } from "../theme";
 
 const setT = (x: number) => {

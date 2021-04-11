@@ -51,13 +51,22 @@ export const useStore = create<State & Api>(
         tWindow: [t - (b - a) / 2, t + (b - a) / 2],
       })),
     setT: (t) => set({ t }),
-    initLocations: (locations, t) =>
-      set((s) => ({
-        t: t ?? s.now,
-        locations,
-        locationStoreReady: true,
-        selectedLocation: [locations[0], 1],
-      })),
+    initLocations: (locations, t) => {
+      if (t)
+        set({
+          t: t as number,
+          tWindow: [t - (day * w) / 2, t + (day * w) / 2],
+          locations,
+          locationStoreReady: true,
+          selectedLocation: [locations[0], 1],
+        });
+      else
+        set({
+          locations,
+          locationStoreReady: true,
+          selectedLocation: [locations[0], 1],
+        });
+    },
     onEarthReady: () => set({ earthReady: true }),
     addLocation: (location) =>
       set((s) => ({

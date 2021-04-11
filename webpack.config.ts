@@ -139,6 +139,7 @@ const webpackDevServerConfiguration: WebpackDevServerConfiguration = {
   useLocalIp: true,
   stats: "minimal",
   open: true,
+  https: true,
 };
 
 export default {
