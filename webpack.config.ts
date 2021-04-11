@@ -6,6 +6,7 @@ import HTMLInlineCSSWebpackPlugin from "html-inline-css-webpack-plugin";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import TerserPlugin from "terser-webpack-plugin";
 import { GenerateSW } from "workbox-webpack-plugin";
+import CopyPlugin from "copy-webpack-plugin";
 import type { Configuration as WebpackConfiguration } from "webpack";
 import type { Configuration as WebpackDevServerConfiguration } from "webpack-dev-server";
 
@@ -68,6 +69,7 @@ const webpackConfiguration: WebpackConfiguration = {
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width,initial-scale=1">
             <title>${htmlWebpackPlugin.options.title}</title>
+            <link rel="manifest" href="/manifest.json">
           </head>
           <body>
             <div id="root">
@@ -110,6 +112,15 @@ const webpackConfiguration: WebpackConfiguration = {
     new BundleAnalyzerPlugin({
       openAnalyzer: false,
       analyzerMode: "static",
+    }),
+
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.join(__dirname, "src/assets/manifest.json"),
+          to: "manifest.json",
+        },
+      ],
     }),
   ],
 };

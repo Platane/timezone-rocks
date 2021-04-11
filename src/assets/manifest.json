@@ -1,0 +1,11 @@
+{
+  "short_name": "TimeZone.rocks",
+  "name": "TimeZone.rocks",
+  "description": "Visualize different timezones around the world.",
+  "icons": [],
+  "start_url": "/",
+  "background_color": "#203b53",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#203b53"
+}
