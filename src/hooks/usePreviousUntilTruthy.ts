@@ -2,7 +2,7 @@ import React from "react";
 
 export const usePreviousUntilTruthy = <T>(
   x: T,
-  initialValue: T | undefined
+  initialValue?: T | undefined
 ) => {
   const ref = React.useRef(x || initialValue);
 

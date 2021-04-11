@@ -9,6 +9,7 @@
     "@loadable/component": "5.14.1",
     "@react-three/drei": "4.0.4",
     "@react-three/fiber": "6.0.9",
+    "ical.js": "1.4.0",
     "lodash.deburr": "4.1.0",
     "luxon": "1.26.0",
     "react": "17.0.2",

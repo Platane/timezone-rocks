@@ -6,18 +6,21 @@ export type Api = {
   setT: (t: number) => void;
   setTWindowOrigin: (t: number) => void;
   onEarthReady: () => void;
-  initLocations: (locations: Location[]) => void;
+  initLocations: (locations: Location[], t: number | undefined) => void;
   addLocation: (location: Location) => void;
   removeLocation: (location: Location) => void;
   selectLocation: (location: Location) => void;
   focusSearch: () => void;
   blurSearch: () => void;
+  startDragDateCursor: () => void;
+  endDragDateCursor: () => void;
 };
 export type State = {
   t: number;
   now: number;
   locationStoreReady: boolean;
   searchFocused: boolean;
+  dateCursorDragged: boolean;
   earthReady: boolean;
   tWindow: [number, number];
   locations: Location[];
@@ -35,6 +38,7 @@ export const useStore = create<State & Api>((set) => ({
   tWindow: [t - (day * w) / 2, t + (day * w) / 2],
   locations: [],
   locationStoreReady: false,
+  dateCursorDragged: false,
   searchFocused: false,
   earthReady: false,
   selectedLocation: null,
@@ -45,12 +49,13 @@ export const useStore = create<State & Api>((set) => ({
       tWindow: [t - (b - a) / 2, t + (b - a) / 2],
     })),
   setT: (t) => set({ t }),
-  initLocations: (locations) =>
-    set({
+  initLocations: (locations, t) =>
+    set((s) => ({
+      t: t ?? s.now,
       locations,
       locationStoreReady: true,
       selectedLocation: [locations[0], 1],
-    }),
+    })),
   onEarthReady: () => set({ earthReady: true }),
   addLocation: (location) =>
     set((s) => ({
@@ -68,11 +73,18 @@ export const useStore = create<State & Api>((set) => ({
     })),
 
   selectLocation: (selectedLocation) =>
-    set((t) => ({
-      selectedLocation: [selectedLocation, (t.selectedLocation?.[1] ?? 1) + 1],
+    set((s) => ({
+      selectedLocation: [selectedLocation, (s.selectedLocation?.[1] ?? 1) + 1],
     })),
   focusSearch: () => set({ searchFocused: true }),
   blurSearch: () => set({ searchFocused: false }),
+  startDragDateCursor: () => set({ dateCursorDragged: true }),
+  endDragDateCursor: () =>
+    set((s) => {
+      const r = 15 * 60 * 1000;
+      const t = Math.round(s.t / r) * r;
+      return { dateCursorDragged: false, t };
+    }),
 }));
 
 init(useStore);

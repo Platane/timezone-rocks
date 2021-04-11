@@ -2,15 +2,22 @@ import { useCallback, useEffect, useRef } from "react";
 
 const isTouchEventSupported = "ontouchend" in document;
 
-export const useSlide = (
-  onChange: (x: number) => void,
-  onDefinitiveChange?: (x: number) => void
-) => {
+export const useSlide = ({
+  onChange,
+  onStart,
+  onEnd,
+}: {
+  onChange?: (x: number) => void;
+  onStart?: (x: number) => void;
+  onEnd?: (x: number) => void;
+}) => {
   const containerRef = useRef<HTMLElement | null>();
   const onChangeRef = useRef(onChange);
   onChangeRef.current = onChange;
-  const onDefinitiveChangeRef = useRef(onDefinitiveChange);
-  onDefinitiveChangeRef.current = onDefinitiveChange;
+  const onStartRef = useRef(onStart);
+  onStartRef.current = onStart;
+  const onEndRef = useRef(onEnd);
+  onEndRef.current = onEnd;
 
   if (isTouchEventSupported) {
     const xRef = useRef(0);
@@ -26,12 +33,24 @@ export const useSlide = (
       },
       []
     );
+    const onTouchStart = useCallback(
+      ({ currentTarget, touches: [{ clientX }] }) => {
+        const { width, left } = currentTarget.getBoundingClientRect();
+
+        const x = (clientX - left) / width;
+        xRef.current = x;
+
+        onStartRef.current?.(x);
+        onChangeRef.current?.(x);
+      },
+      []
+    );
     const onTouchEnd = useCallback(() => {
-      onDefinitiveChangeRef.current?.(xRef.current);
+      onEndRef.current?.(xRef.current);
     }, []);
 
     return {
-      onTouchStart: onTouchMove,
+      onTouchStart,
       onTouchMove,
       onTouchEnd,
     };
@@ -44,7 +63,7 @@ export const useSlide = (
 
       const { width, left } = containerRef.current.getBoundingClientRect();
 
-      onDefinitiveChangeRef.current?.((clientX - left) / width);
+      onEndRef.current?.((clientX - left) / width);
     }, []);
     const onPointerMove = useCallback(({ clientX }) => {
       if (!containerRef.current) return;
@@ -54,9 +73,14 @@ export const useSlide = (
       onChangeRef.current?.((clientX - left) / width);
     }, []);
     const onPointerDown = useCallback(
-      (e) => {
-        containerRef.current = e.currentTarget;
-        onPointerMove(e);
+      ({ currentTarget, clientX }) => {
+        containerRef.current = currentTarget;
+
+        const { width, left } = containerRef.current!.getBoundingClientRect();
+
+        const x = (clientX - left) / width;
+        onStartRef.current?.(x);
+        onChangeRef.current?.(x);
 
         document.body.addEventListener("pointermove", onPointerMove);
         document.body.addEventListener("pointerup", onPointerUp);
