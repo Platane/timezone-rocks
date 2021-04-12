@@ -43,7 +43,9 @@ const preventDefault = (fn: (e: Event) => void) => (e: any) => {
   return fn(e);
 };
 
-const ButtonUrl = styled(Button)``;
+const ButtonUrl = styled(Button)`
+  user-drag: none;
+`;
 
 const ShareIcon2 = styled(ShareIcon)`
   width: calc(100% - 2px);

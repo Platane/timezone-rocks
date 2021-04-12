@@ -48,4 +48,7 @@ const preventDefault = (fn: (e: Event) => void) => (e: any) => {
   return fn(e);
 };
 
-const ButtonICal = styled(Button)``;
+const ButtonICal = styled(Button)`
+  user-select: none;
+  user-drag: none;
+`;
