@@ -74,7 +74,9 @@ export const EarthGlobe = (props: any) => {
   }, [n]);
 
   const landGeometry = useMemo(() => {
-    const geo: THREE.BufferGeometry = (nodes.earth4_lambert1_0 as any).geometry.clone();
+    // const geo: THREE.BufferGeometry = (nodes.earth4_lambert1_0 as any).geometry.clone();
+
+    const geo = new THREE.SphereBufferGeometry(1, 4, 2);
 
     const position = geo.getAttribute("position");
     geo.deleteAttribute("uv");
@@ -95,27 +97,60 @@ export const EarthGlobe = (props: any) => {
     const min = Math.min(...ls);
     const max = Math.max(...ls);
 
-    for (let i = 0; i < position.count; i++) {
-      const p = new THREE.Vector3(
-        position.getX(i),
-        position.getY(i),
-        position.getZ(i)
-      );
+    // for (let i = 0; i < position.count; i++) {
+    //   const p = new THREE.Vector3(
+    //     position.getX(i),
+    //     position.getY(i),
+    //     position.getZ(i)
+    //   );
 
-      const l = p.length();
+    //   const l = p.length();
 
-      const u = MathUtils.clamp((l - min) / (max - min), 0, 1);
+    //   const u = MathUtils.clamp((l - min) / (max - min), 0, 1);
 
-      p.normalize().multiplyScalar(1 + Math.pow(u, 1 / 1.5) * 0.06);
+    //   p.normalize().multiplyScalar(1 + Math.pow(u, 1 / 1.5) * 0.06);
 
-      position.setXYZ(i, p.x, p.y, p.z);
+    //   position.setXYZ(i, p.x, p.y, p.z);
+    // }
+
+    // geo.computeVertexNormals();
+
+    {
+      geo.toNonIndexed();
+      const position = geo.getAttribute("position")!;
+      const normal = geo.getAttribute("normal")!;
+      const faces = [];
+      for (let i = 0; i < position.count; i += 3) {
+        const ia = index.getX(i + 0);
+        const ib = index.getX(i + 1);
+        const ic = index.getX(i + 2);
+
+        const a = new THREE.Vector3(
+          position.getX(ia),
+          position.getY(ia),
+          position.getZ(ia)
+        );
+        const b = new THREE.Vector3(
+          position.getX(ib),
+          position.getY(ib),
+          position.getZ(ib)
+        );
+        const c = new THREE.Vector3(
+          position.getX(ic),
+          position.getY(ic),
+          position.getZ(ic)
+        );
+
+        const m = new THREE.Vector3()
+          .addScaledVector(a, 1 / 3)
+          .addScaledVector(b, 1 / 3)
+          .addScaledVector(c, 1 / 3);
+
+          position.
+      }
+
+      return geo;
     }
-
-    geo.computeVertexNormals();
-
-    const tm = new TessellateModifier(0.01, 2);
-    const geo2 = tm.modify(geo);
-    return geo2;
   }, [nodes.earth4_lambert1_0]);
 
   const outLineRef = useRef<THREE.Object3D>();
@@ -129,28 +164,32 @@ export const EarthGlobe = (props: any) => {
 
   return (
     <group {...props} dispose={null}>
-      <mesh>
-        <sphereBufferGeometry args={[1, 32, 32]} />
-        {/* <meshToonMaterial
+      {false && (
+        <mesh>
+          <sphereBufferGeometry args={[1, 32, 32]} />
+          {/* <meshToonMaterial
           color={"#ff97f6"}
           gradientMap={gradientMap}
           opacity={0.4}
           transparent
         /> */}
-        <meshToonMaterial color={"#97ceff"} gradientMap={gradientMap} />
-      </mesh>
+          <meshToonMaterial color={"#97ceff"} gradientMap={gradientMap} />
+        </mesh>
+      )}
 
-      <mesh ref={outLineRef}>
-        <sphereBufferGeometry args={[1, 32, 32]} />
-        <meshBasicMaterial color={"#769550"} side={THREE.BackSide} />
-      </mesh>
+      {false && (
+        <mesh ref={outLineRef}>
+          <sphereBufferGeometry args={[1, 32, 32]} />
+          <meshBasicMaterial color={"#769550"} side={THREE.BackSide} />
+        </mesh>
+      )}
 
       <mesh geometry={landGeometry}>
         <meshToonMaterial
           color={"#ceff97"}
           gradientMap={gradientMapNTone}
           side={THREE.FrontSide}
-          // wireframe
+          wireframe
           // opacity={0.4}
           // transparent
         />
