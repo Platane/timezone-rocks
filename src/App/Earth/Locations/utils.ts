@@ -1,8 +1,7 @@
 import * as THREE from "three";
 
 /**
- * convert the ( latitude , longitude ) point into spherical point
- *
+ * convert the ( latitude , longitude ) coord into spherical point
  */
 export const setLatLng = (
   spherical: { phi: number; theta: number },

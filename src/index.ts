@@ -35,8 +35,8 @@ if (0) {
     const c1 = { x: 156, y: 167 };
     const c2 = { x: clientX, y: clientY };
 
-    const box1 = { x: 60, y: 20 };
-    const box2 = { x: 54, y: 107 };
+    const box1 = { min: { x: 0, y: 0 }, max: { x: 60, y: 20 } };
+    const box2 = { min: { x: 0, y: 0 }, max: { x: 54, y: 107 } };
 
     ctx.fillStyle = "#fff";
     ctx.beginPath();
@@ -44,11 +44,21 @@ if (0) {
 
     ctx.fillStyle = "#5ff";
     ctx.beginPath();
-    ctx.fillRect(c1.x, c1.y, box1.x, box1.y);
+    ctx.fillRect(
+      c1.x + box1.min.x,
+      c1.y + box1.min.y,
+      box1.max.x - box1.min.x,
+      box1.max.y - box1.min.y
+    );
 
     ctx.fillStyle = "#f8f";
     ctx.beginPath();
-    ctx.fillRect(c2.x, c2.y, box2.x, box2.y);
+    ctx.fillRect(
+      c2.x + box2.min.x,
+      c2.y + box2.min.y,
+      box2.max.x - box2.min.x,
+      box2.max.y - box2.min.y
+    );
 
     ctx.fillStyle = "#333";
     ctx.beginPath();
