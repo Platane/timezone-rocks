@@ -10,7 +10,7 @@ export const createSearch = (locations: Location[]) => {
     const q = normalize(query);
 
     for (let i = 0; i < normalizedNames.length; i++) {
-      if (normalizedNames[i].startsWith(q)) {
+      if (normalizedNames[i].includes(q)) {
         res.push(locations[i]);
         if (res.length >= 9) return res;
       }
@@ -20,4 +20,4 @@ export const createSearch = (locations: Location[]) => {
   };
 };
 
-const normalize = (s: string) => deburr(s.toLowerCase());
+const normalize = (s: string) => " " + deburr(s.toLowerCase());
