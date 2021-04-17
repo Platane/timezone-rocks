@@ -10,30 +10,35 @@ export const getCountries = async () => {
 
   return text
     .split("\n")
-    .filter((x) => x[0] !== "#")
+    .filter((x) => x[0] !== "#" && x)
     .map((s) => {
       const [countryCode, , , , name, capitalName, , population] = s.split(
         "\t"
       );
       return { countryCode, name, capitalName, population: +population };
     })
+    .filter((country) => Number.isFinite(country.population))
     .sort((a, b) => b.population - a.population);
 };
+
 export const getAdmins = async () => {
   const text = await fetch(
     `http://download.geonames.org/export/dump/admin1CodesASCII.txt`
   ).then((res) => res.text());
 
-  return text.split("\n").map((s) => {
-    const [code, name] = s.split("\t");
-    const [countryCode, adminCode] = code.split(".");
-    return { name, countryCode, adminCode };
-  });
+  return text
+    .split("\n")
+    .filter((x) => x[0] !== "#" && x)
+    .map((s) => {
+      const [code, name] = s.split("\t");
+      const [countryCode, adminCode] = code.split(".");
+      return { name, countryCode, adminCode };
+    });
 };
 
 export const getCities = async () => {
   const arraybuffer = await fetch(
-    `http://download.geonames.org/export/dump/cities1000.zip`
+    `http://download.geonames.org/export/dump/cities500.zip`
   ).then((res) => res.arrayBuffer());
 
   const directory = await unzipper.Open.buffer(Buffer.from(arraybuffer));
@@ -43,6 +48,7 @@ export const getCities = async () => {
   return buffer
     .toString()
     .split("\n")
+    .filter((x) => x[0] !== "#" && x)
     .map((s) => {
       const [
         ,
@@ -75,6 +81,7 @@ export const getCities = async () => {
         timezone,
       };
     })
+    .filter((city) => Number.isFinite(city.population) && city.population > 0)
     .sort((a, b) => b.population - a.population);
 };
 
@@ -93,87 +100,126 @@ export const getTimeZones = async () => {
 };
 
 export const run = async () => {
-  const [cities, countries, admins] = await Promise.all([
+  const [cities, admins, countries] = await Promise.all([
     getCities(),
-    getCountries(),
     getAdmins(),
+    getCountries(),
   ]);
 
-  const locations = [
+  const locations = pruneNull([
     ...countries
       .sort((a, b) => b.population - a.population)
-      .map((cc) => {
-        const city =
-          cities.find((c) => c.name === cc.capitalName) ||
-          cities.find((c) => c.countryCode === cc.countryCode)!;
+      .map((country) => {
+        const mainCity =
+          cities.find((c) => c.name === country.capitalName) ||
+          cities.find((c) => c.countryCode === country.countryCode)!;
 
-        if (!city) return null;
+        if (!mainCity) return null;
 
-        return [
-          "country",
-          cc.name,
-          cc.countryCode,
-          city.longitude,
-          city.latitude,
-          city.timezone,
-        ];
-      })
-      .filter(Boolean),
+        return {
+          type: "country",
+          name: country.name,
+          countryCode: country.countryCode,
+          longitude: mainCity.longitude,
+          latitude: mainCity.latitude,
+          timezone: mainCity.timezone,
+        };
+      }),
 
     ...cities
       .sort((a, b) => b.population - a.population)
-      .map((c) => [
-        "city",
-        c.name,
-        c.countryCode,
-        c.longitude,
-        c.latitude,
-        c.timezone,
-      ])
+      .map((c) => ({
+        type: "city",
+        name: c.name,
+        countryCode: c.countryCode,
+        longitude: c.longitude,
+        latitude: c.latitude,
+        timezone: c.timezone,
+      }))
       .slice(0, limit),
 
-    ,
     ...countries
       .sort((a, b) => b.population - a.population)
-      .map((cc) => {
-        const zs = admins.filter((z) => z.countryCode === cc.countryCode);
-        const zc = zs.map((z) =>
-          cities.find(
-            (c) =>
-              z.countryCode === c.countryCode && z.adminCode === c.adminCode
-          )
+      .map((country) => {
+        const as = pruneNull(
+          admins
+            .filter((a) => a.countryCode === country.countryCode)
+            .map((admin) => {
+              const mainCity = cities.find(
+                (city) =>
+                  city.adminCode === admin.adminCode &&
+                  city.countryCode === admin.countryCode
+              );
+
+              if (!mainCity) return null;
+
+              const population = cities.reduce(
+                (sum, city) =>
+                  city.adminCode === admin.adminCode &&
+                  city.countryCode === admin.countryCode
+                    ? sum
+                    : sum + city.population,
+                0
+              );
+
+              return { ...mainCity, ...admin, population };
+            })
         );
 
-        const timezones = new Set<string>();
-        zc.forEach((c) => {
-          if (c) timezones.add(c.timezone);
+        const timezones: Record<
+          string,
+          { population: number; nAdmin: number }
+        > = {};
+
+        as.forEach(({ timezone, population }) => {
+          timezones[timezone] = timezones[timezone] || {
+            population: 0,
+            nAdmin: 0,
+            adminNames: [],
+          };
+
+          timezones[timezone].nAdmin += 1;
+          timezones[timezone].population += population;
         });
 
-        if (timezones.size > 1)
-          return zs
-            .map((z, i) => {
-              const c = zc[i];
-              if (!c) return null;
-              else
-                return [
-                  "admin",
-                  z.name,
-                  z.countryCode,
-                  c.longitude,
-                  c.latitude,
-                  c.timezone,
-                ];
-            })
-            .filter(Boolean);
-        else return [];
+        const tzs = Object.values(timezones);
+
+        if (tzs.length > 1) {
+          return as;
+        } else return [];
       })
-      .flat(),
-  ].filter(Boolean);
+      .flat()
+      .sort((a, b) => b.population - a.population)
+      .map((admin) => ({
+        type: "admin",
+        name: admin.name,
+        countryCode: admin.countryCode,
+        longitude: admin.longitude,
+        latitude: admin.latitude,
+        timezone: admin.timezone,
+      })),
+  ]);
+
+  const content = locations
+    .map((l) =>
+      [
+        l.type,
+        l.name,
+        l.countryCode,
+        l.longitude.toFixed(4),
+        l.latitude.toFixed(4),
+        l.timezone,
+      ].join(",")
+    )
+    .join("\n");
 
   const outFilename = path.join(__dirname, "../../assets/locations.csv");
-  fs.writeFileSync(outFilename, locations.map((x) => x!.join(",")).join("\n"));
+  fs.writeFileSync(outFilename, content);
 };
 
-const limit = 6000;
+const limit = 3000;
 
 run();
+
+const pruneNull = <T>(arr: (T | null | undefined)[]) =>
+  arr.filter(Boolean) as T[];
