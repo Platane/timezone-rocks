@@ -104,9 +104,9 @@ export const Controls = () => {
       ref={orbitControlsRef}
       minPolarAngle={Math.PI / 6}
       maxPolarAngle={Math.PI - Math.PI / 6}
-      minDistance={1.95}
-      maxDistance={10}
-      enableZoom={false}
+      minDistance={1.7}
+      maxDistance={4}
+      enableZoom={true}
       enablePan={false}
     />
   );

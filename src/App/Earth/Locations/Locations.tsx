@@ -1,11 +1,10 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { useStore } from "../../store/store";
-import { useLabelElements } from "./useLabelElements";
+import { labelBox, useLabelElements } from "./useLabelElements";
 import { latLngToWorld } from "./utils";
-import { step } from "./physical";
-import { MathUtils } from "three";
+import { NodeU, step } from "./physical";
 
 export const Locations = () => {
   const locations = useStore((s) => s.locations);
@@ -13,6 +12,14 @@ export const Locations = () => {
   const { gl } = useThree();
 
   const elementPool = useLabelElements(gl.domElement);
+
+  // const [mouse] = useState(new THREE.Vector2());
+  // useEffect(() => {
+  //   window.addEventListener("mousemove", ({ pageX, pageY }) => {
+  //     const { left, top } = gl.domElement.getBoundingClientRect();
+  //     mouse.set(pageX - left, pageY - top);
+  //   });
+  // }, []);
 
   useFrame(({ camera, size }, dt) => {
     if (!ref.current) return;
@@ -31,48 +38,44 @@ export const Locations = () => {
       const x = ((a.x + 1) / 2) * size.width;
       const y = ((1 - a.y) / 2) * size.height;
 
-      if (!node.userData.p) {
-        node.userData.p = new THREE.Vector2(x, y);
-        node.userData.a = new THREE.Vector2();
-        node.userData.v = new THREE.Vector2();
-        node.userData.anchor = new THREE.Vector2();
-        node.userData.box = nodeBox;
+      const u = node.userData as NodeU;
+
+      if (!u.p) {
+        u.p = new THREE.Vector2(x, y);
+        u.a = new THREE.Vector2();
+        u.v = new THREE.Vector2();
+        u.anchor = new THREE.Vector2();
+        u.box = nodeBox;
       }
 
-      node.userData.anchor.x = x;
-      node.userData.anchor.y = y;
-      node.userData.z = a.z;
+      u.anchor.x = x;
+      u.anchor.y = y;
+      (u.anchor as any).z = a.z;
 
       {
         node.getWorldPosition(a).normalize();
         b.subVectors(a, camera.position).normalize();
 
-        const dot = a.dot(b);
-
-        node.userData.front = dot < 0 ? 0 : dot ** 0.5;
+        node.userData.z = a.dot(b);
       }
     }
 
+    // debug
     // nodes[0].userData.anchor.copy(mouse);
 
-    // step physical world
+    // get disk position in screen space
+    getSphereScreenSpace(camera, size, sphereScreenSpace);
 
     worldBox.min.x = 0;
     worldBox.min.y = 0;
     worldBox.max.x = size.width;
     worldBox.max.y = size.height;
 
-    a.set(0, 0, 0);
-    a.project(camera);
-    diskPosition.set(
-      ((a.x + 1) / 2) * size.width,
-      ((1 - a.y) / 2) * size.height
-    );
-
+    // step physical world
     step(
-      ref.current.children as any,
-      diskPosition,
-      size.height * 0.5,
+      nodes as any,
+      sphereScreenSpace.center as any,
+      sphereScreenSpace.radius,
       worldBox,
       Math.min(dt, 1 / 30)
     );
@@ -81,22 +84,25 @@ export const Locations = () => {
 
     // apply new position to the label
     elementPool.current.forEach((el, i) => {
-      const { p, z, front } = nodes[i].userData;
+      const { p, z } = nodes[i].userData as NodeU;
       const x = p.x;
       const y = p.y;
       el.style.transform = `translate(${x}px, ${y}px)`;
 
-      const uz = MathUtils.clamp(1 - z, 0, 1);
       const zIndex =
-        front === 0 ? Math.round(uz * 1000) + 1001 : 1 + Math.round(uz * 998);
+        z > 0 ? Math.round(z * 998) + 1 : +1001 + Math.round(-z * 998);
       el.style.zIndex = zIndex + "";
     });
 
     // apply new position of the dashed line
     for (const node of nodes) {
-      const { p, z } = node.userData;
+      const { p, anchor } = node.userData as NodeU;
 
-      a.set((p.x / size.width) * 2 - 1, 1 - (p.y / size.height) * 2, z);
+      a.set(
+        (p.x / size.width) * 2 - 1,
+        1 - (p.y / size.height) * 2,
+        (anchor as any).z - 0.02
+      );
       a.unproject(camera);
       a.sub(node.position);
 
@@ -125,12 +131,46 @@ export const Locations = () => {
   );
 };
 
+const sphereScreenSpace = new THREE.Sphere();
 const a = new THREE.Vector3();
 const b = new THREE.Vector3();
 const worldBox = new THREE.Box2();
-const nodeBox = new THREE.Box2();
-nodeBox.min.y = -10;
-nodeBox.max.y = 10;
-nodeBox.min.x = -10;
-nodeBox.max.x = 65;
-const diskPosition = new THREE.Vector2();
+const nodeBox = new THREE.Box2().copy(labelBox as any);
+
+const getSphereScreenSpace = (() => {
+  const origin = new THREE.Vector3();
+  const z = new THREE.Vector3();
+  const u = new THREE.Vector3();
+  const e = new THREE.Vector3();
+
+  const n = 13;
+
+  return (
+    camera: THREE.Camera,
+    size: { width: number; height: number },
+    target: THREE.Sphere
+  ) => {
+    origin.set(0, 0, 0).project(camera);
+
+    target.center.set(
+      ((origin.x + 1) / 2) * size.width,
+      ((1 - origin.y) / 2) * size.height,
+      0
+    );
+
+    camera.getWorldDirection(z);
+    z.negate();
+    u.crossVectors(camera.up, z);
+    u.normalize();
+
+    target.radius = 0;
+    for (let k = n; k--; ) {
+      e.lerpVectors(u, z, k / (n - 1)).normalize();
+
+      const { x, y } = e.project(camera).sub(origin);
+      const le = Math.hypot(size.width * x, size.height * y);
+
+      target.radius = Math.max(target.radius, le / 2);
+    }
+  };
+})();

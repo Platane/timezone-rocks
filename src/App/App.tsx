@@ -7,6 +7,7 @@ import { Search } from "./Search";
 import { useStore } from "./store/store";
 // @ts-ignore
 import modelPath from "../assets/earth/scene.glb";
+import "./Earth/Locations/useLabelElements";
 
 const Earth = loadable(() => import("./Earth/Earth"));
 
@@ -70,7 +71,7 @@ export const globals = css`
 const EarthContainer = styled.div`
   height: 400px;
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto;
 
   @media (max-width: 500px) {

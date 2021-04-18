@@ -21,7 +21,7 @@ export const Button = styled.a`
 `;
 
 export const appearAnimation = css`
-  animation-duration: 300ms;
+  animation-duration: 440ms;
 
   &:nth-child(1) {
     animation-name: animation1;

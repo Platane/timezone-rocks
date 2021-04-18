@@ -35,8 +35,14 @@ if (0) {
     const c1 = { x: 156, y: 167 };
     const c2 = { x: clientX, y: clientY };
 
-    const box1 = { min: { x: 0, y: 0 }, max: { x: 60, y: 20 } };
-    const box2 = { min: { x: 0, y: 0 }, max: { x: 54, y: 107 } };
+    const box1 = {
+      min: { x: c1.x - 30, y: c1.y - 10 },
+      max: { x: c1.x + 30, y: c1.y + 10 },
+    };
+    const box2 = {
+      min: { x: c2.x - 20, y: c2.y - 18 },
+      max: { x: c2.x + 54, y: c2.y + 78 },
+    };
 
     ctx.fillStyle = "#fff";
     ctx.beginPath();
@@ -45,8 +51,8 @@ if (0) {
     ctx.fillStyle = "#5ff";
     ctx.beginPath();
     ctx.fillRect(
-      c1.x + box1.min.x,
-      c1.y + box1.min.y,
+      box1.min.x,
+      box1.min.y,
       box1.max.x - box1.min.x,
       box1.max.y - box1.min.y
     );
@@ -54,15 +60,15 @@ if (0) {
     ctx.fillStyle = "#f8f";
     ctx.beginPath();
     ctx.fillRect(
-      c2.x + box2.min.x,
-      c2.y + box2.min.y,
+      box2.min.x,
+      box2.min.y,
       box2.max.x - box2.min.x,
       box2.max.y - box2.min.y
     );
 
     ctx.fillStyle = "#333";
     ctx.beginPath();
-    ctx.fillText(getBoxDistance(c1, c2, box1, box2) + "", 30, 30);
+    ctx.fillText(getBoxDistance(box1, box2) + "", 30, 30);
     //
   });
 }
