@@ -116,7 +116,7 @@ const webpackConfiguration: WebpackConfiguration = {
     new BundleAnalyzerPlugin({
       openAnalyzer: false,
       analyzerMode: "static",
-    }),
+    }) as any,
 
     new CopyPlugin({
       patterns: [
