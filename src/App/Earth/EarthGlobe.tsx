@@ -15,11 +15,177 @@ import { useStore } from "../store/store";
 // @ts-ignore
 import modelPath from "../../assets/earth/scene.glb";
 import { MathUtils } from "three";
-import { TessellateModifier } from "three-stdlib";
+
+export const transform = (geo: THREE.BufferGeometry) => {
+  // geo = new THREE.SphereBufferGeometry(1, 4, 2);
+
+  geo.deleteAttribute("uv");
+
+  // resize
+  if (!0) {
+    const ls: number[] = [];
+    const position = geo.getAttribute("position")!;
+
+    for (let i = 0; i < position.count; i++) {
+      const p = new THREE.Vector3(
+        position.getX(i),
+        position.getY(i),
+        position.getZ(i)
+      );
+
+      const l = p.length();
+      if (l > 8.5) ls.push(l);
+    }
+
+    const min = Math.min(...ls);
+    const max = Math.max(...ls);
+
+    console.log(min, max);
+
+    for (let i = 0; i < position.count; i++) {
+      const p = new THREE.Vector3(
+        position.getX(i),
+        position.getY(i),
+        position.getZ(i)
+      );
+
+      const l = p.length();
+
+      const u = MathUtils.clamp((l - min) / (max - min), 0, 1);
+
+      p.normalize().multiplyScalar(1 + Math.pow(u, 1 / 1.5) * 0.06);
+
+      position.setXYZ(i, p.x, p.y, p.z);
+    }
+  }
+
+  //
+
+  // const tessellateModifier = new TessellateModifier(0.18, 2);
+  // return tessellateModifier.modify(geo);
+
+  // {
+  //   geo.toNonIndexed();
+  //   const position = geo.getAttribute("position")!;
+  //   const normal = geo.getAttribute("normal")!;
+  //   const faces = [];
+  //   for (let i = 0; i < position.count; i += 3) {
+  //     const [a, b, c] = [0, 1, 2].map((j) =>
+  //       new THREE.Vector3().fromBufferAttribute(position, i + j)
+  //     );
+
+  //     const m = new THREE.Vector3()
+  //       .addScaledVector(a, 1 / 3)
+  //       .addScaledVector(b, 1 / 3)
+  //       .addScaledVector(c, 1 / 3);
+  //   }
+
+  // }
+
+  geo = geo.toNonIndexed();
+  if (!0) {
+    const position = geo.getAttribute("position")!;
+    const normal = geo.getAttribute("normal")!;
+    const newNormals: THREE.Vector3[] = [];
+
+    {
+      const ps: THREE.Vector3[] = [];
+      for (let j = 0; j < position.count; j += 1)
+        ps.push(new THREE.Vector3().fromBufferAttribute(position, j));
+      console.log(ps);
+    }
+
+    const getFaces = (p: THREE.Vector3) => {
+      const f = [];
+
+      for (let j = 0; j < position.count; j += 1) {
+        const p0 = new THREE.Vector3().fromBufferAttribute(position, j);
+        if (p.distanceTo(p0) < 0.00001) {
+          const i0 = Math.floor(j / 3) * 3;
+          f.push([i0 + 0, i0 + 1, i0 + 2]);
+        }
+      }
+
+      return f;
+    };
+
+    for (let i = 0; i < position.count; i += 1) {
+      const p = new THREE.Vector3().fromBufferAttribute(position, i);
+      const n = new THREE.Vector3();
+
+      let totalArea = 0;
+
+      getFaces(p).forEach((indexes) => {
+        // mean normal of the face
+        const facePreviousN = new THREE.Vector3();
+        for (const i of indexes) {
+          const n0 = new THREE.Vector3().fromBufferAttribute(normal, i);
+          facePreviousN.addScaledVector(n0, 1 / 3);
+        }
+        facePreviousN.normalize();
+
+        const [a, b, c] = indexes.map((i) =>
+          new THREE.Vector3().fromBufferAttribute(position, i)
+        );
+
+        const faceN = new THREE.Vector3()
+          .subVectors(b, a)
+          .cross(new THREE.Vector3().subVectors(c, a))
+          .normalize();
+
+        if (faceN.dot(facePreviousN) < 0) faceN.negate();
+
+        const u = new THREE.Vector3();
+        const v = new THREE.Vector3();
+
+        u.subVectors(a, p);
+        v.subVectors(b, p);
+
+        if (u.length() < 0.00001) u.subVectors(c, p);
+        if (v.length() < 0.00001) v.subVectors(c, p);
+
+        u.normalize();
+        v.normalize();
+
+        const area = new THREE.Vector3().crossVectors(u, v).length();
+
+        totalArea += area;
+
+        n.addScaledVector(faceN, area);
+      });
+
+      n.normalize();
+
+      const previousN = new THREE.Vector3().fromBufferAttribute(normal, i);
+
+      const k = MathUtils.clamp(totalArea / 5, 0.5, 1);
+      console.log(totalArea, k);
+
+      newNormals.push(new THREE.Vector3().lerpVectors(previousN, n, k));
+    }
+
+    for (let i = 0; i < newNormals.length; i++)
+      normal.setXYZ(i, newNormals[i].x, newNormals[i].y, newNormals[i].z);
+    // normal.setXYZ(i, 0, 0, 1);
+
+    normal.needsUpdate = true;
+
+    // geo.computeVertexNormals();
+  }
+
+  {
+    const normal = geo.getAttribute("normal")!;
+    const ps: THREE.Vector3[] = [];
+    for (let j = 0; j < normal.count; j += 1)
+      ps.push(new THREE.Vector3().fromBufferAttribute(normal, j));
+    console.log(ps.slice(0, 20));
+  }
+
+  return geo;
+};
 
 export const EarthGlobe = (props: any) => {
   const gltf = useGLTF(modelPath);
-  const { nodes } = gltf;
 
   const gradientMap = useMemo(() => {
     const canvas = document.createElement("canvas");
@@ -73,85 +239,14 @@ export const EarthGlobe = (props: any) => {
     return gradientMap;
   }, [n]);
 
-  const landGeometry = useMemo(() => {
-    // const geo: THREE.BufferGeometry = (nodes.earth4_lambert1_0 as any).geometry.clone();
-
-    const geo = new THREE.SphereBufferGeometry(1, 4, 2);
-
-    const position = geo.getAttribute("position");
-    geo.deleteAttribute("uv");
-
-    const ls: number[] = [];
-
-    for (let i = 0; i < position.count; i++) {
-      const p = new THREE.Vector3(
-        position.getX(i),
-        position.getY(i),
-        position.getZ(i)
-      );
-
-      const l = p.length();
-      if (l > 8.5) ls.push(l);
-    }
-
-    const min = Math.min(...ls);
-    const max = Math.max(...ls);
-
-    // for (let i = 0; i < position.count; i++) {
-    //   const p = new THREE.Vector3(
-    //     position.getX(i),
-    //     position.getY(i),
-    //     position.getZ(i)
-    //   );
-
-    //   const l = p.length();
-
-    //   const u = MathUtils.clamp((l - min) / (max - min), 0, 1);
-
-    //   p.normalize().multiplyScalar(1 + Math.pow(u, 1 / 1.5) * 0.06);
-
-    //   position.setXYZ(i, p.x, p.y, p.z);
-    // }
-
-    // geo.computeVertexNormals();
-
-    {
-      geo.toNonIndexed();
-      const position = geo.getAttribute("position")!;
-      const normal = geo.getAttribute("normal")!;
-      const faces = [];
-      for (let i = 0; i < position.count; i += 3) {
-        const ia = index.getX(i + 0);
-        const ib = index.getX(i + 1);
-        const ic = index.getX(i + 2);
-
-        const a = new THREE.Vector3(
-          position.getX(ia),
-          position.getY(ia),
-          position.getZ(ia)
-        );
-        const b = new THREE.Vector3(
-          position.getX(ib),
-          position.getY(ib),
-          position.getZ(ib)
-        );
-        const c = new THREE.Vector3(
-          position.getX(ic),
-          position.getY(ic),
-          position.getZ(ic)
-        );
-
-        const m = new THREE.Vector3()
-          .addScaledVector(a, 1 / 3)
-          .addScaledVector(b, 1 / 3)
-          .addScaledVector(c, 1 / 3);
-
-          position.
-      }
-
-      return geo;
-    }
-  }, [nodes.earth4_lambert1_0]);
+  const landGeometry = useMemo(
+    () =>
+      transform(
+        // @ts-ignore
+        gltf.nodes.earth4_lambert1_0.geometry.clone()
+      ),
+    [gltf]
+  );
 
   const outLineRef = useRef<THREE.Object3D>();
   const { camera } = useThree();
@@ -185,11 +280,11 @@ export const EarthGlobe = (props: any) => {
       )}
 
       <mesh geometry={landGeometry}>
-        <meshToonMaterial
+        <meshPhysicalMaterial
           color={"#ceff97"}
-          gradientMap={gradientMapNTone}
+          roughness={0}
           side={THREE.FrontSide}
-          wireframe
+          // wireframe
           // opacity={0.4}
           // transparent
         />
