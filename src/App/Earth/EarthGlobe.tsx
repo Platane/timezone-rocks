@@ -15,69 +15,64 @@ import { useStore } from "../store/store";
 // @ts-ignore
 import modelPath from "../../assets/earth/scene.glb";
 
+const createOceanGradientMap = () => {
+  const canvas = document.createElement("canvas");
+  canvas.width = 18;
+  canvas.height = 1;
+
+  const context = canvas.getContext("2d")!;
+  context.fillStyle = "#888";
+  context.fillRect(0, 0, 100, 1);
+
+  context.fillStyle = "#444";
+  context.fillRect(0, 0, 10, 1);
+
+  context.fillStyle = "#000";
+  context.fillRect(0, 0, 8, 1);
+
+  const gradientMap = new THREE.Texture(canvas);
+  gradientMap.minFilter = THREE.NearestFilter;
+  gradientMap.magFilter = THREE.NearestFilter;
+  gradientMap.needsUpdate = true;
+
+  return gradientMap;
+};
+const createLandGradientMap = () => {
+  const n = 6;
+
+  const canvas = document.createElement("canvas");
+  canvas.width = n;
+  canvas.height = 1;
+
+  // canvas.style.width = "100px";
+  // canvas.style.height = "100px";
+  // canvas.style.imageRendering = "pixelated";
+  // canvas.style.border = "solid 1px orange";
+  // document.body.appendChild(canvas);
+
+  const context = canvas.getContext("2d")!;
+
+  for (let i = n; i--; ) {
+    const k = i / (n - 1);
+    const a = (0.45 < k && k < 0.8 ? 0.72 : k) * 255;
+    context.fillStyle = `rgb(${a},${a},${a})`;
+    context.fillRect(i, 0, 1, 1);
+  }
+
+  const gradientMap = new THREE.Texture(canvas);
+  gradientMap.minFilter = THREE.NearestFilter;
+  gradientMap.magFilter = THREE.NearestFilter;
+  gradientMap.needsUpdate = true;
+
+  return gradientMap;
+};
+
 export const EarthGlobe = (props: any) => {
   const gltf = useGLTF(modelPath);
-  const { nodes } = gltf;
+  const { geometry } = gltf.nodes.mesh_0 as any;
 
-  const gradientMap = useMemo(() => {
-    const canvas = document.createElement("canvas");
-    canvas.width = 18;
-    canvas.height = 1;
-
-    const context = canvas.getContext("2d")!;
-    context.fillStyle = "#888";
-    context.fillRect(0, 0, 100, 1);
-
-    context.fillStyle = "#444";
-    context.fillRect(0, 0, 10, 1);
-
-    context.fillStyle = "#000";
-    context.fillRect(0, 0, 8, 1);
-
-    const gradientMap = new THREE.Texture(canvas);
-    gradientMap.minFilter = THREE.NearestFilter;
-    gradientMap.magFilter = THREE.NearestFilter;
-    gradientMap.needsUpdate = true;
-
-    return gradientMap;
-  }, []);
-
-  const n = 64;
-  const gradientMapNTone = useMemo(() => {
-    const canvas = document.createElement("canvas");
-    canvas.width = n;
-    canvas.height = 1;
-
-    // canvas.style.width = "100px";
-    // canvas.style.height = "100px";
-    // canvas.style.imageRendering = "pixelated";
-    // canvas.style.border = "solid 1px orange";
-    // document.body.appendChild(canvas);
-
-    const context = canvas.getContext("2d")!;
-
-    for (let i = n; i--; ) {
-      const k = i / (n - 1);
-      const a = (0.45 < k && k < 0.8 ? 0.72 : k) * 255;
-      context.fillStyle = `rgb(${a},${a},${a})`;
-      context.fillRect(i, 0, 1, 1);
-    }
-
-    const gradientMap = new THREE.Texture(canvas);
-    gradientMap.minFilter = THREE.NearestFilter;
-    gradientMap.magFilter = THREE.NearestFilter;
-    gradientMap.needsUpdate = true;
-
-    return gradientMap;
-  }, [n]);
-
-  const landGeometry = useMemo(() => {
-    const geo: THREE.BufferGeometry = (nodes.earth4_lambert1_0 as any).geometry.clone();
-
-    return geo;
-  }, [nodes.earth4_lambert1_0]);
-
-  const s = 1 / 8.5;
+  const gradientMapOcean = useMemo(createOceanGradientMap, []);
+  const gradientMapLand = useMemo(createLandGradientMap, []);
 
   const outLineRef = useRef<THREE.Object3D>();
   const { camera } = useThree();
@@ -92,7 +87,7 @@ export const EarthGlobe = (props: any) => {
     <group {...props} dispose={null}>
       <mesh>
         <sphereBufferGeometry args={[1, 32, 32]} />
-        <meshToonMaterial color={"#97ceff"} gradientMap={gradientMap} />
+        <meshToonMaterial color={"#97ceff"} gradientMap={gradientMapOcean} />
       </mesh>
 
       <mesh ref={outLineRef}>
@@ -100,9 +95,11 @@ export const EarthGlobe = (props: any) => {
         <meshBasicMaterial color={"#769550"} side={THREE.BackSide} />
       </mesh>
 
-      <mesh scale={[s, s, s]} geometry={landGeometry}>
-        <meshToonMaterial color={"#ceff97"} gradientMap={gradientMapNTone} />
-      </mesh>
+      {!false && (
+        <mesh geometry={geometry}>
+          <meshToonMaterial color={"#ceff97"} gradientMap={gradientMapLand} />
+        </mesh>
+      )}
     </group>
   );
 };
