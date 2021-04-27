@@ -11,10 +11,10 @@ export type NodeU = {
   z: number;
 };
 
-const FRICTION = 10;
-const TENSION = 90;
-const DISK_OUT = 40;
-const NODE_PUSH = 5000;
+const FRICTION = 60;
+const TENSION = 900;
+const DISK_OUT = 800;
+const NODE_PUSH = 24000;
 
 const pre = document.createElement("pre");
 pre.style.position = "fixed";
@@ -42,8 +42,6 @@ export const step = (
   world: THREE.Box2,
   dt: number
 ) => {
-  const w = (world.max.x - world.min.x) * 0.3;
-
   // reset acceleration
   // + apply simple forces
   for (const {
@@ -52,7 +50,9 @@ export const step = (
     // reset
     a.set(0, 0);
 
-    const depthPressure = z > 0 ? 1 : MathUtils.clamp(1 + z * 2.3, 0, 1) ** 2;
+    const depthPressure = z > 0 ? 1 : MathUtils.clamp(1 + z * 1.5, 0, 1);
+
+    // print({ depthPressure });
 
     // friction
     a.addScaledVector(v, -FRICTION);
@@ -62,7 +62,7 @@ export const step = (
       t.subVectors(p, anchor);
 
       const l = t.length();
-      const f = MathUtils.lerp(l, Math.min(l, 10), depthPressure);
+      const f = MathUtils.lerp(l, Math.min(l, 12), depthPressure);
 
       a.addScaledVector(t.normalize(), -f * TENSION);
     }
@@ -71,7 +71,7 @@ export const step = (
     {
       const d = getBoxToPointDistance(tmp.copy(box).translate(p), diskPosition);
 
-      const f = Math.max(0, diskRadius + 20 - d) ** 1.8 * depthPressure;
+      const f = Math.max(0, diskRadius + 24 - d) * depthPressure;
 
       t.subVectors(p, diskPosition);
       a.addScaledVector(t.normalize(), f * DISK_OUT);
@@ -99,7 +99,7 @@ export const step = (
         )
       );
 
-      const f = NODE_PUSH / d ** 1;
+      const f = NODE_PUSH / d;
       t.normalize();
 
       a.a.addScaledVector(t, f);
@@ -110,12 +110,6 @@ export const step = (
   for (const {
     userData: { a, v, p },
   } of nodes) {
-    const l = a.length();
-
-    const ma = w / dt ** 2;
-
-    if (l > ma) a.multiplyScalar(ma / l);
-
     v.addScaledVector(a, dt);
     p.addScaledVector(v, dt);
     a.set(0, 0);

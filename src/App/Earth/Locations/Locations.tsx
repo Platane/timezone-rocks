@@ -11,12 +11,15 @@ export const Locations = () => {
   const ref = useRef<THREE.Group>();
   const { gl } = useThree();
 
-  const elementPool = useLabelElements(gl.domElement);
+  const domContainer = gl.domElement.parentElement!;
+  const elementPool = useLabelElements(domContainer);
+
+  const refDtRest = useRef(0);
 
   // const [mouse] = useState(new THREE.Vector2());
   // useEffect(() => {
   //   window.addEventListener("mousemove", ({ pageX, pageY }) => {
-  //     const { left, top } = gl.domElement.getBoundingClientRect();
+  //     const { left, top } = domContainer.getBoundingClientRect();
   //     mouse.set(pageX - left, pageY - top);
   //   });
   // }, []);
@@ -24,8 +27,8 @@ export const Locations = () => {
   useFrame(({ camera, size }, dt) => {
     if (!ref.current) return;
 
-    gl.domElement.style.zIndex = "1000";
-    gl.domElement.style.position = "relative";
+    domContainer.style.zIndex = "1000";
+    domContainer.style.position = "relative";
 
     camera.updateMatrixWorld();
 
@@ -72,13 +75,18 @@ export const Locations = () => {
     worldBox.max.y = size.height;
 
     // step physical world
-    step(
-      nodes as any,
-      sphereScreenSpace.center as any,
-      sphereScreenSpace.radius,
-      worldBox,
-      Math.min(dt, 1 / 30)
-    );
+    const fixedDt = 1 / 120;
+    refDtRest.current = Math.min(refDtRest.current + dt, fixedDt * 10);
+    while (refDtRest.current >= fixedDt) {
+      step(
+        nodes as any,
+        sphereScreenSpace.center as any,
+        sphereScreenSpace.radius,
+        worldBox,
+        fixedDt
+      );
+      refDtRest.current -= fixedDt;
+    }
 
     //
 

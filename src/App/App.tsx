@@ -29,9 +29,11 @@ export const App = () => {
 
   return (
     <>
-      <EarthContainer>
-        <Earth />
-      </EarthContainer>
+      <TopContainer>
+        <EarthContainer>
+          <Earth />
+        </EarthContainer>
+      </TopContainer>
 
       <Search />
 
@@ -68,8 +70,13 @@ export const globals = css`
   }
 `;
 
+const TopContainer = styled.div`
+  width: 100%;
+  overflow: hidden;
+`;
 const EarthContainer = styled.div`
-  height: 400px;
+  position: relative;
+  height: 500px;
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
