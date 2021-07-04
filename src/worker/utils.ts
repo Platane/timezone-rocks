@@ -17,21 +17,21 @@ export const createWorkerHandler = (api: Record<string, Function>) => {
   };
 };
 
-export const createRemote = (worker: Worker, method: string) => (
-  ...args: any
-) =>
-  new Promise<any>((resolve, reject) => {
-    const key = Math.random().toString();
+export const createRemote =
+  (worker: Worker, method: string) =>
+  (...args: any) =>
+    new Promise<any>((resolve, reject) => {
+      const key = Math.random().toString();
 
-    const handler = ({ data }: any) => {
-      if (key === data.key) {
-        if (data.error) reject(data.error);
-        else resolve(data.result);
+      const handler = ({ data }: any) => {
+        if (key === data.key) {
+          if (data.error) reject(data.error);
+          else resolve(data.result);
 
-        worker.removeEventListener("message", handler);
-      }
-    };
-    worker.addEventListener("message", handler);
+          worker.removeEventListener("message", handler);
+        }
+      };
+      worker.addEventListener("message", handler);
 
-    worker.postMessage({ key, method, args });
-  });
+      worker.postMessage({ key, method, args });
+    });

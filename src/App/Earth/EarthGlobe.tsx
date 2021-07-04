@@ -69,7 +69,7 @@ const createLandGradientMap = () => {
 
 export const EarthGlobe = (props: any) => {
   const gltf = useGLTF(modelPath);
-  const { geometry } = gltf.nodes.mesh_0 as any;
+  const { geometry } = (gltf as any).nodes.mesh_0;
 
   const gradientMapOcean = useMemo(createOceanGradientMap, []);
   const gradientMapLand = useMemo(createLandGradientMap, []);

@@ -16,5 +16,7 @@ export const selectHour = createSelector(selectT, (t) => (t % day) / hour);
 
 export const selectTWindowLerp = createSelector(
   selectTWindow,
-  ([a, b]) => (x: number) => (x - a) / (b - a)
+  ([a, b]) =>
+    (x: number) =>
+      (x - a) / (b - a)
 );

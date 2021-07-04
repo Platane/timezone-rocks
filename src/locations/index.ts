@@ -19,7 +19,5 @@ export const getMatchingLocation: Api["getMatchingLocation"] = createRemote(
   "getMatchingLocation"
 );
 
-export const getLocationByTimezoneAndCountryCode: Api["getLocationByTimezoneAndCountryCode"] = createRemote(
-  worker,
-  "getLocationByTimezoneAndCountryCode"
-);
+export const getLocationByTimezoneAndCountryCode: Api["getLocationByTimezoneAndCountryCode"] =
+  createRemote(worker, "getLocationByTimezoneAndCountryCode");

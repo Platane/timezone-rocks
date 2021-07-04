@@ -12,9 +12,8 @@ export const getCountries = async () => {
     .split("\n")
     .filter((x) => x[0] !== "#" && x)
     .map((s) => {
-      const [countryCode, , , , name, capitalName, , population] = s.split(
-        "\t"
-      );
+      const [countryCode, , , , name, capitalName, , population] =
+        s.split("\t");
       return { countryCode, name, capitalName, population: +population };
     })
     .filter((country) => Number.isFinite(country.population))

@@ -13,14 +13,15 @@ export const ShareICal = ({
   startDate: number;
   visible: boolean;
 }) => {
-  const iCal = useMemo(() => generateICal({ url, startDate }), [
-    url,
-    startDate,
-  ]);
+  const iCal = useMemo(
+    () => generateICal({ url, startDate }),
+    [url, startDate]
+  );
 
-  const dataUri = useMemo(() => `data:text/calendar;base64,${btoa(iCal)}`, [
-    iCal,
-  ]);
+  const dataUri = useMemo(
+    () => `data:text/calendar;base64,${btoa(iCal)}`,
+    [iCal]
+  );
 
   const files = useMemo(() => {
     const blob = new Blob([iCal], { type: "text/calendar" });
