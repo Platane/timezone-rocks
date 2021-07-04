@@ -4,6 +4,11 @@ import { App } from "./App/App";
 import { useStore } from "./App/store/store";
 import { getBoxDistance } from "./math-utils";
 
+// uncomment this to generate the earth glb from the source file
+//
+// import { downloadGlb, generateGlb } from "./App/Earth/generate/generate";
+// generateGlb().then(downloadGlb);
+
 useStore.subscribe(
   () => {
     const root = document.getElementById("root");

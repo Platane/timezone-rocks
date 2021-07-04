@@ -35,6 +35,7 @@ const webpackConfiguration: WebpackConfiguration = {
           /\.(otf|ttf|woff|woff2)$/,
           /\.(csv)$/,
           /\.(glb)$/,
+          /\.(zip)$/,
         ],
         loader: "file-loader",
         options: { name: "[contenthash].[ext]" },

@@ -15,6 +15,50 @@ import { useStore } from "../store/store";
 // @ts-ignore
 import modelPath from "../../assets/earth/scene.glb";
 
+export const EarthGlobe = (props: any) => {
+  const gltf = useGLTF(modelPath);
+
+  const {
+    nodes: {
+      land: { geometry },
+    },
+  } = gltf as any;
+
+  const gradientMapOcean = useMemo(createOceanGradientMap, []);
+  const gradientMapLand = useMemo(createLandGradientMap, []);
+  const outlineSphereGeometry = useMemo(createOutlineSphereGeometry, []);
+
+  const outLineRef = useRef<THREE.Object3D>();
+  const { camera } = useThree();
+  useFrame(() => {
+    const d = camera.position.length();
+    outLineRef.current?.scale.setScalar(1 + d * 0.01);
+  });
+
+  useEffect(() => useStore.getState().onEarthReady(), []);
+
+  return (
+    <group {...props} dispose={null}>
+      <mesh>
+        <sphereBufferGeometry args={[1, 32, 32]} />
+        <meshToonMaterial color={"#97ceff"} gradientMap={gradientMapOcean} />
+      </mesh>
+
+      <mesh ref={outLineRef} geometry={outlineSphereGeometry}>
+        <meshToonMaterial
+          color={"#ceff97"}
+          gradientMap={gradientMapLand}
+          side={THREE.BackSide}
+        />
+      </mesh>
+
+      <mesh geometry={geometry}>
+        <meshToonMaterial color={"#ceff97"} gradientMap={gradientMapLand} />
+      </mesh>
+    </group>
+  );
+};
+
 const createOceanGradientMap = () => {
   const canvas = document.createElement("canvas");
   canvas.width = 18;
@@ -67,39 +111,13 @@ const createLandGradientMap = () => {
   return gradientMap;
 };
 
-export const EarthGlobe = (props: any) => {
-  const gltf = useGLTF(modelPath);
-  const { geometry } = (gltf as any).nodes.mesh_0;
-
-  const gradientMapOcean = useMemo(createOceanGradientMap, []);
-  const gradientMapLand = useMemo(createLandGradientMap, []);
-
-  const outLineRef = useRef<THREE.Object3D>();
-  const { camera } = useThree();
-  useFrame(() => {
-    const d = camera.position.length();
-    outLineRef.current?.scale.setScalar(1 + d * 0.01);
-  });
-
-  useEffect(() => useStore.getState().onEarthReady(), []);
-
-  return (
-    <group {...props} dispose={null}>
-      <mesh>
-        <sphereBufferGeometry args={[1, 32, 32]} />
-        <meshToonMaterial color={"#97ceff"} gradientMap={gradientMapOcean} />
-      </mesh>
-
-      <mesh ref={outLineRef}>
-        <sphereBufferGeometry args={[1, 32, 32]} />
-        <meshBasicMaterial color={"#769550"} side={THREE.BackSide} />
-      </mesh>
-
-      {!false && (
-        <mesh geometry={geometry}>
-          <meshToonMaterial color={"#ceff97"} gradientMap={gradientMapLand} />
-        </mesh>
-      )}
-    </group>
-  );
+const createOutlineSphereGeometry = () => {
+  const geo = new THREE.SphereBufferGeometry(1, 32, 32);
+  const normal = geo.getAttribute("normal");
+  for (let i = normal.array.length / normal.itemSize; i--; ) {
+    normal.setX(i, -normal.getX(i));
+    normal.setY(i, -normal.getY(i));
+    normal.setZ(i, -normal.getZ(i));
+  }
+  return geo;
 };
