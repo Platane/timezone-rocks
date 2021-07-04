@@ -5,11 +5,11 @@ import {
   getLocationByTimezoneAndCountryCode,
   getLocationsByKey,
 } from "../../locations";
-import { split } from "../../utils";
 import {
   getClientLocaleCountryCode,
   getClientTimezone,
 } from "../../intl-utils";
+import { pack, unpack } from "./pack";
 
 export const init = async (store: UseStore<State & Api>) => {
   store.subscribe((hash) => {
@@ -41,9 +41,9 @@ export const stringify = ({
   locations,
 }: {
   t?: number;
-  locations: { key: string }[];
+  locations: { key: number }[];
 }) => {
-  let s = locations.map((c) => c.key).join("");
+  let s = pack(locations.map(({ key }) => key));
 
   if (Number.isFinite(t))
     s += "-" + new Date(t!).toISOString().slice(0, 16) + "z";
@@ -54,7 +54,7 @@ export const stringify = ({
 const parse = (hash: string) => {
   const [lkeys, ...lt] = hash.replace(/^#/, "").split("-");
 
-  const keys = split(lkeys, 3);
+  const keys = unpack(lkeys);
 
   try {
     const t = new Date(lt.join("-")).getTime();
