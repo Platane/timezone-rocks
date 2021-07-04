@@ -16,23 +16,8 @@ yarn dev
 
 ## TODO
 
-- [x] starting locations
-- [x] earth toon shader
-- [x] round date on release
-- [x] add countries / state to locations
-- [x] Lazy load the three scene
-  - states makes more sense for US, use states if the country span over more that one timezone ?
-- [x] lines performance optimization
-- [x] fix worker execution
-
 - [ ] 3d on earth avatar
-- [ ] earth land geometry flatten + smooth normal
 - [ ] search design
-
-- [ ] camera rotation spring based
-- [ ] 3d label, avoid overlap
-- [ ] custom and persist office hour
-- [ ] three tree shaking
 
 # Links
 
