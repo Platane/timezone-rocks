@@ -8,6 +8,7 @@ import { useStore } from "./store/store";
 // @ts-ignore
 import modelPath from "../assets/earth/scene.glb";
 import "./Earth/Locations/useLabelElements";
+import { DatePicker } from "./DatePicker";
 
 const Earth = loadable(() => import("./Earth/Earth"));
 
@@ -36,6 +37,8 @@ export const App = () => {
       </TopContainer>
 
       <Search />
+
+      <DatePicker />
 
       <Lines />
     </>

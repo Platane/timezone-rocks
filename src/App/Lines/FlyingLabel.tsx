@@ -6,56 +6,21 @@ import { useStore } from "../store/store";
 import { useExtendedTruthiness } from "../../hooks/useExtendedTruthiness";
 
 type Props = { location: Location };
-export const FlyingLabel = ({ location }: Props) => {
-  const [focus, setFocus] = useState(false);
-  const focusPlus = useExtendedTruthiness(focus, 50);
+export const FlyingLabel = ({ location }: Props) => (
+  <Container>
+    <span />
+    <div style={{ pointerEvents: "auto", position: "relative" }}>
+      <DateLabel />
+    </div>
+    <span />
+  </Container>
+);
 
-  return (
-    <Container>
-      <span />
-      <div
-        style={{ pointerEvents: "auto", position: "relative" }}
-        onClick={(e) => {
-          e.stopPropagation();
-          setFocus(true);
-          (e.currentTarget.children[1].children[0] as any).focus();
-        }}
-      >
-        <DateLabel />
-        <Form
-          style={{
-            opacity: focus ? 1 : 0,
-            pointerEvents: focusPlus ? "auto" : "none",
-          }}
-          onSubmit={(e) => {
-            e.preventDefault();
-
-            setFocus(false);
-
-            const { value } = (e.target as any).children[0];
-
-            if (!value) return;
-
-            const d = DateTime.fromISO(value, { zone: location.timezone })
-              .set({ hour: 12 })
-              .toMillis();
-
-            useStore.getState().setTWindowOrigin(d);
-          }}
-        >
-          <FormInput type="date" onBlur={() => setFocus(false)} />
-          <FormButton type="submit">ok</FormButton>
-        </Form>
-      </div>
-      <span />
-    </Container>
-  );
-};
 const formatDateTime = (timezone: string, t: number) => {
   const parts = DateTime.fromMillis(t, { zone: timezone }).toLocaleParts({
     minute: "numeric",
     hour: "numeric",
-    year: "numeric",
+    // year: "numeric",
     month: "long",
     day: "numeric",
   });
@@ -86,25 +51,10 @@ export const update = (
 ) => {
   const [before, date, after] = formatDateTime(location.timezone, t);
 
-  const value = DateTime.fromMillis(t, {
-    zone: location.timezone,
-  }).toISODate();
-
   domElement.children[0].innerHTML = before;
   domElement.children[1].children[0].innerHTML = date;
-  (domElement.children[1].children[1].children[0] as any).value = value;
   domElement.children[2].innerHTML = after;
 };
-
-const Form = styled.form`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-`;
-const FormButton = styled.button``;
-const FormInput = styled.input``;
 
 const Container = styled.div`
   padding-left: 4px;

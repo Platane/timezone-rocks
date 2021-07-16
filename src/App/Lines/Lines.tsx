@@ -8,6 +8,7 @@ import { LocationLabel, update as updateLocationLabel } from "./LocationLabel";
 import { FlyingLabel, update as updateFlyingLabel } from "./FlyingLabel";
 import { useWidth } from "./useWidth";
 import { DateSlider } from "./DateSlider";
+import { accentColor } from "../theme";
 
 export const Lines = () => {
   const locations = useStore((s) => s.locations);
@@ -157,7 +158,7 @@ export const CursorArm = styled.div`
   position: absolute;
   width: 2px;
   height: calc(100% + 14px);
-  background-color: #e88a28;
+  background-color: ${accentColor};
   left: -1px;
   top: -4px;
   z-index: 2;
