@@ -4,9 +4,7 @@ import { useEffect, useState } from "react";
  *
  */
 export const useClickOutside = (onClickOutside?: () => void) => {
-  const [className] = useState(
-    "outside-click-" + Math.random().toString(36).slice(2)
-  );
+  const [className] = useState(Math.random().toString(36));
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
       if (!ancestorContainsClassName(e.target as any, className))

@@ -32,6 +32,7 @@ export const DatePicker = () => {
       {!focus && (
         <Label
           href="#"
+          aria-label="Open date picker"
           onClick={(e) => {
             e.preventDefault();
             inputRef.current?.focus();
@@ -75,10 +76,14 @@ export const DatePicker = () => {
           type="date"
           defaultValue={defaultValue}
         />
-        <FormSubmitButton tabIndex={focus ? 0 : -1} type="submit">
+        <FormSubmitButton type="submit" tabIndex={focus ? 0 : -1}>
           ok
         </FormSubmitButton>
-        <FormButton tabIndex={focus ? 0 : -1} onClick={() => setFocus(false)}>
+        <FormButton
+          type="button"
+          tabIndex={focus ? 0 : -1}
+          onClick={() => setFocus(false)}
+        >
           cancel
         </FormButton>
       </Form>
