@@ -12,7 +12,7 @@ export const getLocationByTimezoneAndCountryCode = async (
     countryCode
   );
 
-export const getLocationsByKey = async (keys: string[]) =>
+export const getLocationsByKey = async (keys: number[]) =>
   getLocationsByKey_(await locationsPromise)(keys);
 
 export const getMatchingLocation = async (query: string) =>
