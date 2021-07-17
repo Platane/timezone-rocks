@@ -1,16 +1,24 @@
 import { encode, decode } from "base-64";
 
-const MAX_VALUE = 4000;
+export const MAX_VALUE = (1 << 12) - 1;
 const n = Math.ceil(Math.log(MAX_VALUE) / Math.log(2));
 
-const set = (arr: Uint8Array, i: number, value: number) => {
+/**
+ * set the value of the i-nth element
+ * in the Uint8Array containing value of n bits
+ */
+const set = (arr: Uint8Array, n: number, i: number, value: number) => {
   for (let u = 0; u < n; u++) {
     const k = i * n + u;
     arr[Math.floor(k / 8)] += +!!(value & (1 << u)) * (1 << k % 8);
   }
 };
 
-const get = (arr: Uint8Array, i: number) => {
+/**
+ * get the value of the i-nth element
+ * in the Uint8Array containing value of n bits
+ */
+const get = (arr: Uint8Array, n: number, i: number) => {
   let v = 0;
   for (let u = 0; u < n; u++) {
     const k = i * n + u;
@@ -35,7 +43,7 @@ const b64ToArrayBuffer = (s: string) => {
  */
 export const pack = (elements: number[]) => {
   const arr = new Uint8Array(Math.ceil((elements.length * n) / 8));
-  elements.forEach((value, i) => set(arr, i, value + 1));
+  elements.forEach((value, i) => set(arr, n, i, value + 1));
   return arrayBufferTob64(arr);
   //.replace(/=\+$/, "");
 };
@@ -43,6 +51,6 @@ export const pack = (elements: number[]) => {
 export const unpack = (s: string) => {
   const elements: number[] = [];
   const arr = b64ToArrayBuffer(s);
-  for (let v = 0, i = 0; (v = get(arr, i)) !== 0; i++) elements.push(v - 1);
+  for (let v = 0, i = 0; (v = get(arr, n, i)) !== 0; i++) elements.push(v - 1);
   return elements;
 };

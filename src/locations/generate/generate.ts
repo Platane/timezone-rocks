@@ -2,6 +2,7 @@ import * as path from "path";
 import * as fs from "fs";
 import fetch from "node-fetch";
 import * as unzipper from "unzipper";
+import { MAX_VALUE as limit } from "../../App/store/pack";
 
 export const getCountries = async () => {
   const text = await fetch(
@@ -105,8 +106,8 @@ export const run = async () => {
     getCountries(),
   ]);
 
-  const locations = pruneNull([
-    ...countries
+  const locationCountry = pruneNull(
+    countries
       .sort((a, b) => b.population - a.population)
       .map((country) => {
         const mainCity =
@@ -116,88 +117,96 @@ export const run = async () => {
         if (!mainCity) return null;
 
         return {
-          type: "country",
+          type: "country" as const,
           name: country.name,
           countryCode: country.countryCode,
           longitude: mainCity.longitude,
           latitude: mainCity.latitude,
           timezone: mainCity.timezone,
         };
-      }),
-
-    ...cities
-      .sort((a, b) => b.population - a.population)
-      .map((c) => ({
-        type: "city",
-        name: c.name,
-        countryCode: c.countryCode,
-        longitude: c.longitude,
-        latitude: c.latitude,
-        timezone: c.timezone,
-      }))
-      .slice(0, limit),
-
-    ...countries
-      .sort((a, b) => b.population - a.population)
-      .map((country) => {
-        const as = pruneNull(
-          admins
-            .filter((a) => a.countryCode === country.countryCode)
-            .map((admin) => {
-              const mainCity = cities.find(
-                (city) =>
-                  city.adminCode === admin.adminCode &&
-                  city.countryCode === admin.countryCode
-              );
-
-              if (!mainCity) return null;
-
-              const population = cities.reduce(
-                (sum, city) =>
-                  city.adminCode === admin.adminCode &&
-                  city.countryCode === admin.countryCode
-                    ? sum
-                    : sum + city.population,
-                0
-              );
-
-              return { ...mainCity, ...admin, population };
-            })
-        );
-
-        const timezones: Record<
-          string,
-          { population: number; nAdmin: number }
-        > = {};
-
-        as.forEach(({ timezone, population }) => {
-          timezones[timezone] = timezones[timezone] || {
-            population: 0,
-            nAdmin: 0,
-            adminNames: [],
-          };
-
-          timezones[timezone].nAdmin += 1;
-          timezones[timezone].population += population;
-        });
-
-        const tzs = Object.values(timezones);
-
-        if (tzs.length > 1) {
-          return as;
-        } else return [];
       })
-      .flat()
-      .sort((a, b) => b.population - a.population)
-      .map((admin) => ({
-        type: "admin",
-        name: admin.name,
-        countryCode: admin.countryCode,
-        longitude: admin.longitude,
-        latitude: admin.latitude,
-        timezone: admin.timezone,
-      })),
-  ]);
+  );
+
+  const locationAdmin = countries
+    .sort((a, b) => b.population - a.population)
+    .map((country) => {
+      const as = pruneNull(
+        admins
+          .filter((a) => a.countryCode === country.countryCode)
+          .map((admin) => {
+            const mainCity = cities.find(
+              (city) =>
+                city.adminCode === admin.adminCode &&
+                city.countryCode === admin.countryCode
+            );
+
+            if (!mainCity) return null;
+
+            const population = cities.reduce(
+              (sum, city) =>
+                city.adminCode === admin.adminCode &&
+                city.countryCode === admin.countryCode
+                  ? sum
+                  : sum + city.population,
+              0
+            );
+
+            return { ...mainCity, ...admin, population };
+          })
+      );
+
+      const timezones: Record<string, { population: number; nAdmin: number }> =
+        {};
+
+      as.forEach(({ timezone, population }) => {
+        timezones[timezone] = timezones[timezone] || {
+          population: 0,
+          nAdmin: 0,
+          adminNames: [],
+        };
+
+        timezones[timezone].nAdmin += 1;
+        timezones[timezone].population += population;
+      });
+
+      const tzs = Object.values(timezones);
+
+      if (tzs.length > 1) {
+        return as;
+      } else return [];
+    })
+    .flat()
+    .sort((a, b) => b.population - a.population)
+    .map((admin) => ({
+      type: "admin" as const,
+      name: admin.name,
+      countryCode: admin.countryCode,
+      longitude: admin.longitude,
+      latitude: admin.latitude,
+      timezone: admin.timezone,
+    }));
+
+  const locationCity = cities
+    .sort((a, b) => b.population - a.population)
+    .map((c) => ({
+      type: "city" as const,
+      name: c.name,
+      countryCode: c.countryCode,
+      longitude: c.longitude,
+      latitude: c.latitude,
+      timezone: c.timezone,
+    }));
+
+  const locations = [
+    ...locationCountry,
+
+    ...locationCity.slice(
+      0,
+      limit - locationAdmin.length - locationCountry.length
+    ),
+
+    ...locationAdmin,
+  ];
 
   const content = locations
     .map((l) =>
@@ -215,8 +224,6 @@ export const run = async () => {
   const outFilename = path.join(__dirname, "../../assets/locations.csv");
   fs.writeFileSync(outFilename, content);
 };
-
-const limit = 3000;
 
 run();
 
