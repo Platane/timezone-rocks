@@ -7,12 +7,22 @@
 ## Usage
 
 ```sh
-# generate autocomplete suggestion
-yarn generateLocations
-
 # start dev server
 yarn dev
 ```
+
+### Location list for autocomplete
+
+```sh
+# generate autocomplete suggestion
+yarn generateLocations
+```
+
+### Model
+
+The model is a slightly modified version of this [sketfab model](https://sketchfab.com/3d-models/earth-0caafb7e837047a688a3e504c0ea74af).
+
+The transformation scripting is located at src/App/Earth/generate/generate.ts. (uncomment the lines in src/index.ts to regenerate it)
 
 ## TODO
 
