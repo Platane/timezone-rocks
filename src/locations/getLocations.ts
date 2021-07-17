@@ -9,8 +9,8 @@ const parseLocations = (csv: string) =>
       type: type as "city" | "admin" | "country",
       name,
       countryCode,
-      longitude: +lo,
-      latitude: +la,
+      longitude: +lo / 100,
+      latitude: +la / 100,
       timezone: timezone,
     };
   });

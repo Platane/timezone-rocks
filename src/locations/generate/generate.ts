@@ -214,8 +214,8 @@ export const run = async () => {
         l.type,
         l.name,
         l.countryCode,
-        l.longitude.toFixed(4),
-        l.latitude.toFixed(4),
+        Math.round(l.longitude * 100),
+        Math.round(l.latitude * 100),
         l.timezone,
       ].join(",")
     )
