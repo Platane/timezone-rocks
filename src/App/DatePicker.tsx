@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { styled } from "@linaria/react";
 import { useStore } from "./store/store";
 import { DateTime } from "luxon";
 import { EditIcon } from "./Icons/EditIcon";
+import { useExtendedTruthiness } from "../hooks/useExtendedTruthiness";
+import { useClickOutside } from "../hooks/useClickOutside";
 
 export const DatePicker = () => {
   const timezone = useStore(
@@ -14,39 +16,72 @@ export const DatePicker = () => {
   const defaultValue = DateTime.fromMillis(t, { zone: timezone }).toISODate();
 
   const [focus, setFocus] = useState(false);
+  const focusDelay = !useExtendedTruthiness(!focus, 100);
+  const clickOutsideContainer = useClickOutside(
+    useCallback(() => {
+      if (focusDelay) {
+        setFocus(false);
+      }
+    }, [focusDelay])
+  );
+
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   return (
     <Container>
       {!focus && (
-        <Label onClick={() => setFocus(true)}>
+        <Label
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            inputRef.current?.focus();
+            setFocus(true);
+          }}
+        >
           {formatInterval(timezone, tWindow)}
           <Icon color="#fff" />
         </Label>
       )}
 
-      {focus && (
-        <Form
-          onSubmit={(e) => {
-            e.preventDefault();
+      <Form
+        {...clickOutsideContainer}
+        style={{
+          opacity: focus ? 1 : 0,
+          pointerEvents: focus ? "auto" : "none",
+        }}
+        onKeyDown={(e) => {
+          if (e.code === "Escape") setFocus(false);
+        }}
+        onSubmit={(e) => {
+          e.preventDefault();
 
-            setFocus(false);
+          setFocus(false);
 
-            const { value } = (e.target as any).date;
+          const { value } = (e.target as any).date;
 
-            if (!value) return;
+          if (!value) return;
 
-            const d = DateTime.fromISO(value, { zone: timezone })
-              .set({ hour: 12 })
-              .toMillis();
+          const d = DateTime.fromISO(value, { zone: timezone })
+            .set({ hour: 12 })
+            .toMillis();
 
-            useStore.getState().setTWindowOrigin(d);
-          }}
-        >
-          <FormInput name="date" type="date" defaultValue={defaultValue} />
-          <FormSubmitButton type="submit">ok</FormSubmitButton>
-          <FormButton onClick={() => setFocus(false)}>cancel</FormButton>
-        </Form>
-      )}
+          useStore.getState().setTWindowOrigin(d);
+        }}
+      >
+        <FormInput
+          ref={inputRef}
+          tabIndex={focus ? 0 : -1}
+          name="date"
+          type="date"
+          defaultValue={defaultValue}
+        />
+        <FormSubmitButton tabIndex={focus ? 0 : -1} type="submit">
+          ok
+        </FormSubmitButton>
+        <FormButton tabIndex={focus ? 0 : -1} onClick={() => setFocus(false)}>
+          cancel
+        </FormButton>
+      </Form>
     </Container>
   );
 };
@@ -93,20 +128,27 @@ const Container = styled.div`
   position: relative;
   height: 28px;
   margin: 10px;
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
 `;
-const Label = styled.span`
-  font-size: 1.4em;
+const Label = styled.a`
+  font-size: 1.2em;
   font-family: monospace;
   color: #fff;
   text-shadow: 0 0 2px rgba(0, 0, 0, 1), 0 0 4px rgba(0, 0, 0, 1);
-  cursor: pointer;
+  display: inline-block;
+
+  > svg {
+    opacity: 0;
+  }
+  &:hover > svg {
+    transition: opacity 120ms;
+    opacity: 1;
+  }
 `;
 
 const Form = styled.form`
   position: absolute;
-  width: 100%;
   height: 100%;
   left: 0;
   top: 0;
@@ -114,9 +156,11 @@ const Form = styled.form`
 `;
 const FormSubmitButton = styled.button`
   height: 100%;
+  min-width: 60px;
 `;
 const FormButton = styled.button`
   height: 100%;
+  min-width: 60px;
 `;
 const FormInput = styled.input`
   height: 100%;
