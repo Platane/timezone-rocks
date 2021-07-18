@@ -212,7 +212,7 @@ export const run = async () => {
     .map((l) =>
       [
         l.type,
-        l.name.replace(/\s+,\s+/g, " "),
+        l.name.replace(/\s*\,\s*/g, " "),
         l.countryCode,
         Math.round(l.longitude * 100),
         Math.round(l.latitude * 100),
