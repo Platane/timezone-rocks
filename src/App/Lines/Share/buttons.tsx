@@ -15,7 +15,7 @@ export const Button = styled.a`
   justify-content: center;
   align-items: center;
 
-  background-color: #3331;
+  background-color: #3332;
   color: ${accentColor};
   font-size: 0.8em;
 `;

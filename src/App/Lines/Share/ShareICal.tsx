@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { styled } from "@linaria/react";
 import { appearAnimation, Button, disappearAnimation } from "./buttons";
 import { useShare } from "../../../hooks/useShare";
