@@ -1,17 +1,13 @@
 import { styled } from "@linaria/react";
-import React, { useState } from "react";
+import React from "react";
 import { DateTime } from "luxon";
-import { Location } from "../../locations";
-import { useStore } from "../store/store";
-import { useExtendedTruthiness } from "../../hooks/useExtendedTruthiness";
+import type { Location } from "../../locations";
 
-type Props = { location: Location };
-export const FlyingLabel = ({ location }: Props) => (
+type Props = { location: Location; t: number };
+export const FlyingLabel = () => (
   <Container>
     <span />
-    <div style={{ pointerEvents: "auto", position: "relative" }}>
-      <DateLabel />
-    </div>
+    <span style={{ fontSize: "0.72em" }} />
     <span />
   </Container>
 );
@@ -20,7 +16,6 @@ const formatDateTime = (timezone: string, t: number) => {
   const parts = DateTime.fromMillis(t, { zone: timezone }).toLocaleParts({
     minute: "numeric",
     hour: "numeric",
-    // year: "numeric",
     month: "long",
     day: "numeric",
   });
@@ -45,15 +40,12 @@ const formatDateTime = (timezone: string, t: number) => {
   ];
 };
 
-export const update = (
-  domElement: Element,
-  { location, t }: Props & { t: number }
-) => {
-  const [before, date, after] = formatDateTime(location.timezone, t);
+export const update = (domElement: Element, { location, t }: Props) => {
+  const parts = formatDateTime(location.timezone, t);
 
-  domElement.children[0].innerHTML = before;
-  domElement.children[1].children[0].innerHTML = date;
-  domElement.children[2].innerHTML = after;
+  parts.forEach((text, i) => {
+    (domElement.children[i] as HTMLElement).innerText = text;
+  });
 };
 
 const Container = styled.div`
@@ -72,8 +64,4 @@ const Container = styled.div`
   font-family: monospace;
   color: #fff;
   text-shadow: 0 0 2px rgba(0, 0, 0, 1), 0 0 4px rgba(0, 0, 0, 1);
-`;
-
-const DateLabel = styled.span`
-  font-size: 0.72em;
 `;

@@ -23,6 +23,7 @@ export const ShareUrl = ({
       <ButtonUrl
         href={url}
         target="_blank"
+        title={share ? "share" : "share link"}
         className={visible ? appearAnimation : disappearAnimation}
         onClick={
           (share && preventDefault(share)) ||

@@ -75,7 +75,7 @@ export const Lines = () => {
             <LocationLabel location={location} />
 
             <Row onClick={() => selectLocation(location)}>
-              <FlyingLabel location={location} />
+              <FlyingLabel />
 
               {blocks[i].map(({ day, awake, office }, i) => (
                 <React.Fragment key={i}>

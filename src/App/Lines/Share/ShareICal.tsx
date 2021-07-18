@@ -36,6 +36,7 @@ export const ShareICal = ({
       href={dataUri}
       download={"invite.ics"}
       target="_self"
+      title="download iCal invite"
       className={visible ? appearAnimation : disappearAnimation}
       onClick={share ? preventDefault(share) : undefined}
     >
