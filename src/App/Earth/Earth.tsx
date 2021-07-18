@@ -1,7 +1,8 @@
-import React, { Suspense, useRef } from "react";
+import React, { Suspense, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
+import * as THREE from "three";
 import { EarthGlobe } from "./EarthGlobe";
-import { Lights } from "./Lights";
+import { Sun } from "./Sun/Sun";
 import { Locations } from "./Locations/Locations";
 import { stepSpring } from "../../spring-utils";
 import { useStore } from "../store/store";
@@ -17,15 +18,25 @@ export const Earth = () => {
     >
       <Controls />
 
+      {/* <Gizmo /> */}
+
+      <ambientLight intensity={0.1} />
+
       <AppearScaleNode scale={ready ? 1 : 0.001}>
         <Suspense fallback={null}>
           <EarthGlobe />
           <Locations />
-          <Lights />
+          <Sun />
         </Suspense>
       </AppearScaleNode>
     </Canvas>
   );
+};
+
+const Gizmo = () => {
+  const [object] = useState(new THREE.AxesHelper(2));
+
+  return <primitive object={object} />;
 };
 
 const springConfig = { tension: 80, friction: 12 };
