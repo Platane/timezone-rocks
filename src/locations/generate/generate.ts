@@ -2,7 +2,7 @@ import * as path from "path";
 import * as fs from "fs";
 import fetch from "node-fetch";
 import * as unzipper from "unzipper";
-import { MAX_VALUE as limit } from "../../App/store/pack";
+import { limit } from "./options";
 
 export const getCountries = async () => {
   const text = await fetch(
@@ -212,7 +212,7 @@ export const run = async () => {
     .map((l) =>
       [
         l.type,
-        l.name,
+        l.name.replace(/\s+,\s+/g, " "),
         l.countryCode,
         Math.round(l.longitude * 100),
         Math.round(l.latitude * 100),
