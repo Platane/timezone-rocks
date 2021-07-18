@@ -150,6 +150,9 @@ const Label = styled.a`
     transition: opacity 120ms;
     opacity: 1;
   }
+  &:focus > svg {
+    opacity: 1;
+  }
 `;
 
 const Form = styled.form`
