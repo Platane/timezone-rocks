@@ -2511,10 +2511,10 @@
   resolved "https://registry.yarnpkg.com/@principalstudio/html-webpack-inject-preload/-/html-webpack-inject-preload-1.2.7.tgz#0c1f0b32a34d814b36ce84111f89990441cc64e8"
   integrity sha512-KJKkiKG63ugBjf8U0e9jUcI9CLPTFIsxXplEDE0oi3mPpxd90X9SJovo3W2l7yh/ARKIYXhQq8fSXUN7M29TzQ==
 
-"@react-three/drei@7.0.6":
-  version "7.0.6"
-  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-7.0.6.tgz#649eb94d53eae659e516a7c575912ab049a9a1a7"
-  integrity sha512-JRToy+1lg+y0mMzWMRmR0wM4VKPH6Q0jXL7030q9GJE68amZJsXeXYVIORbNaxSt1EtExMnxrX2tolxPDSnH7w==
+"@react-three/drei@7.1.3":
+  version "7.1.3"
+  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-7.1.3.tgz#5c1d65cc3494c24e3ca281b7dd43b434865702d8"
+  integrity sha512-YEP36xOGFBsUrlHkNshC8MoHC0WU4kPoM1A/6YDNaLjCqVOyztM7EaSxLenhrhRMVwAB5emjKL8rHO38u4cy+g==
   dependencies:
     "@babel/runtime" "^7.11.2"
     blob-polyfill "^5.0.20210201"
@@ -2525,16 +2525,16 @@
     react-merge-refs "^1.0.0"
     stats.js "^0.17.0"
     three-mesh-bvh "^0.4.1"
-    three-stdlib "^2.3.0"
+    three-stdlib "^2.3.1"
     troika-three-text "^0.42.0"
     use-asset "^1.0.4"
     utility-types "^3.10.0"
     zustand "^3.5.1"
 
-"@react-three/fiber@7.0.2":
-  version "7.0.2"
-  resolved "https://registry.yarnpkg.com/@react-three/fiber/-/fiber-7.0.2.tgz#ae73c1221344d1ef19dbbc135684aad76808feb1"
-  integrity sha512-F7OmaAAJjTuGNWKlN/Ojq+Xtj/QuZaxWUjpQv7MvTL4p6fM53gzRQQ8i2P3E/rYlSkSCu0kAqmLgwyR+wWqa+g==
+"@react-three/fiber@7.0.5":
+  version "7.0.5"
+  resolved "https://registry.yarnpkg.com/@react-three/fiber/-/fiber-7.0.5.tgz#a129e5b5394fd559b560d37124e67fe64f4adb8f"
+  integrity sha512-IKNlitH2C8vQI3HUU88Dd/QMXkwgoxYJu9wfHAlHBbWGHmu1GHGrYQr2T0HoRAAz+sLlcGS1sC9VfZIlDaHngw==
   dependencies:
     "@babel/runtime" "^7.13.10"
     react-merge-refs "^1.1.0"
@@ -8966,10 +8966,10 @@ three-mesh-bvh@^0.4.1:
   resolved "https://registry.yarnpkg.com/three-mesh-bvh/-/three-mesh-bvh-0.4.1.tgz#ba0bf1dac7cbd41f2132c8446545c8ad9fbeb892"
   integrity sha512-1ALlGVjArZpi0SdqZhjwFA3DZHgBF/Uo4LnL8G7PczI7rpOoBK87CaBL073DVrrbIE4OONJvpq/PEzluKoRHbg==
 
-three-stdlib@2.3.0, three-stdlib@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/three-stdlib/-/three-stdlib-2.3.0.tgz#cf669e50e4a766a0c9af28c2f36680a298c749b0"
-  integrity sha512-XnbTdH72aTB+lLV5y5IKr5bkLv9mHqn4913sY3YNiL3ZwzIl3TPqxRpPuJ7A93IUqo/T2U+fUvLuAaN9tOkM6A==
+three-stdlib@2.3.1, three-stdlib@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/three-stdlib/-/three-stdlib-2.3.1.tgz#201f4ff74a56e9ea45c77c111a615803edcb7f46"
+  integrity sha512-dqBBHHzwS7A9CCY/ArYdk5lL5jiuX/1HQuYMM1OrxGENuYyLsv4TPElQfXjp70Mxw3x67KatqPngHw11hKnfFQ==
   dependencies:
     "@babel/runtime" "^7.14.6"
     "@webgpu/glslang" "^0.0.15"
@@ -8982,10 +8982,10 @@ three-stdlib@2.3.0, three-stdlib@^2.3.0:
     potpack "^1.0.1"
     zstddec "^0.0.2"
 
-three@0.130.0:
-  version "0.130.0"
-  resolved "https://registry.yarnpkg.com/three/-/three-0.130.0.tgz#43778a96366fa5e3d1da28c688e8a2bfd8b42aab"
-  integrity sha512-4jqvbJyvgrjTsBgqE7TrdkZral78l8CXpFCdGzqQoiJHsRhGHxe5tvwqZQVaS6eodPav7jdYO5sp1c5RmMB3ng==
+three@0.130.1:
+  version "0.130.1"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.130.1.tgz#797588b2877ace31603bbbc864eb2e3022f0b3b4"
+  integrity sha512-OSPPKcGvFSiGkG3jFrwwC76PBV/ZSrGxpBbg28bW8s9GU8r/y2spNGtEXHEb/CVqo0Ctf5Lx2rVaxQZB6OasaA==
 
 throat@^6.0.1:
   version "6.0.1"
@@ -10080,7 +10080,12 @@ zstddec@^0.0.2:
   resolved "https://registry.yarnpkg.com/zstddec/-/zstddec-0.0.2.tgz#57e2f28dd1ff56b750e07d158a43f0611ad9eeb4"
   integrity sha512-DCo0oxvcvOTGP/f5FA6tz2Z6wF+FIcEApSTu0zV5sQgn9hoT5lZ9YRAKUraxt9oP7l4e8TnNdi8IZTCX6WCkwA==
 
-zustand@3.5.5, zustand@^3.5.1:
+zustand@3.5.7:
+  version "3.5.7"
+  resolved "https://registry.yarnpkg.com/zustand/-/zustand-3.5.7.tgz#add5e8d0ba031ce6e0ddf9cb76ef15306efb665f"
+  integrity sha512-DlVFXJavIHyXTOGz6dB+8QHZsPyJcGJSEBtlp2Ivmd5SwtlCnhPo3L8LB6YRfAOJC2PbqzgoD8NMjk+y+vIF0g==
+
+zustand@^3.5.1:
   version "3.5.5"
   resolved "https://registry.yarnpkg.com/zustand/-/zustand-3.5.5.tgz#628458ad70621ddc2a17dbee49be963e5c0dccb5"
   integrity sha512-iTiJoxzYFtiD7DhscgwK2P4Kft1JcZEI2U7mG8IxiOFM4KpBAiJZfFop3r/3wbCuyltXI6ph1Fx90e4j/S43XA==
