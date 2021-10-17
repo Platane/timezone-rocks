@@ -9,7 +9,6 @@ import TerserPlugin from "terser-webpack-plugin";
 import { GenerateSW } from "workbox-webpack-plugin";
 import CopyPlugin from "copy-webpack-plugin";
 import type { Configuration as WebpackConfiguration } from "webpack";
-import type { Configuration as WebpackDevServerConfiguration } from "webpack-dev-server";
 
 const mode =
   process.env.NODE_ENV === "production" ? "production" : "development";
@@ -124,15 +123,13 @@ const webpackConfiguration: WebpackConfiguration = {
       ],
     }),
   ],
+
+  devServer: {
+    port: 8080,
+    open: true,
+    host: "local-ip",
+    https: true,
+  },
 };
 
-const webpackDevServerConfiguration: WebpackDevServerConfiguration = {
-  port: 8080,
-  open: true,
-  https: true,
-};
-
-export default {
-  ...webpackConfiguration,
-  devServer: webpackDevServerConfiguration,
-};
+export default webpackConfiguration;
