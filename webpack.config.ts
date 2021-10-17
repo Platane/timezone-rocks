@@ -1,4 +1,5 @@
 import * as path from "path";
+import { execSync } from "child_process";
 import HtmlPlugin from "html-webpack-plugin";
 import HtmlWebpackInjectPreload from "@principalstudio/html-webpack-inject-preload";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
@@ -31,7 +32,6 @@ const webpackConfiguration: WebpackConfiguration = {
           /\.(otf|ttf|woff|woff2)$/,
           /\.(csv)$/,
           /\.(glb)$/,
-          /\.(zip)$/,
         ],
         loader: "file-loader",
         options: { name: "[contenthash].[ext]" },
@@ -59,28 +59,24 @@ const webpackConfiguration: WebpackConfiguration = {
 
     new HtmlPlugin({
       title: "🌐",
-      templateContent: ({ htmlWebpackPlugin }) => `
-        <!DOCTYPE html>
-        <html lang="en">
-          <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width,initial-scale=1">
-            <title>${htmlWebpackPlugin.options.title}</title>
-            <link rel="manifest" href="/manifest.json">
-            <link rel="apple-touch-icon" sizes="180x180" href="/icon-180x180.png">
-            <meta name="theme-color" content="#203b53"/>
-            <link rel="icon" type="image/png" sizes="32x32" href="/icon-32x32.png">
-            <link rel="icon" type="image/png" sizes="16x16" href="/icon-16x16.png">
-          </head>
-          <body>
-            <div id="root">
-              <div style="display:flex;justify-content:center;align-items:center;min-height:400px;height:100%;width:100%;color:#fff">
-                loading...
-              </div>
-            </div>
-          </body>
-        </html>
-    `,
+      templateContent: () => {
+        const code = `console.log(require('react-dom/server').renderToStaticMarkup(require('react').createElement(require('./src/Html.tsx').Html)))`;
+        return (
+          `<!DOCTYPE html>` +
+          execSync(
+            [
+              "./node_modules/.bin/babel-node",
+              `--extensions="${[".js", ".jsx", ".ts", ".tsx"].join(",")}"`,
+              `--presets="${[
+                "@babel/preset-react",
+                "@babel/preset-typescript",
+                "@linaria/babel-preset",
+              ].join(",")}"`,
+              `--eval "${code}"`,
+            ].join(" ")
+          ).toString()
+        );
+      },
     }),
 
     new HTMLInlineCSSWebpackPlugin(),
@@ -132,9 +128,6 @@ const webpackConfiguration: WebpackConfiguration = {
 
 const webpackDevServerConfiguration: WebpackDevServerConfiguration = {
   port: 8080,
-  host: "0.0.0.0",
-  useLocalIp: true,
-  stats: "minimal",
   open: true,
   https: true,
 };
