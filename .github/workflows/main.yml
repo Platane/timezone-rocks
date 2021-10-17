@@ -11,20 +11,36 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16
+          cache: yarn
 
-      - uses: bahmutov/npm-install@v1.7.8
+      - run: yarn install --frozen-lockfile
 
       - run: yarn type
       - run: yarn lint
       - run: yarn test
       - run: yarn generateLocations
       - run: yarn build
-      - run: yarn surge ./build staging-timezone-rocks.surge.sh
+
+      - id: deploy-preview
+        run: |
+          previewUrl=timezone-rocks-$SHA.surge.sh
+          echo ::set-output name=previewUrl::$previewUrl
+          yarn surge ./dist $previewUrl
+
+          branch=`node -e "console.log(process.env.REF.split('/').splice(-1)[0].replace(/\W/g,'-'))`
+          branchUrl=timezone-rocks-$branch.surge.sh
+          echo ::set-output name=branchUrl::$branchUrl
+          yarn surge ./dist $branchUrl
         env:
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
-      - uses: crazy-max/ghaction-github-pages@v2.5.0
+          SHA: ${{ github.sha }}
+          REF: ${{ github.ref }}
+
+      - name: disclaim preview url in commit comment
+        uses: peter-evans/commit-comment@v1
         with:
-          build_dir: build
-        env:
-          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN_GH_PAGES }}
+          token: ${{ github.token }}
+          sha: ${{ github.sha }}
+          body: |
+            [preview](https://${{ steps.deploy-preview.outputs.url }})
