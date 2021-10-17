@@ -78,7 +78,7 @@
   "scripts": {
     "generateLocations": "yarn ts-node src/locations/generate/generate.ts",
     "type": "tsc --noEmit",
-    "lint": "prettier -c '**/*.{ts,tsx,js,jsx,json,md,html}' '!**/{build,web_modules}/**'",
+    "lint": "prettier -c '**/*.{ts,tsx,js,jsx,json,md,html}' '!**/{build,dist}/**'",
     "dev": "webpack serve",
     "build": "NODE_ENV=production webpack build",
     "test": "jest"
