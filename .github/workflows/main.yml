@@ -21,7 +21,8 @@ jobs:
       - run: yarn generateLocations
       - run: yarn build
 
-      - id: deploy-preview
+      - name: deploy preview
+        id: deploy-preview
         run: |
           previewUrl=timezone-rocks-$SHA.surge.sh
           echo ::set-output name=previewUrl::$previewUrl

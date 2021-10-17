@@ -1,6 +1,7 @@
 node_modules
 web_modules
 build
+dist
 .env
 .linaria-cache
 src/assets/locations.csv
