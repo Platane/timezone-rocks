@@ -40,7 +40,7 @@ jobs:
           token: ${{ github.token }}
           sha: ${{ github.sha }}
           body: |
-            [preview](https://${{ steps.deploy-preview.outputs.url }})
+            [preview](https://${{ steps.deploy-preview.outputs.previewUrl }})
 
       - run: yarn type
       - run: yarn lint
