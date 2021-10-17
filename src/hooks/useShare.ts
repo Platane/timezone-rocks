@@ -4,12 +4,13 @@ export const useShare = (shareParams: {
   text?: string;
   title?: string;
   url?: string;
-  files?: readonly File[];
+  files?: File[];
 }) => {
   const share = useMemo(() => {
-    const payload: ShareData & { files?: readonly File[] } = { ...shareParams };
+    const payload: ShareData = { ...shareParams };
 
     if (shareParams.files)
+      // @ts-ignore
       payload.files = Object.freeze([...shareParams.files]);
 
     if (!canShare(payload)) return undefined;
