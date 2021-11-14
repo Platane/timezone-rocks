@@ -26,18 +26,13 @@ const webpackConfiguration: WebpackConfiguration = {
   module: {
     rules: [
       {
-        test: [
-          /\.(bmp|gif|png|jpeg|jpg|svg)$/,
-          /\.(otf|ttf|woff|woff2)$/,
-          /\.(csv)$/,
-          /\.(glb)$/,
-        ],
+        test: [/\.(bmp|gif|png|jpeg|jpg|svg)$/, /\.(csv)$/, /\.(glb)$/],
         loader: "file-loader",
         options: { name: "[contenthash].[ext]" },
       },
 
       {
-        test: /\.(ts|tsx|js)$/,
+        test: /\.(ts|tsx)$/,
         use: [
           { loader: "babel-loader" },
           { loader: "@linaria/webpack-loader" },
@@ -100,28 +95,32 @@ const webpackConfiguration: WebpackConfiguration = {
       ],
     }),
 
-    new GenerateSW({
-      swDest: "service-worker.js",
-      exclude: [/\.LICENSE\.txt/],
-    }),
+    ...("production" === mode
+      ? [
+          new GenerateSW({
+            swDest: "service-worker.js",
+            exclude: [/\.LICENSE\.txt/],
+          }),
 
-    new BundleAnalyzerPlugin({
-      openAnalyzer: false,
-      analyzerMode: "static",
-    }) as any,
+          new BundleAnalyzerPlugin({
+            openAnalyzer: false,
+            analyzerMode: "static",
+          }) as any,
 
-    new CopyPlugin({
-      patterns: [
-        {
-          from: path.join(__dirname, "src/assets/manifest.json"),
-          to: "manifest.json",
-        },
-        {
-          from: path.join(__dirname, "src/assets/icons"),
-          to: "",
-        },
-      ],
-    }),
+          new CopyPlugin({
+            patterns: [
+              {
+                from: path.join(__dirname, "src/assets/manifest.json"),
+                to: "manifest.json",
+              },
+              {
+                from: path.join(__dirname, "src/assets/icons"),
+                to: "",
+              },
+            ],
+          }),
+        ]
+      : []),
   ],
 
   devServer: {
