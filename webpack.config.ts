@@ -17,7 +17,7 @@ const webpackConfiguration: WebpackConfiguration = {
   mode,
   devtool: false,
   entry: path.join(__dirname, "src/index"),
-  output: { filename: "[contenthash].js" },
+  output: { filename: "[contenthash].js", clean: true },
   resolve: { extensions: [".tsx", ".ts", ".js"] },
   optimization: {
     minimize: mode === "production",

@@ -31,7 +31,7 @@ jobs:
           branch=`node -e "console.log(process.env.REF.replace(/^(refs\/(heads\/)?)?/,'').replace(/\W/g,'-'))"`
           branchUrl=timezone-rocks-$branch.surge.sh
           echo ::set-output name=branchUrl::$branchUrl
-          pnpm ./dist $branchUrl
+          pnpm surge ./dist $branchUrl
         env:
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
