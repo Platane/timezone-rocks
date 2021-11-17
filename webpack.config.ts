@@ -123,12 +123,7 @@ const webpackConfiguration: WebpackConfiguration = {
       : []),
   ],
 
-  devServer: {
-    port: 8080,
-    open: true,
-    host: "local-ip",
-    https: true,
-  },
+  ...({ devServer: { port: 8080, https: true } } as any),
 };
 
 export default webpackConfiguration;
