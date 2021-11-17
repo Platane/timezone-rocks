@@ -18,20 +18,20 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - run: npm run generateLocations
-      - run: npm run build
+      - run: pnpm generateLocations
+      - run: pnpm build
 
       - name: deploy preview
         id: deploy-preview
         run: |
           previewUrl=timezone-rocks-$SHA.surge.sh
           echo ::set-output name=previewUrl::$previewUrl
-          npm run surge ./dist $previewUrl
+          pnpm surge ./dist $previewUrl
 
           branch=`node -e "console.log(process.env.REF.replace(/^(refs\/(heads\/)?)?/,'').replace(/\W/g,'-'))"`
           branchUrl=timezone-rocks-$branch.surge.sh
           echo ::set-output name=branchUrl::$branchUrl
-          npx surge ./dist $branchUrl
+          pnpm ./dist $branchUrl
         env:
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
@@ -46,6 +46,6 @@ jobs:
           body: |
             [preview](https://${{ steps.deploy-preview.outputs.previewUrl }})
 
-      - run: npm run type
-      - run: npm run lint
-      - run: npm run test
+      - run: pnpm type
+      - run: pnpm lint
+      - run: pnpm test
