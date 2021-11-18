@@ -14,10 +14,18 @@ export const Avatar = ({ className, style, ...props }: Props) => {
       viewBox="28 25 420 335"
       className={className}
     >
-      {/* <rect x="28" y="25" width="420" height="335" fill="yellow" /> */}
+      {/* <rect
+        x="28"
+        y="25"
+        width="420"
+        height="335"
+        fill="none"
+        strokeWidth="10"
+        stroke="yellow"
+      /> */}
 
-      <circle cx={268} cy={200} r={150} fill="#999" />
-      <circle cx={268} cy={200} r={138} fill="#ccc" />
+      {/* <circle cx={268} cy={200} r={150} fill="#999" />
+      <circle cx={268} cy={200} r={138} fill="#ccc" /> */}
 
       <Face {...props} />
       <HandRight {...props} />

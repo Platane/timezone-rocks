@@ -113,7 +113,7 @@ const getEmojiType = (type: Location["type"]) => {
 
 const Container = styled.form`
   position: relative;
-  margin: 10px;
+  margin: 0 10px 10px 10px;
   width: calc(100% - 20px);
 `;
 

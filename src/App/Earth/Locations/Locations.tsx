@@ -3,11 +3,10 @@ import ReactDOM from "react-dom";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { useStore } from "../../store/store";
-import { labelBox } from "./useLabelElements";
 import { latLngToWorld } from "./utils";
 import { NodeU, step } from "./physical";
 import type { Location } from "../../../locations";
-import { Label } from "./Label";
+import { Label, labelBox } from "./Label";
 
 export const Locations = () => {
   const locations = useStore((s) => s.locations);
@@ -21,7 +20,7 @@ export const Locations = () => {
   } = useThree();
   const [domContainer] = useState(() => document.createElement("div"));
   useEffect(() => {
-    domElement.parentElement?.appendChild(domContainer);
+    domElement.parentElement?.parentElement?.appendChild(domContainer);
     return () => {
       domContainer.parentElement?.removeChild(domContainer);
     };
@@ -106,17 +105,6 @@ export const Locations = () => {
         z > 0 ? Math.round(z * 998) + 1 : +1001 + Math.round(-z * 998);
       el.style.zIndex = zIndex + "";
     }
-
-    // elementPool.current.forEach((el, i) => {
-    //   const { p, z } = nodes[i].userData as NodeU;
-    //   const x = p.x;
-    //   const y = p.y;
-    //   el.style.transform = `translate(${x}px, ${y}px)`;
-
-    //   const zIndex =
-    //     z > 0 ? Math.round(z * 998) + 1 : +1001 + Math.round(-z * 998);
-    //   el.style.zIndex = zIndex + "";
-    // });
 
     // apply new position of the dashed line
     for (const node of nodes) {
