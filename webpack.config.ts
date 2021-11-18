@@ -3,7 +3,6 @@ import { execSync } from "child_process";
 import HtmlPlugin from "html-webpack-plugin";
 import HtmlWebpackInjectPreload from "@principalstudio/html-webpack-inject-preload";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import HTMLInlineCSSWebpackPlugin from "html-inline-css-webpack-plugin";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import TerserPlugin from "terser-webpack-plugin";
 import { GenerateSW } from "workbox-webpack-plugin";
@@ -17,7 +16,11 @@ const webpackConfiguration: WebpackConfiguration = {
   mode,
   devtool: false,
   entry: path.join(__dirname, "src/index"),
-  output: { filename: "[contenthash:base62].js", clean: true },
+  output: {
+    chunkFilename: "[contenthash:base62].js",
+    filename: "[contenthash:base62].js",
+    clean: true,
+  },
   resolve: { extensions: [".tsx", ".ts", ".js"] },
   optimization: {
     minimize: mode === "production",
@@ -73,14 +76,12 @@ const webpackConfiguration: WebpackConfiguration = {
       },
     }),
 
-    new HTMLInlineCSSWebpackPlugin(),
-
     new HtmlWebpackInjectPreload({
       files: [
         {
           match: /\.(csv)$/,
           attributes: {
-            rel: "prefetch",
+            rel: "preload",
             as: "fetch",
             crossorigin: "anonymous",
           },
@@ -88,8 +89,16 @@ const webpackConfiguration: WebpackConfiguration = {
         {
           match: /\.worker\.js$/,
           attributes: {
-            rel: "prefetch",
+            rel: "preload",
             as: "script",
+          },
+        },
+        {
+          match: /\.(glb)$/,
+          attributes: {
+            rel: "prefetch",
+            as: "fetch",
+            crossorigin: "anonymous",
           },
         },
       ],
@@ -123,7 +132,7 @@ const webpackConfiguration: WebpackConfiguration = {
       : []),
   ],
 
-  ...({ devServer: { port: 8080, https: true } } as any),
+  ...({ devServer: { https: true } } as any),
 };
 
 export default webpackConfiguration;
