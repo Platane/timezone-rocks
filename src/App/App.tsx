@@ -7,7 +7,6 @@ import { Search } from "./Search";
 import { useStore } from "./store/store";
 // @ts-ignore
 import modelPath from "../assets/earth/scene.glb";
-import "./Earth/Locations/useLabelElements";
 import { DatePicker } from "./DatePicker";
 import { Earth } from "./Earth/Earth";
 

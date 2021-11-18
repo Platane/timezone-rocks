@@ -48,6 +48,7 @@ specifiers:
   luxon: 2.1.1
   mini-css-extract-plugin: 2.4.4
   node-fetch: 2.6.1
+  park-miller: 2.0.0
   prettier: 2.4.1
   react: 17.0.2
   react-dom: 17.0.2
@@ -76,6 +77,7 @@ dependencies:
   ical.js: 1.4.0
   lodash.deburr: 4.1.0
   luxon: 2.1.1
+  park-miller: 2.0.0
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   reselect: 4.1.4
@@ -6718,6 +6720,11 @@ packages:
       dot-case: 3.0.4
       tslib: 2.3.1
     dev: true
+
+  /park-miller/2.0.0:
+    resolution: {integrity: sha512-NfnUJ9Lo1B2uv3BRCBHFzBJn6CAKfoBw2AIf20c0gvowaUSLQXHvUajBIwpt891y7V35jyWWqD2G3Ft1b7rIWA==}
+    engines: {node: '>=12'}
+    dev: false
 
   /parse-json/4.0.0:
     resolution: {integrity: sha1-vjX1Qlvh9/bHRxhPmKeIy5lHfuA=}
