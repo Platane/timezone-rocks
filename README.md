@@ -27,7 +27,7 @@ The transformation scripting is located at src/App/Earth/generate/generate.ts. (
 ## TODO
 
 - [ ] 3d on earth avatar
-- [ ] location list versioning
+- [x] location list versioning
 
 # Links
 
