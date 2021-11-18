@@ -37,7 +37,7 @@ export const useStore = create<State & Api>(
   devtools((set) => ({
     t,
     now: t,
-    tWindow: [t - (day * w) / 2, t + (day * w) / 2],
+    tWindow: [t - (day * w) / 2, t + (day * w) / 2] as [number, number],
     locations: [],
     locationStoreReady: false,
     dateCursorDragged: false,

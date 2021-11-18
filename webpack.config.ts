@@ -17,7 +17,7 @@ const webpackConfiguration: WebpackConfiguration = {
   mode,
   devtool: false,
   entry: path.join(__dirname, "src/index"),
-  output: { filename: "[contenthash].js", clean: true },
+  output: { filename: "[contenthash:base62].js", clean: true },
   resolve: { extensions: [".tsx", ".ts", ".js"] },
   optimization: {
     minimize: mode === "production",
@@ -28,7 +28,7 @@ const webpackConfiguration: WebpackConfiguration = {
       {
         test: [/\.(bmp|gif|png|jpeg|jpg|svg)$/, /\.(csv)$/, /\.(glb)$/],
         loader: "file-loader",
-        options: { name: "[contenthash].[ext]" },
+        options: { name: "[contenthash:base62].[ext]" },
       },
 
       {

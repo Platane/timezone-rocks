@@ -6,6 +6,7 @@ import { usePreviousUntilTruthy } from "../../../hooks/usePreviousUntilTruthy";
 import { useExtendedTruthiness } from "../../../hooks/useExtendedTruthiness";
 import { ShareUrl } from "./ShareUrl";
 import { ShareICal } from "./ShareICal";
+import { listVersion } from "../../../locations";
 
 export const Share = () => {
   const visible = useStore((s) => !s.dateCursorDragged);
@@ -24,7 +25,7 @@ const Inside = ({ visible }: { visible: boolean }) => {
 
   const url = useMemo(() => {
     const u = new URL(window.location.href);
-    u.hash = stringify({ locations, t });
+    u.hash = stringify({ locations, t, listVersion });
     return u.toString();
   }, [locations, t]);
 
