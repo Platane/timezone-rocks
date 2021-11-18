@@ -26,11 +26,12 @@ The transformation scripting is located at src/App/Earth/generate/generate.ts. (
 
 ## TODO
 
-- [ ] 3d on earth avatar
+- [x] 3d on earth avatar
 - [x] location list versioning
 - [ ] about page
   - describe inaccuracy of past timezone
   - attribution ( geonames.org, sketchfab )
+- [ ] fix sunlight
 
 # Links
 
