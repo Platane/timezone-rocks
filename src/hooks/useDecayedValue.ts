@@ -8,5 +8,5 @@ export const useDecayedValue = <T>(value: T, delay: number) => {
     return () => clearTimeout(timeout);
   });
 
-  return decayed === value ? value : null;
+  return decayed === value ? null : value;
 };

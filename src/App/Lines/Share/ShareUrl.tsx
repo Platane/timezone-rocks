@@ -61,6 +61,7 @@ const CopiedHint = styled.div`
   border-radius: 4px;
 
   animation: animation 1000ms linear;
+  pointer-events: none;
 
   @keyframes animation {
     0% {

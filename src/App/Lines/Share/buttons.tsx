@@ -41,7 +41,8 @@ export const appearAnimation = css`
     }
   }
 
-  &:nth-child(2) {
+  &:nth-child(2),
+  &:nth-child(3) {
     animation-name: animation2;
     @keyframes animation2 {
       0% {
@@ -79,7 +80,8 @@ export const disappearAnimation = css`
     }
   }
 
-  &:nth-child(2) {
+  &:nth-child(2),
+  &:nth-child(3) {
     animation-name: animation2;
     @keyframes animation2 {
       0% {

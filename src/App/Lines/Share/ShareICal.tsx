@@ -25,7 +25,7 @@ export const ShareICal = ({
 
   const files = useMemo(() => {
     const blob = new Blob([iCal], { type: "text/calendar" });
-    const file = new File([blob], "file.png", { type: "text/calendar" });
+    const file = new File([blob], "invite.ics", { type: "text/calendar" });
     return [file];
   }, [url]);
 
