@@ -62,8 +62,8 @@ const createLabel = () => {
 };
 
 export const labelBox = {
-  min: { x: -10, y: -9 },
-  max: { x: 70, y: 9 },
+  min: { x: -20, y: -9 },
+  max: { x: 90, y: 9 },
 };
 
 const labelCss = css`

@@ -9,19 +9,20 @@ import { useStore } from "./store/store";
 import modelPath from "../assets/earth/scene.glb";
 import "./Earth/Locations/useLabelElements";
 import { DatePicker } from "./DatePicker";
+import { Earth } from "./Earth/Earth";
 
-const Earth = loadable(() => import("./Earth/Earth"));
+// const Earth = loadable(() => import("./Earth/Earth"));
 
-const preloadEarth = () => {
-  Earth.preload();
-  const link = document.createElement("link");
-  link.setAttribute("rel", "prefetch");
-  link.setAttribute("href", modelPath);
-  link.setAttribute("crossorigin", "anonymous");
-  document.head.appendChild(link);
-};
+// const preloadEarth = () => {
+//   Earth.preload();
+//   const link = document.createElement("link");
+//   link.setAttribute("rel", "prefetch");
+//   link.setAttribute("href", modelPath);
+//   link.setAttribute("crossorigin", "anonymous");
+//   document.head.appendChild(link);
+// };
 
-preloadEarth();
+// preloadEarth();
 
 export const App = () => {
   const locationStoreReady = useStore((s) => s.locationStoreReady);
