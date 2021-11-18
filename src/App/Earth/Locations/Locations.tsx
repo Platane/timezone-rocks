@@ -1,34 +1,38 @@
 import React, { useEffect, useRef, useState } from "react";
+import ReactDOM from "react-dom";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { useStore } from "../../store/store";
-import { labelBox, useLabelElements } from "./useLabelElements";
+import { labelBox } from "./useLabelElements";
 import { latLngToWorld } from "./utils";
 import { NodeU, step } from "./physical";
+import type { Location } from "../../../locations";
+import { Label } from "./Label";
 
 export const Locations = () => {
   const locations = useStore((s) => s.locations);
   const ref = useRef<THREE.Group>();
-  const { gl } = useThree();
 
-  const domContainer = gl.domElement.parentElement!;
-  const elementPool = useLabelElements(domContainer);
+  //
+  // create and attach a dom element along the canvas
+  //
+  const {
+    gl: { domElement },
+  } = useThree();
+  const [domContainer] = useState(() => document.createElement("div"));
+  useEffect(() => {
+    domElement.parentElement?.appendChild(domContainer);
+    return () => {
+      domContainer.parentElement?.removeChild(domContainer);
+    };
+  }, [domElement]);
 
+  //
+  // physics on every frame
+  //
   const refDtRest = useRef(0);
-
-  // const [mouse] = useState(new THREE.Vector2());
-  // useEffect(() => {
-  //   window.addEventListener("mousemove", ({ pageX, pageY }) => {
-  //     const { left, top } = domContainer.getBoundingClientRect();
-  //     mouse.set(pageX - left, pageY - top);
-  //   });
-  // }, []);
-
   useFrame(({ camera, size }, dt) => {
     if (!ref.current) return;
-
-    domContainer.style.zIndex = "1000";
-    domContainer.style.position = "relative";
 
     camera.updateMatrixWorld();
 
@@ -88,11 +92,12 @@ export const Locations = () => {
       refDtRest.current -= fixedDt;
     }
 
-    //
-
     // apply new position to the label
-    elementPool.current.forEach((el, i) => {
-      const { p, z } = nodes[i].userData as NodeU;
+    for (let i = 0; i < domContainer.children.length; i++) {
+      const node = nodes[i];
+      const el = domContainer.children[i] as HTMLElement;
+
+      const { p, z } = node.userData as NodeU;
       const x = p.x;
       const y = p.y;
       el.style.transform = `translate(${x}px, ${y}px)`;
@@ -100,7 +105,18 @@ export const Locations = () => {
       const zIndex =
         z > 0 ? Math.round(z * 998) + 1 : +1001 + Math.round(-z * 998);
       el.style.zIndex = zIndex + "";
-    });
+    }
+
+    // elementPool.current.forEach((el, i) => {
+    //   const { p, z } = nodes[i].userData as NodeU;
+    //   const x = p.x;
+    //   const y = p.y;
+    //   el.style.transform = `translate(${x}px, ${y}px)`;
+
+    //   const zIndex =
+    //     z > 0 ? Math.round(z * 998) + 1 : +1001 + Math.round(-z * 998);
+    //   el.style.zIndex = zIndex + "";
+    // });
 
     // apply new position of the dashed line
     for (const node of nodes) {
@@ -122,21 +138,52 @@ export const Locations = () => {
   });
 
   return (
-    <group ref={ref}>
-      {locations.map((location) => (
-        <group key={location.key} position={latLngToWorld(location)}>
-          <mesh>
-            <sphereBufferGeometry args={[0.008, 8, 8]} />
-            <meshBasicMaterial color={"#000"} />
-          </mesh>
+    <>
+      <group ref={ref}>
+        {locations.map((location) => (
+          <group key={location.key} position={latLngToWorld(location)}>
+            <mesh>
+              <sphereBufferGeometry args={[0.008, 8, 8]} />
+              <meshBasicMaterial color={"#000"} />
+            </mesh>
 
-          <lineSegments frustumCulled={false}>
-            <lineDashedMaterial dashSize={0.03} gapSize={0.02} color={"#000"} />
-          </lineSegments>
-        </group>
-      ))}
-    </group>
+            <lineSegments frustumCulled={false}>
+              <lineDashedMaterial
+                dashSize={0.03}
+                gapSize={0.02}
+                color={"#000"}
+              />
+            </lineSegments>
+          </group>
+        ))}
+      </group>
+      <Labels locations={locations} domContainer={domContainer} />
+    </>
   );
+};
+
+const Labels = ({
+  locations,
+  domContainer,
+}: {
+  locations: Location[];
+  domContainer: HTMLDivElement;
+}) => {
+  React.useLayoutEffect(() => {
+    ReactDOM.render(
+      <>
+        {locations.map((location) => (
+          <Label key={location.key} location={location} />
+        ))}
+      </>,
+      domContainer
+    );
+    return () => {
+      ReactDOM.unmountComponentAtNode(domContainer);
+    };
+  });
+
+  return null;
 };
 
 const sphereScreenSpace = new THREE.Sphere();
