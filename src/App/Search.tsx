@@ -95,7 +95,7 @@ export const Search = () => {
                 setHover(null);
               }}
             >
-              {getFlagEmoji(c.countryCode)} {getEmojiType(c.type)} {c.name}
+              <SuggestionContent location={c} />
             </SuggestionItem>
           ))}
         </SuggestionContainer>
@@ -129,10 +129,60 @@ const SuggestionContainer = styled.div`
   z-index: 3;
 `;
 
+const SuggestionContent = ({ location }: { location: Location }) => {
+  switch (location.type) {
+    case "timezone":
+      return (
+        <>
+          <SuggestionFlag />
+          <SuggestionType title={location.type}>
+            {getEmojiType(location.type)}
+          </SuggestionType>
+          <SuggestionName>{location.name.split("-")[0].trim()}</SuggestionName>{" "}
+          <SuggestionSubName>
+            {location.name.split("-")[1].trim()}
+          </SuggestionSubName>
+        </>
+      );
+
+    case "country":
+    case "admin":
+    case "city":
+      return (
+        <>
+          <SuggestionFlag>{getFlagEmoji(location.countryCode)}</SuggestionFlag>
+          <SuggestionType title={location.type}>
+            {getEmojiType(location.type)}
+          </SuggestionType>
+          <SuggestionName>{location.name}</SuggestionName>
+        </>
+      );
+  }
+};
+
 const SuggestionItem = styled.a`
   display: block;
-  font-size: 1.1em;
   padding: 6px 4px 6px 4px;
+  font-size: 1.1em;
+`;
+const SuggestionFlag = styled.span`
+  display: inline-block;
+  width: 24px;
+  text-align: center;
+  font-size: 18px;
+`;
+const SuggestionType = styled.span`
+  display: inline-block;
+  width: 24px;
+  text-align: center;
+  font-size: 18px;
+`;
+const SuggestionName = styled.span`
+  font-size: 1.1em;
+  margin-left: 2px;
+`;
+const SuggestionSubName = styled.span`
+  font-size: 0.9em;
 `;
 
 const hoverCss = css`
