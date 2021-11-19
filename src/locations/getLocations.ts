@@ -6,7 +6,7 @@ const parseLocations = (csv: string) =>
     const [type, name, countryCode, lo, la, timezone] = s.split(",");
     return {
       key: i,
-      type: type as "city" | "admin" | "country",
+      type: type as "city" | "admin" | "country" | "timezone",
       name,
       countryCode,
       longitude: +lo / 100,
