@@ -8,14 +8,14 @@
 
 ```sh
 # start dev server
-yarn dev
+npm run dev
 ```
 
 ### Location list for autocomplete
 
 ```sh
 # generate autocomplete suggestion
-yarn generateLocations
+npm run generateLocations
 ```
 
 ### Model
@@ -28,6 +28,9 @@ The transformation scripting is located at src/App/Earth/generate/generate.ts. (
 
 - [ ] 3d on earth avatar
 - [x] location list versioning
+- [ ] about page
+  - describe inaccuracy of past timezone
+  - attribution ( geonames.org, sketchfab )
 
 # Links
 
