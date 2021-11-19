@@ -2,7 +2,43 @@ import * as path from "path";
 import * as fs from "fs";
 import fetch from "node-fetch";
 import * as unzipper from "unzipper";
+import cheerio from "cheerio";
 import { limit } from "./options";
+
+export const getTimezoneAbbreviations = async () => {
+  const text = await fetch(
+    "https://en.wikipedia.org/wiki/List_of_time_zone_abbreviations"
+  ).then((res) => res.text());
+
+  const $ = cheerio.load(text);
+
+  return pruneNull(
+    $(".wikitable.sortable tr")
+      .toArray()
+      .map((row) => {
+        const [abbreviation, name, offsetLiteral] = $(row)
+          .find("td")
+          .toArray()
+          .map((el) =>
+            $(el)
+              .text()
+              .replace(/\[.+\]/g, "")
+              .trim()
+          );
+
+        if (!name) return null;
+
+        const [h, m] = offsetLiteral
+          .replace("UTC", "")
+          .replace("±", "+")
+          .replace("−", "-")
+          .split(":");
+        const offset = parseInt(h) + parseInt(m ?? "0") / 60;
+
+        return { abbreviation, name, offset };
+      })
+  );
+};
 
 export const getCountries = async () => {
   const text = await fetch(
@@ -90,21 +126,27 @@ export const getTimeZones = async () => {
     `http://download.geonames.org/export/dump/timeZones.txt`
   ).then((res) => res.text());
 
-  return text
-    .split("\n")
-    .slice(1)
-    .map((s) => {
-      const [, timezone, offset, offsetDST] = s.split("\t");
-      return { timezone, offset: +offset, offsetDST: +offsetDST };
-    });
+  return pruneNull(
+    text
+      .split("\n")
+      .slice(1)
+      .map((s) => {
+        const [, timezone, offset, offsetDST] = s.split("\t");
+        if (!timezone) return null;
+        return { timezone, offset: +offset, offsetDST: +offsetDST };
+      })
+  );
 };
 
-export const run = async () => {
-  const [cities, admins, countries] = await Promise.all([
-    getCities(),
-    getAdmins(),
-    getCountries(),
-  ]);
+export const getLocations = async (limit: number = Infinity) => {
+  const [cities, admins, countries, timezoneAbbreviations, timezones] =
+    await Promise.all([
+      getCities(),
+      getAdmins(),
+      getCountries(),
+      getTimezoneAbbreviations(),
+      getTimeZones(),
+    ]);
 
   const locationCountry = pruneNull(
     countries
@@ -127,53 +169,53 @@ export const run = async () => {
       })
   );
 
-  const locationAdmin = countries
+  const locationCity = cities
     .sort((a, b) => b.population - a.population)
+    .slice(0, limit)
+    .map((c) => ({
+      type: "city" as const,
+      name: c.name,
+      countryCode: c.countryCode,
+      longitude: c.longitude,
+      latitude: c.latitude,
+      timezone: c.timezone,
+    }));
+
+  const locationAdmin = locationCountry
     .map((country) => {
-      const as = pruneNull(
+      // list the cities in the country
+      const countryCities = cities.filter(
+        (c) => c.countryCode === country.countryCode
+      );
+
+      // list the admin zone in the country
+      // ignore the one that don't have a known city
+      const countryAdmins = pruneNull(
         admins
           .filter((a) => a.countryCode === country.countryCode)
           .map((admin) => {
-            const mainCity = cities.find(
-              (city) =>
-                city.adminCode === admin.adminCode &&
-                city.countryCode === admin.countryCode
+            const mainCity = countryCities.find(
+              (city) => city.adminCode === admin.adminCode
             );
 
-            if (!mainCity) return null;
-
-            const population = cities.reduce(
-              (sum, city) =>
-                city.adminCode === admin.adminCode &&
-                city.countryCode === admin.countryCode
-                  ? sum
-                  : sum + city.population,
-              0
-            );
-
-            return { ...mainCity, ...admin, population };
+            if (mainCity) return { ...mainCity, ...admin };
           })
       );
 
-      const timezones: Record<string, { population: number; nAdmin: number }> =
-        {};
+      // if the country don't span over multiple timezone, don't include the admin level
+      if (!countryAdmins.some((a) => a.timezone !== countryAdmins[0].timezone))
+        return [];
 
-      as.forEach(({ timezone, population }) => {
-        timezones[timezone] = timezones[timezone] || {
-          population: 0,
-          nAdmin: 0,
-          adminNames: [],
-        };
+      // compute the population from the cities population
+      return countryAdmins.map((a) => {
+        const population = countryCities.reduce(
+          (sum, city) =>
+            city.adminCode === a.adminCode ? sum : sum + city.population,
+          0
+        );
 
-        timezones[timezone].nAdmin += 1;
-        timezones[timezone].population += population;
+        return { ...a, population };
       });
-
-      const tzs = Object.values(timezones);
-
-      if (tzs.length > 1) {
-        return as;
-      } else return [];
     })
     .flat()
     .sort((a, b) => b.population - a.population)
@@ -186,29 +228,57 @@ export const run = async () => {
       timezone: admin.timezone,
     }));
 
-  const locationCity = cities
-    .sort((a, b) => b.population - a.population)
-    .map((c) => ({
-      type: "city" as const,
-      name: c.name,
-      countryCode: c.countryCode,
-      longitude: c.longitude,
-      latitude: c.latitude,
-      timezone: c.timezone,
-    }));
+  const locationTimezoneAbbreviations = pruneNull(
+    timezoneAbbreviations.map((ab) => {
+      const ts = timezones
+        .filter((t) => t.offset === ab.offset || t.offsetDST === ab.offset)
+        .map((t) => t.timezone);
+
+      const l =
+        locationCountry.find(
+          (l) => ab.name.includes(l.name) && ts.includes(l.timezone)
+        ) ??
+        locationAdmin.find(
+          (l) => ab.name.includes(l.name) && ts.includes(l.timezone)
+        ) ??
+        locationCity.find(
+          (l) => ab.name.includes(l.name) && ts.includes(l.timezone)
+        ) ??
+        locationCountry.find((l) => ts.includes(l.timezone));
+
+      if (l)
+        return {
+          ...l,
+          type: "timezone" as const,
+          name: ab.abbreviation + " - " + ab.name,
+        };
+    })
+  );
 
   const locations = [
     ...locationCountry,
 
+    ...locationTimezoneAbbreviations,
+
     ...locationCity.slice(
       0,
-      limit - locationAdmin.length - locationCountry.length
+      Math.max(
+        0,
+        limit -
+          locationAdmin.length -
+          locationCountry.length -
+          locationTimezoneAbbreviations.length
+      )
     ),
 
     ...locationAdmin,
-  ];
+  ].slice(0, limit);
 
-  const content = locations
+  return locations;
+};
+
+export const run = async () => {
+  const content = (await getLocations(limit))
     .map((l) =>
       [
         l.type,
