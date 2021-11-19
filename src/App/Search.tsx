@@ -7,6 +7,7 @@ import { useStore } from "./store/store";
 import { usePreviousUntilTruthy } from "../hooks/usePreviousUntilTruthy";
 import { useExtendedTruthiness } from "../hooks/useExtendedTruthiness";
 import { useSubscribe } from "./store/useSubscribe";
+import type { Location } from "../locations/getLocations";
 
 export const Search = () => {
   const focused = useStore((s) => s.searchFocused);
@@ -103,10 +104,11 @@ export const Search = () => {
   );
 };
 
-const getEmojiType = (type: string) => {
+const getEmojiType = (type: Location["type"]) => {
   if (type === "city") return "🏙";
   if (type === "admin") return "🏛";
   if (type === "country") return "🌐";
+  if (type === "timezone") return "🕒";
 };
 
 const Container = styled.form`
