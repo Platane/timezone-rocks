@@ -15,6 +15,7 @@ const FRICTION = 60;
 const TENSION = 900;
 const DISK_OUT = 800;
 const NODE_PUSH = 24000;
+const WALL_PUSH = 80000;
 
 const pre = document.createElement("pre");
 pre.style.position = "fixed";
@@ -78,6 +79,27 @@ export const step = (
     }
 
     // box repulsion
+    {
+      const d = Math.max(1, box.min.x + p.x - world.min.x);
+      const f = WALL_PUSH / d;
+      a.x += f;
+    }
+    {
+      const d = Math.max(1, world.max.x - (box.max.x + p.x));
+      const f = WALL_PUSH / d;
+      a.x -= f;
+    }
+    {
+      const d = Math.max(1, box.min.y + p.y - world.min.y);
+      const f = WALL_PUSH / d;
+      a.y += f;
+    }
+    {
+      const d = Math.max(1, world.max.y - (box.max.y + p.y));
+      const f = WALL_PUSH / d;
+      a.y -= f;
+    }
+
     // TODO
   }
 

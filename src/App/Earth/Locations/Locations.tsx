@@ -66,15 +66,13 @@ export const Locations = () => {
       }
     }
 
-    // debug
-    // nodes[0].userData.anchor.copy(mouse);
-
     // get disk position in screen space
     getSphereScreenSpace(camera, size, sphereScreenSpace);
 
-    worldBox.min.x = 0;
+    const w = domContainer.parentElement!.parentElement!.clientWidth;
+    worldBox.min.x = -(w - size.width) / 2;
     worldBox.min.y = 0;
-    worldBox.max.x = size.width;
+    worldBox.max.x = w - (w - size.width) / 2;
     worldBox.max.y = size.height;
 
     // step physical world

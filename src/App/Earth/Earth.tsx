@@ -18,8 +18,6 @@ export const Earth = () => {
     >
       <Controls />
 
-      {/* <Gizmo /> */}
-
       <ambientLight intensity={0.1} />
 
       <AppearScaleNode scale={ready ? 1 : 0.001}>
@@ -33,13 +31,7 @@ export const Earth = () => {
   );
 };
 
-const Gizmo = () => {
-  const [object] = useState(new THREE.AxesHelper(2));
-
-  return <primitive object={object} />;
-};
-
-const springConfig = { tension: 80, friction: 12 };
+const springConfig = { tension: 80, friction: 9 };
 const AppearScaleNode = ({
   children,
   scale,
