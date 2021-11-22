@@ -2,7 +2,7 @@ import { useCallback, useMemo, useRef } from "react";
 import type { Location } from "../../../locations";
 import { getDate } from "../../../timezone/timezone";
 import { getPoseAtHour } from "../../Avatar/pose";
-import { selectT } from "../../store/selector";
+import { selectT, selectUseCheapAvatar } from "../../store/selector";
 import { useStore } from "../../store/store";
 import { formatTime } from "../../../intl-utils";
 import { useSubscribe } from "../../store/useSubscribe";
@@ -10,6 +10,7 @@ import { Avatar } from "../../Avatar/Avatar";
 import { getFlagEmoji } from "../../../emojiFlagSequence";
 import ParkMiller from "park-miller";
 import { styled } from "@linaria/react";
+import { CheapAvatar } from "../../CheapAvatar";
 
 export const Label = ({ location }: { location: Location }) => {
   const hourLabelRef = useRef<HTMLDivElement | null>(null);
@@ -27,6 +28,8 @@ export const Label = ({ location }: { location: Location }) => {
   );
   const pose = useStore(selectPose);
 
+  const useCheapAvatar = useStore(selectUseCheapAvatar);
+
   const colors = useMemo(() => {
     const pm = new ParkMiller(28113299 + location.key ** 7);
     pm.float();
@@ -41,26 +44,34 @@ export const Label = ({ location }: { location: Location }) => {
 
   return (
     <Container>
-      <Avatar
-        {...colors}
-        pose={pose}
-        style={{
-          width: "80px",
-          position: "absolute",
-          left: "-18px",
-          top: "-10px",
-        }}
-      />
+      {!useCheapAvatar && (
+        <Avatar
+          {...colors}
+          pose={pose}
+          style={{
+            width: "80px",
+            position: "absolute",
+            left: "-18px",
+            top: "-10px",
+          }}
+        />
+      )}
+
+      {useCheapAvatar && (
+        <CheapAvatar
+          pose={pose}
+          style={{
+            fontSize: "32px",
+            position: "absolute",
+            left: "5px",
+            top: "5px",
+          }}
+        />
+      )}
       <LabelHour ref={hourLabelRef} />
       <LabelFlag>{getFlagEmoji(location.countryCode)}</LabelFlag>
     </Container>
   );
-};
-
-const getPseudoRandom = (x: number) => {
-  const pm = new ParkMiller(x ** 7);
-  for (let k = x % 10; k--; ) pm.float();
-  return pm.float();
 };
 
 export const labelBox = {
