@@ -169,7 +169,7 @@ const Labels = ({
     return () => {
       ReactDOM.unmountComponentAtNode(domContainer);
     };
-  });
+  }, [domContainer]);
 
   return null;
 };
