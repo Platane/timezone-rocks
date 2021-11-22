@@ -28,8 +28,15 @@ export const Label = ({ location }: { location: Location }) => {
   const pose = useStore(selectPose);
 
   const colors = useMemo(() => {
-    const a = getPseudoRandom(location.key) * 120 + 60;
-    return { color: `hsl(${a},60%,45%)`, colorDark: `hsl(${a},55%,38%)` };
+    const pm = new ParkMiller(28113299 + location.key ** 7);
+    pm.float();
+    const h = pm.float() * 130 + 160;
+    const s = pm.float() * 28 + 50;
+
+    return {
+      color: `hsl(${h},${s}%,45%)`,
+      colorDark: `hsl(${h},${s - 5}%,38%)`,
+    };
   }, [location.key]);
 
   return (
