@@ -31,7 +31,7 @@ export const Label = ({ location }: { location: ILocation }) => {
   const useCheapAvatar = useStore(selectUseCheapAvatar);
 
   const colors = useMemo(() => {
-    const pm = new ParkMiller(28113299 + location.key ** 7);
+    const pm = new ParkMiller(pseudoRandomInt(location.key));
     pm.float();
     const h = pm.float() * 130 + 160;
     const s = pm.float() * 28 + 50;
@@ -73,6 +73,13 @@ export const Label = ({ location }: { location: ILocation }) => {
     </Container>
   );
 };
+
+const pseudoRandomInt = (seed: string) =>
+  seed
+    .padStart(8, "u")
+    .split("")
+    .slice(0, 12)
+    .reduce((sum, c, i) => sum + (c.charCodeAt(0) - 48) * 64 ** i, 0);
 
 export const labelBox = {
   min: { x: -26, y: -24 },

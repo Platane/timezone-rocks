@@ -4,13 +4,11 @@ import type { Api, State } from "./store";
 import {
   getLocationByTimezoneAndCountryCode,
   getLocationsByKey,
-  listVersion,
 } from "../../locations";
 import {
   getClientLocaleCountryCode,
   getClientTimezone,
 } from "../../intl-utils";
-import { pack, unpack } from "./pack";
 
 export const init = async (store: UseStore<State & Api>) => {
   store.subscribe((hash) => {
@@ -22,10 +20,7 @@ export const init = async (store: UseStore<State & Api>) => {
     parsedHash = parse(window.location.hash);
   } catch (error) {}
 
-  const locations =
-    listVersion === parsedHash?.listVersion
-      ? await getLocationsByKey(parsedHash.keys)
-      : [];
+  const locations = parsedHash ? await getLocationsByKey(parsedHash.keys) : [];
 
   if (locations.length === 0) {
     const clientLocation = await getLocationByTimezoneAndCountryCode(
@@ -41,21 +36,18 @@ export const init = async (store: UseStore<State & Api>) => {
 
 const selectHash = createSelector(
   (s: State) => s.locations,
-  (locations) => stringify({ locations, listVersion })
+  (locations) => stringify({ locations })
 );
 
 export const stringify = ({
   t,
   locations,
-  listVersion,
 }: {
   t?: number;
-  locations: { key: number }[];
-  listVersion: string;
+  locations: { key: string }[];
 }) => {
   let s = "";
-  if (locations.length)
-    s += listVersion + pack(locations.map(({ key }) => key));
+  if (locations.length) s += locations.map(({ key }) => key).join("-");
 
   if (Number.isFinite(t))
     s += "-" + new Date(t!).toISOString().slice(0, 16) + "z";
@@ -64,15 +56,14 @@ export const stringify = ({
 };
 
 const parse = (hash: string) => {
-  const [lkeys, ...lt] = hash.replace(/^#/, "").split("-");
+  const [lkeys, ...lt] = hash.replace(/^#/, "").split("--");
 
-  const listVersion = lkeys.slice(0, 3);
-  const keys = unpack(lkeys.slice(3));
+  const keys = lkeys.split("-");
 
   try {
     const t = new Date(lt.join("-")).getTime();
-    if (Number.isFinite(t)) return { keys, listVersion, t };
+    if (Number.isFinite(t)) return { keys, t };
   } catch (err) {}
 
-  return { keys, listVersion };
+  return { keys };
 };
