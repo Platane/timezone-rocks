@@ -3,6 +3,7 @@
   "author": {
     "name": "platane"
   },
+  "type": "module",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
@@ -27,13 +28,14 @@
     "@babel/preset-env": "7.16.4",
     "@babel/preset-react": "7.16.0",
     "@babel/preset-typescript": "7.16.0",
-    "@sucrase/jest-plugin": "2.2.0",
     "@linaria/babel-preset": "3.0.0-beta.15",
     "@linaria/core": "3.0.0-beta.15",
+    "@linaria/esbuild": "3.0.0-beta.15",
     "@linaria/react": "3.0.0-beta.15",
     "@linaria/shaker": "3.0.0-beta.15",
     "@linaria/webpack-loader": "3.0.0-beta.16",
     "@principalstudio/html-webpack-inject-preload": "1.2.7",
+    "@sucrase/jest-plugin": "2.2.0",
     "@types/base-64": "1.0.0",
     "@types/copy-webpack-plugin": "8.0.1",
     "@types/jest": "27.0.3",
@@ -56,6 +58,8 @@
     "copy-webpack-plugin": "10.0.0",
     "core-js": "3.19.2",
     "css-loader": "6.5.1",
+    "esbuild": "0.14.1",
+    "esbuild-plugin-inline-worker": "0.1.1",
     "file-loader": "6.2.0",
     "html-inline-css-webpack-plugin": "1.11.1",
     "html-webpack-plugin": "5.5.0",
@@ -81,7 +85,7 @@
     "type": "tsc --noEmit",
     "lint": "prettier -c '**/*.{ts,tsx,js,jsx,json,md,html}' '!**/{build,dist}/**'",
     "dev": "webpack serve",
-    "build": "NODE_ENV=production webpack build",
+    "build": "rm -rf dist ; NODE_ENV=production node --loader ts-node/esm ./scripts/build.ts",
     "test": "jest"
   }
 }
