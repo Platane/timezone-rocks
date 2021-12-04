@@ -3,7 +3,6 @@ import * as esbuild from "esbuild";
 import * as path from "path";
 import * as fs from "fs";
 
-const __dirname = new URL(path.dirname(import.meta.url)).pathname;
 const prod = process.env.NODE_ENV === "production";
 
 const build = async () => {
@@ -31,7 +30,7 @@ const build = async () => {
     },
 
     plugins: [
-      (linaria as any).default({
+      linaria({
         sourceMap: false,
       }) as any,
     ],

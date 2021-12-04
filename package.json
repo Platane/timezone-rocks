@@ -3,7 +3,6 @@
   "author": {
     "name": "platane"
   },
-  "type": "module",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
@@ -82,11 +81,11 @@
     "worker-loader": "3.0.8"
   },
   "scripts": {
-    "generateLocations": "node --loader ts-node/esm src/locations/generate/generate.ts",
+    "generateLocations": "sucrase-node src/locations/generate/generate.ts",
     "type": "tsc --noEmit",
     "lint": "prettier -c '**/*.{ts,tsx,js,jsx,json,md,html}' '!**/{build,dist}/**'",
     "dev": "webpack serve",
-    "build": "rm -rf dist ; NODE_ENV=production node --loader ts-node/esm ./scripts/build.ts",
+    "build": "rm -rf dist ; NODE_ENV=production sucrase-node ./scripts/build.ts",
     "test": "jest"
   }
 }

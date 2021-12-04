@@ -4,3 +4,4 @@ build
 dist
 .env
 .linaria-cache
+src/assets/locations.csv

@@ -5,8 +5,7 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
-    "lib": ["dom", "es2019", "WebWorker"],
-    "module": "ESNext"
+    "lib": ["dom", "es2019", "WebWorker"]
   },
   "exclude": ["node_modules"]
 }
