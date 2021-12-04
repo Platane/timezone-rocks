@@ -66,7 +66,7 @@ const build = async () => {
     <div id="root"></div>
     <script>window.__location_worker_url="${workerFile}";</script>
     ${entryJsFiles
-      .map((src) => `<script src="${src}" defer></script>`)
+      .map((src) => `<script type="module" src="${src}" defer></script>`)
       .join("")}
   </body>
   </html>
