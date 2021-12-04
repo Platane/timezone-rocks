@@ -81,7 +81,7 @@
     "worker-loader": "3.0.8"
   },
   "scripts": {
-    "generateLocations": "ts-node src/locations/generate/generate.ts",
+    "generateLocations": "node --loader ts-node/esm src/locations/generate/generate.ts",
     "type": "tsc --noEmit",
     "lint": "prettier -c '**/*.{ts,tsx,js,jsx,json,md,html}' '!**/{build,dist}/**'",
     "dev": "webpack serve",
