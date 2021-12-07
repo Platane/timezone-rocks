@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { getMatchingLocation } from "../locations";
-import type { Location } from "../locations";
+import type { ILocation } from "../locations";
 
 export const useSearchResults = (query = "") => {
   const [result, setResult] = useState<{
     query: string;
-    locations: Location[];
+    locations: ILocation[];
   }>();
 
   useEffect(() => {

@@ -1,16 +1,16 @@
 import create from "zustand";
 import { devtools } from "zustand/middleware";
-import type { Location } from "../../locations/getLocations";
+import type { ILocation } from "../../locations/getLocations";
 import { init } from "./persist";
 
 export type Api = {
   setT: (t: number) => void;
   setTWindowOrigin: (t: number) => void;
   onEarthReady: () => void;
-  initLocations: (locations: Location[], t: number | undefined) => void;
-  addLocation: (location: Location) => void;
-  removeLocation: (location: Location) => void;
-  selectLocation: (location: Location) => void;
+  initLocations: (locations: ILocation[], t: number | undefined) => void;
+  addLocation: (location: ILocation) => void;
+  removeLocation: (location: ILocation) => void;
+  selectLocation: (location: ILocation) => void;
   focusSearch: () => void;
   blurSearch: () => void;
   startDragDateCursor: () => void;
@@ -24,8 +24,8 @@ export type State = {
   dateCursorDragged: boolean;
   earthReady: boolean;
   tWindow: [number, number];
-  locations: Location[];
-  selectedLocation: [Location, number] | null;
+  locations: ILocation[];
+  selectedLocation: [ILocation, number] | null;
 };
 
 const t = Date.now();

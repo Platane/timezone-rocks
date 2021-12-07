@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useRef } from "react";
-import type { Location } from "../../../locations";
+import type { ILocation } from "../../../locations";
 import { getDate } from "../../../timezone/timezone";
 import { getPoseAtHour } from "../../Avatar/pose";
 import { selectT, selectUseCheapAvatar } from "../../store/selector";
@@ -12,7 +12,7 @@ import ParkMiller from "park-miller";
 import { styled } from "@linaria/react";
 import { CheapAvatar } from "../../CheapAvatar";
 
-export const Label = ({ location }: { location: Location }) => {
+export const Label = ({ location }: { location: ILocation }) => {
   const hourLabelRef = useRef<HTMLDivElement | null>(null);
   const selectHour = useCallback(
     (s) => formatTime(getDate(location.timezone, selectT(s)).hour),

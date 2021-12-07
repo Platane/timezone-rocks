@@ -1,9 +1,9 @@
 import { styled } from "@linaria/react";
 import React from "react";
 import { DateTime } from "luxon";
-import type { Location } from "../../locations";
+import type { ILocation } from "../../locations";
 
-type Props = { location: Location; t: number };
+type Props = { location: ILocation; t: number };
 export const FlyingLabel = () => (
   <Container>
     <span />

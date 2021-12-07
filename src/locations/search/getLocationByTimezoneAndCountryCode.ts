@@ -1,7 +1,7 @@
-import { Location } from "../getLocations";
+import { ILocation } from "../getLocations";
 
 export const getLocationByTimezoneAndCountryCode =
-  (locations: Location[]) => (timezone: string, countryCode: string) => {
+  (locations: ILocation[]) => (timezone: string, countryCode: string) => {
     let bestI = 0;
     let bestN = 0;
     for (let i = 0; i < locations.length; i++) {

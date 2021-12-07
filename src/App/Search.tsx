@@ -7,7 +7,7 @@ import { useStore } from "./store/store";
 import { usePreviousUntilTruthy } from "../hooks/usePreviousUntilTruthy";
 import { useExtendedTruthiness } from "../hooks/useExtendedTruthiness";
 import { useSubscribe } from "./store/useSubscribe";
-import type { Location } from "../locations/getLocations";
+import type { ILocation } from "../locations/getLocations";
 
 export const Search = () => {
   const focused = useStore((s) => s.searchFocused);
@@ -104,7 +104,7 @@ export const Search = () => {
   );
 };
 
-const getEmojiType = (type: Location["type"]) => {
+const getEmojiType = (type: ILocation["type"]) => {
   if (type === "city") return "🏙";
   if (type === "admin") return "🏛";
   if (type === "country") return "🌐";
@@ -129,7 +129,7 @@ const SuggestionContainer = styled.div`
   z-index: 3;
 `;
 
-const SuggestionContent = ({ location }: { location: Location }) => {
+const SuggestionContent = ({ location }: { location: ILocation }) => {
   switch (location.type) {
     case "timezone":
       return (

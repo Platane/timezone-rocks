@@ -1,5 +1,5 @@
 import { createRemote } from "../worker/utils";
-export type { Location } from "./getLocations";
+export type { ILocation as ILocation } from "./getLocations";
 import * as api from "./api";
 
 // @ts-ignore

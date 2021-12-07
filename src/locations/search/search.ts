@@ -1,11 +1,11 @@
 import deburr from "lodash.deburr";
-import { Location } from "../getLocations";
+import { ILocation } from "../getLocations";
 
-export const createSearch = (locations: Location[]) => {
+export const createSearch = (locations: ILocation[]) => {
   const normalizedNames = locations.map((l) => normalize(l.name));
 
   return (query: string) => {
-    const res: Location[] = [];
+    const res: ILocation[] = [];
 
     const q = normalize(query);
 

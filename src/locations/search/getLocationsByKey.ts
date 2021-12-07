@@ -1,10 +1,10 @@
-import { Location } from "../getLocations";
+import { ILocation } from "../getLocations";
 
 export const getLocationsByKey =
-  (locations: Location[]) => (keys: number[]) => {
+  (locations: ILocation[]) => (keys: number[]) => {
     const l = keys
       .map((key) => locations.find((l) => l.key === key))
       .filter(Boolean);
 
-    return l as any as Location[];
+    return l as any as ILocation[];
   };

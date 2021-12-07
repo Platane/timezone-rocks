@@ -15,7 +15,7 @@ const parseLocations = (csv: string) =>
     };
   });
 
-export type Location = ReturnType<typeof parseLocations>[number];
+export type ILocation = ReturnType<typeof parseLocations>[number];
 
 export const getLocations = () =>
   fetch(locationListPath)
