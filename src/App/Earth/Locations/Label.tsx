@@ -6,11 +6,12 @@ import { selectT, selectUseCheapAvatar } from "../../store/selector";
 import { useStore } from "../../store/store";
 import { formatTime } from "../../../intl-utils";
 import { useSubscribe } from "../../store/useSubscribe";
-import { Avatar } from "../../Avatar/Avatar";
+import { Avatar as AnimatedAvatar } from "../../Avatar/Avatar";
 import { getFlagEmoji } from "../../../emojiFlagSequence";
 import ParkMiller from "park-miller";
 import { styled } from "@linaria/react";
 import { CheapAvatar } from "../../CheapAvatar";
+import { useDebouncedValue } from "../../../hooks/useDebouncedValue";
 
 export const Label = ({ location }: { location: ILocation }) => {
   const hourLabelRef = useRef<HTMLDivElement | null>(null);
@@ -22,13 +23,23 @@ export const Label = ({ location }: { location: ILocation }) => {
     if (hourLabelRef.current) hourLabelRef.current.innerText = hour;
   }, selectHour);
 
+  return (
+    <Container>
+      <Avatar location={location} />
+      <LabelHour ref={hourLabelRef} />
+      <LabelFlag>{getFlagEmoji(location.countryCode)}</LabelFlag>
+    </Container>
+  );
+};
+
+const Avatar = ({ location }: { location: ILocation }) => {
   const selectPose = useCallback(
     (s) => getPoseAtHour(getDate(location.timezone, selectT(s)).hour),
     [location.timezone]
   );
-  const pose = useStore(selectPose);
 
-  const useCheapAvatar = useStore(selectUseCheapAvatar);
+  const delay = ((location.key % 4) + 1) * 120;
+  const pose = useDebouncedValue(useStore(selectPose), delay);
 
   const colors = useMemo(() => {
     const pm = new ParkMiller(28113299 + location.key ** 7);
@@ -42,35 +53,30 @@ export const Label = ({ location }: { location: ILocation }) => {
     };
   }, [location.key]);
 
-  return (
-    <Container>
-      {!useCheapAvatar && (
-        <Avatar
-          {...colors}
-          pose={pose}
-          style={{
-            width: "80px",
-            position: "absolute",
-            left: "-18px",
-            top: "-10px",
-          }}
-        />
-      )}
+  if (useStore(selectUseCheapAvatar))
+    return (
+      <CheapAvatar
+        pose={pose}
+        style={{
+          fontSize: "32px",
+          position: "absolute",
+          left: "5px",
+          top: "5px",
+        }}
+      />
+    );
 
-      {useCheapAvatar && (
-        <CheapAvatar
-          pose={pose}
-          style={{
-            fontSize: "32px",
-            position: "absolute",
-            left: "5px",
-            top: "5px",
-          }}
-        />
-      )}
-      <LabelHour ref={hourLabelRef} />
-      <LabelFlag>{getFlagEmoji(location.countryCode)}</LabelFlag>
-    </Container>
+  return (
+    <AnimatedAvatar
+      {...colors}
+      pose={pose}
+      style={{
+        width: "80px",
+        position: "absolute",
+        left: "-18px",
+        top: "-10px",
+      }}
+    />
   );
 };
 
