@@ -29,7 +29,7 @@ const webpackConfiguration: WebpackConfiguration = {
   module: {
     rules: [
       {
-        test: [/\.(bmp|gif|png|jpeg|jpg|svg)$/, /\.(csv)$/, /\.(glb)$/],
+        test: [/\.(bmp|gif|png|jpeg|jpg|svg|csv|glb)$/],
         loader: "file-loader",
         options: { name: "[contenthash:base62].[ext]" },
       },
@@ -57,22 +57,23 @@ const webpackConfiguration: WebpackConfiguration = {
     new HtmlPlugin({
       title: "🌐",
       templateContent: () => {
-        const code = `console.log(require('react-dom/server').renderToStaticMarkup(require('react').createElement(require('./src/Html.tsx').Html)))`;
-        return (
-          `<!DOCTYPE html>` +
-          execSync(
-            [
-              "./node_modules/.bin/babel-node",
-              `--extensions="${[".js", ".jsx", ".ts", ".tsx"].join(",")}"`,
-              `--presets="${[
-                "@babel/preset-react",
-                "@babel/preset-typescript",
-                "@linaria/babel-preset",
-              ].join(",")}"`,
-              `--eval "${code}"`,
-            ].join(" ")
-          ).toString()
-        );
+        const code = `
+          const { renderToStaticMarkup } = require("react-dom/server");
+          const { createElement } = require("react");
+          require("@babel/register")({
+            extensions: [".ts", ".tsx", ".js"],
+            presets: [
+              ["@babel/preset-react", { runtime: "automatic" }],
+              "@babel/preset-typescript",
+              "@linaria/babel-preset",
+              ["@babel/preset-env", { modules: "auto", targets: { node: "current" } }],
+            ],
+          });
+          const { Html } = require("./src/Html.tsx");
+
+          console.log(renderToStaticMarkup(createElement(Html)));
+        `;
+        return `<!DOCTYPE html>` + execSync(`node --eval '${code}'`).toString();
       },
     }),
 

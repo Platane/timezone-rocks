@@ -6,6 +6,7 @@ specifiers:
   '@babel/preset-env': 7.16.4
   '@babel/preset-react': 7.16.0
   '@babel/preset-typescript': 7.16.0
+  '@babel/register': 7.16.0
   '@linaria/babel-preset': 3.0.0-beta.15
   '@linaria/core': 3.0.0-beta.15
   '@linaria/react': 3.0.0-beta.15
@@ -91,6 +92,7 @@ devDependencies:
   '@babel/preset-env': 7.16.4_@babel+core@7.16.0
   '@babel/preset-react': 7.16.0_@babel+core@7.16.0
   '@babel/preset-typescript': 7.16.0_@babel+core@7.16.0
+  '@babel/register': 7.16.0_@babel+core@7.16.0
   '@linaria/babel-preset': 3.0.0-beta.15_@babel+core@7.16.0
   '@linaria/core': 3.0.0-beta.15
   '@linaria/react': 3.0.0-beta.15_react@17.0.2
@@ -1395,8 +1397,8 @@ packages:
       clone-deep: 4.0.1
       find-cache-dir: 2.1.0
       make-dir: 2.1.0
-      pirates: 4.0.1
-      source-map-support: 0.5.20
+      pirates: 4.0.4
+      source-map-support: 0.5.21
     dev: true
 
   /@babel/runtime/7.16.3:
