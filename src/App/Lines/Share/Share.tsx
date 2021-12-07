@@ -7,6 +7,7 @@ import { useExtendedTruthiness } from "../../../hooks/useExtendedTruthiness";
 import { ShareUrl } from "./ShareUrl";
 import { ShareICal } from "./ShareICal";
 import { listVersion } from "../../../locations";
+import { selectLocations } from "../../store/selector";
 
 export const Share = () => {
   const visible = useStore((s) => !s.dateCursorDragged);
@@ -17,7 +18,7 @@ export const Share = () => {
 };
 
 const Inside = ({ visible }: { visible: boolean }) => {
-  const locations = useStore((s) => s.locations);
+  const locations = useStore(selectLocations);
 
   const t = usePreviousUntilTruthy(
     useStore((s) => (s.dateCursorDragged ? null : s.t))

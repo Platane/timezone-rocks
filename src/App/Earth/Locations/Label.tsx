@@ -117,21 +117,16 @@ const Container = styled.div`
 
   pointer-events: none;
   transition: opacity 200ms;
+
+  & > * {
+    @keyframes appear {
+      0% {
+        transform: scale(0);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    animation: appear 200ms ease-out;
+  }
 `;
-
-// const style = {
-//   position: "absolute",
-
-//   left: `${labelBox.min.x}px`,
-//   top: `${labelBox.min.y}px`,
-//   height: `${labelBox.max.y - labelBox.min.y}px`,
-//   width: `${labelBox.max.x - labelBox.min.x}px`,
-
-//   color: "#fff",
-//   fontFamily: "monospace",
-//   fontSize: "0.92em",
-//   textShadow: "0 0 2px rgba(0, 0, 0, 1), 0 0 4px rgba(0, 0, 0, 1)",
-//   //   boxShadow: "0 0 0 1px orange",
-//   pointerEvents: "none",
-//   transition: "opacity 200ms",
-// };

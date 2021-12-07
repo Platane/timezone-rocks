@@ -5,11 +5,10 @@ import * as THREE from "three";
 import { useStore } from "../../store/store";
 import { latLngToWorld } from "./utils";
 import { NodeU, step } from "./physical";
-import type { Location } from "../../../locations";
 import { Label, labelBox } from "./Label";
+import { selectLocations } from "../../store/selector";
 
 export const Locations = () => {
-  const locations = useStore((s) => s.locations);
   const ref = useRef<THREE.Group>();
 
   //
@@ -92,16 +91,18 @@ export const Locations = () => {
     // apply new position to the label
     for (let i = 0; i < domContainer.children.length; i++) {
       const node = nodes[i];
-      const el = domContainer.children[i] as HTMLElement;
+      if (node) {
+        const el = domContainer.children[i] as HTMLElement;
 
-      const { p, z } = node.userData as NodeU;
-      const x = p.x;
-      const y = p.y;
-      el.style.transform = `translate(${x}px, ${y}px)`;
+        const { p, z } = node.userData as NodeU;
+        const x = p.x;
+        const y = p.y;
+        el.style.transform = `translate(${x}px, ${y}px)`;
 
-      const zIndex =
-        z > 0 ? Math.round(z * 998) + 1 : +1001 + Math.round(-z * 998);
-      el.style.zIndex = zIndex + "";
+        const zIndex =
+          z > 0 ? Math.round(z * 998) + 1 : +1001 + Math.round(-z * 998);
+        el.style.zIndex = zIndex + "";
+      }
     }
 
     // apply new position of the dashed line
@@ -126,7 +127,7 @@ export const Locations = () => {
   return (
     <>
       <group ref={ref}>
-        {locations.map((location) => (
+        {useStore(selectLocations).map((location) => (
           <group key={location.key} position={latLngToWorld(location)}>
             <mesh>
               <sphereBufferGeometry args={[0.008, 8, 8]} />
@@ -143,27 +144,14 @@ export const Locations = () => {
           </group>
         ))}
       </group>
-      <Labels locations={locations} domContainer={domContainer} />
+      <LabelContainer domContainer={domContainer} />
     </>
   );
 };
 
-const Labels = ({
-  locations,
-  domContainer,
-}: {
-  locations: Location[];
-  domContainer: HTMLDivElement;
-}) => {
+const LabelContainer = ({ domContainer }: { domContainer: HTMLDivElement }) => {
   React.useLayoutEffect(() => {
-    ReactDOM.render(
-      <>
-        {locations.map((location) => (
-          <Label key={location.key} location={location} />
-        ))}
-      </>,
-      domContainer
-    );
+    ReactDOM.render(<Labels />, domContainer);
     return () => {
       ReactDOM.unmountComponentAtNode(domContainer);
     };
@@ -171,6 +159,14 @@ const Labels = ({
 
   return null;
 };
+
+const Labels = () => (
+  <>
+    {useStore(selectLocations).map((location) => (
+      <Label key={location.key} location={location} />
+    ))}
+  </>
+);
 
 const sphereScreenSpace = new THREE.Sphere();
 const a = new THREE.Vector3();

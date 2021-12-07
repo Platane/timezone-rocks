@@ -1,7 +1,7 @@
 import { styled } from "@linaria/react";
 import React, { useCallback, useMemo, useRef } from "react";
 import { useStore } from "../store/store";
-import { selectT, selectTWindow } from "../store/selector";
+import { selectLocations, selectT, selectTWindow } from "../store/selector";
 import { useSubscribe } from "../store/useSubscribe";
 import { getBlocks } from "../../timezone/interval";
 import { LocationLabel, update as updateLocationLabel } from "./LocationLabel";
@@ -11,7 +11,7 @@ import { DateSlider } from "./DateSlider";
 import { accentColor } from "../theme";
 
 export const Lines = () => {
-  const locations = useStore((s) => s.locations);
+  const locations = useStore(selectLocations);
   const tWindow = useStore(selectTWindow);
   const selectLocation = useStore((s) => s.selectLocation);
   const width = useWidth();
