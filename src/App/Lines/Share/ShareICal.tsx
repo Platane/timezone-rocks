@@ -33,6 +33,7 @@ export const ShareICal = ({
 
   return (
     <ButtonICal
+      tabIndex={-1}
       href={dataUri}
       download={"invite.ics"}
       target="_self"

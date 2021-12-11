@@ -38,7 +38,7 @@ const Avatar = ({ location }: { location: ILocation }) => {
     [location.timezone]
   );
 
-  const delay = ((location.key % 4) + 1) * 120;
+  const delay = ((location.key % 3) + 0.5) * 90;
   const pose = useDebouncedValue(useStore(selectPose), delay);
 
   const colors = useMemo(() => {

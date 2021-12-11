@@ -24,9 +24,11 @@ export const LocationLabel = ({ location }: Props) => {
       }
     >
       <Name>{location.name}</Name>
-      {location.type !== "timezone" && (
-        <Flag>{getFlagEmoji(location.countryCode)}</Flag>
-      )}
+
+      <Flag>
+        {location.type !== "timezone" ? getFlagEmoji(location.countryCode) : ""}
+      </Flag>
+
       <Offset></Offset>
 
       <RemoveButton

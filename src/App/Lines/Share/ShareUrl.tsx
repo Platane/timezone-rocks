@@ -21,6 +21,7 @@ export const ShareUrl = ({
   return (
     <>
       <ButtonUrl
+        tabIndex={-1}
         href={url}
         target="_blank"
         title={share ? "share" : "share link"}
