@@ -66,7 +66,7 @@ export const Locations = () => {
     }
 
     // get disk position in screen space
-    getSphereScreenSpace(camera, size, sphereScreenSpace);
+    getSphereScreenSpace(camera, ref.current!, size, sphereScreenSpace);
 
     const w = domContainer.parentElement!.parentElement!.clientWidth;
     worldBox.min.x = -(w - size.width) / 2;
@@ -115,7 +115,7 @@ export const Locations = () => {
         (anchor as any).z - 0.02
       );
       a.unproject(camera);
-      a.sub(node.position);
+      node.worldToLocal(a);
 
       const line = node.children[1] as THREE.LineSegments;
 
@@ -130,7 +130,7 @@ export const Locations = () => {
         {useStore(selectLocations).map((location) => (
           <group key={location.key} position={latLngToWorld(location)}>
             <mesh>
-              <sphereBufferGeometry args={[0.008, 8, 8]} />
+              <sphereBufferGeometry args={[0.008, 6, 6]} />
               <meshBasicMaterial color={"#000"} />
             </mesh>
 
@@ -175,39 +175,47 @@ const worldBox = new THREE.Box2();
 const nodeBox = new THREE.Box2().copy(labelBox as any);
 
 const getSphereScreenSpace = (() => {
-  const origin = new THREE.Vector3();
-  const z = new THREE.Vector3();
-  const u = new THREE.Vector3();
   const e = new THREE.Vector3();
-
-  const n = 13;
+  const n = 45;
 
   return (
     camera: THREE.Camera,
+    group: THREE.Object3D,
     size: { width: number; height: number },
     target: THREE.Sphere
   ) => {
-    origin.set(0, 0, 0).project(camera);
+    // center
+    group.getWorldPosition(target.center);
+    toScreenSpace(target.center, camera, size);
 
-    target.center.set(
-      ((origin.x + 1) / 2) * size.width,
-      ((1 - origin.y) / 2) * size.height,
-      0
-    );
-
-    camera.getWorldDirection(z);
-    z.negate();
-    u.crossVectors(camera.up, z);
-    u.normalize();
-
+    // radius
     target.radius = 0;
     for (let k = n; k--; ) {
-      e.lerpVectors(u, z, k / (n - 1)).normalize();
+      const u = k / n;
 
-      const { x, y } = e.project(camera).sub(origin);
-      const le = Math.hypot(size.width * x, size.height * y);
+      const phi = Math.PI * u;
+      const theta = Math.PI * 2 * u * 8.89;
+      const radius = 1;
 
-      target.radius = Math.max(target.radius, le / 2);
+      e.setFromSphericalCoords(radius, phi, theta);
+      group.localToWorld(e);
+      toScreenSpace(e, camera, size);
+
+      target.radius = Math.max(
+        target.radius,
+        Math.hypot(e.x - target.center.x, e.y - target.center.y)
+      );
     }
   };
 })();
+
+const toScreenSpace = (
+  pWorld: THREE.Vector3,
+  camera: THREE.Camera,
+  { width, height }: { width: number; height: number }
+) => {
+  pWorld.project(camera);
+
+  pWorld.x = ((pWorld.x + 1) / 2) * width;
+  pWorld.y = ((1 - pWorld.y) / 2) * height;
+};
