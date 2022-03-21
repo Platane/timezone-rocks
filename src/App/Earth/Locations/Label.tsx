@@ -39,19 +39,10 @@ const Avatar = ({ location }: { location: ILocation }) => {
   );
 
   const delay = ((location.key % 3) + 0.5) * 90;
+
   const pose = useDebouncedValue(useStore(selectPose), delay);
 
-  const colors = useMemo(() => {
-    const pm = new ParkMiller(28113299 + location.key ** 7);
-    pm.float();
-    const h = pm.float() * 130 + 160;
-    const s = pm.float() * 28 + 50;
-
-    return {
-      color: `hsl(${h},${s}%,45%)`,
-      colorDark: `hsl(${h},${s - 5}%,38%)`,
-    };
-  }, [location.key]);
+  const colors = useMemo(() => getColors(location.key ** 7), [location.key]);
 
   if (useStore(selectUseCheapAvatar))
     return (
@@ -78,6 +69,18 @@ const Avatar = ({ location }: { location: ILocation }) => {
       }}
     />
   );
+};
+
+const getColors = (seed: number) => {
+  const pm = new ParkMiller(28113299 + seed ** 7);
+  pm.float();
+  const h = pm.float() * 130 + 160;
+  const s = pm.float() * 28 + 50;
+
+  return {
+    color: `hsl(${h},${s}%,45%)`,
+    colorDark: `hsl(${h},${s - 5}%,38%)`,
+  };
 };
 
 export const labelBox = {
