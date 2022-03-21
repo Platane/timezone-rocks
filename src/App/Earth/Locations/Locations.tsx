@@ -7,6 +7,7 @@ import { latLngToWorld } from "./utils";
 import { NodeU, step } from "./physical";
 import { Label, labelBox } from "./Label";
 import { selectLocations } from "../../store/selector";
+import { normalize } from "path";
 
 export const Locations = () => {
   const ref = useRef<THREE.Group>();
@@ -30,12 +31,15 @@ export const Locations = () => {
   //
   const refDtRest = useRef(0);
   useFrame(({ camera, size }, dt) => {
-    if (!ref.current) return;
+    const group = ref.current;
+    if (!group) return;
 
     camera.updateMatrixWorld();
 
+    group.getWorldPosition(origin);
+
     // set the anchor point
-    const nodes = ref.current.children;
+    const nodes = group.children;
     for (const node of nodes) {
       node.getWorldPosition(a);
       a.project(camera);
@@ -58,7 +62,7 @@ export const Locations = () => {
       (u.anchor as any).z = a.z;
 
       {
-        node.getWorldPosition(a).normalize();
+        node.getWorldPosition(a).sub(origin).normalize();
         b.subVectors(a, camera.position).normalize();
 
         node.userData.z = a.dot(b);
@@ -66,7 +70,7 @@ export const Locations = () => {
     }
 
     // get disk position in screen space
-    getSphereScreenSpace(camera, ref.current!, size, sphereScreenSpace);
+    getSphereScreenSpace(camera, group, size, sphereScreenSpace);
 
     const w = domContainer.parentElement!.parentElement!.clientWidth;
     worldBox.min.x = -(w - size.width) / 2;
@@ -169,6 +173,7 @@ const Labels = () => (
 );
 
 const sphereScreenSpace = new THREE.Sphere();
+const origin = new THREE.Vector3();
 const a = new THREE.Vector3();
 const b = new THREE.Vector3();
 const worldBox = new THREE.Box2();
