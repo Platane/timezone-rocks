@@ -3,10 +3,10 @@ import { DateTime } from "luxon";
 /**
  *
  * @param timezone
- * @param timestamp timestamp utc
+ * @param timestamp unix timestamp (in ms)
  */
 export const getDate = (timezone: string, timestamp: number) => {
-  const d = DateTime.fromMillis(timestamp).setZone(timezone);
+  const d = DateTime.fromMillis(timestamp, { zone: timezone });
 
   return {
     hour: d.hour + d.minute / 60 + d.second / 3600,
@@ -20,7 +20,7 @@ export const getDate = (timezone: string, timestamp: number) => {
  * return the offset for the time zone ad the given date
  *
  * @param timezone
- * @param timestamp in ms utc
+ * @param timestamp unix timestamp (in ms)
  * @returns offset in minute
  */
 export const getTimezoneOffset = (timezone: string, timestamp: number) => {
