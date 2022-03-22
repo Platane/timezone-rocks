@@ -133,7 +133,11 @@ const webpackConfiguration: WebpackConfiguration = {
       : []),
   ],
 
-  ...({ devServer: { https: true } } as any),
+  ...{
+    devServer: {
+      server: "https",
+    },
+  },
 };
 
 export default webpackConfiguration;
