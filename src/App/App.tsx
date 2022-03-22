@@ -7,8 +7,8 @@ import { Search } from "./Search";
 import { useStore } from "./store/store";
 import { DatePicker } from "./DatePicker";
 
-const LazyEarth = loadable(() => import("./Earth/Earth"));
-LazyEarth.preload();
+const LazyEarthScene = loadable(() => import("./Earth/Scene"));
+LazyEarthScene.preload();
 
 export const App = () => {
   const locationStoreReady = useStore((s) => s.locationStoreReady);
@@ -19,7 +19,7 @@ export const App = () => {
     <>
       <TopContainer>
         <EarthContainer>
-          <LazyEarth />
+          <LazyEarthScene />
         </EarthContainer>
       </TopContainer>
 
