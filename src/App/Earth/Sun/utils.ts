@@ -12,21 +12,23 @@ const year = day * 365.25;
  */
 export const getSunDirection = (timestamp: number, target: THREE.Vector3) => {
   const rotationDuration = (23 * 60 * 60 + 56 * 60 + 4) * 1000;
-  const rotationOffset = 0.98;
+  const rotationOffset = 0.98 + 0.25;
   const rotationAngle =
     ((timestamp % rotationDuration) / rotationDuration + rotationOffset) *
     Math.PI *
     2;
 
   const revolutionDuration = 365.25 * 24 * 60 * 60 * 1000;
+  const revolutionOffset = 0;
   const revolutionAngle =
-    ((timestamp % revolutionDuration) / revolutionDuration) * Math.PI * 2 +
-    Math.PI * 2;
+    ((timestamp % revolutionDuration) / revolutionDuration + revolutionOffset) *
+    Math.PI *
+    2;
 
   const earthAxisAngle = (23.5 / 180) * Math.PI;
 
   r.position.set(Math.cos(revolutionAngle), 0, Math.sin(revolutionAngle));
-  r.position.set(0, 0, 1);
+  // r.position.set(0, 0, 1);
   o.quaternion.setFromAxisAngle(y, rotationAngle);
 
   target.set(0, 0, 0);
