@@ -10,21 +10,38 @@ import {
   getClientLocaleCountryCode,
   getClientTimezone,
 } from "../../intl-utils";
-import { pack, unpack } from "./pack";
+import { selectLocations, selectT } from "./selector";
+import { parse, stringify } from "./stringify-utils";
 
 export const init = async (store: UseStore<State & Api>) => {
-  store.subscribe((hash) => {
-    window.location.hash = hash;
-  }, selectHash);
+  {
+    let timeout: NodeJS.Timeout;
+    store.subscribe(({ locations, t }) => {
+      clearTimeout(timeout);
 
-  let parsedHash;
+      if (
+        initialParsedHash &&
+        initialParsedHash.listVersion === listVersion &&
+        initialParsedHash.keys.length === locations.length &&
+        initialParsedHash.keys.every((key, i) => key === locations[i].key) &&
+        t === initialParsedHash.t
+      )
+        return;
+
+      timeout = setTimeout(() => {
+        window.location.hash = stringify({ locations, listVersion });
+      }, 100);
+    }, selectHashPrimitive);
+  }
+
+  let initialParsedHash: ReturnType<typeof parse> | undefined;
   try {
-    parsedHash = parse(window.location.hash);
+    initialParsedHash = parse(window.location.hash);
   } catch (error) {}
 
   const locations =
-    listVersion === parsedHash?.listVersion
-      ? await getLocationsByKey(parsedHash.keys)
+    listVersion === initialParsedHash?.listVersion
+      ? await getLocationsByKey(initialParsedHash.keys)
       : [];
 
   if (locations.length === 0) {
@@ -36,43 +53,11 @@ export const init = async (store: UseStore<State & Api>) => {
     if (clientLocation) locations.push(clientLocation);
   }
 
-  store.getState().initLocations(locations, parsedHash?.t);
+  store.getState().initLocations(locations, initialParsedHash?.t);
 };
 
-const selectHash = createSelector(
-  (s: State) => s.locations,
-  (locations) => stringify({ locations, listVersion })
+const selectHashPrimitive = createSelector(
+  selectLocations,
+  selectT,
+  (locations, t) => ({ locations, listVersion, t })
 );
-
-export const stringify = ({
-  t,
-  locations,
-  listVersion,
-}: {
-  t?: number;
-  locations: { key: number }[];
-  listVersion: string;
-}) => {
-  let s = "";
-  if (locations.length)
-    s += listVersion + pack(locations.map(({ key }) => key));
-
-  if (Number.isFinite(t))
-    s += "-" + new Date(t!).toISOString().slice(0, 16) + "z";
-
-  return s;
-};
-
-const parse = (hash: string) => {
-  const [lkeys, ...lt] = hash.replace(/^#/, "").split("-");
-
-  const listVersion = lkeys.slice(0, 3);
-  const keys = unpack(lkeys.slice(3));
-
-  try {
-    const t = new Date(lt.join("-")).getTime();
-    if (Number.isFinite(t)) return { keys, listVersion, t };
-  } catch (err) {}
-
-  return { keys, listVersion };
-};

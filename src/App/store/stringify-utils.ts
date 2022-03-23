@@ -23,14 +23,14 @@ export const stringify = ({
         suppressSeconds: true,
         format: "basic",
       });
-    s += "-" + dateLiteral;
+    s += "__" + dateLiteral;
   }
 
   return s;
 };
 
 export const parse = (hash: string) => {
-  const [lkeys, dateLiteral] = hash.replace(/^#/, "").split("-");
+  const [lkeys, dateLiteral] = hash.replace(/^#/, "").split("__");
 
   const listVersion = lkeys.slice(0, 3);
   const keys = unpack(lkeys.slice(3));
