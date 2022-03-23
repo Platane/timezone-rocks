@@ -1,13 +1,13 @@
 import React, { useMemo } from "react";
 import { styled } from "@linaria/react";
 import { useStore } from "../../store/store";
-import { stringify } from "../../store/persist";
 import { usePreviousUntilTruthy } from "../../../hooks/usePreviousUntilTruthy";
 import { useExtendedTruthiness } from "../../../hooks/useExtendedTruthiness";
 import { ShareUrl } from "./ShareUrl";
 import { ShareICal } from "./ShareICal";
 import { listVersion } from "../../../locations";
 import { selectLocations } from "../../store/selector";
+import { stringify } from "../../store/stringify-utils";
 
 export const Share = () => {
   const visible = useStore((s) => !s.dateCursorDragged);

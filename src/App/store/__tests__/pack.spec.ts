@@ -1,4 +1,4 @@
-import { pack, unpack } from "../pack";
+import { pack, unpack } from "../pack-utils";
 
 it("pack", () => {
   const value = [1, 2819, 32, 3410, 918, 123, 0, 12];

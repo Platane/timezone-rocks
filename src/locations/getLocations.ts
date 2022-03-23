@@ -1,7 +1,7 @@
 // @ts-ignore
 import locationListPath from "../assets/locations.csv";
 
-const parseLocations = (csv: string) =>
+export const parseLocations = (csv: string) =>
   csv.split("\n").map((s, i) => {
     const [type, name, countryCode, lo, la, timezone] = s.split(",");
     return {
