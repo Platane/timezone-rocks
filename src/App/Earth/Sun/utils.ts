@@ -1,50 +1,50 @@
 import * as THREE from "three";
 
-/**
- * get the earth self axis rotation
- */
-const getH = (t: number) => (t % day) / day;
-
-/**
- * get the earth rotation around the sun
- */
-const getR = (t: number) => {
-  // set to the winter solstice
-  d.setTime(t);
-  d.setUTCMonth(11);
-  d.setUTCDate(21);
-  d.setUTCHours(0);
-  d.setUTCMinutes(0);
-  d.setUTCSeconds(0);
-
-  // distance to the winter solstice
-  return mod((t - d.getTime()) / year, 1);
-};
-
-const mod = (x: number, n: number) => ((x % n) + n) % n;
-
-const d = new Date();
-
 const hour = 1000 * 60 * 60;
 const day = hour * 24;
 const year = day * 365.25;
 
 /**
  * get the sun direction from the earth point of view
+ * @param timestamp unix timestamp (in ms)
+ *
  * ⚠ likely not astronomically accurate
  */
-export const getSunDirection = (t: number, target: THREE.Vector3) => {
-  // r=0 at the winter solstice
-  const r = getR(t);
+export const getSunDirection = (timestamp: number, target: THREE.Vector3) => {
+  const rotationDuration = (23 * 60 * 60 + 56 * 60 + 4) * 1000;
+  const rotationOffset = 0.98;
+  const rotationAngle =
+    ((timestamp % rotationDuration) / rotationDuration + rotationOffset) *
+    Math.PI *
+    2;
 
-  const h = getH(t);
+  const revolutionDuration = 365.25 * 24 * 60 * 60 * 1000;
+  const revolutionAngle =
+    ((timestamp % revolutionDuration) / revolutionDuration) * Math.PI * 2 +
+    Math.PI * 2;
 
-  const earthAxisAngle = (-23.5 / 180) * Math.PI;
+  const earthAxisAngle = (23.5 / 180) * Math.PI;
 
-  target.set(0, 0, 1);
-  target.applyAxisAngle(x, Math.sin((r - 0.25) * Math.PI * 2) * earthAxisAngle);
-  target.applyAxisAngle(y, (0.5 + h) * 2 * Math.PI);
+  r.position.set(Math.cos(revolutionAngle), 0, Math.sin(revolutionAngle));
+  r.position.set(0, 0, 1);
+  o.quaternion.setFromAxisAngle(y, rotationAngle);
+
+  target.set(0, 0, 0);
+
+  o.updateWorldMatrix(true, true);
+  o.worldToLocal(target);
+
+  // o.updateWorldMatrix(true, true);
+  // o.matrixWorld.invert();
+
+  // target.set(0, 0, 1);
+  // target.applyAxisAngle(y, (0.5 - h) * 2 * Math.PI);
+  // target.applyAxisAngle(x, Math.sin((r - 0.25) * Math.PI * 2) * earthAxisAngle);
 };
+
+const r = new THREE.Object3D();
+const o = new THREE.Object3D();
+r.add(o);
 
 const y = new THREE.Vector3(0, 1, 0);
 const x = new THREE.Vector3(1, 0, 0);
