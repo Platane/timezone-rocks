@@ -8,10 +8,7 @@ const insert = (key: string, t: Tree) => {
   const c = key[0];
 
   if (!c) {
-    if (t[end] === end) {
-      debugger;
-      throw new Error("duplicated key");
-    }
+    if (t[end] === end) throw new Error("duplicated key");
 
     t[end] = end;
     return;
