@@ -81,21 +81,19 @@ export const Controls = () => {
         state.current.idleAnimationDelay = 1;
       }
     } else if (!state.current.orbitControlsActive) {
-      state.current.idleAnimationDelay -= dt;
-      const k = MathUtils.clamp(
-        -state.current.idleAnimationDelay * 0.3 + 0.3,
-        0,
-        1
-      );
-
-      const V = 0.05 * k;
-
-      s.setFromVector3(camera.position);
-      s.theta -= V * dt;
-      if (s.phi < Math.PI / 3) s.phi += V * 0.4 * dt;
-      if (s.phi > Math.PI - Math.PI / 3) s.phi -= V * 0.4 * dt;
-      camera.position.setFromSpherical(s);
-      camera.lookAt(0, 0, 0);
+      // state.current.idleAnimationDelay -= dt;
+      // const k = MathUtils.clamp(
+      //   -state.current.idleAnimationDelay * 0.3 + 0.3,
+      //   0,
+      //   1
+      // );
+      // const V = 0.05 * k;
+      // s.setFromVector3(camera.position);
+      // s.theta -= V * dt;
+      // if (s.phi < Math.PI / 3) s.phi += V * 0.4 * dt;
+      // if (s.phi > Math.PI - Math.PI / 3) s.phi -= V * 0.4 * dt;
+      // camera.position.setFromSpherical(s);
+      // camera.lookAt(0, 0, 0);
     }
   });
 
@@ -105,9 +103,9 @@ export const Controls = () => {
       minPolarAngle={Math.PI / 6}
       maxPolarAngle={Math.PI - Math.PI / 6}
       minDistance={1.8}
-      maxDistance={4}
+      maxDistance={40}
       enableZoom={true}
-      enablePan={false}
+      enablePan={!false}
     />
   );
 };
