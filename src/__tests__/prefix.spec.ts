@@ -1,4 +1,4 @@
-import { generateUniquePrefixes } from "../locations/prefix.utils";
+import { generateUniquePrefixes } from "../locations/prefix-utils";
 
 it("should generate unique prefix", () => {
   expect(generateUniquePrefixes(["aac", "aab0", "a", "a0"])).toEqual([
