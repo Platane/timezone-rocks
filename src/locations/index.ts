@@ -1,28 +1,23 @@
-import { createRemote } from "../worker/utils";
-export type { ILocation as ILocation } from "./getLocations";
-import * as api from "./api";
+import { API as WorkerAPI } from "./worker";
+import { createRpcClient } from "./worker-utils";
+
+export type { ILocation } from "./getLocations";
 
 // @ts-ignore
 import locationListPath from "../assets/locations.csv";
-
-type Api = typeof api;
-
-// @ts-ignore
-import Worker from "worker-loader!./worker.ts";
-
-const worker = new Worker();
-
 export const listVersion = (locationListPath as string).slice(-7, -4);
 
-export const getLocationsByKey: Api["getLocationsByKey"] = createRemote(
-  worker,
-  "getLocationsByKey"
+const worker = new Worker(
+  new URL(
+    "./worker.ts",
+    // @ts-ignore
+    import.meta.url
+  )
 );
 
-export const getMatchingLocation: Api["getMatchingLocation"] = createRemote(
-  worker,
-  "getMatchingLocation"
-);
+const api = createRpcClient<WorkerAPI>(worker);
 
-export const getLocationByTimezoneAndCountryCode: Api["getLocationByTimezoneAndCountryCode"] =
-  createRemote(worker, "getLocationByTimezoneAndCountryCode");
+export const getLocationsByKey = api.getLocationsByKey;
+export const getMatchingLocation = api.getMatchingLocation;
+export const getLocationByTimezoneAndCountryCode =
+  api.getLocationByTimezoneAndCountryCode;
