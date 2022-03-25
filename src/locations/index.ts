@@ -1,6 +1,13 @@
 import { API as WorkerAPI } from "./worker";
 import { createRpcClient } from "./worker-utils";
 
+import init, { greet, init_locations } from "../../crates/search-location/pkg";
+
+init().then(() => {
+  greet("WebAssembly");
+  init_locations(locationListPath);
+});
+
 export type { ILocation } from "./getLocations";
 
 // @ts-ignore
