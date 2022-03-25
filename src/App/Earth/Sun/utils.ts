@@ -25,8 +25,6 @@ export const getSunDirection = (timestamp: number, target: THREE.Vector3) => {
     Math.PI *
     2;
 
-  const earthAxisAngle = (23.5 / 180) * Math.PI;
-
   r.position.set(Math.cos(revolutionAngle), 0, Math.sin(revolutionAngle));
   // r.position.set(0, 0, 1);
   o.quaternion.setFromAxisAngle(y, rotationAngle);
@@ -44,9 +42,13 @@ export const getSunDirection = (timestamp: number, target: THREE.Vector3) => {
   // target.applyAxisAngle(x, Math.sin((r - 0.25) * Math.PI * 2) * earthAxisAngle);
 };
 
-const r = new THREE.Object3D();
-const o = new THREE.Object3D();
-r.add(o);
-
 const y = new THREE.Vector3(0, 1, 0);
-const x = new THREE.Vector3(1, 0, 0);
+
+const r = new THREE.Object3D();
+const h = new THREE.Object3D();
+const o = new THREE.Object3D();
+r.add(h);
+h.add(o);
+const earthAxisAngle = (23.5 / 180) * Math.PI;
+r.quaternion.setFromEuler(new THREE.Euler(earthAxisAngle, 0, 0));
+h.quaternion.setFromAxisAngle(y, Math.PI);
