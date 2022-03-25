@@ -62,7 +62,7 @@ const Avatar = ({ location }: { location: ILocation }) => {
       {...colors}
       pose={pose}
       style={{
-        width: "80px",
+        width: "90px",
         position: "absolute",
         left: "-18px",
         top: "-10px",
@@ -72,20 +72,23 @@ const Avatar = ({ location }: { location: ILocation }) => {
 };
 
 const getColors = (seed: number) => {
-  const pm = new ParkMiller(28113299 + seed ** 7);
+  const pm = new ParkMiller(28113299 + seed ** 7 + seed);
+  pm.float();
+  pm.float();
+  pm.float();
   pm.float();
   const h = pm.float() * 130 + 160;
   const s = pm.float() * 28 + 50;
 
   return {
-    color: `hsl(${h},${s}%,45%)`,
-    colorDark: `hsl(${h},${s - 5}%,38%)`,
+    color: `hsl(${h},${s}%,56%)`,
+    colorDark: `hsl(${h - 3},${s - 9}%,38%)`,
   };
 };
 
 export const labelBox = {
-  min: { x: -26, y: -24 },
-  max: { x: 64, y: 28 },
+  min: { x: -30, y: -24 },
+  max: { x: 74, y: 32 },
 };
 
 const LabelHour = styled.div`
@@ -96,16 +99,16 @@ const LabelHour = styled.div`
   font-size: 0.92em;
   text-shadow: 0 0 2px rgba(0, 0, 0, 1), 0 0 4px rgba(0, 0, 0, 1);
 
-  left: 56px;
+  right: 6px;
   top: 10px;
 `;
 const LabelFlag = styled.div`
   position: absolute;
 
-  font-size: 20px;
+  font-size: 22px;
   /* text-shadow: 0 0 2px rgba(0, 0, 0, 1), 0 0 4px rgba(0, 0, 0, 1); */
 
-  left: 48px;
+  right: 14px;
   bottom: 0px;
 `;
 
@@ -117,11 +120,7 @@ const Container = styled.div`
   height: ${labelBox.max.y - labelBox.min.y}px;
   width: ${labelBox.max.x - labelBox.min.x}px;
 
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-
+  /* opacity: 0.2; */
   /* box-shadow: 0 0 0 1px orange; */
 
   pointer-events: none;

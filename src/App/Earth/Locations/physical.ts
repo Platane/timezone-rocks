@@ -14,7 +14,7 @@ export type NodeU = {
 const FRICTION = 60;
 const TENSION = 900;
 const DISK_OUT = 800;
-const NODE_PUSH = 24000;
+const NODE_PUSH = 30000;
 const WALL_PUSH = 80000;
 
 const pre = document.createElement("pre");
