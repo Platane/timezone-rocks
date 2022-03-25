@@ -7,7 +7,6 @@ import { latLngToWorld } from "./utils";
 import { NodeU, step } from "./physical";
 import { Label, labelBox } from "./Label";
 import { selectLocations } from "../../store/selector";
-import { normalize } from "path";
 
 export const Locations = () => {
   const ref = useRef<THREE.Group>();
