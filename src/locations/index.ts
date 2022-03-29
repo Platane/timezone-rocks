@@ -8,7 +8,6 @@ import init, {
 
 init().then(() => {
   init_locations(locationListPath);
-  console.log(get_location());
 });
 
 export type { ILocation } from "./getLocations";
