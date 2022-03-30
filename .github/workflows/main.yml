@@ -19,6 +19,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
 
       - run: cargo install wasm-pack
 
