@@ -76,6 +76,7 @@
   },
   "scripts": {
     "build-wasm": "( cd crates/search-location ; wasm-pack build --target web )",
+    "build-wasm:production": "( cd crates/search-location ; wasm-pack build --target web --release )",
     "generateLocations": "sucrase-node src/locations/generate/generate.ts",
     "type": "tsc --noEmit",
     "lint": "prettier -c '**/*.{ts,tsx,js,jsx,json,md,html}' '!**/{build,dist,crates}/**'",

@@ -33,7 +33,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       - run: pnpm generateLocations
-      - run: pnpm build-wasm
+      - run: pnpm build-wasm:production
       - run: pnpm build
 
       - name: deploy preview
