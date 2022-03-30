@@ -16,6 +16,15 @@ jobs:
         with:
           toolchain: stable
 
+      - name: Cache cargo
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            ~/.cargo/git
+          key: $cargo-cache-${{ hashFiles('crates/**/Cargo.lock') }}
+
       - uses: actions/setup-node@v2
         with:
           node-version: 17
