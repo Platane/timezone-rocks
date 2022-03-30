@@ -18,7 +18,12 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      - uses: actions-rs/toolchain@v1
+
+      - run: cargo install wasm-pack
+
       - run: pnpm generateLocations
+      - run: pnpm build-wasm
       - run: pnpm build
 
       - name: deploy preview
