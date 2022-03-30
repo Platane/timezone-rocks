@@ -11,18 +11,17 @@ jobs:
       - uses: pnpm/action-setup@v2
         with:
           version: 6
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+
       - uses: actions/setup-node@v2
         with:
           node-version: 17
           cache: pnpm
 
       - run: pnpm install --frozen-lockfile
-
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-
-      - run: cargo install wasm-pack
 
       - run: pnpm generateLocations
       - run: pnpm build-wasm
