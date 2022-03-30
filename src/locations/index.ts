@@ -1,13 +1,13 @@
 import { API as WorkerAPI } from "./worker";
 import { createRpcClient } from "./worker-utils";
 
-import init, {
-  get_location,
-  init_locations,
-} from "../../crates/search-location/pkg";
+import init, { Searcher } from "../../crates/search-location/pkg";
 
-init().then(() => {
-  init_locations(locationListPath);
+init().then(async () => {
+  const searcher = await Searcher.create(locationListPath);
+
+  console.log(searcher.search("foo"));
+  console.log(searcher.get_all_locations());
 });
 
 export type { ILocation } from "./getLocations";

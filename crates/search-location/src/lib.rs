@@ -1,4 +1,3 @@
-use anyhow::Result;
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 
@@ -16,7 +15,6 @@ pub enum LocationKind {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-#[wasm_bindgen]
 pub struct Location {
     name: String,
     kind: LocationKind,
@@ -27,20 +25,13 @@ pub struct Location {
 }
 
 #[wasm_bindgen]
-pub fn get_location() -> JsValue {
-    let l = Location {
-        latitude: 12.0,
-        longitude: 56.0,
-        name: String::from("Hello, world"),
-        countryCode: String::from("LU"),
-        timezone: String::from("xr"),
-        kind: LocationKind::City,
-    };
+pub async fn get_all_locations(url: String) -> Result<JsValue, JsValue> {
+    let list = get_locations(&url).await.unwrap();
 
-    JsValue::from_serde(&l).unwrap()
+    Ok(JsValue::from_serde(&list).unwrap())
 }
 
-async fn get_locations(url: &str) -> Result<Vec<Location>> {
+async fn get_locations(url: &str) -> Result<Vec<Location>, anyhow::Error> {
     let res = reqwest::get(url).await?;
     let body = res.text().await?;
 
@@ -48,7 +39,7 @@ async fn get_locations(url: &str) -> Result<Vec<Location>> {
         .has_headers(false)
         .from_reader(body.as_bytes());
 
-    fn parse_record(r: csv::StringRecord) -> Result<Location> {
+    fn parse_record(r: csv::StringRecord) -> Result<Location, anyhow::Error> {
         let kind_literal = &r[0];
         let kind = match kind_literal {
             "city" => LocationKind::City,
@@ -80,10 +71,23 @@ async fn get_locations(url: &str) -> Result<Vec<Location>> {
 }
 
 #[wasm_bindgen]
-pub async fn init_locations() {
-    let url = "https://localhost:8080/4YoP5z3a3W0xhYgbqCZBkb.csv";
+pub struct Searcher {
+    locations: Vec<Location>,
+}
 
-    let list = get_locations(url).await.unwrap();
+#[wasm_bindgen]
+impl Searcher {
+    pub async fn create(url: String) -> Searcher {
+        let locations = get_locations(&url).await.unwrap();
+        Searcher { locations }
+    }
 
-    alert(&format!("{:#?}", list));
+    pub fn search(&self, pattern: String) -> JsValue {
+        let results = &(self.locations)[1..4];
+        JsValue::from_serde(results).unwrap()
+    }
+
+    pub fn get_all_locations(&self) -> JsValue {
+        JsValue::from_serde(&self.locations).unwrap()
+    }
 }
