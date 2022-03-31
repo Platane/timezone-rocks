@@ -1,15 +1,18 @@
+import * as path from "path";
+import * as fs from "fs";
 import { DateTime } from "luxon";
-import { parseLocations } from "../../../../locations/getLocations";
+import { parseLocations } from "../../../../locations/parseLocations";
 import { setLatLng } from "../../Locations/utils";
 import * as THREE from "three";
 import { getSunDirection } from "../utils";
 import { stringify } from "../../../store/stringify-utils";
 import { getSunRiseTime } from "./sun-rise-cached";
 
-// @ts-ignore
-import locationListRaw from "../../../../assets/locations.csv";
-
-const locations = parseLocations(locationListRaw);
+const locations = parseLocations(
+  fs
+    .readFileSync(path.join(__dirname, "../../../../assets/locations.csv"))
+    .toString()
+);
 
 const locationNames = [
   // cities on equator

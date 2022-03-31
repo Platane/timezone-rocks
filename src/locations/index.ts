@@ -1,7 +1,7 @@
 import { API as WorkerAPI } from "./worker";
 import { createRpcClient } from "./worker-utils";
 
-export type { ILocation } from "./getLocations";
+export type { ILocation } from "./parseLocations";
 
 // @ts-ignore
 import locationListPath from "../assets/locations.csv";

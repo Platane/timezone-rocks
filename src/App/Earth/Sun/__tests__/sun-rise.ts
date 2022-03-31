@@ -5,6 +5,8 @@ export const getSunRiseTime = async (
   position: { latitude: number; longitude: number },
   year = 2020
 ) => {
+  console.log("fetching", (position as any).name, year);
+
   const url =
     `https://gml.noaa.gov/grad/solcalc/table.php?` +
     new URLSearchParams({
