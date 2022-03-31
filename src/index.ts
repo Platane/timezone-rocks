@@ -2,6 +2,7 @@ import { createElement } from "react";
 import { render } from "react-dom";
 import { App } from "./App/App";
 import { useStore } from "./App/store/store";
+import { getMatchingLocation } from "./locations/wasm-index";
 import { getBoxDistance } from "./math-utils";
 
 // uncomment this to generate the earth glb from the source file
@@ -77,3 +78,12 @@ if (0) {
     //
   });
 }
+
+(async () => {
+  const start = performance.now();
+  console.log(
+    await getMatchingLocation(" tok"),
+    performance.now() - start,
+    "ms"
+  );
+})();

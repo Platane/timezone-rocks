@@ -97,7 +97,7 @@ impl Searcher {
         let n = normalize();
         let word_list: Vec<_> = locations.iter().map(|w| n(&w.name)).collect();
 
-        alert(&format!("{:#?}", &word_list));
+        // alert(&format!("{:#?}", &word_list));
         let search_engine = SearchEngine::create(word_list);
 
         Searcher {
