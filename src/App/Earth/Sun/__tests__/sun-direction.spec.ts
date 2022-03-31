@@ -4,7 +4,7 @@ import { setLatLng } from "../../Locations/utils";
 import * as THREE from "three";
 import { getSunDirection } from "../utils";
 import { stringify } from "../../../store/stringify-utils";
-import { getSunRiseTime } from "./sun-rise";
+import { getSunRiseTime } from "./sun-rise-cached";
 
 // @ts-ignore
 import locationListRaw from "../../../../assets/locations.csv";
@@ -20,9 +20,11 @@ const locationNames = [
 
   // // other cities
   "Stockholm",
-  "San Francisco",
-  "Antananarivo",
-  "Osaka",
+  // "San Francisco",
+  // "Antananarivo",
+  // "Osaka",
+  // "Madrid",
+  // ...locations.map((l) => l.name).slice(0, 30),
 ];
 
 locationNames.forEach((locationName) =>
@@ -40,9 +42,9 @@ locationNames.forEach((locationName) =>
 
       const { timezone, points } = await getSunRiseTime(location);
 
-      const interestingPoints = pickN(Array.from(points.entries()), 4, -10);
+      const interestingPoints = pickN(points, 4, -10);
 
-      for (const [date, { sunRise, sunSet }] of interestingPoints) {
+      for (const { date, sunRise, sunSet } of interestingPoints) {
         const tSunRise = DateTime.fromISO(date + "T" + sunRise, {
           zone: timezone,
         }).toMillis();

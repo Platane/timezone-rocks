@@ -54,14 +54,11 @@ export const getSunRiseTime = async (
   const sunRiseMap = readTable(sunRiseTable);
   const sunSetMap = readTable(sunSetTable);
 
-  const points = new Map<string, { sunRise: string; sunSet: string }>();
-
-  for (const [date] of sunRiseMap as any) {
-    points.set(date, {
-      sunRise: sunRiseMap.get(date)!,
-      sunSet: sunSetMap.get(date)!,
-    });
-  }
+  const points = Array.from(sunRiseMap.keys()).map((date) => ({
+    date,
+    sunRise: sunRiseMap.get(date)!,
+    sunSet: sunSetMap.get(date)!,
+  }));
 
   return { timezone, points };
 };
