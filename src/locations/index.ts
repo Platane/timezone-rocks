@@ -6,7 +6,7 @@ import init, { Searcher } from "../../crates/search-location/pkg";
 init().then(async () => {
   const searcher = await Searcher.create(locationListPath);
 
-  console.log(searcher.search("foo"));
+  console.log(searcher.search(" tok"));
   console.log(searcher.get_all_locations());
 });
 
