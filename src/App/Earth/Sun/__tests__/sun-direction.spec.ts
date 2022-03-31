@@ -19,10 +19,10 @@ const locationNames = [
   "Quito",
   "Libreville",
   "Mogadishu",
-  "Pontianak",
+  // "Pontianak",
 
   // // other cities
-  "Stockholm",
+  // "Stockholm",
   // "San Francisco",
   // "Antananarivo",
   // "Osaka",

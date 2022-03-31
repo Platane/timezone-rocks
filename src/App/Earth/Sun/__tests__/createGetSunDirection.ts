@@ -17,11 +17,12 @@ export const createGetSunDirection = ([
   const rotationDuration = (23 * 60 * 60 + 56 * 60 + 4) * 1000;
   const revolutionDuration = 365.256363004 * 24 * 60 * 60 * 1000;
 
-  const rotationAxis = new THREE.Vector3().setFromSphericalCoords(
-    1,
-    rotationAxisPhi * Math.PI * 2,
-    rotationAxisTheta * Math.PI * 2
-  );
+  const rotationAxis = new THREE.Vector3(0, 1, 0);
+  // rotationAxis.applyAxisAngle(new THREE.Vector3(1, 0, 0), earthAxisAngle);
+  // rotationAxis.applyAxisAngle(
+  //   new THREE.Vector3(0, 1, 0),
+  //   rotationAxisPhi * Math.PI * 2
+  // );
 
   const getSunDirection = (timestamp: number, target: THREE.Vector3) => {
     const rotationAngle =

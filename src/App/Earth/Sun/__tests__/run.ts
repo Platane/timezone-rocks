@@ -21,7 +21,7 @@ const locationNames = [
   "Pontianak",
 
   // // other cities
-  "Stockholm",
+  //   "Stockholm",
   // "San Francisco",
   // "Antananarivo",
   // "Osaka",
@@ -30,35 +30,33 @@ const locationNames = [
 ];
 
 const getFitness = async () => {
-  const samples = (
-    await Promise.all(
-      [2002, 2020, 2024]
-        .map((year) =>
-          locations.slice(0, 25).map(async (l) => {
+  const years = [2020];
+  const n_locations = 3;
+  const n_points = 70;
+
+  const samples = await Promise.all(
+    locationNames
+      .map((name) => locations.find((x) => x.name === name)!)
+      // locations
+      .slice(0, n_locations)
+      .map((l) =>
+        Promise.all(
+          years.map(async (year) => {
             const { timezone, points } = await getSunRiseTime(l, year);
 
-            return pickN(points, 10).map(({ date, sunRise, sunSet }) => {
-              const tSunRise = DateTime.fromISO(date + "T" + sunRise, {
-                zone: timezone,
-              }).toMillis();
-              const tSunSet = DateTime.fromISO(date + "T" + sunSet, {
-                zone: timezone,
-              }).toMillis();
-
-              return {
-                tSunRise,
-                tSunSet,
-                latitude: l.latitude,
-                longitude: l.longitude,
-                name: l.name,
-                timezone,
-              };
-            });
+            return pickN(points, n_points, -10)
+              .map(({ date, sunRise, sunSet }) =>
+                [sunRise, sunSet].map((hour) =>
+                  DateTime.fromISO(date + "T" + hour, {
+                    zone: timezone,
+                  }).toMillis()
+                )
+              )
+              .flat();
           })
-        )
-        .flat()
-    )
-  ).flat();
+        ).then((ts) => ({ ...l, ts: ts.flat() }))
+      )
+  );
 
   const spherical = new THREE.Spherical(1);
   const n = new THREE.Vector3();
@@ -66,20 +64,24 @@ const getFitness = async () => {
 
   return (
     getSunDirection: (timestamp: number, target: THREE.Vector3) => void
-  ) =>
-    samples.reduce((errorSquareSum, { tSunRise, tSunSet, ...latLng }) => {
-      setLatLng(spherical, latLng);
+  ) => {
+    let errorSquareSum = 0;
+
+    for (let is = samples.length; is--; ) {
+      const s = samples[is];
+
+      setLatLng(spherical, s);
       n.setFromSpherical(spherical);
 
-      getSunDirection(tSunRise, sunDirection);
-      const errorSunRise = Math.abs(sunDirection.dot(n));
+      for (let it = s.ts.length; it--; ) {
+        const t = s.ts[it];
+        getSunDirection(t, sunDirection);
+        errorSquareSum += sunDirection.dot(n) ** 2;
+      }
+    }
 
-      getSunDirection(tSunSet, sunDirection);
-      const errorSunSet = Math.abs(sunDirection.dot(n));
-
-      return errorSquareSum + errorSunRise + errorSunSet;
-    }, 0) /
-    (samples.length * 2);
+    return errorSquareSum / (samples.length * samples[0].ts.length);
+  };
 };
 
 const pickN = <T>(arr: T[], n: number, offset: number = 0) => {
@@ -100,8 +102,12 @@ const makeRandomUnitVector = (v: number[]) => {
 const copy = (target: number[], v: number[]) =>
   v.forEach((_, i) => (target[i] = v[i]));
 
-const addScaledVector = (target: number[], v: number[], l: number) =>
-  v.forEach((_, i) => (target[i] = target[i] + v[i] * l));
+const copyAndAddScaledVector = (
+  target: number[],
+  origin: number[],
+  v: number[],
+  l: number
+) => v.forEach((_, i) => (target[i] = origin[i] + v[i] * l));
 
 (async () => {
   // to minimize
@@ -109,58 +115,52 @@ const addScaledVector = (target: number[], v: number[], l: number) =>
 
   console.log("ready");
 
-  const r = Array.from({ length: 4 }, Math.random);
+  const r = Array.from({ length: 3 }, Math.random);
   const r_ = r.slice();
   const v = r.slice();
-
-  copy(
-    r,
-    [
-      13.876508774979458, 7.046753690658465, 7.441087446601254,
-      -5.26835680561445,
-    ]
-  );
 
   let f = fitness(createGetSunDirection(r));
 
   {
     const a = performance.now();
-    const n = 10;
+    const n = 200;
     for (let k = n; k--; ) fitness(createGetSunDirection(r));
     console.log((performance.now() - a) / n, "ms");
   }
 
-  let step = 1;
+  let a;
+  const dt = 0.00001;
 
-  const n = 15000;
+  const n = 300 * 1000;
   for (let k = n; k--; ) {
-    //
+    // random vector
     makeRandomUnitVector(v);
 
-    const dt = 0.0001;
+    // compute a = df/dt along this vector
+    {
+      copyAndAddScaledVector(r_, r, v, dt);
+      const f_ = fitness(createGetSunDirection(r_));
+      a = (f - f_) / dt;
+    }
 
-    copy(r_, r);
-    addScaledVector(r_, v, dt);
+    // move r along the vector
+    {
+      const step0 = (k / n) * a * 0.05;
+      let step = step0;
 
-    const f_ = fitness(createGetSunDirection(r_));
+      while (Math.abs(step) > 0.001) {
+        copyAndAddScaledVector(r_, r, v, step);
+        const f_ = fitness(createGetSunDirection(r_));
 
-    let a = (f - f_) / dt;
-    if (a < 0) continue;
-
-    step = (k / n) * 10;
-
-    copy(r_, r);
-    addScaledVector(r_, v, step * a);
-
-    const f2 = fitness(createGetSunDirection(r_));
-
-    if (f2 < f) {
-      f = f2;
-      copy(r, r_);
-      console.log(f, step, JSON.stringify(r));
-    } else {
+        if (f_ < f) {
+          copy(r, r_);
+          f = f_;
+        } else {
+          step = step / 2;
+        }
+      }
     }
   }
 
-  console.log(step);
+  console.log(f, JSON.stringify(r.map((x) => mod(x, 1))));
 })();
