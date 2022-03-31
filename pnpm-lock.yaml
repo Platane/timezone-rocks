@@ -41,6 +41,7 @@ specifiers:
   html-webpack-plugin: 5.5.0
   ical.js: 1.5.0
   jest: 27.5.1
+  jest-raw-loader: 1.0.1
   jszip: 3.7.1
   lodash.deburr: 4.1.0
   luxon: 2.3.1
@@ -118,6 +119,7 @@ devDependencies:
   html-inline-css-webpack-plugin: 1.11.1_html-webpack-plugin@5.5.0
   html-webpack-plugin: 5.5.0_webpack@5.70.0
   jest: 27.5.1
+  jest-raw-loader: 1.0.1
   jszip: 3.7.1
   mini-css-extract-plugin: 2.6.0_webpack@5.70.0
   node-fetch: 2.6.1
@@ -5404,6 +5406,10 @@ packages:
         optional: true
     dependencies:
       jest-resolve: 27.5.1
+    dev: true
+
+  /jest-raw-loader/1.0.1:
+    resolution: {integrity: sha1-zp9W1UZQ8VfEp9FtIkul1hO81iY=}
     dev: true
 
   /jest-regex-util/27.5.1:

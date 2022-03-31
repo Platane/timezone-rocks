@@ -57,6 +57,7 @@
     "html-inline-css-webpack-plugin": "1.11.1",
     "html-webpack-plugin": "5.5.0",
     "jest": "27.5.1",
+    "jest-raw-loader": "1.0.1",
     "jszip": "3.7.1",
     "mini-css-extract-plugin": "2.6.0",
     "node-fetch": "2.6.1",
