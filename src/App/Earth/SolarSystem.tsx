@@ -9,7 +9,7 @@ import { useStore } from "../store/store";
 import { Controls } from "./Controls/Controls";
 import { useSubscribe } from "../store/useSubscribe";
 import { selectT } from "../store/selector";
-import { getH, getR } from "./Sun/utils";
+// import { getH, getR } from "./Sun/utils";
 
 export const Scene = () => {
   const ready = useStore((s) => s.earthReady);
@@ -47,8 +47,10 @@ const SolarSystem = () => {
   const { camera } = useThree();
 
   useSubscribe((t) => {
-    const r = getR(t);
-    const h = getH(t);
+    const r = 0;
+    const h = 0;
+    // const r = getR(t);
+    // const h = getH(t);
 
     const A = 6;
 
