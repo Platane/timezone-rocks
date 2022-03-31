@@ -21,17 +21,17 @@ const locationNames = [
   "Pontianak",
 
   // // other cities
-  //   "Stockholm",
-  // "San Francisco",
-  // "Antananarivo",
-  // "Osaka",
-  // "Madrid",
+  "Stockholm",
+  "San Francisco",
+  "Antananarivo",
+  "Osaka",
+  "Madrid",
   // ...locations.map((l) => l.name).slice(0, 30),
 ];
 
 const getFitness = async () => {
-  const years = [2020];
-  const n_locations = 3;
+  const years = [2020, 2022, 2024];
+  const n_locations = 1;
   const n_points = 70;
 
   const samples = await Promise.all(
@@ -80,7 +80,7 @@ const getFitness = async () => {
       }
     }
 
-    return errorSquareSum / (samples.length * samples[0].ts.length);
+    return Math.sqrt(errorSquareSum / (samples.length * samples[0].ts.length));
   };
 };
 
@@ -99,15 +99,86 @@ const makeRandomUnitVector = (v: number[]) => {
   v.forEach((_, i) => (v[i] = v[i] / l));
 };
 
-const copy = (target: number[], v: number[]) =>
-  v.forEach((_, i) => (target[i] = v[i]));
+const copy = (target: number[], v: number[]) => {
+  for (let i = target.length; i--; ) target[i] = v[i];
+};
 
 const copyAndAddScaledVector = (
   target: number[],
   origin: number[],
   v: number[],
   l: number
-) => v.forEach((_, i) => (target[i] = origin[i] + v[i] * l));
+) => {
+  for (let i = target.length; i--; ) target[i] = origin[i] + v[i] * l;
+};
+
+const solve = <V extends number[]>(
+  getError: (s: V) => number,
+  solution0: V
+): V => {
+  const solution = solution0;
+  const solution2 = solution.slice() as V;
+  const partialDerivative = solution.slice();
+
+  let e = getError(solution);
+
+  const n = 2000;
+  const dt = 0.001;
+
+  const h = [];
+
+  for (let k = n; k--; ) {
+    // compute partial derivative
+    {
+      for (let i = solution.length; i--; ) {
+        for (let j = solution.length; j--; )
+          solution2[j] = solution[j] + (i === j ? dt : 0);
+        const ePlus = getError(solution2);
+
+        for (let j = solution.length; j--; )
+          solution2[j] = solution[j] - (i === j ? dt : 0);
+        const eMinus = getError(solution2);
+
+        partialDerivative[i] = (ePlus - eMinus) / (2 * dt);
+      }
+    }
+
+    // move r along the vector
+    {
+      const step0 = 1;
+      let step = step0;
+
+      let hc = 0;
+
+      while (step > Number.EPSILON) {
+        copyAndAddScaledVector(solution2, solution, partialDerivative, -step);
+        const e2 = getError(solution2);
+
+        if (e2 < e) {
+          copy(solution, solution2);
+          e = e2;
+          hc++;
+        } else {
+          step = step / 2;
+        }
+      }
+
+      h.push(hc);
+
+      if (hc === 0) break;
+    }
+  }
+
+  const a = new Map();
+  h.sort().forEach((x) => a.set(x, a.get(x) + 1 || 1));
+  console.log(
+    Array.from(a.entries())
+      .map(([k, v]) => `${k}: ${v}`)
+      .join("\n")
+  );
+
+  return solution;
+};
 
 (async () => {
   // to minimize
@@ -115,52 +186,24 @@ const copyAndAddScaledVector = (
 
   console.log("ready");
 
-  const r = Array.from({ length: 3 }, Math.random);
-  const r_ = r.slice();
-  const v = r.slice();
+  const getError = (s: number[]) => fitness(createGetSunDirection(s));
 
-  let f = fitness(createGetSunDirection(r));
-
+  const solution0 = Array.from({ length: 4 }, Math.random);
   {
     const a = performance.now();
-    const n = 200;
-    for (let k = n; k--; ) fitness(createGetSunDirection(r));
-    console.log((performance.now() - a) / n, "ms");
+    let k = 0;
+    while (performance.now() - a < 1000)
+      for (let u = 50; u--; k++) getError(solution0);
+    const d = performance.now() - a;
+    console.log(
+      `getError runs in ${(d / k).toFixed(2)}ms  (${k} in ${d.toFixed(0)}ms)`
+    );
   }
 
-  let a;
-  const dt = 0.00001;
+  const solution = solve(getError, Array.from({ length: 4 }, Math.random));
 
-  const n = 300 * 1000;
-  for (let k = n; k--; ) {
-    // random vector
-    makeRandomUnitVector(v);
-
-    // compute a = df/dt along this vector
-    {
-      copyAndAddScaledVector(r_, r, v, dt);
-      const f_ = fitness(createGetSunDirection(r_));
-      a = (f - f_) / dt;
-    }
-
-    // move r along the vector
-    {
-      const step0 = (k / n) * a * 0.05;
-      let step = step0;
-
-      while (Math.abs(step) > 0.001) {
-        copyAndAddScaledVector(r_, r, v, step);
-        const f_ = fitness(createGetSunDirection(r_));
-
-        if (f_ < f) {
-          copy(r, r_);
-          f = f_;
-        } else {
-          step = step / 2;
-        }
-      }
-    }
-  }
-
-  console.log(f, JSON.stringify(r.map((x) => mod(x, 1))));
+  console.log(
+    getError(solution),
+    JSON.stringify(solution.map((x) => mod(x, 1)))
+  );
 })();
