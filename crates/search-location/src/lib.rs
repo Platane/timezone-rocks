@@ -3,7 +3,6 @@ mod search_engine;
 use regex::Regex;
 use search_engine::SearchEngine;
 use serde::{Deserialize, Serialize};
-use unidecode::unidecode;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
@@ -81,18 +80,22 @@ pub struct Searcher {
     search_engine: SearchEngine,
 }
 
-fn normalize(w: &str) -> String {
-    let result = " ".to_string() + &unidecode(&(w.to_lowercase())) + " ";
-    // let result = Regex::new(r"\([^)]*\)").unwrap().replace_all(&result, " ");
-    // let result = Regex::new(r"\W+").unwrap().replace_all(&result, " ");
-    result.to_string()
+fn normalize() -> impl Fn(&str) -> String {
+    |w: &str| {
+        let result = " ".to_string() + &w.to_lowercase() + " ";
+        let result = diacritics::remove_diacritics(&result);
+        // let result = Regex::new(r"\([^)]*\)").unwrap().replace_all(&result, " ");
+        // let result = Regex::new(r"\W+").unwrap().replace_all(&result, " ");
+        result.to_string()
+    }
 }
 
 #[wasm_bindgen]
 impl Searcher {
     pub async fn create(url: String) -> Searcher {
         let locations = get_locations(&url).await.unwrap();
-        let word_list: Vec<_> = locations.iter().map(|w| normalize(&w.name)).collect();
+        let n = normalize();
+        let word_list: Vec<_> = locations.iter().map(|w| n(&w.name)).collect();
 
         alert(&format!("{:#?}", &word_list));
         let search_engine = SearchEngine::create(word_list);
