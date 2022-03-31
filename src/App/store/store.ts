@@ -1,6 +1,6 @@
 import create from "zustand";
 import { devtools } from "zustand/middleware";
-import type { ILocation } from "../../locations/getLocations";
+import type { ILocation } from "../../locations";
 import { init } from "./persist";
 
 export type Api = {

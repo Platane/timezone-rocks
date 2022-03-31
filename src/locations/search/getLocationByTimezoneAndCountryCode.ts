@@ -1,4 +1,4 @@
-import { ILocation } from "../getLocations";
+import type { ILocation } from "../";
 
 export const getLocationByTimezoneAndCountryCode =
   (locations: ILocation[]) => (timezone: string, countryCode: string) => {

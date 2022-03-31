@@ -3,9 +3,9 @@ import { styled } from "@linaria/react";
 import { css } from "@linaria/core";
 import { useStore } from "../store/store";
 import { getFlagEmoji } from "../../emojiFlagSequence";
-import { ILocation } from "../../locations";
 import { formatOffset } from "../../intl-utils";
 import { getTimezoneOffset } from "../../timezone/timezone";
+import type { ILocation } from "../../locations";
 
 type Props = { location: ILocation };
 export const LocationLabel = ({ location }: Props) => {

@@ -7,7 +7,7 @@ import { useStore } from "./store/store";
 import { usePreviousUntilTruthy } from "../hooks/usePreviousUntilTruthy";
 import { useExtendedTruthiness } from "../hooks/useExtendedTruthiness";
 import { useSubscribe } from "./store/useSubscribe";
-import type { ILocation } from "../locations/getLocations";
+import type { ILocation } from "../locations";
 
 export const Search = () => {
   const focused = useStore((s) => s.searchFocused);
