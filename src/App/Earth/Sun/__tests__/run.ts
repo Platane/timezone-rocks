@@ -6,6 +6,9 @@ import { parseLocations } from "../../../../locations/parseLocations";
 import { getSunRiseTime } from "./sun-rise-cached";
 import { setLatLng } from "../../Locations/utils";
 import { createGetSunDirection } from "./createGetSunDirection";
+import asciichart from "asciichart";
+import { solve } from "./gradient-descent";
+import { stringify } from "../../../store/stringify-utils";
 
 const locations = parseLocations(
   fs
@@ -30,9 +33,9 @@ const locationNames = [
 ];
 
 const getFitness = async () => {
-  const years = [2020, 2022, 2024];
+  const years = [2022];
   const n_locations = 1;
-  const n_points = 70;
+  const n_points = 4;
 
   const samples = await Promise.all(
     locationNames
@@ -61,6 +64,17 @@ const getFitness = async () => {
   const spherical = new THREE.Spherical(1);
   const n = new THREE.Vector3();
   const sunDirection = new THREE.Vector3();
+
+  {
+    const [{ ts, ...l }] = samples;
+
+    ts.slice(0, 10).forEach((t) =>
+      console.log(
+        "https://localhost:8080/#" +
+          stringify({ listVersion: "Bkb", locations: [l], t })
+      )
+    );
+  }
 
   return (
     getSunDirection: (timestamp: number, target: THREE.Vector3) => void
@@ -93,93 +107,6 @@ const pickN = <T>(arr: T[], n: number, offset: number = 0) => {
 
 const mod = (x: number, n: number) => ((x % n) + n) % n;
 
-const makeRandomUnitVector = (v: number[]) => {
-  v.forEach((_, i) => (v[i] = Math.random() - 0.5));
-  const l = Math.hypot(...v);
-  v.forEach((_, i) => (v[i] = v[i] / l));
-};
-
-const copy = (target: number[], v: number[]) => {
-  for (let i = target.length; i--; ) target[i] = v[i];
-};
-
-const copyAndAddScaledVector = (
-  target: number[],
-  origin: number[],
-  v: number[],
-  l: number
-) => {
-  for (let i = target.length; i--; ) target[i] = origin[i] + v[i] * l;
-};
-
-const solve = <V extends number[]>(
-  getError: (s: V) => number,
-  solution0: V
-): V => {
-  const solution = solution0;
-  const solution2 = solution.slice() as V;
-  const partialDerivative = solution.slice();
-
-  let e = getError(solution);
-
-  const n = 2000;
-  const dt = 0.001;
-
-  const h = [];
-
-  for (let k = n; k--; ) {
-    // compute partial derivative
-    {
-      for (let i = solution.length; i--; ) {
-        for (let j = solution.length; j--; )
-          solution2[j] = solution[j] + (i === j ? dt : 0);
-        const ePlus = getError(solution2);
-
-        for (let j = solution.length; j--; )
-          solution2[j] = solution[j] - (i === j ? dt : 0);
-        const eMinus = getError(solution2);
-
-        partialDerivative[i] = (ePlus - eMinus) / (2 * dt);
-      }
-    }
-
-    // move r along the vector
-    {
-      const step0 = 1;
-      let step = step0;
-
-      let hc = 0;
-
-      while (step > Number.EPSILON) {
-        copyAndAddScaledVector(solution2, solution, partialDerivative, -step);
-        const e2 = getError(solution2);
-
-        if (e2 < e) {
-          copy(solution, solution2);
-          e = e2;
-          hc++;
-        } else {
-          step = step / 2;
-        }
-      }
-
-      h.push(hc);
-
-      if (hc === 0) break;
-    }
-  }
-
-  const a = new Map();
-  h.sort().forEach((x) => a.set(x, a.get(x) + 1 || 1));
-  console.log(
-    Array.from(a.entries())
-      .map(([k, v]) => `${k}: ${v}`)
-      .join("\n")
-  );
-
-  return solution;
-};
-
 (async () => {
   // to minimize
   const fitness = await getFitness();
@@ -188,7 +115,8 @@ const solve = <V extends number[]>(
 
   const getError = (s: number[]) => fitness(createGetSunDirection(s));
 
-  const solution0 = Array.from({ length: 4 }, Math.random);
+  const solution0 = Array.from({ length: 2 }, Math.random);
+  solution0[1] = 365.256363004 * 24 * 60 * 60 * 1000;
   {
     const a = performance.now();
     let k = 0;
@@ -200,10 +128,30 @@ const solve = <V extends number[]>(
     );
   }
 
-  const solution = solve(getError, Array.from({ length: 4 }, Math.random));
+  {
+    const s0 = solution0.slice();
+    const j = 0;
+
+    console.log(
+      asciichart.plot(
+        Array.from({ length: 100 }).map((_, i, { length: n }) => {
+          const x = i / n;
+          s0[j] = x;
+          const y = getError(s0);
+          return y;
+        }),
+
+        { height: 20 }
+      ),
+      "\n"
+    );
+  }
+
+  const solution = solve(getError, solution0);
 
   console.log(
     getError(solution),
+    JSON.stringify(solution),
     JSON.stringify(solution.map((x) => mod(x, 1)))
   );
 })();

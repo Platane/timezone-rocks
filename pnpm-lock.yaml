@@ -16,6 +16,7 @@ specifiers:
   '@react-three/drei': 8.18.6
   '@react-three/fiber': 7.0.26
   '@sucrase/jest-plugin': 2.2.0
+  '@types/asciichart': ^1.5.6
   '@types/base-64': 1.0.0
   '@types/jest': 27.4.1
   '@types/loadable__component': 5.13.4
@@ -30,6 +31,7 @@ specifiers:
   '@types/webpack-bundle-analyzer': 4.4.1
   '@types/workbox-webpack-plugin': 5.1.8
   '@types/worker-plugin': 5.0.1
+  asciichart: 1.5.25
   babel-loader: 8.2.3
   base-64: 1.0.0
   cheerio: 1.0.0-rc.10
@@ -41,6 +43,7 @@ specifiers:
   html-webpack-plugin: 5.5.0
   ical.js: 1.5.0
   jest: 27.5.1
+  jest-matcher-deep-close-to: 3.0.2
   jszip: 3.7.1
   lodash.deburr: 4.1.0
   luxon: 2.3.1
@@ -71,6 +74,7 @@ dependencies:
   '@loadable/component': 5.15.2_react@17.0.2
   '@react-three/drei': 8.18.6_4ff37aac017f2ab44732083fae83210a
   '@react-three/fiber': 7.0.26_6a2478a5b9a0dfe3cc9e1f0de361d624
+  asciichart: 1.5.25
   base-64: 1.0.0
   ical.js: 1.5.0
   lodash.deburr: 4.1.0
@@ -97,6 +101,7 @@ devDependencies:
   '@linaria/webpack-loader': 3.0.0-beta.16_fa907c5a4f16ccc493e21649ccc59574
   '@principalstudio/html-webpack-inject-preload': 1.2.7_b6f6061bfe56c4f5f9f5f814f10f8be7
   '@sucrase/jest-plugin': 2.2.0
+  '@types/asciichart': 1.5.6
   '@types/base-64': 1.0.0
   '@types/jest': 27.4.1
   '@types/loadable__component': 5.13.4
@@ -120,6 +125,7 @@ devDependencies:
   html-inline-css-webpack-plugin: 1.11.1_html-webpack-plugin@5.5.0
   html-webpack-plugin: 5.5.0_webpack@5.70.0
   jest: 27.5.1
+  jest-matcher-deep-close-to: 3.0.2
   jszip: 3.7.1
   mini-css-extract-plugin: 2.6.0_webpack@5.70.0
   node-fetch: 2.6.1
@@ -2148,6 +2154,10 @@ packages:
     engines: {node: '>= 6'}
     dev: true
 
+  /@types/asciichart/1.5.6:
+    resolution: {integrity: sha512-GXq4BojlHJHRlizP9zXQfhgMbAy+kmyMyfV9P6vyYxUE302Km8GU0ebToQ1YVlGlFypVOYWNxqEWWLQW0HzFgA==}
+    dev: true
+
   /@types/babel__core/7.1.19:
     resolution: {integrity: sha512-WEOTgRsbYkvA/KCsDwVEGkd7WAr1e3g31VHQ8zy5gul/V1qKullU/BU5I68X5v7V3GnB9eotmom4v5a5gjxorw==}
     dependencies:
@@ -2852,6 +2862,10 @@ packages:
     resolution: {integrity: sha512-1OvF9IbWwaeiM9VhzYXVQacMibxpXOMYVNIvMtKRyX9SImBXpKcFr8XvFDeEslCyuH/t6KRt7HEO94AlP8Iatw==}
     engines: {node: '>=12'}
     dev: true
+
+  /asciichart/1.5.25:
+    resolution: {integrity: sha512-PNxzXIPPOtWq8T7bgzBtk9cI2lgS4SJZthUHEiQ1aoIc3lNzGfUvIvo9LiAnq26TACo9t1/4qP6KTGAUbzX9Xg==}
+    dev: false
 
   /asn1/0.2.6:
     resolution: {integrity: sha512-ix/FxPn0MDjeyJ7i/yoHGFt/EX6LyNbxSEhPPXODPL+KB0VPk86UYfL0lMdy+KCnv+fmvIzySwaK5COwqVbWTQ==}
@@ -5359,6 +5373,22 @@ packages:
     resolution: {integrity: sha512-POXfWAMvfU6WMUXftV4HolnJfnPOGEu10fscNCA76KBpRRhcMN2c8d3iT2pxQS3HLbA+5X4sOUPzYO2NUyIlHQ==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dependencies:
+      jest-get-type: 27.5.1
+      pretty-format: 27.5.1
+    dev: true
+
+  /jest-matcher-deep-close-to/3.0.2:
+    resolution: {integrity: sha512-9CDF2DD6FkYUWhkNynojHfoqm9KJ6Uu/UugZn/YU1bTbcJEcDuXA7DZ942X3yJdm0IAEKcQ4AOkGL3n8XMSpiQ==}
+    dependencies:
+      jest-matcher-utils: 27.2.5
+    dev: true
+
+  /jest-matcher-utils/27.2.5:
+    resolution: {integrity: sha512-qNR/kh6bz0Dyv3m68Ck2g1fLW5KlSOUNcFQh87VXHZwWc/gY6XwnKofx76Qytz3x5LDWT09/2+yXndTkaG4aWg==}
+    engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
+    dependencies:
+      chalk: 4.1.2
+      jest-diff: 27.5.1
       jest-get-type: 27.5.1
       pretty-format: 27.5.1
     dev: true
