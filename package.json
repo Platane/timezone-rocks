@@ -82,7 +82,7 @@
     "lint": "prettier -c '**/*.{ts,tsx,js,jsx,json,md,html}' '!**/{build,dist,crates}/**'",
     "dev": "webpack serve",
     "build": "NODE_ENV=production webpack build",
-    "test-wasm": "( cd crates/search-location ; cargo test )",
+    "test-wasm": "( cd crates/search-location ; cargo test  -- --nocapture )",
     "test": "jest"
   }
 }
