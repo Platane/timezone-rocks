@@ -80,22 +80,11 @@ pub struct Searcher {
     search_engine: SearchEngine,
 }
 
-fn normalize() -> impl Fn(&str) -> String {
-    |w: &str| {
-        let result = " ".to_string() + &w.to_lowercase() + " ";
-        let result = diacritics::remove_diacritics(&result);
-        // let result = Regex::new(r"\([^)]*\)").unwrap().replace_all(&result, " ");
-        // let result = Regex::new(r"\W+").unwrap().replace_all(&result, " ");
-        result.to_string()
-    }
-}
-
 #[wasm_bindgen]
 impl Searcher {
     pub async fn create(url: String) -> Searcher {
         let locations = get_locations(&url).await.unwrap();
-        let n = normalize();
-        let word_list: Vec<_> = locations.iter().map(|w| n(&w.name)).collect();
+        let word_list: Vec<_> = locations.iter().map(|w| w.name.to_string()).collect();
 
         // alert(&format!("{:#?}", &word_list));
         let search_engine = SearchEngine::create(word_list);
@@ -108,7 +97,7 @@ impl Searcher {
 
     pub fn search(&self, pattern: String) -> JsValue {
         let results = &(self.locations)[1..4];
-        let results = self.search_engine.search(&pattern);
+        let results = self.search_engine.search(&pattern, 1);
         JsValue::from_serde(&results).unwrap()
     }
 

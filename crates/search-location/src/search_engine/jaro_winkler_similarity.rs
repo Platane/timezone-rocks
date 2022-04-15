@@ -1,26 +1,6 @@
 use core::cmp::{max, min};
 
-pub struct SearchEngine {
-    word_list: Vec<String>,
-}
-
-impl SearchEngine {
-    pub fn create(word_list: Vec<String>) -> SearchEngine {
-        SearchEngine { word_list }
-    }
-    pub fn search(&self, pattern: &str) -> Vec<&String> {
-        let results: Vec<_> = self
-            .word_list
-            .iter()
-            .filter(|w| is_prefix(pattern, w))
-            .take(3)
-            .collect();
-
-        results
-    }
-}
-
-fn is_prefix(prefix: &str, word: &str) -> bool {
+pub fn is_prefix(prefix: &str, word: &str) -> bool {
     prefix.len() <= word.len()
         && prefix
             .chars()
@@ -31,7 +11,7 @@ fn is_prefix(prefix: &str, word: &str) -> bool {
 const P: f32 = 0.1;
 const L_MAX: usize = 4;
 
-fn get_jaro_winkler_similarity(a: &str, b: &str) -> f32 {
+pub fn get_jaro_winkler_similarity(a: &str, b: &str) -> f32 {
     let l_a = a.len();
     let l_b = b.len();
 
@@ -120,29 +100,4 @@ mod tests {
 
         assert_eq!(get_jaro_winkler_similarity("martha", "marhta"), 0.96111107);
     }
-
-    // #[test]
-    // fn should_count_matching_char() {
-    //     assert_eq!(count_matching_char("a", "a"), 1);
-    //     assert_eq!(count_matching_char("abcd", "abcd"), 4);
-    //     assert_eq!(count_matching_char("abc", "abc000"), 3);
-    //     assert_eq!(count_matching_char("aabcd", "abcd"), 4);
-    //     assert_eq!(count_matching_char("abcd", "acbf"), 3);
-    // }
-
-    // #[test]
-    // fn it_should_return_word_matching_pattern() {
-    //     let se = SearchEngine::create(vec![
-    //         "blue".to_string(),
-    //         "moon".to_string(),
-    //         "orange".to_string(),
-    //         "red".to_string(),
-    //         "carmin".to_string(),
-    //     ]);
-
-    //     let results = se.search("blu");
-    //     let expected = vec!["blue"];
-
-    //     assert_eq!(&expected[..], &results[..]);
-    // }
 }
