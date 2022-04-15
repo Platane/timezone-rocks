@@ -48,7 +48,9 @@ fn normalize(w: &str) -> Vec<String> {
 
     let w = w.to_lowercase();
 
-    w.split_ascii_whitespace().map(|w| w.to_string()).collect()
+    vec![w.to_string()]
+
+    // w.split_ascii_whitespace().map(|w| w.to_string()).collect()
 }
 
 #[cfg(test)]
@@ -71,6 +73,22 @@ mod tests {
 
         let results = se.search("ornge", 3);
         let expected = vec![0, 5, 4];
+
+        assert_eq!(&expected[..], &results[..]);
+    }
+
+    #[test]
+    fn it_should_return_multi_word_matching_pattern() {
+        let word_list = vec![
+            "dark orange".to_string(),
+            "orange".to_string(),
+            "orange dark".to_string(),
+            "orange darker".to_string(),
+        ];
+        let se = SearchEngine::create(word_list);
+
+        let results = se.search("ornge", 1);
+        let expected = vec![1];
 
         assert_eq!(&expected[..], &results[..]);
     }

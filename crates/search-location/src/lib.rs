@@ -7,10 +7,15 @@ use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
 extern "C" {
+    // map [rust] fn alert(s: &str) => [ts] global.alert(s: string)
     pub fn alert(s: &str);
+
+    // map [rust] jsLog(s: &str) => [ts] console.log(s: string)
+    #[wasm_bindgen(js_namespace = console, js_name = log)]
+    pub fn consoleLog(s: &str);
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub enum LocationKind {
     City,
     Admin,
@@ -18,7 +23,7 @@ pub enum LocationKind {
     Timezone,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Location {
     name: String,
     kind: LocationKind,
@@ -84,9 +89,14 @@ pub struct Searcher {
 impl Searcher {
     pub async fn create(url: String) -> Searcher {
         let locations = get_locations(&url).await.unwrap();
-        let word_list: Vec<_> = locations.iter().map(|w| w.name.to_string()).collect();
+        let word_list: Vec<_> = locations
+            .iter()
+            .map(|w| w.name.to_string())
+            .take(450)
+            .collect();
 
-        // alert(&format!("{:#?}", &word_list));
+        // consoleLog(&format!("{:#?}", &word_list));
+
         let search_engine = SearchEngine::create(word_list);
 
         Searcher {
@@ -95,9 +105,48 @@ impl Searcher {
         }
     }
 
-    pub fn search(&self, pattern: String) -> JsValue {
-        let results = &(self.locations)[1..4];
-        let results = self.search_engine.search(&pattern, 1);
+    pub async fn create_test() -> Searcher {
+        let locations: Vec<_> = vec![
+            "orange",
+            "yellow",
+            "purple",
+            "redish",
+            "red",
+            "paris",
+            "parisson",
+            "qualisson",
+            "poris",
+            "peauris",
+        ]
+        .iter()
+        .map(|name| Location {
+            latitude: 0.0,
+            longitude: 0.0,
+            name: name.to_string(),
+            timezone: "tz".to_string(),
+            countryCode: "fr".to_string(),
+            kind: LocationKind::Admin,
+        })
+        .collect();
+
+        let word_list: Vec<_> = locations.iter().map(|w| w.name.to_string()).collect();
+
+        let search_engine = SearchEngine::create(word_list);
+
+        Searcher {
+            locations,
+            search_engine,
+        }
+    }
+
+    pub fn search(&self, pattern: String, limit: usize) -> JsValue {
+        let results = &(self.locations)[0..limit];
+        let results: Vec<_> = self
+            .search_engine
+            .search(&pattern, limit)
+            .iter()
+            .map(|i| self.locations[*i].clone())
+            .collect();
         JsValue::from_serde(&results).unwrap()
     }
 

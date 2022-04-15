@@ -1,18 +1,17 @@
 import { createRpcServer } from "./worker-utils";
-import init, {
-  Searcher,
-} from "../../crates/search-location/pkg/search_location";
+import init, { Searcher } from "./pkg/search_location";
 import { ILocation } from "./getLocations";
 
 // @ts-ignore
 import locationListPath from "../assets/locations.csv";
 
 const promise = init().then(() => Searcher.create(locationListPath));
+// const promise = init().then(() => Searcher.create_test());
 
 const api = {
-  getMatchingLocation: async (pattern: string) => {
+  getMatchingLocation: async (pattern: string, limit: number) => {
     const searcher = await promise;
-    const results = searcher.search(pattern) as ILocation[];
+    const results = searcher.search(pattern, limit) as ILocation[];
     return results;
   },
 };
