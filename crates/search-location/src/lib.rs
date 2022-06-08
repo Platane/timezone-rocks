@@ -1,6 +1,5 @@
 mod search_engine;
 
-use regex::Regex;
 use search_engine::SearchEngine;
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
@@ -92,10 +91,10 @@ impl Searcher {
         let word_list: Vec<_> = locations
             .iter()
             .map(|w| w.name.to_string())
-            .take(450)
+            // .take(1478)
             .collect();
 
-        // consoleLog(&format!("{:#?}", &word_list));
+        consoleLog(&format!("{:#?}", &word_list.last()));
 
         let search_engine = SearchEngine::create(word_list);
 
