@@ -66,6 +66,7 @@
     "terser-webpack-plugin": "5.3.1",
     "typescript": "4.6.2",
     "unzipper": "0.10.11",
+    "wasm-pack": "0.10.2",
     "webpack": "5.70.0",
     "webpack-bundle-analyzer": "4.5.0",
     "webpack-cli": "4.9.2",
@@ -74,11 +75,14 @@
     "worker-loader": "3.0.8"
   },
   "scripts": {
+    "build-wasm": "( cd crates/search-location ; wasm-pack build --target web --dev && cp -rf pkg/* ../../src/locations/pkg/ )",
+    "build-wasm:production": "( cd crates/search-location ; wasm-pack build --target web --release )",
     "generateLocations": "sucrase-node src/locations/generate/generate.ts",
     "type": "tsc --noEmit",
-    "lint": "prettier -c '**/*.{ts,tsx,js,jsx,json,md,html}' '!**/{build,dist}/**'",
+    "lint": "prettier -c '**/*.{ts,tsx,js,jsx,json,md,html}' '!**/{build,dist,crates}/**'",
     "dev": "webpack serve",
     "build": "NODE_ENV=production webpack build",
+    "test-wasm": "( cd crates/search-location ; cargo test  -- --nocapture )",
     "test": "jest"
   }
 }
