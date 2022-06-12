@@ -18,7 +18,7 @@ export const AppearScaleNode = ({
 
   useFrame((_, dt) => {
     stepSpring(spring.current, springConfig, dt);
-    ref.current?.scale.setScalar(spring.current.x);
+    ref.current?.scale.setScalar(1);
   });
 
   return <group ref={ref}>{children}</group>;

@@ -15,7 +15,10 @@ const mode =
 const webpackConfiguration: WebpackConfiguration = {
   mode,
   devtool: false,
-  entry: path.join(__dirname, "src/index"),
+  entry: {
+    app: path.join(__dirname, "src/index"),
+    sunTest: path.join(__dirname, "src/App/Earth/Sun/__tests__/index"),
+  },
   output: {
     chunkFilename: "[contenthash:base62].js",
     filename: "[contenthash:base62].js",
@@ -55,6 +58,7 @@ const webpackConfiguration: WebpackConfiguration = {
     new MiniCssExtractPlugin({ filename: "[contenthash].css" }),
 
     new HtmlPlugin({
+      chunks: ["app"],
       title: "🌐",
       templateContent: () => {
         const code = `
@@ -75,6 +79,12 @@ const webpackConfiguration: WebpackConfiguration = {
         `;
         return `<!DOCTYPE html>` + execSync(`node --eval '${code}'`).toString();
       },
+    }),
+
+    new HtmlPlugin({
+      title: "test",
+      chunks: ["sunTest"],
+      filename: "test.html",
     }),
 
     new HtmlWebpackInjectPreload({

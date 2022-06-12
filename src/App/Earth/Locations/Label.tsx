@@ -120,8 +120,8 @@ const Container = styled.div`
   height: ${labelBox.max.y - labelBox.min.y}px;
   width: ${labelBox.max.x - labelBox.min.x}px;
 
-  /* opacity: 0.2; */
-  /* box-shadow: 0 0 0 1px orange; */
+  opacity: 0.2;
+  box-shadow: 0 0 0 1px orange;
 
   pointer-events: none;
   transition: opacity 200ms;

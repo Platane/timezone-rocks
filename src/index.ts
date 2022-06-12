@@ -24,6 +24,8 @@ useStore.subscribe(
   (s) => s.locationStoreReady && s.earthReady
 );
 
+(window as any).__useStore = useStore;
+
 if (0) {
   const c = document.createElement("canvas");
   c.width = 400;

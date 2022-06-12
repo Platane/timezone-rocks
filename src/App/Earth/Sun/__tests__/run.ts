@@ -15,6 +15,8 @@ const locations = parseLocations(
     .readFileSync(path.join(__dirname, "../../../../assets/locations.csv"))
     .toString()
 );
+const getLocationByName = (name: string) =>
+  locations.find((x) => x.name === name);
 
 const locationNames = [
   // cities on equator
@@ -24,11 +26,11 @@ const locationNames = [
   "Pontianak",
 
   // // other cities
-  "Stockholm",
-  "San Francisco",
-  "Antananarivo",
-  "Osaka",
-  "Madrid",
+  // "Stockholm",
+  // "San Francisco",
+  // "Antananarivo",
+  // "Osaka",
+  // "Madrid",
   // ...locations.map((l) => l.name).slice(0, 30),
 ];
 
@@ -39,13 +41,13 @@ const getFitness = async () => {
 
   const samples = await Promise.all(
     locationNames
-      .map((name) => locations.find((x) => x.name === name)!)
+      .map(getLocationByName)
       // locations
       .slice(0, n_locations)
       .map((l) =>
         Promise.all(
           years.map(async (year) => {
-            const { timezone, points } = await getSunRiseTime(l, year);
+            const { timezone, points } = await getSunRiseTime(l!, year);
 
             return pickN(points, n_points, -10)
               .map(({ date, sunRise, sunSet }) =>
@@ -64,17 +66,6 @@ const getFitness = async () => {
   const spherical = new THREE.Spherical(1);
   const n = new THREE.Vector3();
   const sunDirection = new THREE.Vector3();
-
-  {
-    const [{ ts, ...l }] = samples;
-
-    ts.slice(0, 10).forEach((t) =>
-      console.log(
-        "https://localhost:8080/#" +
-          stringify({ listVersion: "Bkb", locations: [l], t })
-      )
-    );
-  }
 
   return (
     getSunDirection: (timestamp: number, target: THREE.Vector3) => void
@@ -98,6 +89,44 @@ const getFitness = async () => {
   };
 };
 
+const spherical = new THREE.Spherical(1);
+const n = new THREE.Vector3();
+const sunDirection = new THREE.Vector3();
+const getError = (
+  getSunDirection: (timestamp: number, target: THREE.Vector3) => void,
+  zone: string,
+  latLng: Parameters<typeof setLatLng>[1],
+  point: {
+    date: string;
+    sunRise: string;
+    sunSet: string;
+  }
+) => {
+  //
+  // hypothesis
+  //   at sun rise, the sun rays should be orthogonal to the normal of the point on the globe
+
+  // position in the model world
+  setLatLng(spherical, latLng);
+
+  // n is the normal ( which is = to the position on the unit sphere )
+  n.setFromSpherical(spherical);
+
+  // parse date
+
+  return [point.sunRise, point.sunSet].reduce((sum, hour) => {
+    // get the timestamp for the date / hour
+    const t = DateTime.fromISO(point.date + "T" + hour, { zone }).toMillis();
+
+    // get the sun direction at the time
+    getSunDirection(t, sunDirection);
+
+    const error = sunDirection.dot(n);
+
+    return sum + error ** 2;
+  });
+};
+
 const pickN = <T>(arr: T[], n: number, offset: number = 0) => {
   return Array.from(
     { length: n },
@@ -108,50 +137,10 @@ const pickN = <T>(arr: T[], n: number, offset: number = 0) => {
 const mod = (x: number, n: number) => ((x % n) + n) % n;
 
 (async () => {
-  // to minimize
-  const fitness = await getFitness();
-
-  console.log("ready");
-
-  const getError = (s: number[]) => fitness(createGetSunDirection(s));
-
-  const solution0 = Array.from({ length: 2 }, Math.random);
-  solution0[1] = 365.256363004 * 24 * 60 * 60 * 1000;
-  {
-    const a = performance.now();
-    let k = 0;
-    while (performance.now() - a < 1000)
-      for (let u = 50; u--; k++) getError(solution0);
-    const d = performance.now() - a;
-    console.log(
-      `getError runs in ${(d / k).toFixed(2)}ms  (${k} in ${d.toFixed(0)}ms)`
-    );
-  }
-
-  {
-    const s0 = solution0.slice();
-    const j = 0;
-
-    console.log(
-      asciichart.plot(
-        Array.from({ length: 100 }).map((_, i, { length: n }) => {
-          const x = i / n;
-          s0[j] = x;
-          const y = getError(s0);
-          return y;
-        }),
-
-        { height: 20 }
-      ),
-      "\n"
-    );
-  }
-
-  const solution = solve(getError, solution0);
-
-  console.log(
-    getError(solution),
-    JSON.stringify(solution),
-    JSON.stringify(solution.map((x) => mod(x, 1)))
+  const { timezone, points } = await getSunRiseTime(
+    getLocationByName("Quito")!,
+    2022
   );
+
+  const getSunDirection = createGetSunDirection([]);
 })();

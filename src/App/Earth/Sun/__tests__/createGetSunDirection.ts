@@ -1,8 +1,8 @@
 import * as THREE from "three";
 
 export const createGetSunDirection = ([
-  rotationOffset,
-  revolutionOffset,
+  // rotationOffset = 0,
+  // revolutionOffset = 0,
 
   rotationAxisPhi,
   rotationAxisTheta,
@@ -30,7 +30,21 @@ export const createGetSunDirection = ([
   // );
   rotationAxis.set(0, 1, 0);
 
+  const rotationOffset = 0;
+  const revolutionOffset = 0;
+
   const getSunDirection = (timestamp: number, target: THREE.Vector3) => {
+    {
+      const rotationDuration = 24 * 60 * 60 * 1000;
+      const rotationOffset = Math.PI * 0.13;
+
+      const a = (timestamp / rotationDuration) * Math.PI * 2 + rotationOffset;
+
+      target.set(Math.sin(a), 0, Math.cos(a));
+
+      return;
+    }
+
     const rotationAngle =
       ((timestamp % rotationDuration) / rotationDuration + rotationOffset) *
       Math.PI *
@@ -42,7 +56,7 @@ export const createGetSunDirection = ([
       Math.PI *
       2;
 
-    // r.position.set(Math.cos(revolutionAngle), 0, Math.sin(revolutionAngle));
+    r.position.set(Math.cos(revolutionAngle), 0, Math.sin(revolutionAngle));
     r.position.set(0, 0, 1);
     o.quaternion.setFromAxisAngle(rotationAxis, rotationAngle);
 
@@ -51,7 +65,8 @@ export const createGetSunDirection = ([
     o.updateWorldMatrix(true, true);
     o.worldToLocal(target);
 
-    target.set(Math.sin(rotationAngle), 0, Math.cos(rotationAngle));
+    // target.set(Math.sin(rotationAngle), 0, Math.cos(rotationAngle));
+    // target.set(Math.sin(rotationAngle), 0, Math.cos(rotationAngle));
 
     // o.updateWorldMatrix(true, true);
     // o.matrixWorld.invert();

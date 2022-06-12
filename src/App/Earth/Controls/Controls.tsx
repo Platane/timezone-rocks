@@ -102,7 +102,7 @@ export const Controls = () => {
       ref={orbitControlsRef}
       minPolarAngle={Math.PI / 6}
       maxPolarAngle={Math.PI - Math.PI / 6}
-      minDistance={1.8}
+      minDistance={1}
       maxDistance={40}
       enableZoom={true}
       enablePan={!false}
@@ -110,5 +110,5 @@ export const Controls = () => {
   );
 };
 
-const springParams = { tension: 60, friction: 16 };
+const springParams = { tension: 860, friction: 46 };
 const s = new THREE.Spherical(1.04);

@@ -23,10 +23,6 @@ export const App = () => {
         </EarthContainer>
       </TopContainer>
 
-      <Search />
-
-      <DatePicker />
-
       <Lines />
     </>
   );

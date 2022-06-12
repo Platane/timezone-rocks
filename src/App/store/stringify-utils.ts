@@ -16,7 +16,7 @@ export const stringify = ({
 
   if (Number.isFinite(t) && t !== undefined) {
     const dateLiteral = DateTime.fromMillis(t)
-      .set({ millisecond: 0, second: 0 })
+      // .set({ millisecond: 0, second: 0 })
       .toISO({
         includeOffset: false,
         suppressMilliseconds: true,

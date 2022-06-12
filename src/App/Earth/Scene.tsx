@@ -11,15 +11,12 @@ export const Scene = () => {
   const ready = useStore((s) => s.earthReady);
 
   return (
-    <Canvas
-      camera={{ near: 0.1, far: 20, position: [0, 0, 1.95] }}
-      dpr={[1, 2]}
-    >
+    <Canvas camera={{ near: 0.1, far: 20, position: [0, 0, 1.5] }} dpr={[1, 2]}>
       <Controls />
 
       <ambientLight intensity={0.1} />
 
-      <AppearScaleNode scaleTarget={ready ? 1 : 0.001}>
+      <AppearScaleNode scaleTarget={ready || true ? 1 : 0.001}>
         <Suspense fallback={null}>
           <EarthGlobe />
           <Locations />
