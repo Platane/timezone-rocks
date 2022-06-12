@@ -11,83 +11,9 @@ import { DateSlider } from "./DateSlider";
 import { accentColor } from "../theme";
 
 export const Lines = () => {
-  const locations = useStore(selectLocations);
-  const tWindow = useStore(selectTWindow);
-  const selectLocation = useStore((s) => s.selectLocation);
-  const width = useWidth();
-
-  const ref = useRef<HTMLElement | null>(null);
-
-  const toScreenSpace = useCallback(
-    (t: number) => ((t - tWindow[0]) / (tWindow[1] - tWindow[0])) * width,
-    [tWindow, width]
-  );
-
-  const blocks = useMemo(
-    () => locations.map((location) => getBlocks(location.timezone, tWindow)),
-    [tWindow, locations]
-  );
-
-  useSubscribe(
-    (t) => {
-      const container = ref.current;
-
-      if (!container) return;
-
-      locations.forEach((location, i) => {
-        const x = toScreenSpace(t);
-
-        const cursorArm = container.children[0] as any;
-        cursorArm.style.transform = `translateX(${x}px)`;
-
-        const locationLabel = container.children[1 + i * 2];
-        updateLocationLabel(locationLabel, { location, t });
-
-        const row = container.children[2 + i * 2];
-
-        const flyingLabel = row.children[0];
-        (flyingLabel as any).style.transform = `translateX(${x + 2}px)`;
-        updateFlyingLabel(flyingLabel, { location, t });
-
-        for (let j = 0; j < blocks[i].length; j++) {
-          const primary = blocks[i][j].day[0] <= t && t <= blocks[i][j].day[1];
-
-          for (let k = 3; k--; )
-            row.children[1 + j * 3 + k].classList[primary ? "add" : "remove"](
-              "primary"
-            );
-        }
-      });
-    },
-    selectT,
-    [locations, toScreenSpace, blocks]
-  );
-
   return (
     <>
       <DateSlider />
-
-      <Container ref={ref as any}>
-        <CursorArm />
-
-        {locations.map((location, i) => (
-          <React.Fragment key={location.key}>
-            <LocationLabel location={location} />
-
-            <Row onClick={() => selectLocation(location)}>
-              <FlyingLabel />
-
-              {blocks[i].map(({ day, awake, office }, i) => (
-                <React.Fragment key={i}>
-                  <DayBlock style={toPosition(toScreenSpace, day, 2)} />
-                  <AwakeBlock style={toPosition(toScreenSpace, awake)} />
-                  <OfficeBlock style={toPosition(toScreenSpace, office)} />
-                </React.Fragment>
-              ))}
-            </Row>
-          </React.Fragment>
-        ))}
-      </Container>
     </>
   );
 };

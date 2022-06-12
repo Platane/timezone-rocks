@@ -138,9 +138,7 @@ const mod = (x: number, n: number) => ((x % n) + n) % n;
 
 (async () => {
   const { timezone, points } = await getSunRiseTime(
-    getLocationByName("Quito")!,
+    getLocationByName("Coyhaique")!,
     2022
   );
-
-  const getSunDirection = createGetSunDirection([]);
 })();

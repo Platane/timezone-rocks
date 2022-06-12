@@ -1,5 +1,6 @@
 import { DateTime } from "luxon";
 import * as THREE from "three";
+import { pickN } from "../../../../array-utils";
 import { getMatchingLocation, listVersion } from "../../../../locations";
 import { stringify } from "../../../store/stringify-utils";
 import { setLatLng } from "../../Locations/utils";
@@ -120,11 +121,28 @@ const formatHour = (hour: number) => {
 
 0;
 (async () => {
-  const [location] = await getMatchingLocation("Quito");
+  const ls = [
+    "Quito",
+    "Libreville",
+    "Mogadishu",
+    "Pontianak",
 
-  const points = toPoints(await getSunRiseTime(location, 2022))
-    .sort((a, b) => a.sunRiseTimestamp - b.sunRiseTimestamp)
-    .slice(0, 400);
+    "Stockholm",
+    "San Francisco",
+    "Antananarivo",
+    "Osaka",
+    "Madrid",
+    "Minsk",
+    "Uruguay",
+  ];
+
+  const [location] = await getMatchingLocation(
+    window.location.search.slice(1) || ls[0]
+  );
+
+  const points = pickN(toPoints(await getSunRiseTime(location, 2022)), 365)
+    //
+    .sort((a, b) => a.sunRiseTimestamp - b.sunRiseTimestamp);
 
   const getSunDirection = createGetSunDirection([]);
 
@@ -237,11 +255,17 @@ const formatHour = (hour: number) => {
     }).toMillis();
 
     const day = 24 * 60 * 60 * 1000;
-    const w = 2.5;
 
     iframe.contentWindow?.__useStore?.setState?.({
       t,
-      tWindow: [t - (day * w) / 2, t + (day * w) / 2],
+      tWindow: [
+        DateTime.fromISO(points[i].date + "T00", {
+          zone: points[i].timezone,
+        }).toMillis() - day,
+        DateTime.fromISO(points[i].date + "T23:59", {
+          zone: points[i].timezone,
+        }).toMillis() + day,
+      ],
     });
   };
 

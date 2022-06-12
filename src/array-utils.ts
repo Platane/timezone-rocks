@@ -13,3 +13,11 @@ export const shuffle = <T>(arr: T[]) => {
     arr[j] = tmp;
   }
 };
+
+export const pickN = <T>(arr: T[], n: number, offset: number = 0) =>
+  Array.from(
+    { length: n },
+    (_, i) => arr[mod(Math.floor((i / n) * arr.length) + offset, arr.length)]
+  );
+
+const mod = (x: number, n: number) => ((x % n) + n) % n;

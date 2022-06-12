@@ -7,15 +7,19 @@ export const createGetSunDirection = ([
   rotationAxisPhi,
   rotationAxisTheta,
 ]: number[]) => {
-  const r = new THREE.Object3D();
-  const o = new THREE.Object3D();
-  r.add(o);
+  const earth = new THREE.Object3D();
+  const earthTilted = new THREE.Object3D();
+  const sun = new THREE.Object3D();
+  const solarSystem = new THREE.Object3D();
+  solarSystem.add(sun);
+  solarSystem.add(earth);
+  earth.add(earthTilted);
   // r.quaternion.setFromEuler(new THREE.Euler(earthAxisAngle, 0, 0));
   // h.quaternion.setFromAxisAngle(y, Math.PI);
 
   const earthAxisAngle = (23.5 / 180) * Math.PI;
-  const rotationDuration = (23 * 60 * 60 + 56 * 60 + 4) * 1000;
-  const revolutionDuration = 365.256363004 * 24 * 60 * 60 * 1000;
+  // const rotationDuration = (23 * 60 * 60 + 56 * 60 + 4) * 1000;
+  // const revolutionDuration = 365.256363004 * 24 * 60 * 60 * 1000;
 
   const rotationAxis = new THREE.Vector3();
   // rotationAxis.applyAxisAngle(new THREE.Vector3(1, 0, 0), earthAxisAngle);
@@ -29,41 +33,46 @@ export const createGetSunDirection = ([
   //   rotationAxisTheta * Math.PI * 2
   // );
   rotationAxis.set(0, 1, 0);
+  rotationAxis.applyQuaternion(
+    new THREE.Quaternion().setFromEuler(new THREE.Euler(earthAxisAngle, 0, 0))
+  );
+  rotationAxis.applyQuaternion(
+    new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 5.5, 0))
+  );
 
   const rotationOffset = 0;
   const revolutionOffset = 0;
 
   const getSunDirection = (timestamp: number, target: THREE.Vector3) => {
     {
-      const rotationDuration = 24 * 60 * 60 * 1000;
-      const rotationOffset = Math.PI * 0.13;
-
-      const a = (timestamp / rotationDuration) * Math.PI * 2 + rotationOffset;
+      const a = (timestamp / (24 * 60 * 60 * 1000) + 0.56) * Math.PI * 2;
 
       target.set(Math.sin(a), 0, Math.cos(a));
 
-      return;
+      // return;
     }
 
+    const rotationDuration = (23 * 60 * 60 + 56 * 60 + 4) * 1000;
+    // const rotationDuration = 24 * 60 * 60 * 1000;
+    const rotationOffset = -0.2;
     const rotationAngle =
-      ((timestamp % rotationDuration) / rotationDuration + rotationOffset) *
-      Math.PI *
-      2;
+      (timestamp / rotationDuration + rotationOffset) * Math.PI * 2;
 
+    const revolutionDuration = 365.256363004 * 24 * 60 * 60 * 1000;
+    const revolutionOffset = -1.34;
     const revolutionAngle =
-      ((timestamp % revolutionDuration) / revolutionDuration +
-        revolutionOffset) *
-      Math.PI *
-      2;
+      (timestamp / revolutionDuration + revolutionOffset) * -Math.PI * 2;
 
-    r.position.set(Math.cos(revolutionAngle), 0, Math.sin(revolutionAngle));
-    r.position.set(0, 0, 1);
-    o.quaternion.setFromAxisAngle(rotationAxis, rotationAngle);
+    earth.position.set(Math.cos(revolutionAngle), 0, Math.sin(revolutionAngle));
+    earthTilted.quaternion.setFromAxisAngle(rotationAxis, rotationAngle);
+
+    earthTilted.updateWorldMatrix(true, false);
 
     target.set(0, 0, 0);
+    earthTilted.worldToLocal(target);
 
-    o.updateWorldMatrix(true, true);
-    o.worldToLocal(target);
+    // o.updateWorldMatrix(true, true);
+    // o.worldToLocal(target);
 
     // target.set(Math.sin(rotationAngle), 0, Math.cos(rotationAngle));
     // target.set(Math.sin(rotationAngle), 0, Math.cos(rotationAngle));

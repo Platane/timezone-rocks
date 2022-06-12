@@ -54,6 +54,11 @@ export const EarthGlobe = (props: any) => {
       <mesh geometry={geometry}>
         <meshToonMaterial color={"#ceff97"} gradientMap={gradientMap} />
       </mesh>
+
+      <mesh>
+        <cylinderBufferGeometry args={[0.05, 0.05, 10]} />
+        <meshStandardMaterial color={"#789a9a"} />
+      </mesh>
     </group>
   );
 };
