@@ -1,4 +1,18 @@
 import * as THREE from "three";
+import { setLatLng } from "../../Locations/utils";
+
+const solsticeIsoDate = "2022-06-21T12:02:30.000+00:00";
+
+const rotationDuration = (23 * 60 * 60 + 56 * 60 + 4) * 1000;
+const revolutionDuration = 365.256363004 * 24 * 60 * 60 * 1000;
+
+const tSolstice = new Date(solsticeIsoDate).getTime();
+
+const revolutionOffset = -tSolstice;
+
+const s = new THREE.Spherical();
+setLatLng(s, { longitude: 0, latitude: 0 });
+const rotationOffset = (s.theta / (Math.PI * 2)) * rotationDuration;
 
 export const createGetSunDirection = ([
   // rotationOffset = 0,
@@ -33,37 +47,26 @@ export const createGetSunDirection = ([
   //   rotationAxisTheta * Math.PI * 2
   // );
   rotationAxis.set(0, 1, 0);
-  rotationAxis.applyQuaternion(
-    new THREE.Quaternion().setFromEuler(new THREE.Euler(earthAxisAngle, 0, 0))
-  );
-  rotationAxis.applyQuaternion(
-    new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 5.5, 0))
-  );
-
-  const rotationOffset = 0;
-  const revolutionOffset = 0;
+  // rotationAxis.applyQuaternion(
+  //   new THREE.Quaternion().setFromEuler(new THREE.Euler(earthAxisAngle, 0, 0))
+  // );
+  // rotationAxis.applyQuaternion(
+  //   new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 5.5, 0))
+  // );
 
   const getSunDirection = (timestamp: number, target: THREE.Vector3) => {
-    {
-      const a = (timestamp / (24 * 60 * 60 * 1000) + 0.56) * Math.PI * 2;
-
-      target.set(Math.sin(a), 0, Math.cos(a));
-
-      // return;
-    }
-
-    const rotationDuration = (23 * 60 * 60 + 56 * 60 + 4) * 1000;
-    // const rotationDuration = 24 * 60 * 60 * 1000;
-    const rotationOffset = -0.2;
     const rotationAngle =
-      (timestamp / rotationDuration + rotationOffset) * Math.PI * 2;
+      (((timestamp + rotationOffset) / rotationDuration) * Math.PI * 2) %
+      (Math.PI * 2);
 
-    const revolutionDuration = 365.256363004 * 24 * 60 * 60 * 1000;
-    const revolutionOffset = -1.34;
     const revolutionAngle =
-      (timestamp / revolutionDuration + revolutionOffset) * -Math.PI * 2;
+      ((timestamp + revolutionOffset) / revolutionDuration) * Math.PI * 2;
 
-    earth.position.set(Math.cos(revolutionAngle), 0, Math.sin(revolutionAngle));
+    earth.position.set(
+      Math.cos(revolutionAngle),
+      0,
+      -Math.sin(revolutionAngle)
+    );
     earthTilted.quaternion.setFromAxisAngle(rotationAxis, rotationAngle);
 
     earthTilted.updateWorldMatrix(true, false);

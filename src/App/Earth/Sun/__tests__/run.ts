@@ -2,7 +2,10 @@ import * as path from "path";
 import * as fs from "fs";
 import { DateTime } from "luxon";
 import * as THREE from "three";
-import { parseLocations } from "../../../../locations/parseLocations";
+import {
+  ILocation,
+  parseLocations,
+} from "../../../../locations/parseLocations";
 import { getSunRiseTime } from "./sun-rise-cached";
 import { setLatLng } from "../../Locations/utils";
 import { createGetSunDirection } from "./createGetSunDirection";
@@ -136,9 +139,52 @@ const pickN = <T>(arr: T[], n: number, offset: number = 0) => {
 
 const mod = (x: number, n: number) => ((x % n) + n) % n;
 
-(async () => {
-  const { timezone, points } = await getSunRiseTime(
-    getLocationByName("Coyhaique")!,
-    2022
+const parseHour = (s: string) => {
+  const [h, m] = s.split(":");
+  return parseInt(h) + parseInt(m) / 60;
+};
+
+const formatHour = (hour: number) => {
+  const h = Math.floor(hour);
+  const m = Math.floor((hour % 1) * 60);
+  const s = ((hour * 60) % 1) * 60;
+
+  return (
+    h.toString().padStart(2, "0") +
+    ":" +
+    m.toString().padStart(2, "0") +
+    ":" +
+    s.toFixed(3).padStart(6, "0")
   );
+};
+
+(async () => {
+  const score = (l: ILocation) =>
+    100 * l.longitude ** 2 + 10 * l.latitude ** 2 + l.key / locations.length;
+
+  const location = locations.reduce((best, l) =>
+    score(best) < score(l) ? best : l
+  );
+
+  const { timezone, points } = await getSunRiseTime(location, 2022);
+
+  const p = points.find((p) => p.date.endsWith("06-21"));
+
+  const h = (parseHour(p!.sunRise) + parseHour(p!.sunSet)) / 2;
+
+  const isoDate = p?.date + "T" + formatHour(h);
+
+  const date = DateTime.fromISO(isoDate, { zone: timezone });
+
+  const getSunDirection = createGetSunDirection([]);
+
+  const direction = new THREE.Vector3();
+
+  const t0 = date.toMillis();
+
+  debugger;
+
+  getSunDirection(t0, direction);
+
+  console.log(direction);
 })();

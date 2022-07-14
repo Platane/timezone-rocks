@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import * as THREE from "three";
-import { pickN } from "../../../../array-utils";
+import { createSampleArray } from "../../../../array-utils";
 import { getMatchingLocation, listVersion } from "../../../../locations";
 import { stringify } from "../../../store/stringify-utils";
 import { setLatLng } from "../../Locations/utils";
@@ -140,7 +140,7 @@ const formatHour = (hour: number) => {
     window.location.search.slice(1) || ls[0]
   );
 
-  const points = pickN(toPoints(await getSunRiseTime(location, 2022)), 365)
+  const points = toPoints(await getSunRiseTime(location, 2022))
     //
     .sort((a, b) => a.sunRiseTimestamp - b.sunRiseTimestamp);
 
@@ -243,8 +243,6 @@ const formatHour = (hour: number) => {
   document.body.appendChild(iframe);
 
   canvas.onmousemove = (e) => {
-    debugger;
-
     const i = Math.floor((e.clientX / canvas.width) * points.length);
     const h = (e.clientY / canvas.height) * 24;
 

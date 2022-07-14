@@ -78,6 +78,7 @@
     "worker-loader": "3.0.8"
   },
   "scripts": {
+    "dev0": "sucrase-node ./src/App/Earth/Sun/__tests__/run.ts",
     "generateLocations": "sucrase-node src/locations/generate/generate.ts",
     "type": "tsc --noEmit",
     "lint": "prettier -c '**/*.{ts,tsx,js,jsx,json,md,html}' '!**/{build,dist}/**'",
