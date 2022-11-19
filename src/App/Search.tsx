@@ -1,13 +1,13 @@
 import React, { useRef, useState } from "react";
 import { styled } from "@linaria/react";
 import { css } from "@linaria/core";
-import { getFlagEmoji } from "../emojiFlagSequence";
+import { getFlagEmoji } from "../utils-emoji";
 import { useSearchResults } from "./useSearchLocation";
 import { useStore } from "./store/store";
 import { usePreviousUntilTruthy } from "../hooks/usePreviousUntilTruthy";
 import { useExtendedTruthiness } from "../hooks/useExtendedTruthiness";
 import { useSubscribe } from "./store/useSubscribe";
-import type { ILocation } from "../locations/getLocations";
+import type { ILocation } from "../locations/fetch/parseLocations";
 
 export const Search = () => {
   const focused = useStore((s) => s.searchFocused);

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react";
+import React from "react";
 
 const isTouchEventSupported = "ontouchend" in document;
 
@@ -11,20 +11,24 @@ export const useSlide = ({
   onStart?: (x: number) => void;
   onEnd?: (x: number) => void;
 }) => {
-  const containerRef = useRef<HTMLElement | null>();
-  const onChangeRef = useRef(onChange);
+  const containerRef = React.useRef<HTMLElement | null>();
+  const onChangeRef = React.useRef(onChange);
   onChangeRef.current = onChange;
-  const onStartRef = useRef(onStart);
+  const onStartRef = React.useRef(onStart);
   onStartRef.current = onStart;
-  const onEndRef = useRef(onEnd);
+  const onEndRef = React.useRef(onEnd);
   onEndRef.current = onEnd;
 
   if (isTouchEventSupported) {
-    const xRef = useRef(0);
+    const xRef = React.useRef(0);
 
-    const onTouchMove = useCallback(
-      ({ currentTarget, touches: [{ clientX }] }) => {
-        const { width, left } = currentTarget.getBoundingClientRect();
+    const onTouchMove = React.useCallback(
+      ({ currentTarget, touches }: TouchEvent | React.TouchEvent) => {
+        const { clientX } = touches[0];
+
+        const { width, left } = (
+          currentTarget as HTMLElement
+        ).getBoundingClientRect();
 
         const x = (clientX - left) / width;
         xRef.current = x;
@@ -33,9 +37,12 @@ export const useSlide = ({
       },
       []
     );
-    const onTouchStart = useCallback(
-      ({ currentTarget, touches: [{ clientX }] }) => {
-        const { width, left } = currentTarget.getBoundingClientRect();
+    const onTouchStart = React.useCallback(
+      ({ currentTarget, touches }: TouchEvent | React.TouchEvent) => {
+        const { clientX } = touches[0];
+        const { width, left } = (
+          currentTarget as HTMLElement
+        ).getBoundingClientRect();
 
         const x = (clientX - left) / width;
         xRef.current = x;
@@ -45,7 +52,7 @@ export const useSlide = ({
       },
       []
     );
-    const onTouchEnd = useCallback(() => {
+    const onTouchEnd = React.useCallback(() => {
       onEndRef.current?.(xRef.current);
     }, []);
 
@@ -55,26 +62,32 @@ export const useSlide = ({
       onTouchEnd,
     };
   } else {
-    const onPointerUp = useCallback(({ clientX }) => {
-      document.body.removeEventListener("pointermove", onPointerMove);
-      document.body.removeEventListener("pointerup", onPointerUp);
+    const onPointerUp = React.useCallback(
+      ({ clientX }: PointerEvent | React.PointerEvent) => {
+        document.body.removeEventListener("pointermove", onPointerMove);
+        document.body.removeEventListener("pointerup", onPointerUp);
 
-      if (!containerRef.current) return;
+        if (!containerRef.current) return;
 
-      const { width, left } = containerRef.current.getBoundingClientRect();
+        const { width, left } = containerRef.current.getBoundingClientRect();
 
-      onEndRef.current?.((clientX - left) / width);
-    }, []);
-    const onPointerMove = useCallback(({ clientX }) => {
-      if (!containerRef.current) return;
+        onEndRef.current?.((clientX - left) / width);
+      },
+      []
+    );
+    const onPointerMove = React.useCallback(
+      ({ clientX }: PointerEvent | React.PointerEvent) => {
+        if (!containerRef.current) return;
 
-      const { width, left } = containerRef.current.getBoundingClientRect();
+        const { width, left } = containerRef.current.getBoundingClientRect();
 
-      onChangeRef.current?.((clientX - left) / width);
-    }, []);
-    const onPointerDown = useCallback(
-      ({ currentTarget, clientX }) => {
-        containerRef.current = currentTarget;
+        onChangeRef.current?.((clientX - left) / width);
+      },
+      []
+    );
+    const onPointerDown = React.useCallback(
+      ({ currentTarget, clientX }: PointerEvent | React.PointerEvent) => {
+        containerRef.current = currentTarget as HTMLElement;
 
         const { width, left } = containerRef.current!.getBoundingClientRect();
 
@@ -88,12 +101,13 @@ export const useSlide = ({
       [onPointerMove]
     );
 
-    useEffect(() => {
-      return () => {
+    React.useEffect(
+      () => () => {
         document.body.removeEventListener("pointermove", onPointerMove);
         document.body.removeEventListener("pointerup", onPointerUp);
-      };
-    }, []);
+      },
+      []
+    );
     return { onPointerDown };
   }
 };

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useSubscribe } from "../../store/useSubscribe";
-import { isStable, stepSpring } from "../../../spring-utils";
+import { isStable, stepSpring } from "../../../utils-spring";
 import * as THREE from "three";
 import { setLatLng } from "../Locations/utils";
 

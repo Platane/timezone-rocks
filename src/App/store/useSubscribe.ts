@@ -6,9 +6,8 @@ export const useSubscribe = <T>(
   selector: (s: State) => T,
   dependencies: any[] = [],
   equalityFn?: any
-) => {
+) =>
   useLayoutEffect(() => {
     listener(selector(useStore.getState()));
-    return useStore.subscribe(listener, selector, equalityFn);
+    return useStore.subscribe(selector, listener, equalityFn);
   }, dependencies);
-};

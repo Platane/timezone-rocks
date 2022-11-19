@@ -2,6 +2,8 @@ type API = Record<string, (...args: any[]) => any>;
 
 const symbol = "worker-rpc__";
 
+let i = 0;
+
 export const createRpcServer = (api: API) =>
   self.addEventListener("message", async (event) => {
     if (event.data?.symbol === symbol) {
@@ -32,7 +34,8 @@ export const createRpcClient = <API_ extends API>(worker: Worker) => {
         (_, methodName) =>
         (...args: any[]) =>
           new Promise((resolve, reject) => {
-            const key = Math.random().toString();
+            i = (i + 1) % Number.MAX_SAFE_INTEGER;
+            const key = i;
 
             const onTerminate = () => {
               worker.removeEventListener("terminate", onTerminate);

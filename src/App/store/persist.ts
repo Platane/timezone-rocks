@@ -1,6 +1,5 @@
 import { createSelector } from "reselect";
-import type { UseStore } from "zustand";
-import type { Api, State } from "./store";
+import type { Store } from "./store";
 import {
   getLocationByTimezoneAndCountryCode,
   getLocationsByKey,
@@ -9,14 +8,14 @@ import {
 import {
   getClientLocaleCountryCode,
   getClientTimezone,
-} from "../../intl-utils";
+} from "../../utils-intl";
 import { selectLocations, selectT } from "./selector";
-import { parse, stringify } from "./stringify-utils";
+import { parse, stringify } from "./utils-stringify";
 
-export const init = async (store: UseStore<State & Api>) => {
+export const init = async (store: Store) => {
   {
     let timeout: NodeJS.Timeout;
-    store.subscribe(({ locations, t }) => {
+    store.subscribe(selectHashPrimitive, ({ locations, t }) => {
       clearTimeout(timeout);
 
       if (
@@ -31,7 +30,7 @@ export const init = async (store: UseStore<State & Api>) => {
       timeout = setTimeout(() => {
         window.location.hash = stringify({ locations, listVersion });
       }, 100);
-    }, selectHashPrimitive);
+    });
   }
 
   let initialParsedHash: ReturnType<typeof parse> | undefined;
@@ -40,7 +39,7 @@ export const init = async (store: UseStore<State & Api>) => {
   } catch (error) {}
 
   const locations =
-    listVersion === initialParsedHash?.listVersion
+    initialParsedHash && listVersion === initialParsedHash?.listVersion
       ? await getLocationsByKey(initialParsedHash.keys)
       : [];
 

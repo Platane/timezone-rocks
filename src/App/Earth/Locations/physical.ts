@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { MathUtils } from "three";
-import { getBoxDistance, getBoxToPointDistance } from "../../../math-utils";
+import { getBoxDistance, getBoxToPointDistance } from "../../../utils-math";
 
 export type NodeU = {
   p: THREE.Vector2;

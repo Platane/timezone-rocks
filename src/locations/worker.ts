@@ -1,8 +1,10 @@
-import { getLocations } from "./getLocations";
+import { getLocations } from "./fetch/getLocations";
 import { getLocationByTimezoneAndCountryCode as getLocationByTimezoneAndCountryCode_ } from "./search/getLocationByTimezoneAndCountryCode";
 import { getLocationsByKey as getLocationsByKey_ } from "./search/getLocationsByKey";
 import { createSearch } from "./search/search";
-import { createRpcServer } from "./worker-utils";
+import { createRpcServer } from "../utils-worker";
+
+console.log("----- worker loaded");
 
 const getLocationByTimezoneAndCountryCode = async (
   timezone: string,

@@ -1,5 +1,5 @@
 import { styled } from "@linaria/react";
-import React, { useCallback, useMemo, useRef } from "react";
+import React from "react";
 import { useStore } from "../store/store";
 import { selectLocations, selectT, selectTWindow } from "../store/selector";
 import { useSubscribe } from "../store/useSubscribe";
@@ -16,14 +16,14 @@ export const Lines = () => {
   const selectLocation = useStore((s) => s.selectLocation);
   const width = useWidth();
 
-  const ref = useRef<HTMLElement | null>(null);
+  const ref = React.useRef<HTMLElement | null>(null);
 
-  const toScreenSpace = useCallback(
+  const toScreenSpace = React.useCallback(
     (t: number) => ((t - tWindow[0]) / (tWindow[1] - tWindow[0])) * width,
     [tWindow, width]
   );
 
-  const blocks = useMemo(
+  const blocks = React.useMemo(
     () => locations.map((location) => getBlocks(location.timezone, tWindow)),
     [tWindow, locations]
   );

@@ -1,5 +1,5 @@
 import { styled } from "@linaria/react";
-import React, { useCallback, useRef } from "react";
+import React from "react";
 import { useSlide } from "./useSlide";
 import { useStore } from "../store/store";
 import { useWidth } from "./useWidth";
@@ -29,10 +29,10 @@ export const DateSlider = () => {
   const now = useStore((s) => s.now);
   const width = useWidth();
 
-  const cursorRef = useRef<HTMLDivElement | null>(null);
-  const shareRef = useRef<HTMLDivElement | null>(null);
+  const cursorRef = React.useRef<HTMLDivElement | null>(null);
+  const shareRef = React.useRef<HTMLDivElement | null>(null);
 
-  const toScreenSpace = useCallback(
+  const toScreenSpace = React.useCallback(
     (t: number) => ((t - tWindow[0]) / (tWindow[1] - tWindow[0])) * width,
     [tWindow, width]
   );

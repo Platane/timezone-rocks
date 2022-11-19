@@ -1,11 +1,7 @@
 import { API as WorkerAPI } from "./worker";
-import { createRpcClient } from "./worker-utils";
-
-export type { ILocation } from "./getLocations";
-
-// @ts-ignore
-import locationListPath from "../assets/locations.csv";
-export const listVersion = (locationListPath as string).slice(-7, -4);
+import { createRpcClient } from "../utils-worker";
+export { listVersion } from "./fetch/getLocations";
+export type { ILocation } from "./fetch/parseLocations";
 
 const worker = new Worker(
   new URL(

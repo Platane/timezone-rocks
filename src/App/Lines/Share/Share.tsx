@@ -7,7 +7,7 @@ import { ShareUrl } from "./ShareUrl";
 import { ShareICal } from "./ShareICal";
 import { listVersion } from "../../../locations";
 import { selectLocations } from "../../store/selector";
-import { stringify } from "../../store/stringify-utils";
+import { stringify } from "../../store/utils-stringify";
 
 export const Share = () => {
   const visible = useStore((s) => !s.dateCursorDragged);

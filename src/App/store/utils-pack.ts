@@ -3,7 +3,7 @@ import {
   b64ToArrayBuffer,
   get,
   set,
-} from "../../arraybuffer-utils";
+} from "../../utils-arraybuffer";
 import { limit as MAX_VALUE } from "../../locations/generate/options";
 
 const n = Math.ceil(Math.log(MAX_VALUE) / Math.log(2));

@@ -1,11 +1,11 @@
-import React, { useRef } from "react";
+import React from "react";
 import * as THREE from "three";
 import { selectT } from "../../store/selector";
 import { useSubscribe } from "../../store/useSubscribe";
-import { getSunDirection } from "./utils";
+import { getSunDirection } from "./getSunDirection";
 
 export const Sun = () => {
-  const refLight = useRef<THREE.DirectionalLight>();
+  const refLight = React.useRef<THREE.DirectionalLight | null>(null);
 
   useSubscribe((t) => {
     if (refLight.current?.position)

@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
+import { createRoot } from "react-dom/client";
 import ReactDOM from "react-dom";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
@@ -9,7 +10,7 @@ import { Label, labelBox } from "./Label";
 import { selectLocations } from "../../store/selector";
 
 export const Locations = () => {
-  const ref = useRef<THREE.Group>();
+  const ref = React.useRef<THREE.Group | null>(null);
 
   //
   // create and attach a dom element along the canvas
@@ -17,8 +18,8 @@ export const Locations = () => {
   const {
     gl: { domElement },
   } = useThree();
-  const [domContainer] = useState(() => document.createElement("div"));
-  useEffect(() => {
+  const [domContainer] = React.useState(() => document.createElement("div"));
+  React.useEffect(() => {
     domElement.parentElement?.parentElement?.appendChild(domContainer);
     return () => {
       domContainer.parentElement?.removeChild(domContainer);
@@ -28,7 +29,7 @@ export const Locations = () => {
   //
   // physics on every frame
   //
-  const refDtRest = useRef(0);
+  const refDtRest = React.useRef(0);
   useFrame(({ camera, size }, dt) => {
     const group = ref.current;
     if (!group) return;
@@ -133,7 +134,7 @@ export const Locations = () => {
         {useStore(selectLocations).map((location) => (
           <group key={location.key} position={latLngToWorld(location)}>
             <mesh>
-              <sphereBufferGeometry args={[0.008, 6, 6]} />
+              <sphereGeometry args={[0.008, 6, 6]} />
               <meshBasicMaterial color={"#000"} />
             </mesh>
 
@@ -154,7 +155,9 @@ export const Locations = () => {
 
 const LabelContainer = ({ domContainer }: { domContainer: HTMLDivElement }) => {
   React.useLayoutEffect(() => {
-    ReactDOM.render(<Labels />, domContainer);
+    const c = createRoot(domContainer);
+    c.render(<Labels />);
+
     return () => {
       ReactDOM.unmountComponentAtNode(domContainer);
     };

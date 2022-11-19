@@ -1,10 +1,5 @@
-import { ILocation } from "../getLocations";
+import { pruneUndefined } from "../../utils-array";
+import type { ILocation } from "../fetch/parseLocations";
 
-export const getLocationsByKey =
-  (locations: ILocation[]) => (keys: number[]) => {
-    const l = keys
-      .map((key) => locations.find((l) => l.key === key))
-      .filter(Boolean);
-
-    return l as any as ILocation[];
-  };
+export const getLocationsByKey = (locations: ILocation[]) => (keys: number[]) =>
+  pruneUndefined(keys.map((key) => locations.find((l) => l.key === key)));

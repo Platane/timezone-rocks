@@ -1,8 +1,7 @@
 import * as path from "path";
 import * as fs from "fs";
-import fetch from "node-fetch";
 import * as unzipper from "unzipper";
-import cheerio from "cheerio";
+import { load as CheerioLoad } from "cheerio";
 import { limit } from "./options";
 
 export const getTimezoneAbbreviations = async () => {
@@ -10,7 +9,7 @@ export const getTimezoneAbbreviations = async () => {
     "https://en.wikipedia.org/wiki/List_of_time_zone_abbreviations"
   ).then((res) => res.text());
 
-  const $ = cheerio.load(text);
+  const $ = CheerioLoad(text);
 
   return pruneNull(
     $(".wikitable.sortable tr")

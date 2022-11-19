@@ -1,6 +1,3 @@
-// @ts-ignore
-import locationListPath from "../assets/locations.csv";
-
 export const parseLocations = (csv: string) =>
   csv.split("\n").map((s, i) => {
     const [type, name, countryCode, lo, la, timezone] = s.split(",");
@@ -16,8 +13,3 @@ export const parseLocations = (csv: string) =>
   });
 
 export type ILocation = ReturnType<typeof parseLocations>[number];
-
-export const getLocations = () =>
-  fetch(locationListPath)
-    .then((res) => res.text())
-    .then(parseLocations);

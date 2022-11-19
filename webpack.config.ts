@@ -29,7 +29,7 @@ const webpackConfiguration: WebpackConfiguration = {
   module: {
     rules: [
       {
-        test: [/\.(bmp|gif|png|jpeg|jpg|svg|csv|glb)$/],
+        test: [/\.(csv|glb)$/],
         loader: "file-loader",
         options: { name: "[contenthash:base62].[ext]" },
       },
@@ -105,6 +105,19 @@ const webpackConfiguration: WebpackConfiguration = {
       ],
     }),
 
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.join(__dirname, "src/assets/manifest.json"),
+          to: "manifest.json",
+        },
+        {
+          from: path.join(__dirname, "src/assets/icons"),
+          to: "",
+        },
+      ],
+    }),
+
     ...("production" === mode
       ? [
           new GenerateSW({
@@ -116,19 +129,6 @@ const webpackConfiguration: WebpackConfiguration = {
             openAnalyzer: false,
             analyzerMode: "static",
           }) as any,
-
-          new CopyPlugin({
-            patterns: [
-              {
-                from: path.join(__dirname, "src/assets/manifest.json"),
-                to: "manifest.json",
-              },
-              {
-                from: path.join(__dirname, "src/assets/icons"),
-                to: "",
-              },
-            ],
-          }),
         ]
       : []),
   ],

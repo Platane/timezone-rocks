@@ -1,5 +1,5 @@
 import deburr from "lodash.deburr";
-import { ILocation } from "../getLocations";
+import type { ILocation } from "../fetch/parseLocations";
 
 export const createSearch = (locations: ILocation[]) => {
   const normalizedNames = locations.map((l) => normalize(l.name));

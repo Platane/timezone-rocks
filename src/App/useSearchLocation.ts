@@ -1,23 +1,8 @@
-import { useEffect, useState } from "react";
 import { getMatchingLocation } from "../locations";
-import type { ILocation } from "../locations";
+import { useAsyncMemo } from "../hooks/useAsyncMemo";
 
-export const useSearchResults = (query = "") => {
-  const [result, setResult] = useState<{
-    query: string;
-    locations: ILocation[];
-  }>();
-
-  useEffect(() => {
-    if (query.length)
-      getMatchingLocation(query).then((locations) =>
-        setResult({ query, locations })
-      );
-  }, [query]);
-
-  if (!query) return [];
-
-  if (result?.query === query) return result.locations;
-
-  return null;
-};
+export const useSearchResults = (query = "") =>
+  useAsyncMemo(
+    () => (query.trim().length ? getMatchingLocation(query) : []),
+    [query]
+  );

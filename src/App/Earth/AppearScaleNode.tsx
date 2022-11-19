@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { stepSpring } from "../../spring-utils";
+import { stepSpring } from "../../utils-spring";
 
 export const AppearScaleNode = ({
   children,
@@ -12,8 +12,8 @@ export const AppearScaleNode = ({
   scaleTarget: number;
   springConfig?: { tension: number; friction: number };
 }) => {
-  const ref = useRef<THREE.Group>();
-  const spring = useRef({ x: 0, target: 0, v: 0 });
+  const ref = React.useRef<THREE.Group | null>(null);
+  const spring = React.useRef({ x: 0, target: 0, v: 0 });
   spring.current.target = scaleTarget;
 
   useFrame((_, dt) => {

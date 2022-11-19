@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { OrbitControls } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useSubscribe } from "../../store/useSubscribe";
-import { isStable, stepSpring } from "../../../spring-utils";
+import { isStable, stepSpring } from "../../../utils-spring";
 import { setLatLng } from "../Locations/utils";
 import { MathUtils } from "three";
 import type { OrbitControls as IOrbitControls } from "three-stdlib";

@@ -1,4 +1,4 @@
-import { generateICal } from "../ical-utils";
+import { generateICal } from "../utils-ical";
 // @ts-ignore
 import ICAL from "ical.js";
 

@@ -2,9 +2,9 @@ import React from "react";
 import { styled } from "@linaria/react";
 import { css } from "@linaria/core";
 import { useStore } from "../store/store";
-import { getFlagEmoji } from "../../emojiFlagSequence";
+import { getFlagEmoji } from "../../utils-emoji";
 import { ILocation } from "../../locations";
-import { formatOffset } from "../../intl-utils";
+import { formatOffset } from "../../utils-intl";
 import { getTimezoneOffset } from "../../timezone/timezone";
 
 type Props = { location: ILocation };

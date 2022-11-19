@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { styled } from "@linaria/react";
 import { appearAnimation, Button, disappearAnimation } from "./buttons";
 import { useShare } from "../../../hooks/useShare";
-import { generateICal } from "../../../ical-utils";
+import { generateICal } from "../../../utils-ical";
 
 export const ShareICal = ({
   url,

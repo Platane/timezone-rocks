@@ -1,22 +1,22 @@
-import { useCallback, useMemo, useRef } from "react";
+import React from "react";
 import type { ILocation } from "../../../locations";
 import { getDate } from "../../../timezone/timezone";
 import { getPoseAtHour } from "../../Avatar/pose";
 import { selectT, selectUseCheapAvatar } from "../../store/selector";
-import { useStore } from "../../store/store";
-import { formatTime } from "../../../intl-utils";
+import { State, useStore } from "../../store/store";
+import { formatTime } from "../../../utils-intl";
 import { useSubscribe } from "../../store/useSubscribe";
 import { Avatar as AnimatedAvatar } from "../../Avatar/Avatar";
-import { getFlagEmoji } from "../../../emojiFlagSequence";
+import { getFlagEmoji } from "../../../utils-emoji";
 import ParkMiller from "park-miller";
 import { styled } from "@linaria/react";
 import { CheapAvatar } from "../../CheapAvatar";
 import { useDebouncedValue } from "../../../hooks/useDebouncedValue";
 
 export const Label = ({ location }: { location: ILocation }) => {
-  const hourLabelRef = useRef<HTMLDivElement | null>(null);
-  const selectHour = useCallback(
-    (s) => formatTime(getDate(location.timezone, selectT(s)).hour),
+  const hourLabelRef = React.useRef<HTMLDivElement | null>(null);
+  const selectHour = React.useCallback(
+    (s: State) => formatTime(getDate(location.timezone, selectT(s)).hour),
     [location.timezone]
   );
   useSubscribe((hour) => {
@@ -33,8 +33,8 @@ export const Label = ({ location }: { location: ILocation }) => {
 };
 
 const Avatar = ({ location }: { location: ILocation }) => {
-  const selectPose = useCallback(
-    (s) => getPoseAtHour(getDate(location.timezone, selectT(s)).hour),
+  const selectPose = React.useCallback(
+    (s: State) => getPoseAtHour(getDate(location.timezone, selectT(s)).hour),
     [location.timezone]
   );
 
@@ -42,7 +42,10 @@ const Avatar = ({ location }: { location: ILocation }) => {
 
   const pose = useDebouncedValue(useStore(selectPose), delay);
 
-  const colors = useMemo(() => getColors(location.key ** 7), [location.key]);
+  const colors = React.useMemo(
+    () => getColors(location.key ** 7),
+    [location.key]
+  );
 
   if (useStore(selectUseCheapAvatar))
     return (
