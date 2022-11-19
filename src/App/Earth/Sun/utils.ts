@@ -1,50 +1,47 @@
 import * as THREE from "three";
 
-/**
- * get the earth self axis rotation
- */
-const getH = (t: number) => (t % day) / day;
+const earthAxisAngle = (23.5 / 180) * Math.PI;
 
-/**
- * get the earth rotation around the sun
- */
-const getR = (t: number) => {
-  // set to the winter solstice
-  d.setTime(t);
-  d.setUTCMonth(11);
-  d.setUTCDate(21);
-  d.setUTCHours(0);
-  d.setUTCMinutes(0);
-  d.setUTCSeconds(0);
+const rotationDuration = 24 * 60 * 60 * 1000 + 4 * 60 * 1000;
+const revolutionDuration = 365.256363004 * 24 * 60 * 60 * 1000;
 
-  // distance to the winter solstice
-  return mod((t - d.getTime()) / year, 1);
-};
+// import { DateTime } from "luxon";
+// const decSolstice = DateTime.fromISO("2022-12-21T21:48:10").toMillis();
+// const revolutionOffset = -(decSolstice / revolutionDuration) % 1;
+const revolutionOffset = 0.02935049978712101;
 
-const mod = (x: number, n: number) => ((x % n) + n) % n;
+// empirically
+const rotationOffset = 0.845;
 
-const d = new Date();
+const p = new THREE.Object3D();
+const o = new THREE.Object3D();
 
-const hour = 1000 * 60 * 60;
-const day = hour * 24;
-const year = day * 365.25;
+const Y = new THREE.Vector3(0, 1, 0);
+
+p.add(o);
+p.quaternion.setFromEuler(new THREE.Euler(0, 0, -earthAxisAngle));
 
 /**
  * get the sun direction from the earth point of view
- * ⚠ likely not astronomically accurate
  */
 export const getSunDirection = (t: number, target: THREE.Vector3) => {
-  // r=0 at the winter solstice
-  const r = getR(t);
+  const rev = (t % revolutionDuration) / revolutionDuration + revolutionOffset;
 
-  const h = getH(t);
+  const rot = (t % rotationDuration) / rotationDuration + rotationOffset;
 
-  const earthAxisAngle = (-23.5 / 180) * Math.PI;
+  const A = 1000;
 
-  target.set(0, 0, 1);
-  target.applyAxisAngle(x, Math.sin((r - 0.25) * Math.PI * 2) * earthAxisAngle);
-  target.applyAxisAngle(y, (0.5 + h) * 2 * Math.PI);
+  p.position.set(
+    Math.cos(rev * Math.PI * 2) * A,
+    0,
+    Math.sin(rev * Math.PI * 2) * A
+  );
+
+  o.quaternion.setFromAxisAngle(Y, rot * Math.PI * 2);
+
+  o.updateWorldMatrix(true, false);
+
+  target.set(0, 0, 0);
+  o.worldToLocal(target);
+  target.normalize();
 };
-
-const y = new THREE.Vector3(0, 1, 0);
-const x = new THREE.Vector3(1, 0, 0);
