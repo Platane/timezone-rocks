@@ -31,7 +31,7 @@ export type State = {
 const t = Date.now();
 const day = 24 * 60 * 60 * 1000;
 
-const w = Math.max(2.3, Math.min(3, window.innerWidth / 300));
+const w = Math.max(2.3, Math.min(6, window.innerWidth / 100));
 
 export const useStore = create<State & Api>(
   devtools((set) => ({

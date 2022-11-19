@@ -12,6 +12,7 @@ import {
 } from "../../intl-utils";
 import { selectLocations, selectT } from "./selector";
 import { parse, stringify } from "./stringify-utils";
+import { location0 } from "../SolarSystem/location0";
 
 export const init = async (store: UseStore<State & Api>) => {
   {
@@ -52,6 +53,9 @@ export const init = async (store: UseStore<State & Api>) => {
 
     if (clientLocation) locations.push(clientLocation);
   }
+
+  locations.length = 0;
+  locations.push(location0);
 
   store.getState().initLocations(locations, initialParsedHash?.t);
 };

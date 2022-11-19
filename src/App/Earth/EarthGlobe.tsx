@@ -30,8 +30,8 @@ export const EarthGlobe = (props: any) => {
   const outLineRef = useRef<THREE.Object3D>();
   const { camera } = useThree();
   useFrame(() => {
-    const d = camera.position.length();
-    outLineRef.current?.scale.setScalar(1 + d * 0.01);
+    // const d = camera.position.length();
+    // outLineRef.current?.scale.setScalar(1 + d * 0.01);
   });
 
   useEffect(() => useStore.getState().onEarthReady(), []);
@@ -60,7 +60,7 @@ export const EarthGlobe = (props: any) => {
 
 const createGradientMap = () => {
   const canvas = document.createElement("canvas");
-  canvas.width = 18;
+  canvas.width = 20;
   canvas.height = 1;
 
   const context = canvas.getContext("2d")!;
@@ -71,7 +71,7 @@ const createGradientMap = () => {
   context.fillRect(0, 0, 10, 1);
 
   context.fillStyle = "#000";
-  context.fillRect(0, 0, 8, 1);
+  context.fillRect(0, 0, 10, 1);
 
   const gradientMap = new THREE.Texture(canvas);
   gradientMap.minFilter = THREE.NearestFilter;

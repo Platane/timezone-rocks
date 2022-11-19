@@ -75,6 +75,7 @@
   },
   "scripts": {
     "generateLocations": "sucrase-node src/locations/generate/generate.ts",
+    "generate-sun-rise-data-for-location0": "sucrase-node src/sun-data/generate-sun-rise-data-for-location0.ts",
     "type": "tsc --noEmit",
     "lint": "prettier -c '**/*.{ts,tsx,js,jsx,json,md,html}' '!**/{build,dist}/**'",
     "dev": "webpack serve",

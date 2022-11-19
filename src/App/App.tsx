@@ -6,6 +6,8 @@ import { Lines } from "./Lines/Lines";
 import { Search } from "./Search";
 import { useStore } from "./store/store";
 import { DatePicker } from "./DatePicker";
+import { SolarSystemScene } from "./SolarSystem/SolarSystem";
+import { DateShortcuts } from "./SolarSystem/DateShortcuts";
 
 const LazyEarthScene = loadable(() => import("./Earth/Scene"));
 LazyEarthScene.preload();
@@ -17,13 +19,17 @@ export const App = () => {
 
   return (
     <>
-      <TopContainer>
+      {/* <TopContainer>
         <EarthContainer>
           <LazyEarthScene />
         </EarthContainer>
-      </TopContainer>
+      </TopContainer> */}
+
+      <SolarSystemScene />
 
       <Search />
+
+      <DateShortcuts />
 
       <DatePicker />
 
@@ -66,13 +72,13 @@ const TopContainer = styled.div`
 `;
 const EarthContainer = styled.div`
   position: relative;
-  height: 500px;
+  height: 200px;
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
 
   @media (max-width: 500px) {
-    height: 300px;
+    height: 200px;
     max-width: 400px;
   }
 `;
