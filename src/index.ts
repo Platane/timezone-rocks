@@ -13,9 +13,4 @@ const handler = (ready: boolean) => {
 handler(useStore.getState().locationStoreReady);
 useStore.subscribe((s) => s.locationStoreReady, handler);
 
-// useStore.subscribe(
-//   (s) => s.locationStoreReady && s.earthReady,
-//   () => {
-//     window.navigator?.serviceWorker?.register("service-worker.js");
-//   }
-// );
+window.navigator?.serviceWorker?.register("service-worker.js");
