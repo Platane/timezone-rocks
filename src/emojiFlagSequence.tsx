@@ -1,5 +1,5 @@
-export const getFlagEmoji = (countyCode: string) => {
-  const cc = countyCode.toLocaleLowerCase();
+export const getFlagEmoji = (countryCode: string) => {
+  const cc = countryCode.toLocaleLowerCase();
   const a = parseInt(cc[0], 36) - 10;
   const b = parseInt(cc[1], 36) - 10;
 
