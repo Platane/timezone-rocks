@@ -31,7 +31,7 @@ The transformation scripting is located at src/App/Earth/generate/generate.ts. (
 - [ ] about page
   - describe inaccuracy of past timezone
   - attribution ( geonames.org, sketchfab )
-- [ ] fix sunlight
+- [x] fix sunlight
 - [ ] improve label phy engine
 - [ ] improve cloudflare deployment process ([ref](https://medium.com/swlh/using-cloudflare-workers-and-github-actions-to-deploy-statically-generated-sites-c96b502d49c4))
 
