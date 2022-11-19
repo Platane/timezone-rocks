@@ -71,6 +71,15 @@
     "workbox-webpack-plugin": "6.5.4",
     "worker-loader": "3.0.8"
   },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/__tests__/**/?(*.)+(spec|test).ts"
+    ],
+    "transform": {
+      "\\.(js|jsx|ts|tsx)$": "@sucrase/jest-plugin"
+    }
+  },
   "scripts": {
     "generateLocations": "sucrase-node src/locations/generate/generate.ts",
     "type": "tsc --noEmit",
