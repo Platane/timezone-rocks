@@ -21,22 +21,37 @@ jobs:
       - run: pnpm generateLocations
       - run: pnpm build
 
-      - name: deploy preview
-        id: deploy-preview
-        run: |
-          previewUrl=timezone-rocks-$SHA.surge.sh
-          echo ::set-output name=previewUrl::$previewUrl
-          pnpm surge ./dist $previewUrl
+      # - uses: actions/upload-artifact@v3
+      #   with:
+      #     name: site
+      #     path: dist
 
-          branch=`node -e "console.log(process.env.REF.replace(/^(refs\/(heads\/)?)?/,'').replace(/\W/g,'-'))"`
-          branchUrl=timezone-rocks-$branch.surge.sh
-          echo ::set-output name=branchUrl::$branchUrl
-          pnpm surge ./dist $branchUrl
-        env:
-          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
-          SHA: ${{ github.sha }}
-          REF: ${{ github.ref }}
+      - name: Publish
+        id: publish
+        uses: cloudflare/pages-action@1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_PUBLISH_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ secrets.CLOUDFLARE_PROJECT_NAME }}
+          directory: dist
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      # - name: deploy preview
+      #   id: deploy-preview
+      #   run: |
+      #     previewUrl=timezone-rocks-$SHA.surge.sh
+      #     echo ::set-output name=previewUrl::$previewUrl
+      #     pnpm surge ./dist $previewUrl
+
+      #     branch=`node -e "console.log(process.env.REF.replace(/^(refs\/(heads\/)?)?/,'').replace(/\W/g,'-'))"`
+      #     branchUrl=timezone-rocks-$branch.surge.sh
+      #     echo ::set-output name=branchUrl::$branchUrl
+      #     pnpm surge ./dist $branchUrl
+      #   env:
+      #     SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+      #     SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+      #     SHA: ${{ github.sha }}
+      #     REF: ${{ github.ref }}
 
       - name: disclaim preview url in commit comment
         uses: peter-evans/commit-comment@v2
@@ -44,7 +59,7 @@ jobs:
           token: ${{ github.token }}
           sha: ${{ github.sha }}
           body: |
-            [preview](https://${{ steps.deploy-preview.outputs.previewUrl }})
+            [preview](https://${{ steps.publish.outputs.url }})
 
       - run: pnpm type
       - run: pnpm lint
