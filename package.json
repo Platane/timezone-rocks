@@ -83,7 +83,7 @@
   "scripts": {
     "generateLocations": "sucrase-node src/locations/generate/generate.ts",
     "type": "tsc --noEmit",
-    "lint": "prettier -c '**/*.{ts,tsx,js,jsx,json,md,html}' '!**/{build,dist}/**'",
+    "lint": "prettier -c '**/*.{ts,tsx,json,md,html}' '!**/{build,dist}/**'",
     "dev": "webpack serve",
     "build": "NODE_ENV=production webpack build",
     "test": "jest"

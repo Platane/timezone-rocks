@@ -14,7 +14,7 @@ const mode =
 
 const webpackConfiguration: WebpackConfiguration = {
   mode,
-  devtool: false,
+  devtool: mode === "production" ? false : "eval",
   entry: path.join(__dirname, "src/index"),
   output: {
     chunkFilename: "[contenthash:base62].js",
@@ -52,7 +52,7 @@ const webpackConfiguration: WebpackConfiguration = {
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin({ filename: "[contenthash].css" }),
+    new MiniCssExtractPlugin({ filename: "[contenthash:base62].css" }),
 
     new HtmlPlugin({
       title: "🌐",
@@ -125,10 +125,10 @@ const webpackConfiguration: WebpackConfiguration = {
             exclude: [/\.LICENSE\.txt/],
           }),
 
-          new BundleAnalyzerPlugin({
-            openAnalyzer: false,
-            analyzerMode: "static",
-          }) as any,
+          // new BundleAnalyzerPlugin({
+          //   openAnalyzer: false,
+          //   analyzerMode: "static",
+          // }),
         ]
       : []),
   ],
