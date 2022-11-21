@@ -20,7 +20,6 @@ export const init = async (store: Store) => {
 
       if (
         initialParsedHash &&
-        initialParsedHash.listVersion === listVersion &&
         initialParsedHash.keys.length === locations.length &&
         initialParsedHash.keys.every((key, i) => key === locations[i].key) &&
         t === initialParsedHash.t
@@ -28,7 +27,7 @@ export const init = async (store: Store) => {
         return;
 
       timeout = setTimeout(() => {
-        window.location.hash = stringify({ locations, listVersion });
+        window.location.hash = stringify({ locations });
       }, 100);
     });
   }
@@ -38,10 +37,9 @@ export const init = async (store: Store) => {
     initialParsedHash = parse(window.location.hash);
   } catch (error) {}
 
-  const locations =
-    initialParsedHash && listVersion === initialParsedHash?.listVersion
-      ? await getLocationsByKey(initialParsedHash.keys)
-      : [];
+  const locations = initialParsedHash
+    ? await getLocationsByKey(initialParsedHash.keys)
+    : [];
 
   if (locations.length === 0) {
     const clientLocation = await getLocationByTimezoneAndCountryCode(

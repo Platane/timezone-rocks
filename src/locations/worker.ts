@@ -15,7 +15,7 @@ const getLocationByTimezoneAndCountryCode = async (
     countryCode
   );
 
-const getLocationsByKey = async (keys: number[]) =>
+const getLocationsByKey = async (keys: string[]) =>
   getLocationsByKey_(await locationsPromise)(keys);
 
 const getMatchingLocation = async (query: string) =>

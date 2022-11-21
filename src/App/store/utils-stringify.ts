@@ -1,20 +1,16 @@
 import { DateTime } from "luxon";
-import { pack, unpack } from "./utils-pack";
 
 export const stringify = ({
   t,
   locations,
-  listVersion,
 }: {
   t?: number;
-  locations: { key: number }[];
-  listVersion: string;
+  locations: { key: string }[];
 }) => {
   let s = "";
-  if (locations.length)
-    s += listVersion + pack(locations.map(({ key }) => key));
+  if (locations.length) s += locations.map(({ key }) => key).join("-");
 
-  if (Number.isFinite(t) && t !== undefined) {
+  if (Number.isFinite(t) && t) {
     const dateLiteral = DateTime.fromMillis(t)
       .set({ millisecond: 0, second: 0 })
       .toISO({
@@ -23,22 +19,21 @@ export const stringify = ({
         suppressSeconds: true,
         format: "basic",
       });
-    s += "__" + dateLiteral;
+    s += "--" + dateLiteral;
   }
 
   return s;
 };
 
 export const parse = (hash: string) => {
-  const [lkeys, dateLiteral] = hash.replace(/^#/, "").split("__");
+  const [lkeys, dateLiteral] = hash.replace(/^#/, "").split("--");
 
-  const listVersion = lkeys.slice(0, 3);
-  const keys = unpack(lkeys.slice(3));
+  const keys = lkeys.split("-");
 
   try {
     const t = DateTime.fromISO(dateLiteral).toMillis();
-    if (Number.isFinite(t)) return { keys, listVersion, t };
+    if (Number.isFinite(t)) return { keys, t };
   } catch (err) {}
 
-  return { keys, listVersion };
+  return { keys };
 };

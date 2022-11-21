@@ -38,14 +38,15 @@ const Avatar = ({ location }: { location: ILocation }) => {
     [location.timezone]
   );
 
-  const delay = ((location.key % 3) + 0.5) * 90;
+  const n = React.useMemo(
+    () => parseInt(location.key.replace(/\W/g, "").toLowerCase(), 36),
+    [location.key]
+  );
+  const delay = ((n % 3) + 0.5) * 90;
 
   const pose = useDebouncedValue(useStore(selectPose), delay);
 
-  const colors = React.useMemo(
-    () => getColors(location.key ** 7),
-    [location.key]
-  );
+  const colors = React.useMemo(() => getColors(n), [location.key]);
 
   if (useStore(selectUseCheapAvatar))
     return (

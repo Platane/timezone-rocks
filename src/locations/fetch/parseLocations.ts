@@ -2,7 +2,7 @@ export const parseLocations = (csv: string) =>
   csv.split("\n").map((s, i) => {
     const [type, name, countryCode, lo, la, timezone] = s.split(",");
     return {
-      key: i,
+      key: i.toString(),
       type: type as "city" | "admin" | "country" | "timezone",
       name,
       countryCode,
