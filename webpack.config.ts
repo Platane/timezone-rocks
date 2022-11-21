@@ -17,8 +17,8 @@ const webpackConfiguration: WebpackConfiguration = {
   devtool: mode === "production" ? false : "eval",
   entry: path.join(__dirname, "src/index"),
   output: {
-    chunkFilename: "[contenthash:base62].js",
-    filename: "[contenthash:base62].js",
+    chunkFilename: "assets/[contenthash:base62].js",
+    filename: "assets/[contenthash:base62].js",
     clean: true,
   },
   resolve: { extensions: [".tsx", ".ts", ".js"] },
@@ -31,7 +31,7 @@ const webpackConfiguration: WebpackConfiguration = {
       {
         test: [/\.(csv|glb)$/],
         loader: "file-loader",
-        options: { name: "[contenthash:base62].[ext]" },
+        options: { name: "assets/[contenthash:base62].[ext]" },
       },
 
       {
@@ -52,7 +52,7 @@ const webpackConfiguration: WebpackConfiguration = {
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin({ filename: "[contenthash:base62].css" }),
+    new MiniCssExtractPlugin({ filename: "assets/[contenthash:base62].css" }),
 
     new HtmlPlugin({
       title: "🌐",
@@ -110,6 +110,10 @@ const webpackConfiguration: WebpackConfiguration = {
         {
           from: path.join(__dirname, "src/assets/manifest.json"),
           to: "manifest.json",
+        },
+        {
+          from: path.join(__dirname, "src/assets/_headers"),
+          to: "",
         },
         {
           from: path.join(__dirname, "src/assets/icons"),
