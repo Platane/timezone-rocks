@@ -50,7 +50,7 @@ export const Search = () => {
     >
       <Input
         type="search"
-        placeholder="Add a timezone"
+        placeholder="Add your teammate's timezone"
         spellCheck={false}
         value={query}
         onChange={(event) => setQuery(event.target.value)}
