@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
         with:
-          version: 6
+          version: 7
       - uses: actions/setup-node@v3
         with:
           node-version: 18
@@ -20,11 +20,6 @@ jobs:
 
       - run: pnpm generateLocations
       - run: pnpm build
-
-      # - uses: actions/upload-artifact@v3
-      #   with:
-      #     name: site
-      #     path: dist
 
       - name: Publish
         id: publish
@@ -36,30 +31,13 @@ jobs:
           directory: dist
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: deploy preview
-      #   id: deploy-preview
-      #   run: |
-      #     previewUrl=timezone-rocks-$SHA.surge.sh
-      #     echo ::set-output name=previewUrl::$previewUrl
-      #     pnpm surge ./dist $previewUrl
-
-      #     branch=`node -e "console.log(process.env.REF.replace(/^(refs\/(heads\/)?)?/,'').replace(/\W/g,'-'))"`
-      #     branchUrl=timezone-rocks-$branch.surge.sh
-      #     echo ::set-output name=branchUrl::$branchUrl
-      #     pnpm surge ./dist $branchUrl
-      #   env:
-      #     SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-      #     SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
-      #     SHA: ${{ github.sha }}
-      #     REF: ${{ github.ref }}
-
       - name: disclaim preview url in commit comment
         uses: peter-evans/commit-comment@v2
         with:
           token: ${{ github.token }}
           sha: ${{ github.sha }}
           body: |
-            [preview](https://${{ steps.publish.outputs.url }})
+            [preview](${{ steps.publish.outputs.url }})
 
       - run: pnpm type
       - run: pnpm lint
