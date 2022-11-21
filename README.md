@@ -11,13 +11,6 @@
 npm run dev
 ```
 
-### Location list for autocomplete
-
-```sh
-# generate autocomplete suggestion
-npm run generateLocations
-```
-
 ### Model
 
 The model is a slightly modified version of this [sketfab model](https://sketchfab.com/3d-models/earth-0caafb7e837047a688a3e504c0ea74af).
@@ -35,11 +28,4 @@ The transformation scripting is located at src/App/Earth/generate/generate.ts. (
 - [ ] improve label phy engine
 - [x] improve cloudflare deployment process ([ref](https://medium.com/swlh/using-cloudflare-workers-and-github-actions-to-deploy-statically-generated-sites-c96b502d49c4))
 - [ ] use svg flags instead of emojis, [those](https://www.npmjs.com/package/country-flag-icons) are nice
-
-# Links
-
-[staging](https://timezone-rocks-master.surge.sh)
-
-[staging stress test](https://timezone-rocks-master.surge.sh/#WBLAmAAEIACYAAOAAJIAApgATCABuAAHgAEiAASYAJQgApgAS4ABsgAGmADcIAO4AE+AA==)
-
-[dst jump](https://timezone-rocks-master.surge.sh/#WBLJsBJAA==-2021-03-28T01:00z)
+- [ ] use a custom shader to highlight terrain and have a strict sunlight shadow
