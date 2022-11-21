@@ -18,7 +18,6 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - run: pnpm generateLocations
       - run: pnpm build
 
       - name: Publish
