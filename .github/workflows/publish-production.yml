@@ -6,7 +6,7 @@ on:
       - "live"
 
 jobs:
-  main:
+  publish-production:
     runs-on: ubuntu-latest
 
     steps:
