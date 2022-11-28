@@ -1,0 +1,19 @@
+{
+  "name": "@tzr/app",
+  "version": "0.0.1",
+  "private": true,
+  "devDependencies": {
+    "@babel/core": "7.20.2",
+    "@babel/preset-react": "7.18.6",
+    "@babel/preset-typescript": "7.18.6",
+    "@linaria/rollup": "4.2.2",
+    "@vitejs/plugin-react": "2.2.0",
+    "rollup": "3.4.0",
+    "rollup-plugin-visualizer": "5.8.3",
+    "vite": "3.2.4"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  }
+}

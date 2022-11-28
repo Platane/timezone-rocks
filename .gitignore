@@ -2,5 +2,6 @@ node_modules
 web_modules
 build
 dist
+dist-info
 .env
 .linaria-cache

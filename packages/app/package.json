@@ -1,0 +1,33 @@
+{
+  "name": "@tzr/app",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@linaria/core": "4.2.2",
+    "@linaria/react": "4.3.0",
+    "@loadable/component": "5.15.2",
+    "@react-three/drei": "9.43.3",
+    "@react-three/fiber": "8.9.1",
+    "@tzr/avatar": "0.0.1",
+    "@tzr/location-index": "0.0.1",
+    "@tzr/utils": "0.0.1",
+    "ical.js": "1.5.0",
+    "lodash.deburr": "4.1.0",
+    "luxon": "3.1.0",
+    "park-miller": "2.0.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "reselect": "4.1.7",
+    "three": "0.146.0",
+    "three-stdlib": "2.19.0",
+    "zustand": "4.1.4"
+  },
+  "devDependencies": {
+    "@types/loadable__component": "5.13.4",
+    "@types/lodash.deburr": "4.1.7",
+    "@types/luxon": "3.1.0",
+    "@types/react": "18.0.25",
+    "@types/react-dom": "18.0.9",
+    "@types/three": "0.146.0"
+  }
+}

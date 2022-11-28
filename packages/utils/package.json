@@ -1,0 +1,11 @@
+{
+  "name": "@tzr/utils",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "base-64": "1.0.0"
+  },
+  "devDependencies": {
+    "@types/base-64": "1.0.0"
+  }
+}

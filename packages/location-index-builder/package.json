@@ -1,0 +1,18 @@
+{
+  "name": "@tzr/location-index-builder",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@tzr/utils": "0.0.1",
+    "cheerio": "1.0.0-rc.12",
+    "unzipper": "0.10.11"
+  },
+  "devDependencies": {
+    "@types/node": "18.11.9",
+    "@types/unzipper": "0.10.5",
+    "sucrase": "3.29.0"
+  },
+  "scripts": {
+    "build": "sucrase-node print.ts > ../location-index/assets/locations.csv"
+  }
+}
