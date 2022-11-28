@@ -1,0 +1,13 @@
+{
+  "name": "@tzr/location-index",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@tzr/location-index-builder": "0.0.1",
+    "@tzr/utils": "0.0.1",
+    "lodash.deburr": "4.1.0"
+  },
+  "devDependencies": {
+    "@types/lodash.deburr": "4.1.7"
+  }
+}
