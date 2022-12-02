@@ -1,7 +1,6 @@
 node_modules
-web_modules
-build
 dist
 dist-info
 .env
-.linaria-cache
+/packages/e2e/playwright-report
+/packages/e2e/playwright-screenshots
