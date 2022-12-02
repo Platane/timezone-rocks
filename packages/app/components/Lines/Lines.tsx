@@ -16,7 +16,7 @@ export const Lines = () => {
   const selectLocation = useStore((s) => s.selectLocation);
   const width = useWidth();
 
-  const ref = React.useRef<HTMLElement | null>(null);
+  const ref = React.useRef<HTMLDivElement | null>(null);
 
   const toScreenSpace = React.useCallback(
     (t: number) => ((t - tWindow[0]) / (tWindow[1] - tWindow[0])) * width,
@@ -34,19 +34,19 @@ export const Lines = () => {
 
       if (!container) return;
 
+      const x = toScreenSpace(t);
+
+      const cursorArm = container.children[0] as HTMLElement;
+      cursorArm.style.transform = `translateX(${x}px)`;
+
       locations.forEach((location, i) => {
-        const x = toScreenSpace(t);
-
-        const cursorArm = container.children[0] as any;
-        cursorArm.style.transform = `translateX(${x}px)`;
-
-        const locationLabel = container.children[1 + i * 2];
+        const locationLabel = container.children[1 + i * 2] as HTMLElement;
         updateLocationLabel(locationLabel, { location, t });
 
-        const row = container.children[2 + i * 2];
+        const row = container.children[2 + i * 2] as HTMLElement;
 
-        const flyingLabel = row.children[0];
-        (flyingLabel as any).style.transform = `translateX(${x + 2}px)`;
+        const flyingLabel = row.children[0] as HTMLElement;
+        flyingLabel.style.transform = `translateX(${x + 2}px)`;
         updateFlyingLabel(flyingLabel, { location, t });
 
         for (let j = 0; j < blocks[i].length; j++) {
@@ -67,14 +67,18 @@ export const Lines = () => {
     <>
       <DateSlider />
 
-      <Container ref={ref as any}>
+      <Container role="list" ref={ref}>
         <CursorArm />
 
         {locations.map((location, i) => (
           <React.Fragment key={location.key}>
             <LocationLabel location={location} />
 
-            <Row onClick={() => selectLocation(location)}>
+            <Row
+              role="listitem"
+              id={`location-item-${location.key}`}
+              onClick={() => selectLocation(location)}
+            >
               <FlyingLabel />
 
               {blocks[i].map(({ day, awake, office }, i) => (

@@ -23,7 +23,7 @@ export const LocationLabel = ({ location }: Props) => {
         selectedLocation === location ? locationLabelSelected : undefined
       }
     >
-      <Name>{location.name}</Name>
+      <Name htmlFor={`location-item-${location.key}`}>{location.name}</Name>
 
       <Flag>
         {location.type !== "timezone" ? getFlagEmoji(location.countryCode) : ""}
@@ -32,6 +32,8 @@ export const LocationLabel = ({ location }: Props) => {
       <Offset></Offset>
 
       <RemoveButton
+        role="button"
+        aria-label="remove location"
         href="#"
         title="remove location"
         onClick={(e) => {
@@ -74,7 +76,7 @@ const Flag = styled.span`
   font-size: 12px;
   margin-left: 8px;
 `;
-const Name = styled.span`
+const Name = styled.label`
   display: inline-block;
 `;
 const Offset = styled.span`
