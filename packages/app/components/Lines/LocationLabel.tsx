@@ -6,9 +6,10 @@ import { getFlagEmoji } from "../../flags/emoji";
 import { formatOffset } from "../../intl/format";
 import { getTimezoneOffset } from "../../timezone/timezone";
 import type { ILocation } from "@tzr/location-index";
+import { stringify } from "../../store/utils-stringify";
 
-type Props = { location: ILocation };
-export const LocationLabel = ({ location }: Props) => {
+type Props = { location: ILocation; locations: ILocation[] };
+export const LocationLabel = ({ location, locations }: Props) => {
   const selectLocation = useStore((s) => s.selectLocation);
   const selectedLocation = useStore((s) => s.selectedLocation?.[0]);
   const removeLocation = useStore((s) => s.removeLocation);
@@ -34,7 +35,12 @@ export const LocationLabel = ({ location }: Props) => {
       <RemoveButton
         role="button"
         aria-label="remove location"
-        href="#"
+        href={
+          "#" +
+          stringify({
+            locations: locations.filter((l) => l.key !== location.key),
+          })
+        }
         title="remove location"
         onClick={(e) => {
           e.preventDefault();

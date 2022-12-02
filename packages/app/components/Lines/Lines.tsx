@@ -72,7 +72,7 @@ export const Lines = () => {
 
         {locations.map((location, i) => (
           <React.Fragment key={location.key}>
-            <LocationLabel location={location} />
+            <LocationLabel location={location} locations={locations} />
 
             <Row
               role="listitem"
