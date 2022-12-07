@@ -55,7 +55,7 @@ export const LocationLabel = ({ location, locations }: Props) => {
 
 export const update = (
   domElement: Element,
-  { location, t }: Props & { t: number }
+  { location, t }: { location: ILocation; t: number }
 ) => {
   domElement.children[2].innerHTML = formatOffset(
     getTimezoneOffset(location.timezone, t)
