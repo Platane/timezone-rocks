@@ -31,6 +31,6 @@
     "test": "jest",
     "build:locations": "( cd packages/location-index-builder ; pnpm build )",
     "dev": "( cd packages/app-builder ; pnpm dev )",
-    "build:app": "( cd packages/app-builder ; pnpm build )"
+    "build:app": "( cd packages/location-index-wasm ; pnpm build:production ) && ( cd packages/app-builder ; pnpm build )"
   }
 }

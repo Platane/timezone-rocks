@@ -1,0 +1,17 @@
+{
+  "name": "@tzr/location-index-wasm",
+  "version": "0.0.1",
+  "private": true,
+  "sideEffects": false,
+  "dependencies": {},
+  "devDependencies": {
+    "wasm-pack": "0.10.2"
+  },
+  "module": "pkg/search_location.js",
+  "types": "pkg/search_location.d.ts",
+  "scripts": {
+    "build:dev": "( cd crates/search-location ; wasm-pack build --target web --dev )",
+    "build:production": "( cd crates/search-location ; wasm-pack build --target web --release )",
+    "test": "( cd crates/search-location ; cargo test  -- --nocapture )"
+  }
+}
