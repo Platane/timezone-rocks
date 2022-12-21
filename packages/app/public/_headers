@@ -4,6 +4,7 @@
   Referrer-Policy: no-referrer
   Content-Security-Policy: default-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'
   Access-Control-Allow-Origin: <origin>
+  Permissions-Policy: geolocation=()
 
 /assets/*
   cache-control: public, max-age=31536000, immutable
