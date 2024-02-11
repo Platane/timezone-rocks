@@ -16,7 +16,7 @@ jobs:
 
       - run: bun install --frozen-lockfile
 
-      - run: npm run build:app
+      - run: bun build:app
 
       - name: Publish
         id: publish
@@ -36,9 +36,9 @@ jobs:
           body: |
             [preview](${{ steps.publish.outputs.url }})
 
-      - run: npm run type
-      - run: npm run lint
-      - run: npm run test
+      - run: bun type
+      - run: bun lint
+      - run: bun test
 
   e2e:
     runs-on: ubuntu-latest

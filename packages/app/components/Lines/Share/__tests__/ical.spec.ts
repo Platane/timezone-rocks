@@ -1,6 +1,7 @@
 // @ts-ignore
 import ICAL from "ical.js";
 import { generateICal } from "../utils-ical";
+import { it, expect } from "bun:test";
 
 it("should", () => {
   const ical = generateICal({

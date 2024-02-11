@@ -14,7 +14,7 @@ import {
 
 export const init = async (store: Store) => {
   {
-    let timeout: NodeJS.Timeout;
+    let timeout: number | Timer | undefined;
     store.subscribe(selectHashPrimitive, ({ locations, t }) => {
       clearTimeout(timeout);
 
