@@ -19,5 +19,8 @@
         "noExplicitAny": "off"
       }
     }
+  },
+  "files": {
+    "ignore": ["dist", "dist-info"]
   }
 }
