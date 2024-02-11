@@ -26,10 +26,8 @@ jobs:
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
       - name: disclaim preview url in commit comment
-        uses: peter-evans/commit-comment@v2
+        uses: peter-evans/commit-comment@v3
         with:
-          token: ${{ github.token }}
-          sha: ${{ github.sha }}
           body: |
             [preview](${{ steps.publish.outputs.url }})
 
