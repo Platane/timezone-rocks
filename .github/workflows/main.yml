@@ -50,7 +50,17 @@ jobs:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v1
 
+      - run: bun install --frozen-lockfile
+
+      - name: Cache playwright binaries
+        uses: actions/cache@v3
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ matrix.browser }}
+
       - run: bunx playwright install ${{ matrix.browser }} --with-deps
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
         working-directory: packages/e2e
 
       - run: |
