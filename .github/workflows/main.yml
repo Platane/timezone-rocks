@@ -38,7 +38,7 @@ jobs:
 
       - run: bun type
       - run: bun lint
-      - run: bun test
+      - run: npm run test
 
   e2e:
     runs-on: ubuntu-latest
