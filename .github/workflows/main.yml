@@ -49,9 +49,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v1
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
 
       - run: bunx playwright install ${{ matrix.browser }} --with-deps
         working-directory: packages/e2e
