@@ -33,8 +33,8 @@ export const generateGlb = async () => {
 
   const scene = transform(gltf.scene);
 
-  const outGlb: any = new Promise((resolve) =>
-    new GLTFExporter().parse(scene, resolve, {
+  const outGlb: any = new Promise((resolve, reject) =>
+    new GLTFExporter().parse(scene, resolve, reject, {
       binary: true,
       onlyVisible: true,
     })

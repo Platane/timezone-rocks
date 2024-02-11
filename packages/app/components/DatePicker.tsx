@@ -75,7 +75,7 @@ export const DatePicker = () => {
           name="date"
           type="date"
           aria-label="date picker"
-          defaultValue={defaultValue}
+          defaultValue={defaultValue ?? undefined}
         />
         <FormSubmitButton type="submit" tabIndex={focus ? 0 : -1}>
           ok

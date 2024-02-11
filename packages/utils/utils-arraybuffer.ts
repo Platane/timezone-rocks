@@ -7,7 +7,7 @@ import { encode, decode } from "base-64";
 export const set = (arr: Uint8Array, n: number, i: number, value: number) => {
   for (let u = 0; u < n; u++) {
     const k = i * n + u;
-    arr[Math.floor(k / 8)] += +!!(value & (1 << u)) * (1 << k % 8);
+    arr[Math.floor(k / 8)] += +!!(value & (1 << u)) * (1 << (k % 8));
   }
 };
 
@@ -19,7 +19,7 @@ export const get = (arr: Uint8Array, n: number, i: number) => {
   let v = 0;
   for (let u = 0; u < n; u++) {
     const k = i * n + u;
-    v += +!!((arr[Math.floor(k / 8)] || 0) & (1 << k % 8)) * (1 << u);
+    v += +!!((arr[Math.floor(k / 8)] || 0) & (1 << (k % 8))) * (1 << u);
   }
   return v;
 };

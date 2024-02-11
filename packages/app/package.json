@@ -3,31 +3,31 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "@linaria/core": "4.2.2",
-    "@linaria/react": "4.3.0",
-    "@loadable/component": "5.15.2",
-    "@react-three/drei": "9.43.3",
-    "@react-three/fiber": "8.9.1",
+    "@linaria/core": "6.1.0",
+    "@linaria/react": "6.1.0",
+    "@loadable/component": "5.16.3",
+    "@react-three/drei": "9.97.4",
+    "@react-three/fiber": "8.15.16",
     "@tzr/avatar": "0.0.1",
     "@tzr/location-index": "0.0.1",
     "@tzr/utils": "0.0.1",
     "ical.js": "1.5.0",
     "lodash.deburr": "4.1.0",
-    "luxon": "3.1.0",
+    "luxon": "3.4.4",
     "park-miller": "2.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "reselect": "4.1.7",
-    "three": "0.146.0",
-    "three-stdlib": "2.19.0",
-    "zustand": "4.1.4"
+    "reselect": "5.1.0",
+    "three": "0.161.0",
+    "three-stdlib": "2.29.4",
+    "zustand": "4.5.0"
   },
   "devDependencies": {
-    "@types/loadable__component": "5.13.4",
-    "@types/lodash.deburr": "4.1.7",
-    "@types/luxon": "3.1.0",
-    "@types/react": "18.0.25",
-    "@types/react-dom": "18.0.9",
-    "@types/three": "0.146.0"
+    "@types/loadable__component": "5.13.8",
+    "@types/lodash.deburr": "4.1.9",
+    "@types/luxon": "3.4.2",
+    "@types/react": "18.2.55",
+    "@types/react-dom": "18.2.19",
+    "@types/three": "0.161.2"
   }
 }

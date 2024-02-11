@@ -27,7 +27,7 @@ const config: PlaywrightTestConfig = {
 
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: "https://timezone.rocks",
-    baseURL: process.env.APP_URL,
+    baseURL: process.env.APP_URL ?? "http://localhost:3000",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",

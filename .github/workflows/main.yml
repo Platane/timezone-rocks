@@ -8,18 +8,15 @@ jobs:
     outputs:
       published_url: ${{ steps.publish.outputs.url }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1
+      - uses: actions/setup-node@v4
         with:
-          version: 7
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: pnpm
+          node-version: 20
 
-      - run: pnpm install --frozen-lockfile
+      - run: bun install --frozen-lockfile
 
-      - run: pnpm build:app
+      - run: npm run build:app
 
       - name: Publish
         id: publish
@@ -39,9 +36,9 @@ jobs:
           body: |
             [preview](${{ steps.publish.outputs.url }})
 
-      - run: pnpm type
-      - run: pnpm lint
-      - run: pnpm test
+      - run: npm run type
+      - run: npm run lint
+      - run: npm run test
 
   e2e:
     runs-on: ubuntu-latest
@@ -53,22 +50,17 @@ jobs:
         browser: [chromium]
         # browser: [firefox, chromium, webkit]
     steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1
+      - uses: actions/setup-node@v4
         with:
-          version: 7
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: pnpm
+          node-version: 20
 
-      - run: pnpm install --frozen-lockfile --filter e2e
-
-      - run: pnpm playwright install ${{ matrix.browser }} --with-deps
+      - run: bunx playwright install ${{ matrix.browser }} --with-deps
         working-directory: packages/e2e
 
       - run: |
-          pnpm playwright test \
+          bunx playwright test \
             --project ${{ matrix.browser }} \
             --shard ${{ matrix.shard }} \
             --reporter github \

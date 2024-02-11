@@ -4,15 +4,15 @@
  */
 export const formatTime = (hour: number) => {
   const h = 0 | hour;
-  const m = 0 | (hour * 60) % 60;
+  const m = 0 | ((hour * 60) % 60);
 
   if (timeFormatter) {
     const d = new Date();
     d.setHours(h);
     d.setMinutes(m);
     return timeFormatter.format(d);
-  } else
-    return `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}`;
+  }
+  return `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}`;
 };
 
 /**
@@ -21,7 +21,7 @@ export const formatTime = (hour: number) => {
 export const formatOffset = (minute: number) => {
   const sign = minute > 0;
   const hour = 0 | (Math.abs(minute) / 60);
-  const min = 0 | Math.abs(minute) % 60;
+  const min = 0 | (Math.abs(minute) % 60);
 
   return (
     "GMT " +

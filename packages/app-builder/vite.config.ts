@@ -1,8 +1,8 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { visualizer } from "rollup-plugin-visualizer";
-import linaria from "@linaria/rollup";
 import { execSync } from "child_process";
+import wyw from "@wyw-in-js/vite";
 
 const getVersion = () =>
   [
@@ -17,9 +17,9 @@ export default defineConfig(() => ({
     visualizer({
       filename: "../../dist-info/bundle-stats.html",
       template: "treemap",
-    }) as any,
+    }),
     react(),
-    linaria({
+    wyw({
       include: ["**/*.tsx"],
       exclude: ["**/node_modules/**"],
       babelOptions: {
