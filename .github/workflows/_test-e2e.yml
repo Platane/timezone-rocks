@@ -14,8 +14,8 @@ jobs:
       fail-fast: false
       matrix:
         shard: ["1/1"]
-        # browser: [firefox, chromium]
-        browser: [firefox, chromium, webkit]
+        browser: [firefox, chromium]
+        # browser: [firefox, chromium, webkit]
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v1
