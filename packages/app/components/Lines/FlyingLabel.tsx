@@ -21,12 +21,16 @@ export const FlyingLabel = () => (
  * split into date / time / literal blocks
  */
 const formatDateTime = (timezone: string, t: number) => {
-  const parts = DateTime.fromMillis(t, { zone: timezone }).toLocaleParts({
+  const date = DateTime.fromMillis(t, { zone: timezone }).toJSDate();
+
+  const dateTimeFormat = new Intl.DateTimeFormat(undefined, {
     minute: "numeric",
     hour: "numeric",
     month: "long",
     day: "numeric",
   });
+
+  const parts = dateTimeFormat.formatToParts(date);
 
   const getLooseType = (type: Intl.DateTimeFormatPart["type"]) =>
     ((type === "day" || type === "month" || type === "year") && "date") ||

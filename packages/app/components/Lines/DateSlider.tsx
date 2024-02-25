@@ -68,7 +68,7 @@ export const DateSlider = () => {
           <NowLabel>now</NowLabel>
         </NowButton>
 
-        <Caret ref={cursorRef} />
+        <Caret ref={cursorRef} aria-label="date slider" />
       </CursorContainer>
 
       <ShareContainer ref={shareRef}>

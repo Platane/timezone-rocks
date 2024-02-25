@@ -96,6 +96,12 @@ export const formatInterval = (timezone: string, [a, b]: [number, number]) => {
   const da = DateTime.fromMillis(a, { zone: timezone });
   const db = DateTime.fromMillis(b, { zone: timezone });
 
+  // const dateTimeFormat = new Intl.DateTimeFormat(undefined, {
+  //   month: "long",
+  //   day: "numeric",
+  // });
+  // return dateTimeFormat.formatRange(da.toJSDate(), db.toJSDate());
+
   if (da.year !== db.year)
     return (
       da.toLocaleString({ year: "numeric", month: "long", day: "numeric" }) +
