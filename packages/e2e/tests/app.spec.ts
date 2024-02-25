@@ -91,7 +91,7 @@ test("Should be able to move slider", async ({ page }) => {
 
   {
     const date = await flyingDateLocator.textContent();
-    expect(date).toBe("February 2 at 5:00 AM");
+    expect(date).toBe("February 2 at 05:00 AM");
   }
 
   await expect(page.getByLabel("avatar in the pose night")).toBeVisible();

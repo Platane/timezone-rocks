@@ -24,8 +24,8 @@ const formatDateTime = (timezone: string, t: number) => {
   const date = DateTime.fromMillis(t, { zone: timezone }).toJSDate();
 
   const dateTimeFormat = new Intl.DateTimeFormat(undefined, {
-    minute: "numeric",
-    hour: "numeric",
+    minute: "2-digit",
+    hour: "2-digit",
     month: "long",
     day: "numeric",
   });
@@ -73,15 +73,21 @@ export const update = (domElement: Element, { location, t }: Props) => {
     const el = domElement.children[i] as HTMLElement;
     el.innerText = parts[i]?.text ?? "";
 
-    el.classList.remove(valueClassName);
+    el.classList.remove(dateClassName);
+    el.classList.remove(timeClassName);
     el.classList.remove(literalClassName);
 
     if (parts[i]?.type === "literal") el.classList.add(literalClassName);
-    else el.classList.add(valueClassName);
+    if (parts[i]?.type === "date") el.classList.add(dateClassName);
+    if (parts[i]?.type === "time") el.classList.add(timeClassName);
   }
 };
 
-const valueClassName = css`
+const dateClassName = css`
+  white-space: pre;
+  font-size: 0.72em;
+`;
+const timeClassName = css`
   white-space: pre;
 `;
 const literalClassName = css`
@@ -97,12 +103,13 @@ const Container = styled.div`
   font-size: 10px;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
+  padding-bottom:2px ;
   z-index: 2;
   height: 100%;
   pointer-events: none;
   font-size: 1.4em;
   font-family: monospace;
   color: #fff;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 1), 0 0 4px rgba(0, 0, 0, 1);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 1), 0 0 4px rgba(0, 0, 0, 1), 0 0 8px rgba(0, 0, 0, 1);
 `;

@@ -115,31 +115,29 @@ const toPosition = (
   return { left: sa + "px", right: sb + "px", width: sb - sa + "px" };
 };
 
+const LINE_HEIGHT = 32;
+
 const Row = styled.div`
-  height: 32px;
+  height: ${LINE_HEIGHT}px;
   overflow: hidden;
   position: relative;
 `;
+
+const BLOCK_HEIGHT = 34;
 
 const Block = styled.div`
   position: absolute;
   border-radius: 4px;
   transition: filter 100ms;
+  height: ${BLOCK_HEIGHT}px;
+  top: ${(LINE_HEIGHT - BLOCK_HEIGHT) / 2}px;
 `;
 
 const DayBlock = styled(Block)`
-  height: 24px;
-  top: 4px;
-
-  height: 30px;
-  top: 1px;
-
   background-color: #aaa6;
   margin-bottom: 4px;
 `;
 const AwakeBlock = styled(Block)`
-  height: 30px;
-  top: 1px;
   transition: background-color 200ms;
   background-color: #8e928b;
   &.primary {
@@ -148,8 +146,6 @@ const AwakeBlock = styled(Block)`
   }
 `;
 const OfficeBlock = styled(Block)`
-  height: 30px;
-  top: 1px;
   border-radius: 0px;
   transition: background-color 200ms;
   background-color: #848881;
