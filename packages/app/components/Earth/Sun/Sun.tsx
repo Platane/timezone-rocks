@@ -12,5 +12,5 @@ export const Sun = () => {
       getSunDirection(t, refLight.current.position);
   }, selectT);
 
-  return <directionalLight intensity={0.2} ref={refLight} />;
+  return <directionalLight intensity={0.4} ref={refLight} />;
 };

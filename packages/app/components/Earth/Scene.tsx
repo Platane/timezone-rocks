@@ -17,7 +17,7 @@ export const Scene = () => {
     >
       <Controls />
 
-      <ambientLight intensity={0.1} />
+      <ambientLight intensity={0.3} />
 
       <AppearScaleNode scaleTarget={ready ? 1 : 0.001}>
         <Suspense fallback={null}>
