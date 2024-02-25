@@ -9,8 +9,6 @@ test("Should load timezone lines", async ({ page }) => {
 });
 
 test("Should load 3d globe", async ({ page, browserName }) => {
-  test.skip(browserName === "firefox", "Still working on it");
-
   page.on("console", (msg) => console.log(msg.text()));
 
   await page.goto("/");
