@@ -20,7 +20,7 @@ export const Lines = () => {
 
   const toScreenSpace = React.useCallback(
     (t: number) => ((t - tWindow[0]) / (tWindow[1] - tWindow[0])) * width,
-    [tWindow, width]
+    [tWindow[0], tWindow[1], width]
   );
 
   const blocks = React.useMemo(
