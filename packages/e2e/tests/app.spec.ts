@@ -1,16 +1,17 @@
 import { test, expect } from "@playwright/test";
 
-test("Should load", async ({ page }) => {
-  page.on("console", (msg) => console.log(msg.text()));
-
+test("Should load timezone lines", async ({ page }) => {
   await page.goto("/");
 
   await expect(page.getByText("loading...")).not.toBeVisible();
 
-  await page.screenshot({
-    fullPage: true,
-    path: "playwright-screenshots/page-loaded.png",
-  });
+  await expect(page.getByRole("listitem")).toHaveCount(1);
+});
+
+test("Should load 3d globe", async ({ page }) => {
+  page.on("console", (msg) => console.log(msg.text()));
+
+  await page.goto("/");
 
   await page.waitForSelector("canvas");
 
@@ -19,7 +20,7 @@ test("Should load", async ({ page }) => {
     path: "playwright-screenshots/page-canvas-loaded.png",
   });
 
-  await page.waitForTimeout(5000);
+  await page.waitForTimeout(500);
 
   await page.screenshot({
     fullPage: true,
