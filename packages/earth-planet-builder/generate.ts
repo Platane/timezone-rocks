@@ -43,6 +43,20 @@ export const generateGlb = async () => {
   return outGlb;
 };
 
+/**
+ * execute that in a browser context
+ */
+export const generateAndDownload = () =>
+  generateGlb().then((bin) => {
+    const blob = new Blob([bin]);
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.download = "out.glb";
+    a.href = url;
+    a.click();
+  });
+
 const transform = (scene: THREE.Object3D) => {
   let m: THREE.Mesh;
   scene.clone().traverse((o) => {
@@ -54,9 +68,10 @@ const transform = (scene: THREE.Object3D) => {
   mesh.material = new THREE.MeshStandardMaterial();
   mesh.geometry = mesh.geometry.clone();
   mesh.geometry.deleteAttribute("uv");
+  mesh.geometry.deleteAttribute("normal");
   mesh.name = "land";
   resize(mesh.geometry);
-  setFlatNormals(mesh.geometry);
+  // setFlatNormals(mesh.geometry);
 
   const o = new THREE.Scene();
   o.add(mesh);
@@ -152,6 +167,7 @@ const tesselate = (geometry: THREE.BufferGeometry) => {
 };
 
 const resize = (geometry: THREE.BufferGeometry) => {
+  // for each vertices, the distance from origin
   const ls: number[] = [];
   const position = geometry.getAttribute("position")!;
 
@@ -178,11 +194,15 @@ const resize = (geometry: THREE.BufferGeometry) => {
       position.getZ(i)
     );
 
-    const l = p.length();
+    if (!false) {
+      const l = p.length();
 
-    const u = THREE.MathUtils.clamp((l - min) / (max - min), 0, 1);
+      const u = THREE.MathUtils.clamp((l - min) / (max - min), 0, 1);
 
-    p.normalize().multiplyScalar(1 + Math.pow(u, 1 / 1.5) * 0.08);
+      p.normalize().multiplyScalar(1 + u ** (1 / 1.5) * 0.1);
+    } else {
+      p.multiplyScalar(1 / min);
+    }
 
     position.setXYZ(i, p.x, p.y, p.z);
   }

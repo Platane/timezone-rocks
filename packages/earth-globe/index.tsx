@@ -2,6 +2,7 @@ import React from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
+import { createEarthMaterial } from "./materials/earthMaterial/material";
 
 import modelPath from "./assets/scene.glb";
 
@@ -23,6 +24,8 @@ export const EarthGlobe = (props: React.ComponentProps<"group">) => {
     outLineRef.current?.scale.setScalar(1 + d * 0.01);
   });
 
+  const earthMaterial = React.useMemo(createEarthMaterial, []);
+
   return (
     <group {...props} dispose={null}>
       <mesh>
@@ -32,15 +35,14 @@ export const EarthGlobe = (props: React.ComponentProps<"group">) => {
 
       <mesh ref={outLineRef} geometry={outlineSphereGeometry}>
         <meshToonMaterial
-          color={"#ceff97"}
+          color={"rgb(206, 255, 151)"}
           gradientMap={gradientMap}
           side={THREE.BackSide}
+          depthWrite={false}
         />
       </mesh>
 
-      <mesh geometry={geometry}>
-        <meshToonMaterial color={"#ceff97"} gradientMap={gradientMap} />
-      </mesh>
+      <mesh geometry={geometry} material={earthMaterial} />
     </group>
   );
 };
