@@ -13,6 +13,8 @@ export const Avatar = ({ className, style, ...props }: Props) => {
       style={style}
       viewBox="28 25 420 335"
       className={className}
+      role="img"
+      aria-label={`avatar in the pose ${props.pose}`}
     >
       {/* <rect
         x="28"
