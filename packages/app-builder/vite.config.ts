@@ -1,4 +1,4 @@
-import { PluginOption, defineConfig } from "vite";
+import { PluginOption, Plugin, defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { visualizer } from "rollup-plugin-visualizer";
 import { execSync } from "child_process";
@@ -18,7 +18,7 @@ export default defineConfig(() => ({
     visualizer({
       filename: "../../dist-info/bundle-stats.html",
       template: "treemap",
-    }),
+    }) as Plugin,
     react(),
     wyw({
       include: ["**/*.tsx"],
