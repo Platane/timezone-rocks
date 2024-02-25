@@ -19,12 +19,12 @@ export const Locations = () => {
     gl: { domElement },
   } = useThree();
   const [domContainer] = React.useState(() => document.createElement("div"));
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     domElement.parentElement?.parentElement?.appendChild(domContainer);
     return () => {
       domContainer.parentElement?.removeChild(domContainer);
     };
-  }, [domElement]);
+  }, [domContainer, domElement]);
 
   //
   // physics on every frame
@@ -72,7 +72,11 @@ export const Locations = () => {
     // get disk position in screen space
     getSphereScreenSpace(camera, group, size, sphereScreenSpace);
 
-    const w = domContainer.parentElement!.parentElement!.clientWidth;
+    const domThreeContainer = domContainer.parentElement?.parentElement;
+
+    if (!domThreeContainer) return;
+
+    const w = domThreeContainer.clientWidth;
     worldBox.min.x = -(w - size.width) / 2;
     worldBox.min.y = 0;
     worldBox.max.x = w - (w - size.width) / 2;
