@@ -20,12 +20,13 @@ jobs:
 
       - run: bun build:app
 
-      - name: Publish Main
-        uses: cloudflare/pages-action@1
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_PUBLISH_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: timezone-rocks
-          directory: dist
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
+      - run: bunx wrangler pages deploy dist --project-name=timezone-rocks --branch=main
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_PUBLISH_TOKEN }}
+
+  e2e:
+    needs: [publish-production]
+    uses: ./.github/workflows/_test-e2e.yml
+    with:
+      APP_URL: "https://timezone.rocks"

@@ -1,0 +1,14 @@
+name: Recuring live test
+
+on:
+  deployment_status:
+  schedule:
+    - cron: "0 12 * * *"
+
+  workflow_dispatch:
+
+jobs:
+  e2e:
+    uses: ./.github/workflows/_test-e2e.yml
+    with:
+      APP_URL: "https://timezone.rocks"
