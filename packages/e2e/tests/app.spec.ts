@@ -64,24 +64,34 @@ test("Should be able to move slider", async ({ page }) => {
   await page.getByLabel("date picker").fill("2024-02-01");
   await page.getByLabel("date picker").press("Enter");
 
-  await expect(page.getByText("February 1 at 12:00 PM")).toBeVisible();
+  const flyingDateLocator = page.locator(`[data-test-id="flying-date"]`);
+
+  {
+    const date = await flyingDateLocator.textContent();
+    expect(date).toBe("February 1 at 12:00 PM");
+  }
 
   await expect(page.getByLabel("avatar in the pose day")).toBeVisible();
 
-  //
-  const sliderLocator = page.getByLabel("date slider");
+  // slide 300px left
+  {
+    const sliderLocator = page.getByLabel("date slider");
 
-  await expect(sliderLocator).toBeVisible();
+    await expect(sliderLocator).toBeVisible();
 
-  const bb0 = (await sliderLocator.boundingBox())!;
-  const p0 = { x: bb0.x + bb0.width / 2, y: bb0.y + bb0.height / 2 };
+    const bb0 = (await sliderLocator.boundingBox())!;
+    const p0 = { x: bb0.x + bb0.width / 2, y: bb0.y + bb0.height / 2 };
 
-  await page.mouse.move(p0.x, p0.y);
-  await page.mouse.down();
-  await page.mouse.move(p0.x + 300, p0.y);
-  await page.mouse.up();
+    await page.mouse.move(p0.x, p0.y);
+    await page.mouse.down();
+    await page.mouse.move(p0.x + 300, p0.y);
+    await page.mouse.up();
+  }
 
-  await expect(page.getByText("February 2 at 5:30 AM")).toBeVisible();
+  {
+    const date = await flyingDateLocator.textContent();
+    expect(date).toBe("February 2 at 5:30 AM");
+  }
 
   await expect(page.getByLabel("avatar in the pose night")).toBeVisible();
 });

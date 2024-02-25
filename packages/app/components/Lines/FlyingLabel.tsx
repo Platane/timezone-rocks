@@ -5,8 +5,8 @@ import type { ILocation } from "@tzr/location-index";
 import { css } from "@linaria/core";
 
 type Props = { location: ILocation; t: number };
-export const FlyingLabel = () => (
-  <Container>
+export const FlyingLabel = (props: React.ComponentProps<typeof Container>) => (
+  <Container {...props}>
     <span />
     <span />
     <span />

@@ -79,7 +79,7 @@ export const Lines = () => {
               id={`location-item-${location.key}`}
               onClick={() => selectLocation(location)}
             >
-              <FlyingLabel />
+              <FlyingLabel data-test-id="flying-date" />
 
               {blocks[i].map(({ day, awake, office }, i) => (
                 <React.Fragment key={i}>
