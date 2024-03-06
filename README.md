@@ -1,8 +1,5 @@
 # 🌐
 
-![type definitions](https://img.shields.io/npm/types/typescript?style=flat-square)
-![code style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/platane/timezone-rocks/test?label=test&style=flat-square)](https://github.com/Platane/timezone-rocks/actions/workflows/main.yml)
 
 ## Usage
 
@@ -15,7 +12,6 @@ npm run dev
 
 The model is a slightly modified version of this [sketfab model](https://sketchfab.com/3d-models/earth-0caafb7e837047a688a3e504c0ea74af).
 
-The transformation scripting is located at src/App/Earth/generate/generate.ts. (uncomment the lines in src/index.ts to regenerate it)
 
 ## TODO
 
@@ -28,5 +24,5 @@ The transformation scripting is located at src/App/Earth/generate/generate.ts. (
 - [ ] improve label phy engine
 - [x] improve cloudflare deployment process ([ref](https://medium.com/swlh/using-cloudflare-workers-and-github-actions-to-deploy-statically-generated-sites-c96b502d49c4))
 - [ ] use svg flags instead of emojis, [those](https://www.npmjs.com/package/country-flag-icons) are nice
-- [ ] use a custom shader to highlight terrain and have a strict sunlight shadow
+- [x] use a custom shader to highlight terrain and have a strict sunlight shadow
 - [ ] use a input=range in place of the slider for accessibility [ref](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/slider_role)
