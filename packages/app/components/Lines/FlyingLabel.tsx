@@ -21,16 +21,14 @@ export const FlyingLabel = (props: React.ComponentProps<typeof Container>) => (
  * split into date / time / literal blocks
  */
 const formatDateTime = (timezone: string, t: number) => {
-  const date = DateTime.fromMillis(t, { zone: timezone }).toJSDate();
+  const date = DateTime.fromMillis(t, { zone: timezone });
 
-  const dateTimeFormat = new Intl.DateTimeFormat(undefined, {
+  const parts = date.toLocaleParts({
     minute: "2-digit",
     hour: "2-digit",
     month: "long",
     day: "numeric",
   });
-
-  const parts = dateTimeFormat.formatToParts(date);
 
   const getLooseType = (type: Intl.DateTimeFormatPart["type"]) =>
     ((type === "day" || type === "month" || type === "year") && "date") ||
