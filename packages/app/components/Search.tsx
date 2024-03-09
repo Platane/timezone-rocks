@@ -8,6 +8,7 @@ import { useStore } from "../store/store";
 import { usePreviousUntilTruthy } from "../hooks/usePreviousUntilTruthy";
 import { useExtendedTruthiness } from "../hooks/useExtendedTruthiness";
 import type { ILocation } from "@tzr/location-index";
+import type { TextFragments } from "@tzr/location-index/search/splitFragments";
 
 export const Search = () => {
   const focused = useStore((s) => s.searchFocused);
@@ -129,7 +130,9 @@ const SuggestionContainer = styled.div`
   z-index: 3;
 `;
 
-const SuggestionContent = ({ location }: { location: ILocation }) => {
+const SuggestionContent = ({
+  location,
+}: { location: ILocation & { fragments: TextFragments } }) => {
   switch (location.type) {
     case "timezone":
       return (
@@ -138,10 +141,8 @@ const SuggestionContent = ({ location }: { location: ILocation }) => {
           <SuggestionType title={location.type}>
             {getEmojiType(location.type)}
           </SuggestionType>
-          <SuggestionName>{location.name.split("-")[0].trim()}</SuggestionName>{" "}
-          <SuggestionSubName>
-            {location.name.split("-")[1].trim()}
-          </SuggestionSubName>
+          <SuggestionName>{location.name.split("-")[0]}</SuggestionName>{" "}
+          <SuggestionSubName>-{location.name.split("-")[1]}</SuggestionSubName>
         </>
       );
 
@@ -154,11 +155,27 @@ const SuggestionContent = ({ location }: { location: ILocation }) => {
           <SuggestionType title={location.type}>
             {getEmojiType(location.type)}
           </SuggestionType>
-          <SuggestionName>{location.name}</SuggestionName>
+          <SuggestionName>
+            <FragmentedText fragments={location.fragments} />
+          </SuggestionName>
         </>
       );
   }
 };
+
+const FragmentedText = ({ fragments }: { fragments: TextFragments }) => (
+  <>
+    {fragments.map(({ match, text }, i) =>
+      match ? (
+        <span key={i} data-fragment-match>
+          {text}
+        </span>
+      ) : (
+        text
+      )
+    )}
+  </>
+);
 
 const SuggestionItem = styled.a`
   display: block;
@@ -180,6 +197,10 @@ const SuggestionType = styled.span`
 const SuggestionName = styled.span`
   font-size: 1.1em;
   margin-left: 2px;
+  & > [data-fragment-match]{
+    font-weight:bold;
+    background-color: #a0a0a033;
+  }
 `;
 const SuggestionSubName = styled.span`
   font-size: 0.9em;
