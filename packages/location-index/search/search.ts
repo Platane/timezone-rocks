@@ -14,14 +14,14 @@ export const createSearch = (locations: ILocation[]) => {
 
     for (let i = 0; i < normalizedNames.length; i++) {
       if (normalizedNames[i].includes(q)) {
-        res.push({
-          ...locations[i],
-          fragments: splitFragments(
-            q,
-            normalizedNames[i],
-            " " + locations[i].name
-          ),
-        });
+        const fragments = splitFragments(
+          q,
+          normalizedNames[i],
+          " " + locations[i].name
+        );
+        fragments[0].text = fragments[0].text.substring(1);
+
+        res.push({ ...locations[i], fragments });
         if (res.length >= 9) return res;
       }
     }

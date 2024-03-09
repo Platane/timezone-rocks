@@ -17,7 +17,7 @@ export const Search = () => {
   const addLocation = useStore((s) => s.addLocation);
   const [query, setQuery] = useState("");
   const focusedPlus = useExtendedTruthiness(focused, 100);
-  const [hover, setHover] = useState<null | number>(null);
+  const [hoveredKey, setHoveredKey] = useState<string>();
   const results = usePreviousUntilTruthy(useSearchResults(query), [])!;
 
   const ref = useRef<HTMLFormElement | null>(null);
@@ -41,11 +41,11 @@ export const Search = () => {
       ref={ref}
       onSubmit={(e) => {
         e.preventDefault();
-        const top = results[hover as any] ?? results[0];
+        const top = results.find((r) => r.key === hoveredKey) ?? results[0];
         if (top) {
           addLocation(top);
           setQuery("");
-          setHover(null);
+          setHoveredKey(undefined);
         }
       }}
     >
@@ -60,20 +60,13 @@ export const Search = () => {
         onKeyDownCapture={(e) => {
           switch (e.code) {
             case "ArrowUp":
-              setHover((i) => {
-                if (i === null) return results.length - 1;
-                if (i >= results.length) return results.length - 1;
-                if (i === 0) return results.length - 1;
-                return i - 1;
-              });
-              e.preventDefault();
-              break;
-
             case "ArrowDown":
-              setHover((i) => {
-                if (i === null) return 0;
-                if (i >= results.length - 1) return 0;
-                return i + 1;
+              setHoveredKey((key) => {
+                const delta = e.code === "ArrowDown" ? 1 : -1;
+                const i = results.findIndex((r) => r.key === key);
+                if (i === -1 && delta === -1)
+                  return results[results.length - 1]?.key;
+                return results[(i + delta) % results.length]?.key;
               });
               e.preventDefault();
               break;
@@ -82,18 +75,18 @@ export const Search = () => {
       />
 
       {results.length > 0 && focusedPlus && (
-        <SuggestionContainer onMouseLeave={() => setHover(null)}>
-          {results.map((c, i) => (
+        <SuggestionContainer onMouseLeave={() => setHoveredKey(undefined)}>
+          {results.map((c) => (
             <SuggestionItem
               href="#"
               key={c.key}
-              className={hover !== null && hover === i ? hoverCss : ""}
-              onMouseEnter={() => setHover(i)}
+              data-hovered={hoveredKey === c.key}
+              onMouseEnter={() => setHoveredKey(c.key)}
               onClick={(event) => {
                 event.preventDefault();
                 addLocation(c);
                 setQuery("");
-                setHover(null);
+                setHoveredKey(undefined);
               }}
             >
               <SuggestionContent location={c} />
@@ -134,17 +127,39 @@ const SuggestionContent = ({
   location,
 }: { location: ILocation & { fragments: TextFragments } }) => {
   switch (location.type) {
-    case "timezone":
+    case "timezone": {
+      const name: TextFragments = [];
+      const subName: TextFragments = [];
+
+      for (const f of location.fragments) {
+        if (subName.length > 0) {
+          subName.push(f);
+        } else {
+          const i = f.text.indexOf("-");
+          if (i === -1) {
+            name.push(f);
+          } else {
+            name.push({ ...f, text: f.text.substring(0, i) });
+            subName.push({ ...f, text: f.text.substring(i) });
+          }
+        }
+      }
+
       return (
         <>
           <SuggestionFlag />
           <SuggestionType title={location.type}>
             {getEmojiType(location.type)}
           </SuggestionType>
-          <SuggestionName>{location.name.split("-")[0]}</SuggestionName>{" "}
-          <SuggestionSubName>-{location.name.split("-")[1]}</SuggestionSubName>
+          <SuggestionName>
+            <FragmentedText fragments={name} />
+          </SuggestionName>
+          <SuggestionSubName>
+            <FragmentedText fragments={subName} />
+          </SuggestionSubName>
         </>
       );
+    }
 
     case "country":
     case "admin":
@@ -177,10 +192,15 @@ const FragmentedText = ({ fragments }: { fragments: TextFragments }) => (
   </>
 );
 
-const SuggestionItem = styled.a`
+const SuggestionItem = styled.a<{ "data-hovered": boolean }>`
   display: block;
   padding: 6px 4px 6px 4px;
   font-size: 1.1em;
+
+  &[data-hovered="true"]{
+    background-color: -webkit-focus-ring-color;
+    background-color: Highlight;
+  }
 `;
 const SuggestionFlag = styled.span`
   display: inline-block;
@@ -199,16 +219,18 @@ const SuggestionName = styled.span`
   margin-left: 2px;
   & > [data-fragment-match]{
     font-weight:bold;
-    background-color: #a0a0a033;
+    background-color: #71799c33;
+    border-radius: 2px;
   }
 `;
 const SuggestionSubName = styled.span`
   font-size: 0.9em;
-`;
-
-const hoverCss = css`
-  background-color: -webkit-focus-ring-color;
-  background-color: Highlight;
+  & > [data-fragment-match]{
+    font-weight:bold;
+    background-color: #71799c33;
+    border-radius: 2px;
+    
+  }
 `;
 
 const Input = styled.input`
