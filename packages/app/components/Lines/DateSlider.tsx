@@ -56,18 +56,18 @@ export const DateSlider = () => {
 
   return (
     <Container>
-      <CursorContainer {...bind}>
-        <NowButton
-          title="Reset to now"
-          onClick={resetT}
-          style={{
-            transform: `translateX(${toScreenSpace(now)}px)`,
-          }}
-        >
-          <NowCarret />
-          <NowLabel>now</NowLabel>
-        </NowButton>
+      <NowButton
+        title="Reset to now"
+        onClick={resetT}
+        style={{
+          transform: `translateX(${toScreenSpace(now)}px)`,
+        }}
+      >
+        <NowCarret />
+        <NowLabel>now</NowLabel>
+      </NowButton>
 
+      <CursorContainer {...bind}>
         <Caret ref={cursorRef} aria-label="date slider" />
       </CursorContainer>
 
