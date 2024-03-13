@@ -4,10 +4,10 @@
   "private": true,
   "dependencies": {
     "jszip": "3.10.1",
-    "three": "0.161.0",
-    "three-stdlib": "2.29.4"
+    "three": "0.162.0",
+    "three-stdlib": "2.29.5"
   },
   "devDependencies": {
-    "@types/three": "0.161.2"
+    "@types/three": "0.162.0"
   }
 }

@@ -1,4 +1,4 @@
-import create, { StateCreator } from "zustand";
+import { create, StateCreator } from "zustand";
 import { subscribeWithSelector } from "zustand/middleware";
 import type { ILocation } from "@tzr/location-index";
 import { init } from "./persist";

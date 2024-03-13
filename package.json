@@ -6,10 +6,10 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
-    "@types/node": "20.11.17",
-    "@biomejs/biome": "1.5.3",
-    "typescript": "5.3.3",
-    "bun-types": "1.0.26"
+    "@types/node": "20.11.27",
+    "@biomejs/biome": "1.6.1",
+    "typescript": "5.4.2",
+    "bun-types": "1.0.30"
   },
   "workspaces": ["packages/*"],
   "scripts": {
