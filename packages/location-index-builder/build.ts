@@ -40,7 +40,7 @@ export const getTimezoneAbbreviations = async () => {
 
 export const getCountries = async () => {
   const text = await fetch(
-    `http://download.geonames.org/export/dump/countryInfo.txt`
+    "http://download.geonames.org/export/dump/countryInfo.txt"
   ).then((res) => res.text());
 
   return text
@@ -51,13 +51,19 @@ export const getCountries = async () => {
         s.split("\t");
       return { countryCode, name, capitalName, population: +population };
     })
-    .filter((country) => Number.isFinite(country.population))
+    .filter(
+      (country) =>
+        Number.isFinite(country.population) &&
+        // those two are included in the list, but no longer exist
+        country.name !== "Serbia and Montenegro" &&
+        country.name !== "Netherlands Antilles"
+    )
     .sort((a, b) => b.population - a.population);
 };
 
 export const getAdmins = async () => {
   const text = await fetch(
-    `http://download.geonames.org/export/dump/admin1CodesASCII.txt`
+    "http://download.geonames.org/export/dump/admin1CodesASCII.txt"
   ).then((res) => res.text());
 
   return text
@@ -72,7 +78,7 @@ export const getAdmins = async () => {
 
 export const getCities = async () => {
   const arraybuffer = await fetch(
-    `http://download.geonames.org/export/dump/cities500.zip`
+    "http://download.geonames.org/export/dump/cities500.zip"
   ).then((res) => res.arrayBuffer());
 
   const directory = await unzipper.Open.buffer(Buffer.from(arraybuffer));
@@ -121,7 +127,7 @@ export const getCities = async () => {
 
 export const getTimeZones = async () => {
   const text = await fetch(
-    `http://download.geonames.org/export/dump/timeZones.txt`
+    "http://download.geonames.org/export/dump/timeZones.txt"
   ).then((res) => res.text());
 
   return pruneUndefined(
@@ -180,7 +186,7 @@ export const getLocations = async (limit: number = Infinity) => {
     }));
 
   const locationAdmin = locationCountry
-    .map((country) => {
+    .flatMap((country) => {
       // list the cities in the country
       const countryCities = cities.filter(
         (c) => c.countryCode === country.countryCode
