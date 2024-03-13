@@ -13,7 +13,14 @@ const getVersion = () =>
 
 export default defineConfig(() => ({
   root: "../app/",
-  assetsInclude: ["**/*.glb", "**/*.csv", "**/*.frag", "**/*.vert", "**/*.zip"],
+  assetsInclude: [
+    "**/*.svg",
+    "**/*.glb",
+    "**/*.csv",
+    "**/*.frag",
+    "**/*.vert",
+    "**/*.zip",
+  ],
   plugins: [
     visualizer({
       filename: "../../dist-info/bundle-stats.html",

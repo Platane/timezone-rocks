@@ -6,6 +6,10 @@ import { Lines } from "../Lines/Lines";
 import { Search } from "../Search";
 import { useStore } from "../../store/store";
 import { DatePicker } from "../DatePicker";
+import { InfoDialog } from "../Info/InfoDialog";
+import { useNavigate, useUrl } from "./router";
+import { Header } from "../Header/Header";
+import { AvatarApp } from "../AvatarApp/AvatarApp";
 
 const LazyEarthScene = loadable(() => import("../Earth/Scene"));
 LazyEarthScene.preload();
@@ -13,10 +17,17 @@ LazyEarthScene.preload();
 export const App = () => {
   const locationStoreReady = useStore((s) => s.locationStoreReady);
 
+  const url = useUrl();
+  const navigate = useNavigate();
+
+  if (url === "/avatar") return <AvatarApp />;
+
   if (!locationStoreReady) return null;
 
   return (
     <>
+      <Header />
+
       <TopContainer>
         <EarthContainer>
           <LazyEarthScene />
@@ -28,6 +39,11 @@ export const App = () => {
       <DatePicker />
 
       <Lines />
+
+      <InfoDialog
+        open={url === "/about"}
+        onOpenChange={() => navigate("/", { orBack: true })}
+      />
     </>
   );
 };

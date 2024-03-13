@@ -15,4 +15,8 @@ const handler = (ready: boolean) => {
 handler(useStore.getState().locationStoreReady);
 useStore.subscribe((s) => s.locationStoreReady, handler);
 
+// add scrollbar-width property, use in some layout css
+const scrollbarWidth = window.innerWidth - document.body.clientWidth + "px";
+document.documentElement.style.setProperty("--scrollbar-width", scrollbarWidth);
+
 // window.navigator?.serviceWorker?.register("service-worker.js");

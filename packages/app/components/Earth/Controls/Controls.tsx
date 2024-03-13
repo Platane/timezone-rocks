@@ -54,12 +54,14 @@ export const Controls = () => {
       state.current.idleAnimationDelay = 1;
     };
 
-    orbitControlsRef.current!.addEventListener("start", onStart);
-    orbitControlsRef.current!.addEventListener("end", onEnd);
+    const orbitControls = orbitControlsRef.current!;
+
+    orbitControls.addEventListener("start", onStart);
+    orbitControls.addEventListener("end", onEnd);
 
     return () => {
-      orbitControlsRef.current!.removeEventListener("start", onStart);
-      orbitControlsRef.current!.removeEventListener("end", onEnd);
+      orbitControls.removeEventListener("start", onStart);
+      orbitControls.removeEventListener("end", onEnd);
     };
   });
 

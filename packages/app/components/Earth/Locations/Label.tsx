@@ -38,15 +38,14 @@ const Avatar = ({ location }: { location: ILocation }) => {
     [location.timezone]
   );
 
-  const n = React.useMemo(
-    () => parseInt(location.key.replace(/\W/g, "").toLowerCase(), 36),
-    [location.key]
-  );
-  const delay = ((n % 3) + 0.5) * 90;
+  const { delay, colors } = React.useMemo(() => {
+    const n = parseInt(location.key.replace(/\W/g, "").toLowerCase(), 36);
+    const delay = ((n % 3) + 0.5) * 90;
+    const colors = getColors(n);
+    return { delay, colors };
+  }, [location.key]);
 
   const pose = useDebouncedValue(useStore(selectPose), delay);
-
-  const colors = React.useMemo(() => getColors(n), [location.key]);
 
   if (useStore(selectUseCheapAvatar))
     return (
@@ -75,7 +74,7 @@ const Avatar = ({ location }: { location: ILocation }) => {
   );
 };
 
-const getColors = (seed: number) => {
+export const getColors = (seed: number) => {
   const pm = new ParkMiller(28113299 + seed ** 7 + seed);
   pm.float();
   pm.float();
