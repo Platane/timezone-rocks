@@ -2,7 +2,7 @@
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer
-  Content-Security-Policy: default-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'
+  Content-Security-Policy: default-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' 'unsafe-inline'
   Access-Control-Allow-Origin: <origin>
   Permissions-Policy: geolocation=()
 
