@@ -1,4 +1,4 @@
-name: Publish to cloudflare live domain, based on the "live" tag
+name: Publish production
 
 on:
   push:
