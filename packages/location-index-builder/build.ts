@@ -31,7 +31,7 @@ export const getTimezoneAbbreviations = async () => {
           .replace("±", "+")
           .replace("−", "-")
           .split(":");
-        const offset = parseInt(h) + parseInt(m ?? "0") / 60;
+        const offset = Number.parseInt(h) + Number.parseInt(m ?? "0") / 60;
 
         return { abbreviation, name, offset };
       })

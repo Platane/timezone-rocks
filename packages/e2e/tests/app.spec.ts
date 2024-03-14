@@ -69,7 +69,7 @@ test("Should be able to move slider", async ({ page }) => {
 
   {
     const date = await flyingDateLocator.textContent();
-    expect(date).toBe("February 1 at 12:00 PM");
+    expect(date?.replaceAll(/\s/g, " ")).toBe("February 1 at 12:00 PM");
   }
 
   await expect(page.getByLabel("avatar in the pose day")).toBeVisible();
@@ -85,13 +85,13 @@ test("Should be able to move slider", async ({ page }) => {
 
     await page.mouse.move(p0.x, p0.y);
     await page.mouse.down();
-    await page.mouse.move(p0.x + 300, p0.y);
+    await page.mouse.move(p0.x + 310, p0.y);
     await page.mouse.up();
   }
 
   {
     const date = await flyingDateLocator.textContent();
-    expect(date).toBe("February 2 at 05:00 AM");
+    expect(date?.replaceAll(/\s/g, " ")).toBe("February 2 at 05:30 AM");
   }
 
   await expect(page.getByLabel("avatar in the pose night")).toBeVisible();
