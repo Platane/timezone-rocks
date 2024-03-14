@@ -39,6 +39,7 @@ export default defineConfig(() => ({
   define: { "process.env.APP_VERSION": JSON.stringify(getVersion()) },
   server: { port: 3000 },
   build: {
+    assetsInlineLimit: 0,
     reportCompressedSize: false,
     outDir: "../../dist",
   },
