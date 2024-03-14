@@ -22,12 +22,15 @@ jobs:
 
       - run: bun install --frozen-lockfile
 
+      - run: echo version=`bunx playwright --version | cut -d" " -f2` >> "$GITHUB_OUTPUT"
+        id: playwright-version
+
       - name: Cache playwright binaries
         uses: actions/cache@v3
         id: playwright-cache
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ matrix.browser }}
+          key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}-${{ matrix.browser }}
 
       - run: bunx playwright install ${{ matrix.browser }} --with-deps
         if: steps.playwright-cache.outputs.cache-hit != 'true'
