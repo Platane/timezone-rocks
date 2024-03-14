@@ -16,7 +16,7 @@ export const Header = () => (
       <Icon src={infoUrl} alt="info icon" />
     </Link>
 
-    <Link href="/avatar" title="about">
+    <Link href="/avatar" title="avatar animation">
       <Icon src={avatarUrl} alt="avatar icon" />
     </Link>
   </Container>
