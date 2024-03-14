@@ -20,6 +20,10 @@ jobs:
 
       - run: bun build:app
 
+      - name: rewrite robot.txt
+        run: |
+          echo -e "User-agent: *\nAllow: /" > dist/robots.txt
+
       - run: bunx wrangler pages deploy dist --project-name=timezone-rocks --branch=main
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

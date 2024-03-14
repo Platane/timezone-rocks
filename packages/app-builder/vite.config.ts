@@ -1,8 +1,8 @@
-import { PluginOption, Plugin, defineConfig } from "vite";
+import { type PluginOption, type Plugin, defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { visualizer } from "rollup-plugin-visualizer";
-import { execSync } from "child_process";
-import { join as pathJoin } from "path";
+import { execSync } from "node:child_process";
+import { join as pathJoin } from "node:path";
 import wyw from "@wyw-in-js/vite";
 
 const getVersion = () =>
