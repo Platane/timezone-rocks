@@ -18,7 +18,8 @@ jobs:
 
       - run: bun install --frozen-lockfile
 
-      - run: bun build:app
+      - run: bunx vite build
+        working-directory: packages/app-builder
 
       - name: rewrite robot.txt
         run: |

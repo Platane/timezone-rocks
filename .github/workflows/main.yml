@@ -13,7 +13,8 @@ jobs:
 
       - run: bun install --frozen-lockfile
 
-      - run: bun build:app
+      - run: bunx vite build
+        working-directory: packages/app-builder
 
       - name: Publish
         id: publish
