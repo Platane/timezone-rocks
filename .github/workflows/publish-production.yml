@@ -35,3 +35,4 @@ jobs:
     uses: ./.github/workflows/_test-e2e.yml
     with:
       APP_URL: "https://timezone.rocks"
+    secrets: inherit

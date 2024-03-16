@@ -1,14 +1,34 @@
 name: Recuring live test
 
 on:
-  deployment_status:
   schedule:
-    - cron: "0 12 * * *"
+    - cron: "0 12 */3 * *"
 
   workflow_dispatch:
+    inputs:
+      app_url:
+        type: string
+        description: url to test
+        default: https://timezone.rocks
+        required: true
 
 jobs:
   e2e:
     uses: ./.github/workflows/_test-e2e.yml
     with:
-      APP_URL: "https://timezone.rocks"
+      APP_URL: ${{ inputs.app_url || 'https://timezone.rocks' }}
+    secrets: inherit
+
+  notify:
+    runs-on: ubuntu-latest
+    needs: [e2e]
+    if: failure()
+    steps:
+      - name: Leave comment with the report
+        # if: github.event_name == 'schedule'
+        run: |
+          BODY="🚨 e2e test failed [report](${{ needs.e2e.outputs.report_url }}) [run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) [app](${{ inputs.app_url || 'https://timezone.rocks' }})"
+          gh issue comment 15 --body "$BODY"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}

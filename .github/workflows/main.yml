@@ -1,6 +1,9 @@
 name: main
 
-on: [push]
+on:
+  push:
+    paths:
+      - "**"
 
 jobs:
   main:
@@ -41,3 +44,4 @@ jobs:
     uses: ./.github/workflows/_test-e2e.yml
     with:
       APP_URL: ${{ needs.main.outputs.published_url }}
+    secrets: inherit
