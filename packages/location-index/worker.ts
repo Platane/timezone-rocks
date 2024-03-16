@@ -4,8 +4,6 @@ import { getLocationsByKey as getLocationsByKey_ } from "./search/getLocationsBy
 import { createSearch } from "./search/search";
 import { createRpcServer } from "./rpc";
 
-console.log("----- worker loaded");
-
 const getLocationByTimezoneAndCountryCode = async (
   timezone: string,
   countryCode: string

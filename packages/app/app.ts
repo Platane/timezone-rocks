@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { App } from "./components/App/App";
 import { useStore } from "./store/store";
 
-console.log("version", process.env.APP_VERSION);
+console.debug("version", process.env.APP_VERSION);
 
 const handler = (ready: boolean) => {
   if (ready) {
