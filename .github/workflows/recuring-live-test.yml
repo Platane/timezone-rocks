@@ -24,11 +24,11 @@ jobs:
     needs: [e2e]
     if: failure()
     steps:
-      - name: Leave comment with the report
-        # if: github.event_name == 'schedule'
+      - name: Create issue
+        if: github.event_name == 'schedule'
         run: |
           BODY="🚨 e2e test failed [report](${{ needs.e2e.outputs.report_url }}) [run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) [app](${{ inputs.app_url || 'https://timezone.rocks' }})"
-          gh issue comment 15 --body "$BODY"
+          gh issue create --body "$BODY" --assignee ${{ github.repository_owner }} --label bug --title "🚨 e2e test failed"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
