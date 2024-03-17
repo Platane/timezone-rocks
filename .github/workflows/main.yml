@@ -1,13 +1,11 @@
 name: main
 
-on:
-  push:
-    paths:
-      - "**"
+on: push
 
 jobs:
   main:
     runs-on: ubuntu-latest
+    if: github.ref_type != 'tag'
     outputs:
       published_url: ${{ steps.publish.outputs.url }}
     steps:
