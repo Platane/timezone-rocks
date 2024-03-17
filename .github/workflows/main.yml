@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref_type != 'tag'
     outputs:
-      published_url: ${{ steps.publish.outputs.url }}
+      published_url: ${{ steps.deploy.outputs.url }}
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v1
@@ -17,21 +17,21 @@ jobs:
       - run: bunx vite build
         working-directory: packages/app-builder
 
-      - name: Publish
-        id: publish
-        uses: cloudflare/pages-action@1
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: timezone-rocks
-          directory: dist
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy
+        id: deploy
+        run: |
+          bunx wrangler pages deploy dist --project-name=timezone-rocks --branch=preview | tee deploy_log.txt
+          URL=`cat deploy_log.txt | grep -Eo "https://[^ ]*"`
+          echo url=$URL >> "$GITHUB_OUTPUT"
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
       - name: disclaim preview url in commit comment
         uses: peter-evans/commit-comment@v3
         with:
           body: |
-            [preview](${{ steps.publish.outputs.url }})
+            [preview](${{ steps.deploy.outputs.url }})
 
       - run: bun type
       - run: bun lint
