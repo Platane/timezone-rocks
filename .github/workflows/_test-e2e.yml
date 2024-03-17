@@ -35,7 +35,7 @@ jobs:
         id: playwright-version
 
       - name: Cache playwright binaries
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: playwright-cache
         with:
           path: ~/.cache/ms-playwright
@@ -78,10 +78,11 @@ jobs:
 
       - uses: oven-sh/setup-bun@v1
 
+      - run: bunx playwright merge-reports --reporter html blob-report
+
       - name: upload html report
         id: report-upload
         run: |
-          bunx playwright merge-reports --reporter html blob-report
           bunx wrangler pages deploy playwright-report --project-name=timezone-rocks --branch=test-report | tee deploy_log.txt
           URL=`cat deploy_log.txt | grep -Eo "https://[^ ]*"`
           echo url=$URL >> "$GITHUB_OUTPUT"
