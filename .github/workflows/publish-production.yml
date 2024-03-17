@@ -28,7 +28,7 @@ jobs:
       - run: bunx wrangler pages deploy dist --project-name=timezone-rocks --branch=main
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_PUBLISH_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
   e2e:
     needs: [publish-production]

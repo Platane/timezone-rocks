@@ -12,7 +12,7 @@ on:
         value: ${{ jobs.collect-report.outputs.report_url }}
     secrets:
       CLOUDFLARE_ACCOUNT_ID:
-      CLOUDFLARE_PUBLISH_TOKEN:
+      CLOUDFLARE_API_TOKEN:
 
 jobs:
   e2e:

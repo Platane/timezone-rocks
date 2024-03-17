@@ -21,7 +21,7 @@ jobs:
         id: publish
         uses: cloudflare/pages-action@1
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_PUBLISH_TOKEN }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: timezone-rocks
           directory: dist
