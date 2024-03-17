@@ -15,6 +15,9 @@
 
 ## Usage
 
+
+**dev server**
+
 ```sh
 
 # install dependencies
@@ -24,3 +27,9 @@ bun i
 npm run dev
 ```
 
+**trigger deployment**
+
+```sh
+# set the tag "live" to the current commit
+git tag live -f ; git push --tags -f
+```
