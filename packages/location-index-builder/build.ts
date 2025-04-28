@@ -259,10 +259,45 @@ export const getLocations = async (limit: number = Infinity) => {
     })
   );
 
+  const locationTimezoneNumeral = pruneUndefined(
+    Array.from({ length: 24 }, (_, i) => {
+      const offset = i - 11;
+      if (offset === 0) return undefined;
+
+      const l =
+        locationCountry.find((l) =>
+          timezones.some(
+            (t) => t.timezone === l.timezone && t.offset === offset
+          )
+        ) ??
+        locationAdmin.find((l) =>
+          timezones.some(
+            (t) => t.timezone === l.timezone && t.offset === offset
+          )
+        ) ??
+        locationCity.find((l) =>
+          timezones.some(
+            (t) => t.timezone === l.timezone && t.offset === offset
+          )
+        );
+
+      if (l)
+        return {
+          ...l,
+          type: "timezone" as const,
+          name: `GMT${offset < 0 ? "-" : "+"}${Math.abs(offset)}`,
+          offset,
+          offsetDST: offset,
+        };
+    })
+  );
+
   const locations = [
     ...locationCountry,
 
     ...locationTimezoneAbbreviations,
+
+    ...locationTimezoneNumeral,
 
     ...locationCity.slice(
       0,
