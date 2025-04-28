@@ -21,7 +21,7 @@ jobs:
         id: deploy
         run: |
           bunx wrangler pages deploy dist --project-name=timezone-rocks --branch=preview | tee deploy_log.txt
-          URL=`cat deploy_log.txt | grep -Eo "https://[^ ]*"`
+          URL=`cat deploy_log.txt | grep -Eo "https://[^ ]*" | head -1`
           echo url=$URL >> "$GITHUB_OUTPUT"
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
