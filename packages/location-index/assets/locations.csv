@@ -439,6 +439,29 @@ timezone,WGT - West Greenland Time,BR,-4664,-2355,America/Sao_Paulo
 timezone,WST - Western Standard Time,CN,11640,3991,Asia/Shanghai
 timezone,YAKT - Yakutsk Time,RU,12973,6203,Asia/Yakutsk
 timezone,YEKT - Yekaterinburg Time,RU,6061,5685,Asia/Yekaterinburg
+timezone,GMT-11,AS,-17070,-1428,Pacific/Pago_Pago
+timezone,GMT-10,PF,-14957,-1753,Pacific/Tahiti
+timezone,GMT-9,US,-14990,6122,America/Anchorage
+timezone,GMT-8,CR,-12189,3734,America/Los_Angeles
+timezone,GMT-7,US,-10482,4114,America/Denver
+timezone,GMT-6,MX,-9913,1943,America/Mexico_City
+timezone,GMT-5,US,-7704,3890,America/New_York
+timezone,GMT-4,VE,-6688,1049,America/Caracas
+timezone,GMT-3,BR,-4664,-2355,America/Sao_Paulo
+timezone,GMT-2,GL,-5172,6418,America/Nuuk
+timezone,GMT-1,CV,-2351,1493,Atlantic/Cape_Verde
+timezone,GMT+1,NG,750,906,Africa/Lagos
+timezone,GMT+2,EG,3125,3006,Africa/Cairo
+timezone,GMT+3,RU,3762,5575,Europe/Moscow
+timezone,GMT+4,AZ,4989,4038,Asia/Baku
+timezone,GMT+5,PK,7304,3372,Asia/Karachi
+timezone,GMT+6,BD,9041,2371,Asia/Dhaka
+timezone,GMT+7,ID,10685,-621,Asia/Jakarta
+timezone,GMT+8,CN,11640,3991,Asia/Shanghai
+timezone,GMT+9,JP,13969,3569,Asia/Tokyo
+timezone,GMT+10,PG,14715,-948,Pacific/Port_Moresby
+timezone,GMT+11,AU,14913,-3528,Australia/Sydney
+timezone,GMT+12,FJ,17843,-1814,Pacific/Fiji
 city,Shanghai,CN,12146,3122,Asia/Shanghai
 city,Beijing,CN,11640,3991,Asia/Shanghai
 city,Shenzhen,CN,11407,2255,Asia/Shanghai
@@ -8166,26 +8189,3 @@ admin,Line Islands,KI,-15749,202,Pacific/Kiritimati
 admin,Yap State,FM,13812,952,Pacific/Chuuk
 admin,Rongelap Atoll,MH,16689,1116,Pacific/Majuro
 admin,Jabat Island,MH,16898,775,Pacific/Kwajalein
-admin,Lib Island,MH,16738,831,Pacific/Majuro
-admin,Wotho Atoll,MH,16601,1017,Pacific/Majuro
-admin,Mejit Island,MH,17086,1028,Pacific/Majuro
-admin,Lae Atoll,MH,16626,892,Pacific/Majuro
-admin,Utrik Atoll,MH,16985,1123,Pacific/Majuro
-admin,Aur Atoll,MH,17117,815,Pacific/Majuro
-admin,Ujae Atoll,MH,16576,893,Pacific/Majuro
-admin,Ailuk Atoll,MH,16998,1022,Pacific/Majuro
-admin,Likiep Atoll,MH,16931,983,Pacific/Majuro
-admin,Kili Island,MH,16912,564,Pacific/Majuro
-admin,Ebon Atoll,MH,16870,458,Pacific/Majuro
-admin,Namdrik Atoll,MH,16810,560,Pacific/Majuro
-admin,Mili Atoll,MH,17174,608,Pacific/Majuro
-admin,Wotje Atoll,MH,17024,945,Pacific/Majuro
-admin,Kosrae,FM,16301,532,Pacific/Kosrae
-admin,Jaluit Atoll,MH,16964,592,Pacific/Majuro
-admin,Arno Atoll,MH,17155,707,Pacific/Majuro
-admin,Pohnpei State,FM,15816,692,Pacific/Pohnpei
-admin,Chuuk,FM,15184,745,Pacific/Chuuk
-admin,Kwajalein Atoll,MH,16774,877,Pacific/Kwajalein
-admin,Îles du Vent,PF,-14960,-1756,Pacific/Tahiti
-admin,Majuro Atoll,MH,17138,709,Pacific/Majuro
-admin,Gilbert Islands,KI,17298,133,Pacific/Tarawa
