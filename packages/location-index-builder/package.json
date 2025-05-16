@@ -13,6 +13,6 @@
     "sucrase": "3.35.0"
   },
   "scripts": {
-    "build": "bun print.ts > ../location-index/assets/locations.csv"
+    "build": "bun --eval \"require('./build.ts').build().then(res=>require('fs').writeFileSync('../location-index/assets/locations.csv',res))\" "
   }
 }
