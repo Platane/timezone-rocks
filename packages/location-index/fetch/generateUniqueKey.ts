@@ -12,7 +12,10 @@ export const generateUniqueKey = (ls: ILocation[]) => {
     return fullKey.substring(0, n);
   };
   const normalize = (w: string) =>
-    deburr(w).replace(/\W+/g, " ").trim().replace(/ /g, "_");
+    deburr(w)
+      .replace(/[^\w\+]+/g, " ")
+      .trim()
+      .replace(/ /g, "_");
 
   const timezoneShorts = new Map<string, number>();
   for (const l of ls)

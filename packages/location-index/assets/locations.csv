@@ -7487,28 +7487,6 @@ timezone,WGT - West Greenland Time,,-4500,0,UTC-3
 timezone,WST - Western Standard Time,,12000,0,UTC+8
 timezone,YAKT - Yakutsk Time,RU,12973,6203,Asia/Yakutsk
 timezone,YEKT - Yekaterinburg Time,RU,6061,5685,Asia/Yekaterinburg
-timezone,GMT-11,,-16500,0,UTC-11
-timezone,UTC-11,,-16500,0,UTC-11
-timezone,GMT-10,,-15000,0,UTC-10
-timezone,UTC-10,,-15000,0,UTC-10
-timezone,GMT-9,,-13500,0,UTC-9
-timezone,UTC-9,,-13500,0,UTC-9
-timezone,GMT-8,,-12000,0,UTC-8
-timezone,UTC-8,,-12000,0,UTC-8
-timezone,GMT-7,,-10500,0,UTC-7
-timezone,UTC-7,,-10500,0,UTC-7
-timezone,GMT-6,,-9000,0,UTC-6
-timezone,UTC-6,,-9000,0,UTC-6
-timezone,GMT-5,,-7500,0,UTC-5
-timezone,UTC-5,,-7500,0,UTC-5
-timezone,GMT-4,,-6000,0,UTC-4
-timezone,UTC-4,,-6000,0,UTC-4
-timezone,GMT-3,,-4500,0,UTC-3
-timezone,UTC-3,,-4500,0,UTC-3
-timezone,GMT-2,,-3000,0,UTC-2
-timezone,UTC-2,,-3000,0,UTC-2
-timezone,GMT-1,,-1500,0,UTC-1
-timezone,UTC-1,,-1500,0,UTC-1
 timezone,GMT+1,,1500,0,UTC+1
 timezone,UTC+1,,1500,0,UTC+1
 timezone,GMT+2,,3000,0,UTC+2
@@ -7531,6 +7509,32 @@ timezone,GMT+10,,15000,0,UTC+10
 timezone,UTC+10,,15000,0,UTC+10
 timezone,GMT+11,,16500,0,UTC+11
 timezone,UTC+11,,16500,0,UTC+11
+timezone,GMT+12,,18000,0,UTC+12
+timezone,UTC+12,,18000,0,UTC+12
+timezone,GMT-1,,-1500,0,UTC-1
+timezone,UTC-1,,-1500,0,UTC-1
+timezone,GMT-2,,-3000,0,UTC-2
+timezone,UTC-2,,-3000,0,UTC-2
+timezone,GMT-3,,-4500,0,UTC-3
+timezone,UTC-3,,-4500,0,UTC-3
+timezone,GMT-4,,-6000,0,UTC-4
+timezone,UTC-4,,-6000,0,UTC-4
+timezone,GMT-5,,-7500,0,UTC-5
+timezone,UTC-5,,-7500,0,UTC-5
+timezone,GMT-6,,-9000,0,UTC-6
+timezone,UTC-6,,-9000,0,UTC-6
+timezone,GMT-7,,-10500,0,UTC-7
+timezone,UTC-7,,-10500,0,UTC-7
+timezone,GMT-8,,-12000,0,UTC-8
+timezone,UTC-8,,-12000,0,UTC-8
+timezone,GMT-9,,-13500,0,UTC-9
+timezone,UTC-9,,-13500,0,UTC-9
+timezone,GMT-10,,-15000,0,UTC-10
+timezone,UTC-10,,-15000,0,UTC-10
+timezone,GMT-11,,-16500,0,UTC-11
+timezone,UTC-11,,-16500,0,UTC-11
+timezone,GMT-12,,-18000,0,UTC-12
+timezone,UTC-12,,-18000,0,UTC-12
 admin,Tibet,CN,9110,2965,Asia/Shanghai
 admin,Qinghai,CN,10176,3663,Asia/Shanghai
 admin,Ningxia,CN,10627,3847,Asia/Shanghai
@@ -8185,7 +8189,3 @@ admin,Manus Province,PG,14727,-203,Pacific/Port_Moresby
 admin,Enga Province,PG,14372,-549,Pacific/Port_Moresby
 admin,Hela Province,PG,14295,-584,Pacific/Port_Moresby
 admin,Chimbu Province,PG,14497,-602,Pacific/Port_Moresby
-admin,Milne Bay Province,PG,15046,-1032,Pacific/Port_Moresby
-admin,New Ireland,PG,15080,-257,Pacific/Port_Moresby
-admin,Sandaun Province,PG,14130,-268,Pacific/Port_Moresby
-admin,West New Britain Province,PG,15014,-555,Pacific/Port_Moresby

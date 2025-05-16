@@ -264,9 +264,8 @@ export const getLocations = async (limit: number = Infinity) => {
     };
   });
 
-  const locationTimezoneNumeral = Array.from({ length: 23 }, (_, i) => {
-    const offset = i - 11;
-    if (offset === 0) return [];
+  const locationTimezoneNumeral = Array.from({ length: 24 }, (_, i) => {
+    const offset = i < 12 ? i + 1 : -(i - 12 + 1);
 
     const l = {
       type: "timezone" as const,
