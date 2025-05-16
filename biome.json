@@ -2,7 +2,7 @@
   "$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
   "javascript": {
     "formatter": {
-      "trailingComma": "es5"
+      "trailingCommas": "es5"
     }
   },
   "formatter": {
