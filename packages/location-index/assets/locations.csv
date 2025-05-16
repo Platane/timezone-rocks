@@ -67,11 +67,11 @@ country,Guatemala,GT,-9051,1464,America/Guatemala
 country,The Netherlands,NL,489,5237,Europe/Amsterdam
 country,Ecuador,EC,-7852,-23,America/Guayaquil
 country,Syria,SY,3629,3351,Asia/Damascus
+country,Zimbabwe,ZW,3105,-1783,Africa/Harare
 country,Cambodia,KH,10492,1156,Asia/Phnom_Penh
 country,Senegal,SN,-1744,1469,Africa/Dakar
 country,Chad,TD,1504,1211,Africa/Ndjamena
 country,Somalia,SO,4534,204,Africa/Mogadishu
-country,Zimbabwe,ZW,3105,-1783,Africa/Harare
 country,Guinea,GN,-1368,954,Africa/Conakry
 country,Rwanda,RW,3006,-195,Africa/Kigali
 country,Tunisia,TN,1017,3682,Africa/Tunis
@@ -176,7 +176,7 @@ country,Guadeloupe,GP,-6173,1600,America/Guadeloupe
 country,Martinique,MQ,-6107,1460,America/Martinique
 country,Brunei,BN,11494,489,Asia/Brunei
 country,Bahamas,BS,-7734,2506,America/Nassau
-country,Belize,BZ,-8877,1725,America/Belize
+country,Belize,BZ,-8876,1725,America/Belize
 country,Iceland,IS,-2190,6414,Atlantic/Reykjavik
 country,Vanuatu,VU,16831,-1774,Pacific/Efate
 country,Barbados,BB,-5962,1311,America/Barbados
@@ -243,225 +243,6 @@ country,Cocos Islands,CC,9682,-1216,Indian/Cocos
 country,French Southern Territories,TF,7022,-4935,Indian/Kerguelen
 country,Pitcairn,PN,15173,-3294,Australia/Sydney
 country,South Georgia and the South Sandwich Islands,GS,-3651,-5428,Atlantic/South_Georgia
-timezone,ACT - Acre Time,BR,-6781,-997,America/Rio_Branco
-timezone,ACT - ASEAN Common Time (proposed),CN,11640,3991,Asia/Shanghai
-timezone,ADT - Atlantic Daylight Time,BR,-4664,-2355,America/Sao_Paulo
-timezone,AEDT - Australian Eastern Daylight Saving Time,AU,14913,-3528,Australia/Sydney
-timezone,AEST - Australian Eastern Standard Time,AU,14913,-3528,Australia/Sydney
-timezone,AET (AEST/AEDT) - Australian Eastern Time,AU,14913,-3528,Australia/Sydney
-timezone,AFT - Afghanistan Time,AF,6917,3453,Asia/Kabul
-timezone,AKDT - Alaska Daylight Time,US,-14990,6122,America/Anchorage
-timezone,AKST - Alaska Standard Time,US,-14990,6122,America/Anchorage
-timezone,ALMT - Alma-Ata Time,BD,9041,2371,Asia/Dhaka
-timezone,AMST - Amazon Summer Time (Brazil),BR,-4664,-2355,America/Sao_Paulo
-timezone,AMT - Amazon Time (Brazil),US,-7704,3890,America/New_York
-timezone,AMT - Armenia Time,AM,4451,4018,Asia/Yerevan
-timezone,ANAT - Anadyr Time,NZ,17478,-4129,Pacific/Auckland
-timezone,AQTT - Aqtobe Time,PK,7304,3372,Asia/Karachi
-timezone,ART - Argentina Time,AR,-5838,-3461,America/Argentina/Buenos_Aires
-timezone,AST - Arabia Standard Time,RU,3762,5575,Europe/Moscow
-timezone,AST - Atlantic Standard Time,US,-7704,3890,America/New_York
-timezone,AWST - Australian Western Standard Time,CN,11640,3991,Asia/Shanghai
-timezone,AZOST - Azores Summer Time,PT,-2567,3774,Atlantic/Azores
-timezone,AZOT - Azores Standard Time,PT,-2567,3774,Atlantic/Azores
-timezone,AZT - Azerbaijan Time,AZ,4989,4038,Asia/Baku
-timezone,BNT - Brunei Time,BN,11494,489,Asia/Brunei
-timezone,BIOT - British Indian Ocean Time,BD,9041,2371,Asia/Dhaka
-timezone,BOT - Bolivia Time,BO,-6526,-1903,America/La_Paz
-timezone,BRST - Brasília Summer Time,GL,-5172,6418,America/Nuuk
-timezone,BRT - Brasília Time,BR,-4793,-1578,America/Sao_Paulo
-timezone,BST - Bangladesh Standard Time,BD,9041,2371,Asia/Dhaka
-timezone,BST - Bougainville Standard Time,PG,15557,-623,Pacific/Bougainville
-timezone,BST - British Summer Time (British Standard Time from Mar 1968 to Oct 1971),NG,750,906,Africa/Lagos
-timezone,BTT - Bhutan Time,BT,8964,2747,Asia/Thimphu
-timezone,CAT - Central Africa Time,EG,3125,3006,Africa/Cairo
-timezone,CCT - Cocos Islands Time,CC,9682,-1216,Indian/Cocos
-timezone,CDT - Central Daylight Time (North America),US,-7704,3890,America/New_York
-timezone,CDT - Cuba Daylight Time,CU,-8238,2313,America/Havana
-timezone,CEST - Central European Summer Time,EG,3125,3006,Africa/Cairo
-timezone,CET - Central European Time,NG,750,906,Africa/Lagos
-timezone,CHOT - Choibalsan Standard Time,CN,11640,3991,Asia/Shanghai
-timezone,CHOST - Choibalsan Summer Time,JP,13969,3569,Asia/Tokyo
-timezone,CHST - Chamorro Standard Time,AU,14913,-3528,Australia/Sydney
-timezone,CHUT - Chuuk Time,FM,15184,745,Pacific/Chuuk
-timezone,CIST - Clipperton Island Standard Time,CR,-12189,3734,America/Los_Angeles
-timezone,CKT - Cook Island Time,PF,-14957,-1753,Pacific/Tahiti
-timezone,CLST - Chile Summer Time,CL,-7065,-3346,America/Santiago
-timezone,CLT - Chile Standard Time,CL,-7065,-3346,America/Santiago
-timezone,COST - Colombia Summer Time,CO,-7403,4088,America/New_York
-timezone,COT - Colombia Time,CO,-7403,4088,America/New_York
-timezone,CST - Central Standard Time (Central America),MX,-9913,1943,America/Mexico_City
-timezone,CST - China Standard Time,CN,11640,3991,Asia/Shanghai
-timezone,CST - Cuba Standard Time,CU,-8238,2313,America/Havana
-timezone,CT (CST/CDT) - Central Time,MX,-9913,1943,America/Mexico_City
-timezone,CVT - Cape Verde Time,CV,-2351,1493,Atlantic/Cape_Verde
-timezone,CXT - Christmas Island Time,CX,10568,-1042,Indian/Christmas
-timezone,DAVT - Davis Time,ID,10685,-621,Asia/Jakarta
-timezone,DDUT - Dumont d'Urville Time (in French Antarctic station),AU,14913,-3528,Australia/Sydney
-timezone,DFT - AIX-specific equivalent of Central European Time,NG,750,906,Africa/Lagos
-timezone,EASST - Easter Island Summer Time,US,-7704,3890,America/New_York
-timezone,EAST - Easter Island Standard Time,MX,-9913,1943,America/Mexico_City
-timezone,EAT - East Africa Time,RU,3762,5575,Europe/Moscow
-timezone,ECT - Eastern Caribbean Time (does not recognise DST),US,-7704,3890,America/New_York
-timezone,ECT - Ecuador Time,EC,-7852,-23,America/Guayaquil
-timezone,EDT - Eastern Daylight Time (North America),US,-7704,3890,America/New_York
-timezone,EEST - Eastern European Summer Time,RU,3762,5575,Europe/Moscow
-timezone,EET - Eastern European Time,EG,3125,3006,Africa/Cairo
-timezone,EGST - Eastern Greenland Summer Time,GB,-13,5151,Europe/London
-timezone,EGT - Eastern Greenland Time,GL,-5172,6418,America/Nuuk
-timezone,EST - Eastern Standard Time (North America),US,-7704,3890,America/New_York
-timezone,ET (EST/EDT) - Eastern Time (North America),US,-7704,3890,America/New_York
-timezone,FET - Further-eastern European Time,RU,3762,5575,Europe/Moscow
-timezone,FJT - Fiji Time,FJ,17843,-1814,Pacific/Fiji
-timezone,FKST - Falkland Islands Summer Time,BR,-4664,-2355,America/Sao_Paulo
-timezone,FKT - Falkland Islands Time,US,-7704,3890,America/New_York
-timezone,FNT - Fernando de Noronha Time,GL,-5172,6418,America/Nuuk
-timezone,GALT - Galápagos Time,EC,-9031,-74,Pacific/Galapagos
-timezone,GET - Georgia Standard Time,GE,4483,4169,Asia/Tbilisi
-timezone,GFT - French Guiana Time,GF,-5233,494,America/Cayenne
-timezone,GILT - Gilbert Island Time,NZ,17478,-4129,Pacific/Auckland
-timezone,GMT - Greenwich Mean Time,GB,-13,5151,Europe/London
-timezone,GST - South Georgia and the South Sandwich Islands Time,GS,-3651,-5428,Atlantic/South_Georgia
-timezone,GST - Gulf Standard Time,AZ,4989,4038,Asia/Baku
-timezone,GYT - Guyana Time,GY,-5816,680,America/Guyana
-timezone,HAEC - Heure Avancée d'Europe Centrale French-language name for CEST,EG,3125,3006,Africa/Cairo
-timezone,HST - Hawaii–Aleutian Standard Time,US,-15786,2131,Pacific/Honolulu
-timezone,HKT - Hong Kong Time,HK,11417,2228,Asia/Hong_Kong
-timezone,HMT - Heard and McDonald Islands Time,PK,7304,3372,Asia/Karachi
-timezone,HOVST - Hovd Summer Time (not used from 2017–present),CN,11640,3991,Asia/Shanghai
-timezone,HOVT - Hovd Time,MN,9164,4801,Asia/Hovd
-timezone,ICT - Indochina Time,ID,10685,-621,Asia/Jakarta
-timezone,IDT - Israel Daylight Time,IL,3522,3177,Asia/Jerusalem
-timezone,IOT - Indian Ocean Time,BD,9041,2371,Asia/Dhaka
-timezone,IRDT - Iran Daylight Time,AF,6917,3453,Asia/Kabul
-timezone,IRKT - Irkutsk Time,RU,10430,5230,Asia/Irkutsk
-timezone,IRST - Iran Standard Time,IR,5142,3569,Asia/Tehran
-timezone,IST - Indian Standard Time,IN,7721,2862,Asia/Kolkata
-timezone,IST - Irish Standard Time,NG,750,906,Africa/Lagos
-timezone,IST - Israel Standard Time,IL,3522,3177,Asia/Jerusalem
-timezone,JST - Japan Standard Time,JP,13969,3569,Asia/Tokyo
-timezone,KALT - Kaliningrad Time,RU,2051,5471,Europe/Kaliningrad
-timezone,KGT - Kyrgyzstan Time,KG,7459,4287,Asia/Bishkek
-timezone,KOST - Kosrae Time,FM,16301,532,Pacific/Kosrae
-timezone,KRAT - Krasnoyarsk Time,RU,9291,5603,Asia/Krasnoyarsk
-timezone,KST - Korea Standard Time,JP,13969,3569,Asia/Tokyo
-timezone,LHST - Lord Howe Summer Time,AU,14913,-3528,Australia/Sydney
-timezone,LINT - Line Islands Time,KI,-15749,202,Pacific/Kiritimati
-timezone,MAGT - Magadan Time,NZ,17478,-4129,Pacific/Auckland
-timezone,MAWT - Mawson Station Time,PK,7304,3372,Asia/Karachi
-timezone,MDT - Mountain Daylight Time (North America),MX,-9913,1943,America/Mexico_City
-timezone,MET - Middle European Time (same zone as CET),NG,750,906,Africa/Lagos
-timezone,MEST - Middle European Summer Time (same zone as CEST),EG,3125,3006,Africa/Cairo
-timezone,MHT - Marshall Islands Time,MH,17138,709,Pacific/Majuro
-timezone,MIST - Macquarie Island Station Time,AU,14913,-3528,Australia/Sydney
-timezone,MMT - Myanmar Standard Time,MM,9613,1975,Asia/Yangon
-timezone,MSK - Moscow Time,RU,3762,5575,Europe/Moscow
-timezone,MST - Malaysian Standard Time,MY,10169,314,Asia/Kuala_Lumpur
-timezone,MST - Mountain Standard Time (North America),CR,-12189,3734,America/Los_Angeles
-timezone,MT (MST/MDT) - Mountain Time (North America),CR,-12189,3734,America/Los_Angeles
-timezone,MUT - Mauritius Time,MU,5750,-2016,Indian/Mauritius
-timezone,MVT - Maldives Time,MV,7351,418,Indian/Maldives
-timezone,MYT - Malaysia Time,MY,10169,314,Asia/Kuala_Lumpur
-timezone,NCT - New Caledonia Time,NC,16645,-2227,Pacific/Noumea
-timezone,NFT - Norfolk Island Time,AU,14913,-3528,Australia/Sydney
-timezone,NOVT - Novosibirsk Time,RU,8294,5503,Asia/Novosibirsk
-timezone,NPT - Nepal Time,NP,8532,2770,Asia/Kathmandu
-timezone,NST - Newfoundland Standard Time,AG,-5271,4756,America/St_Johns
-timezone,NT - Newfoundland Time,AG,-5271,4756,America/St_Johns
-timezone,NUT - Niue Time,NU,-16992,-1905,Pacific/Niue
-timezone,NZDT - New Zealand Daylight Time,NZ,17478,-4129,Pacific/Auckland
-timezone,NZDST - New Zealand Daylight Saving Time,NZ,17478,-4129,Pacific/Auckland
-timezone,NZST - New Zealand Standard Time,NZ,17478,-4129,Pacific/Auckland
-timezone,OMST - Omsk Time,RU,7337,5499,Asia/Omsk
-timezone,ORAT - Oral Time,KZ,5137,5123,Asia/Oral
-timezone,PDT - Pacific Daylight Time (North America),CR,-12189,3734,America/Los_Angeles
-timezone,PET - Peru Time,PE,-7703,-1204,America/Lima
-timezone,PETT - Kamchatka Time,RU,15863,5306,Asia/Kamchatka
-timezone,PGT - Papua New Guinea Time,PG,14715,-948,Pacific/Port_Moresby
-timezone,PHOT - Phoenix Island Time,NZ,17478,-4129,Pacific/Auckland
-timezone,PHT - Philippine Time,CN,11640,3991,Asia/Shanghai
-timezone,PHST - Philippine Standard Time,CN,11640,3991,Asia/Shanghai
-timezone,PKT - Pakistan Standard Time,PK,7304,3372,Asia/Karachi
-timezone,PMDT - Saint Pierre and Miquelon Daylight Time,GL,-5172,6418,America/Nuuk
-timezone,PMST - Saint Pierre and Miquelon Standard Time,BR,-4664,-2355,America/Sao_Paulo
-timezone,PONT - Pohnpei Standard Time,AU,14913,-3528,Australia/Sydney
-timezone,PST - Pacific Standard Time (North America),CR,-12189,3734,America/Los_Angeles
-timezone,PT (PST/PDT) - Pacific Time (North America),CR,-12189,3734,America/Los_Angeles
-timezone,PWT - Palau Time,PW,13447,734,Pacific/Palau
-timezone,PYST - Paraguay Summer Time,PY,-5765,-2529,America/Asuncion
-timezone,PYT - Paraguay Time,US,-7704,3890,America/New_York
-timezone,RET - Réunion Time,AZ,4989,4038,Asia/Baku
-timezone,ROTT - Rothera Research Station Time,BR,-4664,-2355,America/Sao_Paulo
-timezone,SAKT - Sakhalin Island Time,AU,14913,-3528,Australia/Sydney
-timezone,SAMT - Samara Time,RU,5015,5320,Europe/Samara
-timezone,SAST - South African Standard Time,ZA,2819,-2574,Africa/Johannesburg
-timezone,SBT - Solomon Islands Time,SB,15995,-943,Pacific/Guadalcanal
-timezone,SCT - Seychelles Time,AZ,4989,4038,Asia/Baku
-timezone,SDT - Samoa Daylight Time,PF,-14957,-1753,Pacific/Tahiti
-timezone,SGT - Singapore Time,SG,10385,129,Asia/Singapore
-timezone,SLST - Sri Lanka Standard Time,LK,7985,694,Asia/Colombo
-timezone,SRET - Srednekolymsk Time,AU,14913,-3528,Australia/Sydney
-timezone,SRT - Suriname Time,SR,-5517,587,America/Paramaribo
-timezone,SST - Samoa Standard Time,AS,-17070,-1428,Pacific/Pago_Pago
-timezone,SYOT - Showa Station Time,RU,3762,5575,Europe/Moscow
-timezone,TAHT - Tahiti Time,PF,-14957,-1753,Pacific/Tahiti
-timezone,THA - Thailand Standard Time,TH,10050,1375,Asia/Bangkok
-timezone,TFT - French Southern and Antarctic Time,PK,7304,3372,Asia/Karachi
-timezone,TJT - Tajikistan Time,TJ,6878,3854,Asia/Dushanbe
-timezone,TKT - Tokelau Time,TK,-17252,-854,Pacific/Fakaofo
-timezone,TLT - Timor Leste Time,TL,12557,-856,Asia/Dili
-timezone,TMT - Turkmenistan Time,TM,5838,3795,Asia/Ashgabat
-timezone,TRT - Turkey Time,TR,3285,3992,Europe/Istanbul
-timezone,TOT - Tonga Time,TO,-17520,-2114,Pacific/Tongatapu
-timezone,TST - Taiwan Standard Time,TW,12153,2505,Asia/Taipei
-timezone,TVT - Tuvalu Time,TV,17919,-852,Pacific/Funafuti
-timezone,ULAST - Ulaanbaatar Summer Time,JP,13969,3569,Asia/Tokyo
-timezone,ULAT - Ulaanbaatar Standard Time,MN,10688,4791,Asia/Ulaanbaatar
-timezone,UTC - Coordinated Universal Time,GB,-13,5151,Europe/London
-timezone,UYST - Uruguay Summer Time,GL,-5172,6418,America/Nuuk
-timezone,UYT - Uruguay Standard Time,UY,-5619,-3490,America/Montevideo
-timezone,UZT - Uzbekistan Time,UZ,6922,4126,Asia/Tashkent
-timezone,VET - Venezuelan Standard Time,VE,-6688,1049,America/Caracas
-timezone,VLAT - Vladivostok Time,RU,13187,4311,Asia/Vladivostok
-timezone,VOLT - Volgograd Time,RU,4450,4872,Europe/Volgograd
-timezone,VOST - Vostok Station Time,BD,9041,2371,Asia/Dhaka
-timezone,VUT - Vanuatu Time,VU,16831,-1774,Pacific/Efate
-timezone,WAKT - Wake Island Time,NZ,17478,-4129,Pacific/Auckland
-timezone,WAST - West Africa Summer Time,EG,3125,3006,Africa/Cairo
-timezone,WAT - West Africa Time,NG,750,906,Africa/Lagos
-timezone,WEST - Western European Summer Time,NG,750,906,Africa/Lagos
-timezone,WET - Western European Time,GB,-13,5151,Europe/London
-timezone,WIB - Western Indonesian Time,ID,10685,-621,Asia/Jakarta
-timezone,WIT - Eastern Indonesian Time,JP,13969,3569,Asia/Tokyo
-timezone,WITA - Central Indonesia Time,CN,11640,3991,Asia/Shanghai
-timezone,WGST - West Greenland Summer Time,GL,-5172,6418,America/Nuuk
-timezone,WGT - West Greenland Time,BR,-4664,-2355,America/Sao_Paulo
-timezone,WST - Western Standard Time,CN,11640,3991,Asia/Shanghai
-timezone,YAKT - Yakutsk Time,RU,12973,6203,Asia/Yakutsk
-timezone,YEKT - Yekaterinburg Time,RU,6061,5685,Asia/Yekaterinburg
-timezone,GMT-11,AS,-17070,-1428,Pacific/Pago_Pago
-timezone,GMT-10,PF,-14957,-1753,Pacific/Tahiti
-timezone,GMT-9,US,-14990,6122,America/Anchorage
-timezone,GMT-8,CR,-12189,3734,America/Los_Angeles
-timezone,GMT-7,US,-10482,4114,America/Denver
-timezone,GMT-6,MX,-9913,1943,America/Mexico_City
-timezone,GMT-5,US,-7704,3890,America/New_York
-timezone,GMT-4,VE,-6688,1049,America/Caracas
-timezone,GMT-3,BR,-4664,-2355,America/Sao_Paulo
-timezone,GMT-2,GL,-5172,6418,America/Nuuk
-timezone,GMT-1,CV,-2351,1493,Atlantic/Cape_Verde
-timezone,GMT+1,NG,750,906,Africa/Lagos
-timezone,GMT+2,EG,3125,3006,Africa/Cairo
-timezone,GMT+3,RU,3762,5575,Europe/Moscow
-timezone,GMT+4,AZ,4989,4038,Asia/Baku
-timezone,GMT+5,PK,7304,3372,Asia/Karachi
-timezone,GMT+6,BD,9041,2371,Asia/Dhaka
-timezone,GMT+7,ID,10685,-621,Asia/Jakarta
-timezone,GMT+8,CN,11640,3991,Asia/Shanghai
-timezone,GMT+9,JP,13969,3569,Asia/Tokyo
-timezone,GMT+10,PG,14715,-948,Pacific/Port_Moresby
-timezone,GMT+11,AU,14913,-3528,Australia/Sydney
-timezone,GMT+12,FJ,17843,-1814,Pacific/Fiji
 city,Shanghai,CN,12146,3122,Asia/Shanghai
 city,Beijing,CN,11640,3991,Asia/Shanghai
 city,Shenzhen,CN,11407,2255,Asia/Shanghai
@@ -530,6 +311,7 @@ city,Kolkata,IN,8836,2256,Asia/Kolkata
 city,Xiamen,CN,11808,2448,Asia/Shanghai
 city,Surat,IN,7283,2120,Asia/Kolkata
 city,Yangon,MM,9616,1681,Asia/Yangon
+city,Bao'an,CN,11388,2255,Asia/Shanghai
 city,Kabul,AF,6917,3453,Asia/Kabul
 city,Nairobi,KE,3682,-128,Africa/Nairobi
 city,Wuxi,CN,12029,3157,Asia/Shanghai
@@ -614,12 +396,11 @@ city,Bandung,ID,10761,-692,Asia/Jakarta
 city,Medan,ID,9867,358,Asia/Jakarta
 city,Ouagadougou,BF,-153,1237,Africa/Ouagadougou
 city,Fortaleza,BR,-3854,-372,America/Fortaleza
-city,Cali,CO,-7652,344,America/Bogota
+city,Cali,CO,-7652,343,America/Bogota
 city,Algiers,DZ,309,3673,Africa/Algiers
 city,Nanchang,CN,11585,2868,Asia/Shanghai
 city,Hohhot,CN,11165,4081,Asia/Shanghai
 city,Nagoya,JP,13691,3518,Asia/Tokyo
-city,Konya,TR,3248,3787,Europe/Istanbul
 city,Rome,IT,1251,4189,Europe/Rome
 city,Houston,US,-9536,2976,America/Chicago
 city,Mashhad,IR,5961,3630,Asia/Tehran
@@ -629,7 +410,7 @@ city,Queens,US,-7384,4068,America/New_York
 city,Kowloon,HK,11418,2232,Asia/Hong_Kong
 city,Nagpur,IN,7908,2115,Asia/Kolkata
 city,Yantai,CN,12144,3748,Asia/Shanghai
-city,Maracaibo,VE,-7161,1067,America/Caracas
+city,Maracaibo,VE,-7161,1064,America/Caracas
 city,Lubumbashi,CD,2748,-1166,Africa/Lubumbashi
 city,Manaus,BR,-6002,-310,America/Manaus
 city,Lusaka,ZM,2829,-1541,Africa/Lusaka
@@ -656,7 +437,7 @@ city,Zunyi,CN,10691,2769,Asia/Shanghai
 city,Al Başrah al Qadīmah,IQ,4782,3050,Asia/Baghdad
 city,La Paz,BO,-6815,-1650,America/La_Paz
 city,Lianyungang,CN,11922,3460,Asia/Shanghai
-city,Medellín,CO,-7556,625,America/Bogota
+city,Medellín,CO,-7557,625,America/Bogota
 city,Brazzaville,CG,1528,-427,Africa/Brazzaville
 city,Tashkent,UZ,6922,4126,Asia/Tashkent
 city,Ganzhou,CN,11493,2585,Asia/Shanghai
@@ -698,7 +479,7 @@ city,Davao,PH,12561,707,Asia/Manila
 city,Fuyang,CN,11582,3290,Asia/Shanghai
 city,Montréal,CA,-7359,4551,America/Toronto
 city,Bayan Nur,CN,10739,4074,Asia/Shanghai
-city,Maracay,VE,-6759,1024,America/Caracas
+city,Maracay,VE,-6759,1025,America/Caracas
 city,Chaozhou,CN,11662,2365,Asia/Shanghai
 city,Minsk,BY,2757,5390,Europe/Minsk
 city,Budapest,HU,1904,4750,Europe/Budapest
@@ -708,7 +489,7 @@ city,Rasapūdipalem,IN,8332,1773,Asia/Kolkata
 city,León de los Aldama,MX,-10167,2113,America/Mexico_City
 city,Warsaw,PL,2101,5223,Europe/Warsaw
 city,Soweto,ZA,2786,-2627,Africa/Johannesburg
-city,Puebla,MX,-9820,1904,America/Mexico_City
+city,Puebla,MX,-9821,1905,America/Mexico_City
 city,Vienna,AT,1637,4821,Europe/Vienna
 city,Patna,IN,8514,2559,Asia/Kolkata
 city,Mosul,IQ,4312,3634,Asia/Baghdad
@@ -727,7 +508,7 @@ city,Suzhou,CN,11698,3364,Asia/Shanghai
 city,Ecatepec de Morelos,MX,-9906,1960,America/Mexico_City
 city,Lu’an,CN,11652,3174,Asia/Shanghai
 city,Barcelona,ES,216,4139,Europe/Madrid
-city,Valencia,VE,-6801,1016,America/Caracas
+city,Valencia,VE,-6800,1016,America/Caracas
 city,Yancheng,CN,12016,3336,Asia/Shanghai
 city,Novosibirsk,RU,8294,5503,Asia/Novosibirsk
 city,Erbil,IQ,4401,3619,Asia/Baghdad
@@ -785,7 +566,6 @@ city,Kaifeng,CN,11431,3480,Asia/Shanghai
 city,Anshan,CN,12299,4112,Asia/Shanghai
 city,Karaj,IR,5099,3583,Asia/Tehran
 city,Kathmandu,NP,8532,2770,Asia/Kathmandu
-city,Niulanwo,CN,11395,2263,Asia/Shanghai
 city,Baoji,CN,10724,3437,Asia/Shanghai
 city,Suqian,CN,11830,3395,Asia/Shanghai
 city,Liuzhou,CN,10941,2432,Asia/Shanghai
@@ -793,6 +573,7 @@ city,Tirunelveli,IN,7768,873,Asia/Kolkata
 city,San Antonio,US,-9849,2942,America/Chicago
 city,Kayseri,TR,3549,3873,Europe/Istanbul
 city,Kharkiv,UA,3625,4998,Europe/Kyiv
+city,Konya,TR,3248,3787,Europe/Istanbul
 city,Zhangjiagang,CN,12054,3187,Asia/Shanghai
 city,Agra,IN,7802,2718,Asia/Kolkata
 city,Tabriz,IR,4629,3808,Asia/Tehran
@@ -808,7 +589,7 @@ city,San Diego,US,-11716,3272,America/Los_Angeles
 city,Rājkot,IN,7079,2229,Asia/Kolkata
 city,Luoyang,CN,11244,3467,Asia/Shanghai
 city,Adelaide,AU,13860,-3493,Australia/Adelaide
-city,Guadalajara,MX,-10339,2067,America/Mexico_City
+city,Guadalajara,MX,-10335,2068,America/Mexico_City
 city,The Bronx,US,-7387,4085,America/New_York
 city,Guankou,CN,11363,2816,Asia/Shanghai
 city,Milan,IT,919,4546,Europe/Rome
@@ -832,7 +613,7 @@ city,Córdoba,AR,-6419,-3141,America/Argentina/Cordoba
 city,Maoming,CN,11091,2167,Asia/Shanghai
 city,Tripoli,LY,1319,3289,Africa/Tripoli
 city,Dallas,US,-9681,3278,America/Chicago
-city,Callao,PE,-7712,-1206,America/Lima
+city,Callao,PE,-7713,-1205,America/Lima
 city,Madinah,SA,3961,2447,Asia/Riyadh
 city,Yaoundé,CM,1152,387,Africa/Douala
 city,Qinzhou,CN,10865,2198,Asia/Shanghai
@@ -873,14 +654,13 @@ city,Jinzhong,CN,11275,3768,Asia/Shanghai
 city,Meerut,IN,7771,2898,Asia/Kolkata
 city,Nowrangapur,IN,8255,1923,Asia/Kolkata
 city,Karbala,IQ,4402,3262,Asia/Baghdad
-city,Galaţi,RO,2805,4544,Europe/Bucharest
 city,Changzhi,CN,11311,3618,Asia/Shanghai
 city,Tianshui,CN,10574,3458,Asia/Shanghai
 city,Mombasa,KE,3966,-405,Africa/Nairobi
 city,Mandalay,MM,9608,2197,Asia/Yangon
 city,Barranquilla,CO,-7478,1097,America/Bogota
 city,Chelyabinsk,RU,6143,5515,Asia/Yekaterinburg
-city,Mérida,MX,-8962,2098,America/Merida
+city,Mérida,MX,-8962,2097,America/Merida
 city,Hiroshima,JP,13245,3440,Asia/Tokyo
 city,Bulawayo,ZW,2858,-2015,Africa/Harare
 city,Santiago de los Caballeros,DO,-7069,1945,America/Santo_Domingo
@@ -910,6 +690,7 @@ city,Sofia,BG,2332,4270,Europe/Sofia
 city,Anyang,CN,11438,3610,Asia/Shanghai
 city,Birmingham,GB,-190,5248,Europe/London
 city,Vijayawada,IN,8065,1651,Asia/Kolkata
+city,Yerevan,AM,4451,4018,Asia/Yerevan
 city,Bijie,CN,10529,2730,Asia/Shanghai
 city,Monterrey,MX,-10032,2568,America/Monterrey
 city,Kigali,RW,3006,-195,Africa/Kigali
@@ -925,7 +706,6 @@ city,Lilongwe,MW,3379,-1397,Africa/Blantyre
 city,Huaibei,CN,11679,3397,Asia/Shanghai
 city,Maiduguri,NG,1316,1185,Africa/Lagos
 city,Meishan,CN,10384,3004,Asia/Shanghai
-city,Yerevan,AM,4451,4018,Asia/Yerevan
 city,Ciudad Nezahualcoyotl,MX,-9901,1940,America/Mexico_City
 city,Mwanza,TZ,3290,-252,Africa/Dar_es_Salaam
 city,Sendai,JP,14087,3827,Asia/Tokyo
@@ -981,7 +761,7 @@ city,Khartoum North,SD,3253,1565,Africa/Khartoum
 city,Edmonton,CA,-11347,5355,America/Edmonton
 city,Wuwei,CN,10263,3793,Asia/Shanghai
 city,Namangan,UZ,7167,4100,Asia/Tashkent
-city,Arequipa,PE,-7153,-1640,America/Lima
+city,Arequipa,PE,-7154,-1640,America/Lima
 city,Hanzhong,CN,10702,3308,Asia/Shanghai
 city,Hezhou,CN,11157,2440,Asia/Shanghai
 city,Zhu Cheng City,CN,11940,3600,Asia/Shanghai
@@ -1036,7 +816,7 @@ city,Fort Worth,US,-9732,3273,America/Chicago
 city,Salem,IN,7816,1165,Asia/Kolkata
 city,São Luís,BR,-4430,-253,America/Fortaleza
 city,Seongnam-si,KR,12714,3744,Asia/Seoul
-city,Cartagena,CO,-7551,1040,America/Bogota
+city,Cartagena,CO,-7549,1040,America/Bogota
 city,Columbus,US,-8300,3996,America/New_York
 city,Sialkot,PK,7453,3249,Asia/Karachi
 city,Laibin,CN,10922,2375,Asia/Shanghai
@@ -1077,7 +857,7 @@ city,Marseille,FR,538,4330,Europe/Paris
 city,Ankang,CN,10902,3268,Asia/Shanghai
 city,Mysore,IN,7664,1230,Asia/Kolkata
 city,Langfang,CN,11671,3952,Asia/Shanghai
-city,Jiaozuo,CN,11323,3524,Asia/Shanghai
+city,Jiaozuo,CN,11324,3524,Asia/Shanghai
 city,San Francisco,US,-12242,3777,America/Los_Angeles
 city,Liverpool,GB,-298,5341,Europe/London
 city,Aden,YE,4504,1278,Asia/Aden
@@ -1098,7 +878,7 @@ city,Ulan Bator,MN,10688,4791,Asia/Ulaanbaatar
 city,Weihai,CN,12211,3751,Asia/Shanghai
 city,Takeo,KH,10478,1099,Asia/Phnom_Penh
 city,Haiphong,VN,10668,2086,Asia/Bangkok
-city,Cochabamba,BO,-6616,-1739,America/La_Paz
+city,Cochabamba,BO,-6616,-1738,America/La_Paz
 city,Ahvaz,IR,4868,3132,Asia/Tehran
 city,Hubli,IN,7513,1535,Asia/Kolkata
 city,Zhabei,CN,12146,3126,Asia/Shanghai
@@ -1119,15 +899,15 @@ city,João Pessoa,BR,-3486,-711,America/Fortaleza
 city,Bukavu,CD,2884,-249,Africa/Lubumbashi
 city,Barcelona,VE,-6469,1014,America/Caracas
 city,Bangui,CF,1855,436,Africa/Bangui
-city,Hermosillo,MX,-11098,2910,America/Hermosillo
+city,Hermosillo,MX,-11097,2909,America/Hermosillo
 city,Ottawa,CA,-7570,4541,America/Toronto
 city,Cần Thơ,VN,10579,1004,Asia/Ho_Chi_Minh
-city,Culiacán,MX,-10739,2479,America/Mazatlan
+city,Culiacán,MX,-10739,2480,America/Mazatlan
 city,Malatya,TR,3832,3835,Europe/Istanbul
 city,Anqing,CN,11705,3051,Asia/Shanghai
 city,Oran,DZ,-64,3570,Africa/Algiers
 city,Freetown,SL,-1324,849,Africa/Freetown
-city,San Pedro Sula,HN,-8802,1550,America/Tegucigalpa
+city,San Pedro Sula,HN,-8803,1551,America/Tegucigalpa
 city,Narela,IN,7709,2885,Asia/Kolkata
 city,Xingtai,CN,11449,3706,Asia/Shanghai
 city,Niigata,JP,13904,3792,Asia/Tokyo
@@ -1146,7 +926,7 @@ city,Jalandhar,IN,7558,3133,Asia/Kolkata
 city,Thiruvananthapuram,IN,7695,849,Asia/Kolkata
 city,Chuzhou,CN,11830,3232,Asia/Shanghai
 city,Port Said,EG,3230,3127,Africa/Cairo
-city,Cúcuta,CO,-7251,789,America/Bogota
+city,Cúcuta,CO,-7250,791,America/Bogota
 city,Homs,SY,3672,3473,Asia/Damascus
 city,Xuanzhou,CN,11876,3095,Asia/Shanghai
 city,Tainan,TW,12021,2299,Asia/Taipei
@@ -1201,7 +981,7 @@ city,Denpasar,ID,11522,-865,Asia/Makassar
 city,Muzaffarābād,PK,7347,3437,Asia/Karachi
 city,Okayama,JP,13393,3465,Asia/Tokyo
 city,Wanzhou,CN,10840,3076,Asia/Shanghai
-city,San Luis Potosí,MX,-10098,2215,America/Mexico_City
+city,San Luis Potosí,MX,-10097,2215,America/Monterrey
 city,Aguascalientes,MX,-10228,2188,America/Mexico_City
 city,Zhumadian,CN,11403,3298,Asia/Shanghai
 city,Morādābād,IN,7878,2884,Asia/Kolkata
@@ -1211,13 +991,13 @@ city,Valenzuela,PH,12097,1470,Asia/Manila
 city,Ribeirão Preto,BR,-4781,-2118,America/Sao_Paulo
 city,Zaporizhzhya,UA,3512,4785,Europe/Kyiv
 city,Zanzibar,TZ,3920,-616,Africa/Dar_es_Salaam
-city,Saltillo,MX,-10101,2542,America/Monterrey
+city,Saltillo,MX,-10098,2543,America/Monterrey
 city,Latakia,SY,3579,3553,Asia/Damascus
 city,Subang Jaya,MY,10158,304,Asia/Kuala_Lumpur
 city,Tolyatti,RU,4935,5353,Europe/Samara
 city,Jaboatão,BR,-3500,-818,America/Recife
 city,Santo Domingo Oeste,DO,-7000,1850,America/Santo_Domingo
-city,Santo Domingo Este,DO,-6985,1848,America/Santo_Domingo
+city,Santo Domingo Este,DO,-6985,1849,America/Santo_Domingo
 city,Battagram,PK,7302,3468,Asia/Karachi
 city,Suez,EG,3253,2997,Africa/Cairo
 city,Changzhi,CN,11174,3521,Asia/Shanghai
@@ -1276,9 +1056,8 @@ city,Cheonan,KR,12715,3681,Asia/Seoul
 city,Pontianak,ID,10933,-3,Asia/Pontianak
 city,Banjarmasin,ID,11459,-332,Asia/Makassar
 city,Puducherry,IN,7983,1193,Asia/Kolkata
-city,Xin’an,CN,11392,2257,Asia/Shanghai
 city,Suining,CN,10557,3051,Asia/Shanghai
-city,Puyang,CN,11502,3576,Asia/Shanghai
+city,Puyang,CN,11504,3576,Asia/Shanghai
 city,Boston,US,-7106,4236,America/New_York
 city,Tlalnepantla,MX,-9920,1954,America/Mexico_City
 city,Portland,US,-12268,4552,America/Los_Angeles
@@ -1305,7 +1084,7 @@ city,Hebi,CN,11429,3573,Asia/Shanghai
 city,Tshikapa,CD,2080,-642,Africa/Lubumbashi
 city,Memphis,US,-9005,3515,America/Chicago
 city,Jingmen,CN,11220,3103,Asia/Shanghai
-city,Barnaul,RU,8376,5336,Asia/Barnaul
+city,Barnaul,RU,8375,5336,Asia/Barnaul
 city,Dandong,CN,12439,4013,Asia/Shanghai
 city,Stuttgart,DE,918,4878,Europe/Berlin
 city,Jaboatão dos Guararapes,BR,-3501,-811,America/Recife
@@ -1350,7 +1129,7 @@ city,Benoni,ZA,2832,-2619,Africa/Johannesburg
 city,Vladivostok,RU,13187,4311,Asia/Vladivostok
 city,Kochi,IN,7626,994,Asia/Kolkata
 city,Jinzhou,CN,12114,4111,Asia/Shanghai
-city,Tuxtla,MX,-9311,1676,America/Mexico_City
+city,Tuxtla,MX,-9312,1675,America/Merida
 city,Kryvyy Rih,UA,3339,4791,Europe/Kyiv
 city,Amrāvati,IN,7775,2093,Asia/Kolkata
 city,Sanming,CN,11762,2625,Asia/Shanghai
@@ -1381,7 +1160,7 @@ city,Yingkou,CN,12223,4066,Asia/Shanghai
 city,Cimahi,ID,10754,-687,Asia/Jakarta
 city,Las Piñas,PH,12098,1445,Asia/Manila
 city,Zhangzhou,CN,11766,2451,Asia/Shanghai
-city,Reynosa,MX,-9829,2608,America/Matamoros
+city,Reynosa,MX,-9828,2608,America/Matamoros
 city,Thuận An,VN,10671,1092,Asia/Ho_Chi_Minh
 city,Dortmund,DE,747,5151,Europe/Berlin
 city,Londrina,BR,-5116,-2331,America/Sao_Paulo
@@ -1425,6 +1204,7 @@ city,Bokāro,IN,8615,2367,Asia/Kolkata
 city,Asmara,ER,3893,1534,Africa/Asmara
 city,Sukkur,PK,6886,2770,Asia/Karachi
 city,Uberlândia,BR,-4828,-1892,America/Sao_Paulo
+city,Chợ Lớn,VN,10665,1075,Asia/Ho_Chi_Minh
 city,Wenchang,CN,11080,1955,Asia/Shanghai
 city,Ile-Ife,NG,456,748,Africa/Lagos
 city,Gombe,NG,1117,1029,Africa/Lagos
@@ -1436,11 +1216,11 @@ city,Warangal,IN,7958,1800,Asia/Kolkata
 city,Bloemfontein,ZA,2621,-2912,Africa/Johannesburg
 city,Sheffield,GB,-147,5338,Europe/London
 city,Dresden,DE,1374,5105,Europe/Berlin
-city,Santiago de Cuba,CU,-7583,2002,America/Havana
+city,Santiago de Cuba,CU,-7582,2002,America/Havana
 city,Siping,CN,12438,4316,Asia/Shanghai
 city,Benguela,AO,1340,-1258,Africa/Luanda
 city,Huaihua,CN,11000,2756,Asia/Shanghai
-city,Chiclayo,PE,-7984,-677,America/Lima
+city,Chiclayo,PE,-7985,-677,America/Lima
 city,Zahedan,IR,6086,2950,Asia/Tehran
 city,Nanded,IN,7731,1916,Asia/Kolkata
 city,Kozhikode,IN,7578,1125,Asia/Kolkata
@@ -1489,7 +1269,7 @@ city,Cuauhtémoc,MX,-9915,1945,America/Mexico_City
 city,Shangluo,CN,10993,3387,Asia/Shanghai
 city,Tucson,US,-11093,3222,America/Phoenix
 city,Himeji,JP,13470,3482,Asia/Tokyo
-city,Ibagué,CO,-7523,444,America/Bogota
+city,Ibagué,CO,-7520,444,America/Bogota
 city,Antwerpen,BE,440,5122,Europe/Brussels
 city,Assiut,EG,3118,2718,Africa/Cairo
 city,Hamadān,IR,4851,3480,Asia/Tehran
@@ -1570,7 +1350,7 @@ city,Pohang,KR,12936,3603,Asia/Seoul
 city,Kampung Larkin Lama,MY,10374,150,Asia/Kuala_Lumpur
 city,Kota Damansara,MY,10158,315,Asia/Kuala_Lumpur
 city,Zhucheng,CN,11940,3599,Asia/Shanghai
-city,Santa Marta,CO,-7420,1124,America/Bogota
+city,Santa Marta,CO,-7419,1124,America/Bogota
 city,Matsudo,JP,13990,3578,Asia/Tokyo
 city,Hāthazāri,BD,9181,2251,Asia/Dhaka
 city,Karagandy,KZ,7310,4980,Asia/Almaty
@@ -1585,7 +1365,7 @@ city,Cheboksary,RU,4725,5613,Europe/Moscow
 city,Shanwei,CN,11535,2278,Asia/Shanghai
 city,Montería,CO,-7588,875,America/Bogota
 city,Ruiru,KE,3696,-115,Africa/Nairobi
-city,Valledupar,CO,-7325,1046,America/Bogota
+city,Valledupar,CO,-7325,1047,America/Bogota
 city,Ajman City,AE,5548,2540,Asia/Dubai
 city,Jianshui,CN,10122,2428,Asia/Shanghai
 city,Port Sudan,SD,3722,1962,Africa/Khartoum
@@ -1599,7 +1379,7 @@ city,Masina,CD,1539,-438,Africa/Kinshasa
 city,Sahāranpur,IN,7755,2997,Asia/Kolkata
 city,Vellore,IN,7913,1292,Asia/Kolkata
 city,Cuautitlán Izcalli,MX,-9922,1964,America/Mexico_City
-city,Piura,PE,-8063,-519,America/Lima
+city,Piura,PE,-8066,-518,America/Lima
 city,Kalaburagi,IN,7684,1734,Asia/Kolkata
 city,Kurashiki,JP,13377,3458,Asia/Tokyo
 city,Bhātpāra,IN,8840,2287,Asia/Kolkata
@@ -1638,7 +1418,7 @@ city,Mykolayiv,UA,3199,4698,Europe/Kyiv
 city,Fukuyama,JP,13337,3448,Asia/Tokyo
 city,Staten Island,US,-7414,4056,America/New_York
 city,Nanping,CN,11817,2665,Asia/Shanghai
-city,Pereira,CO,-7570,481,America/Bogota
+city,Pereira,CO,-7569,481,America/Bogota
 city,Ciudad Apodaca,MX,-10019,2578,America/Monterrey
 city,Belford Roxo,BR,-4340,-2276,America/Sao_Paulo
 city,Kanazawa,JP,13662,3660,Asia/Tokyo
@@ -1668,7 +1448,7 @@ city,Ujjain,IN,7578,2318,Asia/Kolkata
 city,Nazrēt,ET,3927,855,Africa/Addis_Ababa
 city,Colorado Springs,US,-10482,3883,America/Denver
 city,Niterói,BR,-4310,-2288,America/Sao_Paulo
-city,Huancayo,PE,-7520,-1207,America/Lima
+city,Huancayo,PE,-7521,-1207,America/Lima
 city,Al Ḩillah,IQ,4442,3246,Asia/Baghdad
 city,Mbandaka,CD,1826,5,Africa/Kinshasa
 city,Malanje,AO,1634,-954,Africa/Luanda
@@ -1718,7 +1498,7 @@ city,Bei’an,CN,12660,4827,Asia/Shanghai
 city,Mālegaon,IN,7453,2055,Asia/Kolkata
 city,Davangere,IN,7593,1447,Asia/Kolkata
 city,Ado-Ekiti,NG,522,762,Africa/Lagos
-city,Manizales,CO,-7552,507,America/Bogota
+city,Manizales,CO,-7551,507,America/Bogota
 city,Masan,KR,12683,3513,Asia/Seoul
 city,Ananindeua,BR,-4837,-137,America/Belem
 city,Stavropol’,RU,4197,4504,Europe/Moscow
@@ -1739,7 +1519,7 @@ city,Jalgaon,IN,7557,2100,Asia/Kolkata
 city,Ningde,CN,11952,2666,Asia/Shanghai
 city,Akola,IN,7700,2071,Asia/Kolkata
 city,Belagavi,IN,7450,1585,Asia/Kolkata
-city,Cusco,PE,-7197,-1352,America/Lima
+city,Cusco,PE,-7197,-1353,America/Lima
 city,Jiuquan,CN,9852,3974,Asia/Shanghai
 city,Veracruz,MX,-9614,1918,America/Mexico_City
 city,East Jerusalem,PS,3523,3178,Asia/Hebron
@@ -1774,6 +1554,7 @@ city,Rio Branco,BR,-6781,-997,America/Rio_Branco
 city,Oakland,US,-12227,3780,America/Los_Angeles
 city,Korba,IN,8270,2235,Asia/Kolkata
 city,Takamatsu,JP,13405,3433,Asia/Tokyo
+city,Kowloon City,HK,11419,2233,Asia/Hong_Kong
 city,Tirana,AL,1982,4133,Europe/Tirane
 city,San Juan,PR,-6611,1847,America/Puerto_Rico
 city,Alor Setar,MY,10036,612,Asia/Kuala_Lumpur
@@ -1789,7 +1570,7 @@ city,Magnitogorsk,RU,5901,5340,Asia/Yekaterinburg
 city,Tulsa,US,-9599,3615,America/Chicago
 city,Jhānsi,IN,7858,2546,Asia/Kolkata
 city,Tseung Kwan O,HK,11425,2233,Asia/Hong_Kong
-city,Ciudad Bolívar,VE,-6354,813,America/Caracas
+city,Ciudad Bolívar,VE,-6355,812,America/Caracas
 city,Kampung Kangkar Teberau,MY,10375,153,Asia/Kuala_Lumpur
 city,Koumassi,CI,-397,530,Africa/Abidjan
 city,Guyuan,CN,10628,3601,Asia/Shanghai
@@ -1836,7 +1617,7 @@ city,Quận Mười,VN,10667,1077,Asia/Ho_Chi_Minh
 city,Kisumu,KE,3476,-10,Africa/Nairobi
 city,Luhansk,UA,3933,4857,Europe/Kyiv
 city,Keelung,TW,12174,2513,Asia/Taipei
-city,Barinas,VE,-7021,862,America/Caracas
+city,Barinas,VE,-7023,862,America/Caracas
 city,Wichita,US,-9734,3769,America/Chicago
 city,Al Hoceïma,MA,-394,3525,Africa/Casablanca
 city,Surrey,CA,-12283,4911,America/Vancouver
@@ -1880,7 +1661,7 @@ city,Betim,BR,-4420,-1997,America/Sao_Paulo
 city,Bawshar,OM,5840,2358,Asia/Muscat
 city,Delmas,HT,-7230,1854,America/Port-au-Prince
 city,Wellington,NZ,17478,-4129,Pacific/Auckland
-city,Mazatlán,MX,-10641,2323,America/Mazatlan
+city,Mazatlán,MX,-10642,2322,America/Mazatlan
 city,Caxias do Sul,BR,-5118,-2917,America/Sao_Paulo
 city,Nizhny Tagil,RU,5997,5792,Asia/Yekaterinburg
 city,Irapuato,MX,-10136,2068,America/Mexico_City
@@ -1935,7 +1716,7 @@ city,Sector 6,RO,2602,4444,Europe/Bucharest
 city,Canberra,AU,14913,-3528,Australia/Sydney
 city,Nara-shi,JP,13580,3469,Asia/Tokyo
 city,Florence,IT,1125,4378,Europe/Rome
-city,Ahmadnagar,IN,7474,1909,Asia/Kolkata
+city,Ahilyanagar,IN,7474,1909,Asia/Kolkata
 city,Kollam,IN,7658,888,Asia/Kolkata
 city,Dhūlia,IN,7478,2090,Asia/Kolkata
 city,Huanggang,CN,11487,3045,Asia/Shanghai
@@ -1994,7 +1775,7 @@ city,Kyzylorda,KZ,6551,4485,Asia/Qyzylorda
 city,Kawagoe,JP,13949,3591,Asia/Tokyo
 city,Takatsuki,JP,13562,3485,Asia/Tokyo
 city,Muzaffarpur,IN,8539,2612,Asia/Kolkata
-city,Villahermosa,MX,-9293,1799,America/Mexico_City
+city,Villahermosa,MX,-9294,1799,America/Merida
 city,Setapak,MY,10173,321,Asia/Kuala_Lumpur
 city,Mahilyow,BY,3034,5392,Europe/Minsk
 city,Ciudad General Escobedo,MX,-10032,2580,America/Monterrey
@@ -2010,6 +1791,7 @@ city,Lapu-Lapu City,PH,12395,1031,Asia/Manila
 city,Pengze,CN,11655,2990,Asia/Shanghai
 city,Bahir Dar,ET,3739,1159,Africa/Addis_Ababa
 city,Punāsa,IN,7639,2224,Asia/Kolkata
+city,Al Maḩmūdīyah,IQ,4437,3306,Asia/Baghdad
 city,Diepsloot,ZA,2801,-2593,Africa/Johannesburg
 city,Quelimane,MZ,3689,-1788,Africa/Maputo
 city,Arkhangel’sk,RU,4055,6455,Europe/Moscow
@@ -2092,14 +1874,14 @@ city,Tieling,CN,12384,4229,Asia/Shanghai
 city,Qazvin,IR,5000,3627,Asia/Tehran
 city,Asahikawa,JP,14236,4377,Asia/Tokyo
 city,Kāmārhāti,IN,8837,2267,Asia/Kolkata
-city,Tepic,MX,-10490,2151,America/Mazatlan
+city,Tepic,MX,-10489,2151,America/Mazatlan
 city,Wŏnju,KR,12795,3735,Asia/Seoul
 city,Wad Medani,SD,3352,1440,Africa/Khartoum
 city,Quận Mười Một,VN,10664,1076,Asia/Ho_Chi_Minh
 city,Nukus,UZ,5961,4245,Asia/Samarkand
 city,Montes Claros,BR,-4386,-1673,America/Sao_Paulo
 city,Maebashi,JP,13908,3640,Asia/Tokyo
-city,Ciudad Victoria,MX,-9915,2374,America/Monterrey
+city,Ciudad Victoria,MX,-9914,2374,America/Monterrey
 city,Soledad de Graciano Sánchez,MX,-10094,2219,America/Mexico_City
 city,Kochi,JP,13353,3355,Asia/Tokyo
 city,Bielefeld,DE,853,5203,Europe/Berlin
@@ -2154,8 +1936,8 @@ city,Uíge,AO,1506,-761,Africa/Luanda
 city,Riverside,US,-11740,3395,America/Los_Angeles
 city,Ixtapaluca,MX,-9888,1932,America/Mexico_City
 city,Osh,KG,7280,4053,Asia/Bishkek
-city,Portoviejo,EC,-8045,-105,America/Guayaquil
-city,Villavicencio,CO,-7363,414,America/Bogota
+city,Portoviejo,EC,-8045,-106,America/Guayaquil
+city,Villavicencio,CO,-7363,413,America/Bogota
 city,Man’gyŏngdae-ri,KP,12566,3899,Asia/Pyongyang
 city,Jundiaí,BR,-4688,-2319,America/Sao_Paulo
 city,San Miguelito,PA,-7947,905,America/Panama
@@ -2255,19 +2037,19 @@ city,Kulti,IN,8684,2373,Asia/Kolkata
 city,Tláhuac,MX,-9901,1929,America/Mexico_City
 city,Sapele,NG,568,589,Africa/Lagos
 city,Pittsburgh,US,-8000,4044,America/New_York
-city,Armenia,CO,-7568,453,America/Bogota
+city,Armenia,CO,-7567,454,America/Bogota
 city,Sumbawanga,TZ,3162,-797,Africa/Dar_es_Salaam
 city,Orël,RU,3608,5296,Europe/Moscow
 city,Akashi,JP,13501,3466,Asia/Tokyo
 city,Kurume,JP,13052,3332,Asia/Tokyo
 city,Graz,AT,1545,4707,Europe/Vienna
 city,Saint Paul,US,-9309,4494,America/Chicago
+city,Nghi Sơn,VN,10583,1933,Asia/Ho_Chi_Minh
 city,Karnāl,IN,7698,2969,Asia/Kolkata
 city,Changyi,CN,11939,3685,Asia/Shanghai
-city,Ciudad del Este,PY,-5461,-2551,America/Asuncion
+city,Ciudad del Este,PY,-5465,-2550,America/Asuncion
 city,Barddhamān,IN,8786,2326,Asia/Kolkata
 city,Solwezi,ZM,2639,-1217,Africa/Lusaka
-city,Tanglang,CN,11398,2259,Asia/Shanghai
 city,Hamburg-Mitte,DE,1002,5355,Europe/Berlin
 city,Miri,MY,11399,440,Asia/Kuching
 city,Xinyi,CN,11835,3438,Asia/Shanghai
@@ -2276,12 +2058,11 @@ city,Surgut,RU,7342,6126,Asia/Yekaterinburg
 city,Swansea,GB,-394,5162,Europe/London
 city,Newcastle upon Tyne,GB,-161,5497,Europe/London
 city,Yangshuo,CN,11049,2478,Asia/Shanghai
-city,Jiuxiangling,CN,11395,2259,Asia/Shanghai
 city,Biñan,PH,12108,1434,Asia/Manila
 city,Malir Cantonment,PK,6721,2494,Asia/Karachi
 city,Winejok,SS,2757,901,Africa/Juba
 city,Batikent,TR,3273,3997,Europe/Istanbul
-city,Mérida,VE,-7116,859,America/Caracas
+city,Mérida,VE,-7117,858,America/Caracas
 city,Linqu,CN,11854,3652,Asia/Shanghai
 city,Angeles City,PH,12058,1515,Asia/Manila
 city,Pātan,NP,8531,2768,Asia/Kathmandu
@@ -2310,6 +2091,7 @@ city,Tirupati,IN,7942,1364,Asia/Kolkata
 city,Southend-on-Sea,GB,71,5154,Europe/London
 city,Lincoln,US,-9667,4080,America/Chicago
 city,Viña del Mar,CL,-7155,-3302,America/Santiago
+city,Phu Quoc,VN,10397,1022,Asia/Ho_Chi_Minh
 city,Baiyin,CN,10417,3655,Asia/Shanghai
 city,Fukushima,JP,14047,3775,Asia/Tokyo
 city,Greater Noida,IN,7754,2850,Asia/Kolkata
@@ -2332,7 +2114,7 @@ city,Morioka,JP,14115,3970,Asia/Tokyo
 city,Atyrau,KZ,5188,4712,Asia/Atyrau
 city,Xiuying,CN,11029,2000,Asia/Shanghai
 city,Paulista,BR,-3487,-794,America/Recife
-city,San Cristóbal,VE,-7222,777,America/Caracas
+city,San Cristóbal,VE,-7224,777,America/Caracas
 city,Limeira,BR,-4740,-2256,America/Sao_Paulo
 city,Parbhani,IN,7677,1927,Asia/Kolkata
 city,Victoria,CA,-12335,4844,America/Vancouver
@@ -2348,7 +2130,6 @@ city,Cileungsir,ID,10696,-639,Asia/Jakarta
 city,Sinŭiju,KP,12440,4010,Asia/Pyongyang
 city,Sector 4,RO,2612,4438,Europe/Bucharest
 city,Ibaraki,JP,13557,3482,Asia/Tokyo
-city,Xili,CN,11395,2259,Asia/Shanghai
 city,Marienthal,DE,1008,5357,Europe/Berlin
 city,Adapazarı,TR,3040,4078,Europe/Istanbul
 city,Sultanbeyli,TR,2927,4096,Europe/Istanbul
@@ -2358,18 +2139,19 @@ city,Songea,TZ,3565,-1068,Africa/Dar_es_Salaam
 city,Butembo,CD,2929,14,Africa/Lubumbashi
 city,Tacna,PE,-7025,-1801,America/Lima
 city,Sumaré,BR,-4727,-2282,America/Sao_Paulo
+city,Al Qurnah,IQ,4743,3102,Asia/Baghdad
 city,Savar,BD,9025,2385,Asia/Dhaka
 city,Bergen,NO,532,6039,Europe/Oslo
 city,Henderson,US,-11498,3604,America/Los_Angeles
 city,Sekondi,GH,-171,493,Africa/Accra
 city,Kyengera,UG,3250,30,Africa/Kampala
 city,Greensboro,US,-7979,3607,America/New_York
-city,Haifa,IL,3499,3282,Asia/Jerusalem
+city,Haifa,IL,3500,3281,Asia/Jerusalem
 city,Århus,DK,1021,5616,Europe/Copenhagen
 city,Viamão,BR,-5102,-3008,America/Sao_Paulo
 city,Chernihiv,UA,3128,5151,Europe/Kyiv
 city,Dengzhou,CN,11208,3268,Asia/Shanghai
-city,Atush,CN,7617,3971,Asia/Urumqi
+city,Guangminglu,CN,7618,3971,Asia/Urumqi
 city,Alto Barinas,VE,-7023,859,America/Caracas
 city,Karlsruhe,DE,840,4901,Europe/Berlin
 city,Port Moresby,PG,14715,-948,Pacific/Port_Moresby
@@ -2388,7 +2170,7 @@ city,Pétionville,HT,-7229,1851,America/Port-au-Prince
 city,Tegal,ID,10914,-687,Asia/Jakarta
 city,Xinyuan,CN,8325,4343,Asia/Urumqi
 city,Valparaíso,CL,-7163,-3304,America/Santiago
-city,Ica,PE,-7573,-1407,America/Lima
+city,Ica,PE,-7573,-1408,America/Lima
 city,Tin Shui Wai,HK,11400,2246,Asia/Hong_Kong
 city,Purnia,IN,8747,2578,Asia/Kolkata
 city,Newark,US,-7417,4074,America/New_York
@@ -2418,7 +2200,7 @@ city,Qarshi,UZ,6579,3886,Asia/Samarkand
 city,Binhe,CN,11283,3269,Asia/Shanghai
 city,Windsor,CA,-8302,4230,America/Toronto
 city,Coacalco,MX,-9911,1963,America/Mexico_City
-city,Sincelejo,CO,-7540,930,America/Bogota
+city,Sincelejo,CO,-7539,930,America/Bogota
 city,Gijón,ES,-566,4354,Europe/Madrid
 city,Zoucheng,CN,11697,3540,Asia/Shanghai
 city,Khomeynī Shahr,IR,5154,3269,Asia/Tehran
@@ -2525,7 +2307,7 @@ city,Porto-Novo,BJ,260,650,Africa/Porto-Novo
 city,Jersey City,US,-7408,4073,America/New_York
 city,Manta,EC,-8073,-95,America/Guayaquil
 city,Bégoua,CF,1853,445,Africa/Bangui
-city,Riobamba,EC,-7865,-167,America/Guayaquil
+city,Riobamba,EC,-7866,-167,America/Guayaquil
 city,Sivas,TR,3702,3975,Europe/Istanbul
 city,Wolverhampton,GB,-212,5259,Europe/London
 city,Fanling,HK,11414,2249,Asia/Hong_Kong
@@ -2560,6 +2342,7 @@ city,Plymouth,GB,-414,5037,Europe/London
 city,Nianbo,CN,10242,3648,Asia/Shanghai
 city,Baranagar,IN,8838,2264,Asia/Kolkata
 city,Aral,CN,8127,4054,Asia/Urumqi
+city,Skardu,PK,7563,3530,Asia/Karachi
 city,Tampines New Town,SG,10395,135,Asia/Singapore
 city,Qo‘qon,UZ,7094,4053,Asia/Tashkent
 city,Sumy,UA,3480,5092,Europe/Kyiv
@@ -2604,8 +2387,9 @@ city,Isiro,CD,2762,277,Africa/Lubumbashi
 city,Sari,IR,5306,3656,Asia/Tehran
 city,Woodlands,SG,10379,144,Asia/Singapore
 city,Banda Aceh,ID,9533,554,Asia/Jakarta
-city,Oaxaca,MX,-9672,1707,America/Mexico_City
+city,Oaxaca,MX,-9673,1706,America/Mexico_City
 city,Mossamedes,AO,1215,-1520,Africa/Luanda
+city,Al Madīnah,IQ,4727,3096,Asia/Baghdad
 city,Ikot Ekpene,NG,771,518,Africa/Lagos
 city,Yanzhou,CN,11683,3555,Asia/Shanghai
 city,Hanam,KR,12721,3754,Asia/Seoul
@@ -2621,16 +2405,16 @@ city,Marg‘ilon,UZ,7172,4047,Asia/Tashkent
 city,Godomè,BJ,235,639,Africa/Porto-Novo
 city,Naihāti,IN,8842,2289,Asia/Kolkata
 city,Braşov,RO,2561,4565,Europe/Bucharest
+city,Xuân Lộc,VN,10723,1093,Asia/Ho_Chi_Minh
 city,Vitória da Conquista,BR,-4084,-1487,America/Bahia
 city,Laohekou,CN,11167,3239,Asia/Shanghai
 city,Talcahuano,CL,-7312,-3672,America/Santiago
 city,Richards Bay,ZA,3204,-2878,Africa/Johannesburg
-city,Nantou,CN,11392,2254,Asia/Shanghai
 city,Qina,EG,3273,2616,Africa/Cairo
 city,El Fasher,SD,2535,1363,Africa/Khartoum
 city,Thiès Nones,SN,-1697,1478,Africa/Dakar
 city,Suihua,CN,12697,4665,Asia/Shanghai
-city,Los Teques,VE,-6704,1034,America/Caracas
+city,Los Teques,VE,-6704,1035,America/Caracas
 city,Santiago del Estero,AR,-6426,-2780,America/Argentina/Cordoba
 city,Sétif,DZ,541,3619,Africa/Algiers
 city,Begusarai,IN,8613,2542,Asia/Kolkata
@@ -2647,13 +2431,14 @@ city,Jimma,ET,3683,767,Africa/Addis_Ababa
 city,Governador Valadares,BR,-4195,-1885,America/Sao_Paulo
 city,Timişoara,RO,2123,4575,Europe/Bucharest
 city,Wafangdian,CN,12201,3962,Asia/Shanghai
-city,Santa Clara,CU,-7996,2241,America/Havana
+city,Santa Clara,CU,-7997,2241,America/Havana
 city,Iwo,NG,418,764,Africa/Lagos
 city,Libertad,PH,12550,894,Asia/Manila
 city,Altona,DE,993,5355,Europe/Berlin
 city,La Paz,MX,-11031,2414,America/Mazatlan
 city,Āvadi,IN,8011,1311,Asia/Kolkata
 city,Praia Grande,BR,-4640,-2401,America/Sao_Paulo
+city,Kelar,IQ,4532,3463,Asia/Baghdad
 city,Colonia del Valle,MX,-9916,1939,America/Mexico_City
 city,Niš,RS,2190,4332,Europe/Belgrade
 city,Singa,SD,3393,1315,Africa/Khartoum
@@ -2669,6 +2454,7 @@ city,Cidade Ademar,BR,-4666,-2367,America/Sao_Paulo
 city,Gasteiz / Vitoria,ES,-267,4285,Europe/Madrid
 city,Lubbock,US,-10186,3358,America/Chicago
 city,Thái Nguyên,VN,10585,2159,Asia/Bangkok
+city,Thuqbah,SA,5020,2626,Asia/Riyadh
 city,Yamagata,JP,14037,3823,Asia/Tokyo
 city,Tehuacán,MX,-9740,1846,America/Mexico_City
 city,Guarenas,VE,-6662,1047,America/Caracas
@@ -2690,7 +2476,8 @@ city,Probolinggo,ID,11322,-775,Asia/Jakarta
 city,Chitato,AO,2073,-730,Africa/Luanda
 city,Orsk,RU,5849,5123,Asia/Yekaterinburg
 city,Vanderbijlpark,ZA,2784,-2671,Africa/Johannesburg
-city,Coro,VE,-6967,1140,America/Caracas
+city,Coro,VE,-6968,1141,America/Caracas
+city,Americana,BR,-4733,-2274,America/Sao_Paulo
 city,Kiel,DE,1013,5432,Europe/Berlin
 city,Colombo,BR,-4922,-2529,America/Sao_Paulo
 city,Norfolk,US,-7629,3685,America/New_York
@@ -2743,7 +2530,7 @@ city,Man,CI,-755,741,Africa/Abidjan
 city,Bahawalnagar,PK,7325,3000,Asia/Karachi
 city,Novorossiysk,RU,3776,4473,Europe/Moscow
 city,Tsukuba,JP,14012,3608,Asia/Tokyo
-city,Arica,CL,-7030,-1847,America/Santiago
+city,Arica,CL,-7030,-1848,America/Santiago
 city,Reno,US,-11981,3953,America/Los_Angeles
 city,Winston-Salem,US,-8024,3610,America/New_York
 city,Farrukhābād,IN,7958,2739,Asia/Kolkata
@@ -2780,6 +2567,7 @@ city,Groningen,NL,657,5322,Europe/Amsterdam
 city,Temuco,CL,-7260,-3874,America/Santiago
 city,Krefeld,DE,655,5134,Europe/Berlin
 city,Halle (Saale),DE,1198,5148,Europe/Berlin
+city,Amarapura,MM,9605,2191,Asia/Yangon
 city,Athlone,ZA,1850,-3397,Africa/Johannesburg
 city,Batangas,PH,12106,1376,Asia/Manila
 city,Al Jubayl,SA,4962,2702,Asia/Riyadh
@@ -2810,6 +2598,7 @@ city,Chesapeake,US,-7627,3682,America/New_York
 city,Caruaru,BR,-3598,-828,America/Recife
 city,Uluberiya,IN,8810,2248,Asia/Kolkata
 city,Dali,CN,10021,2558,Asia/Shanghai
+city,Thành Phố Bà Rịa,VN,10717,1050,Asia/Ho_Chi_Minh
 city,Kediri,ID,11202,-782,Asia/Jakarta
 city,Georgetown,GY,-5816,680,America/Guyana
 city,Ramagundam,IN,7947,1876,Asia/Kolkata
@@ -2896,6 +2685,7 @@ city,Radom,PL,2115,5140,Europe/Warsaw
 city,Paya Terubong,MY,10028,537,Asia/Kuala_Lumpur
 city,Richmond,US,-7746,3755,America/New_York
 city,Changhua,TW,12055,2407,Asia/Taipei
+city,Điện Bàn,VN,10825,1589,Asia/Ho_Chi_Minh
 city,Takarazuka,JP,13536,3480,Asia/Tokyo
 city,Nzérékoré,GN,-882,776,Africa/Conakry
 city,Shrīrāmpur,IN,8834,2275,Asia/Kolkata
@@ -2961,7 +2751,7 @@ city,Neyshābūr,IR,5880,3621,Asia/Tehran
 city,Wuxue,CN,11555,2985,Asia/Shanghai
 city,Rennes,FR,-167,4811,Europe/Paris
 city,Chí Linh,VN,10632,2107,Asia/Bangkok
-city,Campeche,MX,-9053,1984,America/Merida
+city,Campeche,MX,-9052,1984,America/Merida
 city,Quận Ba,VN,10669,1077,Asia/Ho_Chi_Minh
 city,Fuencarral-El Pardo,ES,-373,4050,Europe/Madrid
 city,Mirzāpur,IN,8257,2514,Asia/Kolkata
@@ -2973,7 +2763,6 @@ city,Kropyvnytskyy,UA,3227,4851,Europe/Kyiv
 city,Kharagpur,IN,8733,2234,Asia/Kolkata
 city,Badalona,ES,225,4145,Europe/Madrid
 city,Kabinda,CD,2448,-614,Africa/Lubumbashi
-city,Changlingpi,CN,11401,2260,Asia/Shanghai
 city,Jacobabad,PK,6844,2828,Asia/Karachi
 city,Tunduma,TZ,3277,-930,Africa/Dar_es_Salaam
 city,Binangonan,PH,12119,1446,Asia/Manila
@@ -2987,6 +2776,7 @@ city,Imperatriz,BR,-4749,-553,America/Fortaleza
 city,Koutiala,ML,-547,1239,Africa/Bamako
 city,Eluru,IN,8110,1671,Asia/Kolkata
 city,San Pedro de Macorís,DO,-6931,1845,America/Santo_Domingo
+city,Galaţi,RO,2805,4544,Europe/Bucharest
 city,Amarnāth,IN,7317,1920,Asia/Kolkata
 city,Kremenchuk,UA,3340,4906,Europe/Kyiv
 city,Mokotów,PL,2103,5219,Europe/Warsaw
@@ -2996,6 +2786,7 @@ city,Mainz,DE,828,4998,Europe/Berlin
 city,Yamuna Nagar,IN,7728,3013,Asia/Kolkata
 city,Pangkalpinang,ID,10611,-213,Asia/Jakarta
 city,Jamaica,US,-7381,4069,America/New_York
+city,Gilgit,PK,7431,3592,Asia/Karachi
 city,Rybinsk,RU,3884,5805,Europe/Moscow
 city,Santa Rosa,PH,12111,1431,Asia/Manila
 city,Raurkela Industrial Township,IN,8486,2220,Asia/Kolkata
@@ -3009,7 +2800,7 @@ city,Zelenograd,RU,3718,5598,Europe/Moscow
 city,Archway,GB,-13,5157,Europe/London
 city,Wangsa Maju,MY,10174,320,Asia/Kuala_Lumpur
 city,Salt Lake City,US,-11189,4076,America/Denver
-city,Biysk,RU,8521,5254,Asia/Barnaul
+city,Biysk,RU,8520,5253,Asia/Barnaul
 city,Novi Sad,RS,1984,4525,Europe/Belgrade
 city,Jinzhou,CN,12172,3910,Asia/Shanghai
 city,Monclova,MX,-10142,2691,America/Monterrey
@@ -3073,7 +2864,6 @@ city,Qui Nhon,VN,10922,1378,Asia/Ho_Chi_Minh
 city,Sidi Bel Abbes,DZ,-63,3519,Africa/Algiers
 city,Pāli,IN,7332,2577,Asia/Kolkata
 city,Arroyo Naranjo,CU,-8238,2304,America/Havana
-city,Baimang,CN,11394,2263,Asia/Shanghai
 city,Jebel Ali,AE,5511,2500,Asia/Dubai
 city,Bogra,BD,8937,2485,Asia/Dhaka
 city,Kostanay,KZ,6362,5321,Asia/Qostanay
@@ -3090,7 +2880,7 @@ city,Chungju,KR,12793,3698,Asia/Seoul
 city,Anand,IN,7296,2255,Asia/Kolkata
 city,São Leopoldo,BR,-5115,-2976,America/Sao_Paulo
 city,Bade,TW,12128,2493,Asia/Taipei
-city,Oruro,BO,-6715,-1798,America/La_Paz
+city,Oruro,BO,-6709,-1797,America/La_Paz
 city,Kielce,PL,2063,5087,Europe/Warsaw
 city,Bachuan,CN,10605,2985,Asia/Shanghai
 city,Rewa,IN,8129,2453,Asia/Kolkata
@@ -3130,11 +2920,12 @@ city,Epworth,ZW,3115,-1789,Africa/Harare
 city,San Felipe,VE,-6874,1034,America/Caracas
 city,Dinajpur,BD,8864,2563,Asia/Dhaka
 city,Buenavista,MX,-9917,1961,America/Mexico_City
+city,Việt Yên,VN,10613,2127,Asia/Bangkok
 city,Ifakara,TZ,3668,-813,Africa/Dar_es_Salaam
 city,Sumbe,AO,1384,-1121,Africa/Luanda
 city,Ségou,ML,-626,1344,Africa/Bamako
 city,Itabuna,BR,-3928,-1479,America/Bahia
-city,Latacunga,EC,-7862,-94,America/Guayaquil
+city,Latacunga,EC,-7862,-93,America/Guayaquil
 city,Nāngloi Jāt,IN,7707,2868,Asia/Kolkata
 city,Kishiwada,JP,13537,3447,Asia/Tokyo
 city,Jinghong,CN,10077,2200,Asia/Shanghai
@@ -3178,7 +2969,7 @@ city,Osmaniye,TR,3625,3707,Europe/Istanbul
 city,Burnaby,CA,-12295,4927,America/Vancouver
 city,Bābol,IR,5268,3655,Asia/Tehran
 city,Burhānpur,IN,7623,2131,Asia/Kolkata
-city,Tapachula,MX,-9226,1490,America/Mexico_City
+city,Tapachula,MX,-9226,1491,America/Merida
 city,Little Rock,US,-9229,3475,America/Chicago
 city,Çorlu,TR,2780,4116,Europe/Istanbul
 city,Madiun,ID,11152,-763,Asia/Jakarta
@@ -3208,6 +2999,7 @@ city,Petropavl,KZ,6915,5487,Asia/Almaty
 city,Aurora,US,-8832,4176,America/Chicago
 city,Nicosia,CY,3336,3518,Asia/Nicosia
 city,Brescia,IT,1021,4554,Europe/Rome
+city,Nasīm Shahr,IR,5116,3557,Asia/Tehran
 city,Ugep,NG,808,581,Africa/Lagos
 city,Kamina,CD,2500,-874,Africa/Lubumbashi
 city,Yanbu,SA,3806,2409,Asia/Riyadh
@@ -3232,6 +3024,7 @@ city,Sīkar,IN,7514,2761,Asia/Kolkata
 city,Beiliu,CN,11035,2271,Asia/Shanghai
 city,Tilburg,NL,509,5156,Europe/Amsterdam
 city,Iquique,CL,-7015,-2021,America/Santiago
+city,Thuận Thanh,VN,10608,2102,Asia/Bangkok
 city,Balakovo,RU,4780,5203,Europe/Saratov
 city,Armavir,RU,4111,4500,Europe/Moscow
 city,Kamoke,PK,7422,3198,Asia/Karachi
@@ -3268,8 +3061,8 @@ city,Hospet,IN,7639,1527,Asia/Kolkata
 city,Fuenlabrada,ES,-379,4028,Europe/Madrid
 city,Mentougou,CN,11609,3994,Asia/Shanghai
 city,Akron,US,-8152,4108,America/New_York
-city,Talca,CL,-7166,-3543,America/Santiago
-city,Ciudad Madero,MX,-9784,2227,America/Monterrey
+city,Talca,CL,-7165,-3542,America/Santiago
+city,Ciudad Madero,MX,-9784,2225,America/Monterrey
 city,Shreveport,US,-9375,3253,America/Chicago
 city,Gemena,CD,1977,326,Africa/Kinshasa
 city,Bhālswa Jahangirpur,IN,7717,2874,Asia/Kolkata
@@ -3293,7 +3086,6 @@ city,Moundou,TD,1608,857,Africa/Ndjamena
 city,Sambhal,IN,7857,2858,Asia/Kolkata
 city,Lhokseumawe,ID,9715,518,Asia/Jakarta
 city,Bhiwāni,IN,7614,2879,Asia/Kolkata
-city,Americana,BR,-4733,-2274,America/Sao_Paulo
 city,Engels,RU,4611,5148,Europe/Saratov
 city,Mocuba,MZ,3699,-1684,Africa/Maputo
 city,Burgas,BG,2747,4251,Europe/Sofia
@@ -3327,6 +3119,7 @@ city,Karuri,KE,3676,-118,Africa/Nairobi
 city,Karuri,KE,3718,-70,Africa/Nairobi
 city,Manéah,GN,-1342,973,Africa/Conakry
 city,Severodvinsk,RU,3983,6456,Europe/Moscow
+city,Kowloon City Centre,HK,11419,2233,Asia/Hong_Kong
 city,Mobile,US,-8804,3069,America/Chicago
 city,Düzce,TR,3116,4084,Europe/Istanbul
 city,Nnewi,NG,692,602,Africa/Lagos
@@ -3412,7 +3205,7 @@ city,Grand Prairie,US,-9700,3275,America/Chicago
 city,Ait Melloul,MA,-950,3034,Africa/Casablanca
 city,Sutton,GB,-20,5135,Europe/London
 city,Quận Năm,VN,10667,1076,Asia/Ho_Chi_Minh
-city,Chilpancingo,MX,-9951,1755,America/Mexico_City
+city,Chilpancingo,MX,-9950,1755,America/Mexico_City
 city,Cachoeiro de Itapemirim,BR,-4111,-2085,America/Sao_Paulo
 city,Donaustadt,AT,1646,4823,Europe/Vienna
 city,Pinar del Río,CU,-8370,2242,America/Havana
@@ -3489,6 +3282,7 @@ city,Carletonville,ZA,2740,-2636,Africa/Johannesburg
 city,Dubréka,GN,-1352,979,Africa/Conakry
 city,Banhā,EG,3118,3046,Africa/Cairo
 city,Bahraigh,IN,8159,2757,Asia/Kolkata
+city,Quarto Oggiaro,IT,914,4551,Europe/Rome
 city,Potsdam,DE,1307,5240,Europe/Berlin
 city,Tsing Yi Town,HK,11410,2235,Asia/Hong_Kong
 city,Monywa,MM,9514,2211,Asia/Yangon
@@ -3504,7 +3298,7 @@ city,Odense,DK,1039,5540,Europe/Copenhagen
 city,Townsville,AU,14681,-1927,Australia/Brisbane
 city,Singosari,ID,11267,-789,Asia/Jakarta
 city,Sacaba,BO,-6604,-1740,America/La_Paz
-city,Quetzaltenango,GT,-9152,1483,America/Guatemala
+city,Quetzaltenango,GT,-9152,1484,America/Guatemala
 city,Āshuganj City,BD,9101,2404,Asia/Dhaka
 city,Chandannagar,IN,8837,2286,Asia/Kolkata
 city,Gangneung,KR,12887,3775,Asia/Seoul
@@ -3549,6 +3343,7 @@ city,Amadora,PT,-923,3875,Europe/Lisbon
 city,Ipswich,GB,116,5206,Europe/London
 city,Njeru,UG,3318,44,Africa/Kampala
 city,Toliara,MG,4367,-2335,Indian/Antananarivo
+city,An Nhơn,VN,10911,1389,Asia/Ho_Chi_Minh
 city,Saki,NG,339,867,Africa/Lagos
 city,Chlef,DZ,133,3617,Africa/Algiers
 city,Fontanar,CU,-8241,2302,America/Havana
@@ -3560,7 +3355,6 @@ city,Metro,ID,10531,-511,Asia/Jakarta
 city,Livingstone,ZM,2585,-1784,Africa/Lusaka
 city,Potchefstroom,ZA,2710,-2672,Africa/Johannesburg
 city,Ciudad Camilo Cienfuegos,CU,-8233,2316,America/Havana
-city,Longjing,CN,11397,2256,Asia/Shanghai
 city,Paris 13e Arrondissement,FR,236,4883,Europe/Paris
 city,Proddatūr,IN,7855,1475,Asia/Kolkata
 city,Sittwe,MM,9290,2015,Asia/Yangon
@@ -3600,6 +3394,7 @@ city,Siverek,TR,3932,3776,Europe/Istanbul
 city,Palhoça,BR,-4867,-2765,America/Sao_Paulo
 city,Rancho Cucamonga,US,-11759,3411,America/Los_Angeles
 city,Cape Coral,US,-8195,2656,America/New_York
+city,Tân Châu,VN,10524,1080,Asia/Ho_Chi_Minh
 city,Jiutai,CN,12583,4415,Asia/Shanghai
 city,Santa Rosa,US,-12271,3844,America/Los_Angeles
 city,Naga,PH,12318,1362,Asia/Manila
@@ -3620,6 +3415,7 @@ city,Daule,EC,-7998,-186,America/Guayaquil
 city,Cuddalore,IN,7977,1176,Asia/Kolkata
 city,Tlemcen,DZ,-131,3488,Africa/Algiers
 city,Shimla,IN,7717,3110,Asia/Kolkata
+city,Shāhīn Shahr,IR,5155,3286,Asia/Tehran
 city,Croydon,GB,-10,5138,Europe/London
 city,Myeik,MM,9860,1244,Asia/Yangon
 city,East New York,US,-7388,4067,America/New_York
@@ -3635,7 +3431,7 @@ city,Izumo,JP,13277,3537,Asia/Tokyo
 city,Kon Tum,VN,10801,1435,Asia/Ho_Chi_Minh
 city,Ongata Rongai,KE,3676,-140,Africa/Nairobi
 city,Lang'ata,KE,3673,-137,Africa/Nairobi
-city,Tunja,CO,-7337,554,America/Bogota
+city,Tunja,CO,-7336,554,America/Bogota
 city,Quillacollo,BO,-6628,-1739,America/La_Paz
 city,Gisenyi,RW,2926,-170,Africa/Kigali
 city,Isparta,TR,3055,3776,Europe/Istanbul
@@ -3696,7 +3492,7 @@ city,Mufulira,ZM,2824,-1255,Africa/Lusaka
 city,Deoli,IN,7723,2850,Asia/Kolkata
 city,Jaffna,LK,8001,967,Asia/Colombo
 city,Arad,RO,2132,4618,Europe/Bucharest
-city,Chetumal,MX,-8830,1851,America/Cancun
+city,Chetumal,MX,-8830,1852,America/Cancun
 city,Bharūch,IN,7298,2169,Asia/Kolkata
 city,Đồng Hới,VN,10662,1747,Asia/Bangkok
 city,Don Mueang City,TH,10059,1391,Asia/Bangkok
@@ -3711,9 +3507,9 @@ city,Poços de Caldas,BR,-4656,-2179,America/Sao_Paulo
 city,Calabozo,VE,-6743,892,America/Caracas
 city,Jabālyā,PS,3448,3153,Asia/Gaza
 city,Araraquara,BR,-4818,-2179,America/Sao_Paulo
-city,Yopal,CO,-7240,534,America/Bogota
+city,Yopal,CO,-7239,534,America/Bogota
 city,Ituzaingó,AR,-5669,-2759,America/Argentina/Cordoba
-city,Florencia,CO,-7561,161,America/Bogota
+city,Florencia,CO,-7560,162,America/Bogota
 city,Moratuwa,LK,7988,677,Asia/Colombo
 city,Angers,FR,-55,4747,Europe/Paris
 city,Ilford,GB,7,5156,Europe/London
@@ -3818,6 +3614,7 @@ city,McKinney,US,-9662,3320,America/Chicago
 city,Sambalpur,IN,8398,2147,Asia/Kolkata
 city,Mostaganem,DZ,9,3593,Africa/Algiers
 city,Chirchiq,UZ,6958,4147,Asia/Tashkent
+city,Bandar-e Māhshahr,IR,4919,3056,Asia/Tehran
 city,Floridsdorf,AT,1640,4825,Europe/Vienna
 city,Leverkusen,DE,698,5103,Europe/Berlin
 city,Gadag,IN,7563,1543,Asia/Kolkata
@@ -3834,6 +3631,7 @@ city,Al Maţarīyah,EG,3203,3118,Africa/Cairo
 city,Criciúma,BR,-4937,-2868,America/Sao_Paulo
 city,Kunduz,AF,6886,3673,Asia/Kabul
 city,Fengcheng,CN,11659,3470,Asia/Shanghai
+city,Trảng Bàng,VN,10636,1103,Asia/Ho_Chi_Minh
 city,Unnāo,IN,8049,2655,Asia/Kolkata
 city,Hortaleza,ES,-364,4047,Europe/Madrid
 city,N'dalatando,AO,1491,-930,Africa/Luanda
@@ -3875,7 +3673,7 @@ city,Dubai Investments Park,AE,5516,2501,Asia/Dubai
 city,İskenderun,TR,3617,3659,Europe/Istanbul
 city,Salavat,RU,5591,5338,Asia/Yekaterinburg
 city,Manzanillo,MX,-10434,1912,America/Mexico_City
-city,Jalapa,GT,-8999,1463,America/Guatemala
+city,Jalapa,GT,-8999,1464,America/Guatemala
 city,Paech’ŏn-ŭp,KP,12630,3799,Asia/Pyongyang
 city,Cary,US,-7878,3579,America/New_York
 city,Skudai,MY,10366,154,Asia/Kuala_Lumpur
@@ -3914,7 +3712,7 @@ city,Ilagan,PH,12189,1715,Asia/Manila
 city,Centro Habana,CU,-8236,2314,America/Havana
 city,Hoshiārpur,IN,7591,3154,Asia/Kolkata
 city,Bukit Batok New Town,SG,10376,136,Asia/Singapore
-city,San Cristóbal de las Casas,MX,-9264,1673,America/Mexico_City
+city,San Cristóbal de las Casas,MX,-9264,1673,America/Merida
 city,Dijon,FR,502,4732,Europe/Paris
 city,Gol’yanovo,RU,3781,5582,Europe/Moscow
 city,Sobral,BR,-4035,-369,America/Fortaleza
@@ -3959,6 +3757,7 @@ city,Yizhou,CN,10867,2450,Asia/Shanghai
 city,Sunnyvale,US,-12204,3737,America/Los_Angeles
 city,Tema,GH,-2,567,Africa/Accra
 city,Yichun,CN,12888,4772,Asia/Shanghai
+city,Đức Phổ,VN,10896,1481,Asia/Ho_Chi_Minh
 city,Itajaí,BR,-4866,-2691,America/Sao_Paulo
 city,Ar Ramthā,JO,3601,3256,Asia/Amman
 city,Hanumāngarh,IN,7433,2958,Asia/Kolkata
@@ -3985,6 +3784,7 @@ city,Saint-Denis,RE,5545,-2088,Indian/Reunion
 city,Brăila,RO,2797,4527,Europe/Bucharest
 city,Lyubertsy,RU,3789,5568,Europe/Moscow
 city,Bumba,CD,2247,219,Africa/Kinshasa
+city,Rudrapur,IN,7940,2898,Asia/Kolkata
 city,La Serena,CL,-7125,-2991,America/Santiago
 city,Miskolc,HU,2078,4810,Europe/Budapest
 city,Abū Kabīr,EG,3167,3073,Africa/Cairo
@@ -4074,6 +3874,7 @@ city,Serilingampalle,IN,7830,1749,Asia/Kolkata
 city,Chillán,CL,-7210,-3661,America/Santiago
 city,Blitar,ID,11217,-810,Asia/Jakarta
 city,Virār,IN,7281,1946,Asia/Kolkata
+city,Kỳ Anh,VN,10630,1806,Asia/Bangkok
 city,Piedras Negras,MX,-10052,2870,America/Matamoros
 city,Kızıltepe,TR,4058,3719,Europe/Istanbul
 city,Astoria,US,-7393,4077,America/New_York
@@ -4082,7 +3883,7 @@ city,Balashikha,RU,3795,5579,Europe/Moscow
 city,Poole,GB,-198,5071,Europe/London
 city,Raigarh,IN,8340,2190,Asia/Kolkata
 city,Vryheid,ZA,3079,-2777,Africa/Johannesburg
-city,Baishizhou,CN,11396,2254,Asia/Shanghai
+city,Malatia-Sebastia,AM,4445,4017,Asia/Yerevan
 city,Malkajgiri,IN,7853,1745,Asia/Kolkata
 city,Gimcheon,KR,12812,3612,Asia/Seoul
 city,Bercham,MY,10114,464,Asia/Kuala_Lumpur
@@ -4153,6 +3954,7 @@ city,Salamanca,ES,-368,4043,Europe/Madrid
 city,Kolomna,RU,3878,5507,Europe/Moscow
 city,Hājīpur,IN,8521,2569,Asia/Kolkata
 city,Rafsanjān,IR,5599,3041,Asia/Tehran
+city,Hòa Thành,VN,10613,1129,Asia/Ho_Chi_Minh
 city,Mestre,IT,1225,4549,Europe/Rome
 city,As Sālimīyah,KW,4808,2933,Asia/Kuwait
 city,Bridgeport,US,-7319,4118,America/New_York
@@ -4168,7 +3970,7 @@ city,Kramatorsk,UA,3759,4873,Europe/Kyiv
 city,Naperville,US,-8815,4179,America/Chicago
 city,Manama,BH,5059,2623,Asia/Bahrain
 city,Buôn Ma Thuột,VN,10804,1267,Asia/Ho_Chi_Minh
-city,Colima,MX,-10373,1925,America/Mexico_City
+city,Colima,MX,-10371,1924,America/Mexico_City
 city,Bhimavaram,IN,8152,1654,Asia/Kolkata
 city,Lárisa,GR,2242,3964,Europe/Athens
 city,Nakhodka,RU,13292,4284,Asia/Vladivostok
@@ -4187,7 +3989,7 @@ city,Puerto Plata,DO,-7069,1979,America/Santo_Domingo
 city,Chamberí,ES,-370,4043,Europe/Madrid
 city,Krishnanagar,IN,8849,2341,Asia/Kolkata
 city,Xinji,CN,11522,3793,Asia/Shanghai
-city,Jutiapa,GT,-8990,1429,America/Guatemala
+city,Jutiapa,GT,-8989,1428,America/Guatemala
 city,Marabá,BR,-4913,-538,America/Belem
 city,Cambridge,GB,12,5220,Europe/London
 city,Kampung Pasir Gudang Baru,MY,10388,147,Asia/Kuala_Lumpur
@@ -4199,6 +4001,7 @@ city,Médéa,DZ,275,3626,Africa/Algiers
 city,Taishan,CN,11278,2225,Asia/Shanghai
 city,El Eulma,DZ,569,3615,Africa/Algiers
 city,Pécs,HU,1823,4607,Europe/Budapest
+city,Giá Rai,VN,10546,923,Asia/Ho_Chi_Minh
 city,Concordia,AR,-5802,-3139,America/Argentina/Cordoba
 city,Kampong Pasir Ris,SG,10393,138,Asia/Singapore
 city,Fujieda,JP,13827,3487,Asia/Tokyo
@@ -4220,6 +4023,7 @@ city,Kakamigahara,JP,13687,3542,Asia/Tokyo
 city,Le Mans,FR,20,4800,Europe/Paris
 city,Lodhran,PK,7163,2953,Asia/Karachi
 city,Jyväskylä,FI,2572,6224,Europe/Helsinki
+city,Hailin,CN,12939,4457,Asia/Shanghai
 city,Tsuchiura,JP,14021,3609,Asia/Tokyo
 city,Elektrostal’,RU,3846,5579,Europe/Moscow
 city,Yong’an,CN,10946,3102,Asia/Shanghai
@@ -4227,7 +4031,6 @@ city,Paris 11e Arrondissement,FR,238,4886,Europe/Paris
 city,Huelva,ES,-694,3727,Europe/Madrid
 city,Navoiy,UZ,6538,4008,Asia/Samarkand
 city,Syracuse,US,-7615,4305,America/New_York
-city,Malatia-Sebastia,AM,4445,4017,Asia/Yerevan
 city,Atibaia,BR,-4655,-2312,America/Sao_Paulo
 city,Ashkelon,IL,3457,3167,Asia/Jerusalem
 city,Pinetown,ZA,3089,-2982,Africa/Johannesburg
@@ -4256,8 +4059,10 @@ city,Surprise,US,-11233,3363,America/Phoenix
 city,Kenema,SL,-1119,788,Africa/Freetown
 city,Norwich,GB,130,5263,Europe/London
 city,Cabo de Santo Agostinho,BR,-3503,-829,America/Recife
+city,Tịnh Biên,VN,10494,1060,Asia/Ho_Chi_Minh
 city,Moriguchi,JP,13557,3473,Asia/Tokyo
 city,Amiens,FR,230,4990,Europe/Paris
+city,Cai Lậy,VN,10612,1040,Asia/Ho_Chi_Minh
 city,Macaé,BR,-4178,-2238,America/Sao_Paulo
 city,Rewāri,IN,7662,2820,Asia/Kolkata
 city,Novyye Kuz’minki,RU,3775,5570,Europe/Moscow
@@ -4297,6 +4102,7 @@ city,Masai,MY,10388,149,Asia/Kuala_Lumpur
 city,Punto Fijo,VE,-7020,1169,America/Caracas
 city,Myingyan,MM,9539,2146,Asia/Yangon
 city,Arnhem,NL,591,5198,Europe/Amsterdam
+city,Kamālshahr,IR,5087,3586,Asia/Tehran
 city,Zheleznodorozhnyy,RU,3802,5574,Europe/Moscow
 city,Jahrom,IR,5356,2850,Asia/Tehran
 city,Zamora,MX,-10228,1999,America/Mexico_City
@@ -4339,10 +4145,10 @@ city,Beni,CD,2947,49,Africa/Lubumbashi
 city,Debre Mark’os,ET,3773,1035,Africa/Addis_Ababa
 city,Vila Curuca,BR,-4642,-2351,America/Sao_Paulo
 city,Nigel,ZA,2848,-2643,Africa/Johannesburg
-city,Shengavit,AM,4448,4016,Asia/Yerevan
 city,Buea,CM,924,415,Africa/Douala
 city,Shuizhai,CN,11576,2393,Asia/Shanghai
 city,Al’met’yevsk,RU,5232,5490,Europe/Moscow
+city,Shengavit,AM,4448,4016,Asia/Yerevan
 city,Darmstadt,DE,865,4987,Europe/Berlin
 city,Paris 12e Arrondissement,FR,244,4884,Europe/Paris
 city,Toowoomba,AU,15195,-2756,Australia/Brisbane
@@ -4396,7 +4202,6 @@ city,Belgrano,AR,-5846,-3456,America/Argentina/Buenos_Aires
 city,Sarh,TD,1838,915,Africa/Ndjamena
 city,San Juan del Río,MX,-10000,2039,America/Mexico_City
 city,Sekondi-Takoradi,GH,-176,493,Africa/Accra
-city,Taoyuan,CN,11396,2258,Asia/Shanghai
 city,Liuzhi,CN,10543,2623,Asia/Shanghai
 city,Fuyu,CN,12482,4518,Asia/Shanghai
 city,Chitradurga,IN,7640,1422,Asia/Kolkata
@@ -4439,6 +4244,7 @@ city,Odintsovo,RU,3728,5567,Europe/Moscow
 city,Foggia,IT,1555,4146,Europe/Rome
 city,Antsiranana,MG,4929,-1232,Indian/Antananarivo
 city,Kānchrāpāra,IN,8843,2296,Asia/Kolkata
+city,Nor Nork,AM,4457,4020,Asia/Yerevan
 city,San Juan Sacatepéquez,GT,-9064,1472,America/Guatemala
 city,Minoh,JP,13547,3483,Asia/Tokyo
 city,Funtua,NG,731,1152,Africa/Lagos
@@ -4475,7 +4281,6 @@ city,Queimados,BR,-4356,-2272,America/Sao_Paulo
 city,Tumxuk,CN,7906,3987,Asia/Urumqi
 city,Kushtia,BD,8912,2390,Asia/Dhaka
 city,Pitalito,CO,-7605,185,America/Bogota
-city,Nor Nork,AM,4457,4020,Asia/Yerevan
 city,Barysaw,BY,2851,5423,Europe/Minsk
 city,Baliuag,PH,12090,1495,Asia/Manila
 city,West Bromwich,GB,-199,5252,Europe/London
@@ -4487,6 +4292,7 @@ city,Cẩm Phả Mines,VN,10730,2102,Asia/Bangkok
 city,Cẩm Phả,VN,10727,2101,Asia/Bangkok
 city,Petapa,GT,-9056,1450,America/Guatemala
 city,Buguma,NG,686,474,Africa/Lagos
+city,Araras,BR,-4738,-2236,America/Sao_Paulo
 city,Shiqiao,CN,11336,2295,Asia/Shanghai
 city,Pyay,MM,9522,1882,Asia/Yangon
 city,Rabak,SD,3274,1318,Africa/Khartoum
@@ -4562,6 +4368,7 @@ city,Tondabayashichō,JP,13560,3450,Asia/Tokyo
 city,Sandachō,JP,13523,3488,Asia/Tokyo
 city,Shillong,IN,9188,2557,Asia/Kolkata
 city,Mīāndoāb,IR,4611,3697,Asia/Tehran
+city,Kentron,AM,4451,4018,Asia/Yerevan
 city,Kislovodsk,RU,4272,4391,Europe/Moscow
 city,Schaerbeek,BE,438,5087,Europe/Brussels
 city,Hoofddorp,NL,469,5230,Europe/Amsterdam
@@ -4614,6 +4421,7 @@ city,Onomichi,JP,13320,3442,Asia/Tokyo
 city,Denton,US,-9713,3321,America/Chicago
 city,Lashio,MM,9775,2294,Asia/Yangon
 city,Pīlibhīt,IN,7980,2863,Asia/Kolkata
+city,Shangzhi,CN,12800,4521,Asia/Shanghai
 city,Novomoskovsk,RU,3829,5401,Europe/Moscow
 city,Buzău,RO,2683,4515,Europe/Bucharest
 city,Sapucaia do Sul,BR,-5115,-2982,America/Sao_Paulo
@@ -4649,7 +4457,7 @@ city,Umeå,SE,2026,6383,Europe/Stockholm
 city,Songjiang,CN,12122,3103,Asia/Shanghai
 city,Jaraguá do Sul,BR,-4907,-2649,America/Sao_Paulo
 city,Sinnar,SD,3357,1357,Africa/Khartoum
-city,Masaya,NI,-8609,1197,America/Managua
+city,Masaya,NI,-8610,1197,America/Managua
 city,Visalia,US,-11929,3633,America/Los_Angeles
 city,Rustavi,GE,4498,4156,Asia/Tbilisi
 city,Caála,AO,1556,-1285,Africa/Luanda
@@ -4666,12 +4474,14 @@ city,Cambridge,CA,-8031,4336,America/Toronto
 city,Gyeongsan-si,KR,12874,3582,Asia/Seoul
 city,Mardin,TR,4074,3731,Europe/Istanbul
 city,Baidoa,SO,4365,311,Africa/Mogadishu
+city,Sầm Sơn,VN,10590,1973,Asia/Ho_Chi_Minh
 city,Salford,GB,-229,5349,Europe/London
 city,Mandi Bahauddin,PK,7349,3259,Asia/Karachi
 city,Tokat,TR,3655,4031,Europe/Istanbul
 city,Sukrah,TN,1025,3688,Africa/Tunis
 city,Ô Môn,VN,10562,1011,Asia/Ho_Chi_Minh
 city,Deoria,IN,8378,2650,Asia/Kolkata
+city,Erebuni,AM,4453,4013,Asia/Yerevan
 city,Mianwali,PK,7153,3258,Asia/Karachi
 city,Coral Springs,US,-8027,2627,America/New_York
 city,Sherbrooke,CA,-7190,4540,America/Toronto
@@ -4713,6 +4523,7 @@ city,Concord,US,-12203,3798,America/Los_Angeles
 city,Puno,PE,-7002,-1584,America/Lima
 city,Kamyshin,RU,4541,5009,Europe/Volgograd
 city,Shuanglonghu,CN,10661,2972,Asia/Shanghai
+city,Neemuch,IN,7487,2446,Asia/Kolkata
 city,Kafr ad Dawwār,EG,3013,3113,Africa/Cairo
 city,Hassan,IN,7610,1301,Asia/Kolkata
 city,Bosque Saúde,BR,-4662,-2361,America/Sao_Paulo
@@ -4737,6 +4548,7 @@ city,Orekhovo-Borisovo Severnoye,RU,3768,5562,Europe/Moscow
 city,Ivanovskoye,RU,3783,5577,Europe/Moscow
 city,Buôn Hồ,VN,10830,1295,Asia/Ho_Chi_Minh
 city,Muar,MY,10257,204,Asia/Kuala_Lumpur
+city,Chũ,VN,10657,2137,Asia/Bangkok
 city,Västerås,SE,1655,5962,Europe/Stockholm
 city,Seto,JP,13710,3523,Asia/Tokyo
 city,Alhambra,US,-11213,3350,America/Phoenix
@@ -4781,7 +4593,6 @@ city,La Victoria,VE,-6733,1023,America/Caracas
 city,Pakpattan,PK,7339,3034,Asia/Karachi
 city,Jingzhi,CN,11939,3631,Asia/Shanghai
 city,Danshui,CN,11447,2280,Asia/Shanghai
-city,Erebuni,AM,4453,4013,Asia/Yerevan
 city,Bahawalnagar,PK,7339,3055,Asia/Karachi
 city,Solihull,GB,-178,5241,Europe/London
 city,East Los Angeles,US,-11817,3402,America/Los_Angeles
@@ -4853,7 +4664,7 @@ city,Jagādhri,IN,7730,3017,Asia/Kolkata
 city,Norman,US,-9744,3522,America/Chicago
 city,Huixquilucan,MX,-9935,1936,America/Mexico_City
 city,Semnan,IR,5339,3558,Asia/Tehran
-city,San Francisco de Macorís,DO,-7026,1930,America/Santo_Domingo
+city,San Francisco de Macorís,DO,-7025,1929,America/Santo_Domingo
 city,Yushu,CN,12654,4483,Asia/Shanghai
 city,Yuanlin,TW,12058,2396,Asia/Taipei
 city,Santa Tecla,SV,-8928,1368,America/El_Salvador
@@ -4867,14 +4678,13 @@ city,Bến Tre,VN,10638,1024,Asia/Ho_Chi_Minh
 city,Gorzów Wielkopolski,PL,1523,5274,Europe/Warsaw
 city,Timon,BR,-4284,-509,America/Fortaleza
 city,Monza,IT,927,4558,Europe/Rome
-city,New Mirpur,PK,7375,3315,Asia/Karachi
+city,New Mirpur City,PK,7375,3315,Asia/Karachi
 city,Pinsk,BY,2607,5212,Europe/Minsk
 city,Koreatown,US,-11830,3406,America/Los_Angeles
 city,Targówek,PL,2105,5229,Europe/Warsaw
 city,Lecheng,CN,11335,2513,Asia/Shanghai
 city,São José dos Pinhais,BR,-4921,-2553,America/Sao_Paulo
 city,Nancun,CN,12013,3653,Asia/Shanghai
-city,Kentron,AM,4451,4018,Asia/Yerevan
 city,Marand,IR,4577,3843,Asia/Tehran
 city,Rajapalaiyam,IN,7755,945,Asia/Kolkata
 city,As Sinbillāwayn,EG,3146,3088,Africa/Cairo
@@ -4938,6 +4748,7 @@ city,Cherkessk,RU,4206,4422,Europe/Moscow
 city,Maastricht,NL,569,5085,Europe/Amsterdam
 city,Amherst,US,-7880,4298,America/New_York
 city,Mỹ Tho,VN,10636,1036,Asia/Ho_Chi_Minh
+city,Ajapnyak,AM,4447,4020,Asia/Yerevan
 city,Tekirdağ,TR,2751,4098,Europe/Istanbul
 city,Victorville,US,-11729,3454,America/Los_Angeles
 city,Barbacena,BR,-4377,-2123,America/Sao_Paulo
@@ -4961,6 +4772,7 @@ city,Carora,VE,-7008,1017,America/Caracas
 city,Mataró,ES,244,4154,Europe/Madrid
 city,Vallejo,US,-12226,3810,America/Los_Angeles
 city,Bhadreswar,IN,8834,2282,Asia/Kolkata
+city,Dorūd,IR,4906,3349,Asia/Tehran
 city,Bern,CH,745,4695,Europe/Zurich
 city,Nagaon,IN,9267,2635,Asia/Kolkata
 city,Vejalpur,IN,7356,2269,Asia/Kolkata
@@ -4981,6 +4793,7 @@ city,Chico,US,-12184,3973,America/Los_Angeles
 city,North Stamford,US,-7354,4114,America/New_York
 city,Bergamo,IT,967,4570,Europe/Rome
 city,Cachoeirinha,BR,-5109,-2995,America/Sao_Paulo
+city,Chơn Thành,VN,10664,1143,Asia/Ho_Chi_Minh
 city,Ambikāpur,IN,8320,2312,Asia/Kolkata
 city,Hartford,US,-7269,4176,America/New_York
 city,Tabuk,PH,12128,1741,Asia/Manila
@@ -5008,9 +4821,10 @@ city,Ulm,DE,999,4840,Europe/Berlin
 city,Rawang,MY,10158,332,Asia/Kuala_Lumpur
 city,Mandoli,IN,7731,2870,Asia/Kolkata
 city,Ağrı,TR,4304,3971,Europe/Istanbul
-city,San Carlos,VE,-6858,966,America/Caracas
+city,San Carlos,VE,-6859,966,America/Caracas
 city,Włocławek,PL,1907,5265,Europe/Warsaw
 city,Allentown,US,-7549,4061,America/New_York
+city,Bao'an Centre,CN,11392,2258,Asia/Shanghai
 city,Charsadda,PK,7174,3415,Asia/Karachi
 city,Fernando de la Mora,PY,-5752,-2534,America/Asuncion
 city,Perugia,IT,1239,4311,Europe/Rome
@@ -5039,6 +4853,7 @@ city,Rize,TR,4052,4102,Europe/Istanbul
 city,Jaranwala,PK,7342,3133,Asia/Karachi
 city,Palm Bay,US,-8059,2803,America/New_York
 city,Salto,BR,-4729,-2320,America/Sao_Paulo
+city,Ann,MM,9405,1980,Asia/Yangon
 city,Leiden,NL,449,5216,Europe/Amsterdam
 city,Trois-Rivières,CA,-7255,4635,America/Toronto
 city,Ajax,CA,-7903,4385,America/Toronto
@@ -5049,6 +4864,7 @@ city,Modakeke,NG,426,738,Africa/Lagos
 city,Nobeoka,JP,13167,3258,Asia/Tokyo
 city,Silang,PH,12097,1422,Asia/Manila
 city,Amanfrom,GH,-40,554,Africa/Accra
+city,Moḩammad Shahr,IR,5092,3576,Asia/Tehran
 city,Īz̄eh,IR,4987,3183,Asia/Tehran
 city,Nazilli,TR,2832,3792,Europe/Istanbul
 city,Daitō,JP,13562,3471,Asia/Tokyo
@@ -5073,6 +4889,7 @@ city,Santa Coloma de Gramenet,ES,221,4145,Europe/Madrid
 city,San Jose,PH,12107,1235,Asia/Manila
 city,Damoh,IN,7944,2383,Asia/Kolkata
 city,Lhasa,CN,9110,2965,Asia/Shanghai
+city,Bắc Quang,VN,10487,2248,Asia/Bangkok
 city,Xunchang,CN,10471,2845,Asia/Shanghai
 city,Miramar,MX,-9790,2236,America/Monterrey
 city,Queenstown,ZA,2688,-3190,Africa/Johannesburg
@@ -5099,6 +4916,7 @@ city,Ciudad Delicias,MX,-10547,2819,America/Chihuahua
 city,San Rafael,AR,-6833,-3462,America/Argentina/Mendoza
 city,Shaoshan,CN,11252,2792,Asia/Shanghai
 city,Troparëvo,RU,3748,5566,Europe/Moscow
+city,Nghi Xuân,VN,10576,1866,Asia/Bangkok
 city,Amreli,IN,7121,2160,Asia/Kolkata
 city,Nakhon Pathom,TH,10004,1382,Asia/Bangkok
 city,Manfalūţ,EG,3097,2731,Africa/Cairo
@@ -5128,7 +4946,7 @@ city,Narasaraopet,IN,8005,1623,Asia/Kolkata
 city,Lisala,CD,2152,215,Africa/Kinshasa
 city,Badin,PK,6884,2466,Asia/Karachi
 city,Banfora,BF,-477,1063,Africa/Ouagadougou
-city,Punta Arenas,CL,-7091,-5315,America/Punta_Arenas
+city,Punta Arenas,CL,-7091,-5316,America/Punta_Arenas
 city,Kadoma,ZW,2992,-1833,Africa/Harare
 city,Pyin Oo Lwin,MM,9646,2204,Asia/Yangon
 city,Independence,US,-9442,3909,America/Chicago
@@ -5207,6 +5025,7 @@ city,Urasoe,JP,12773,2626,Asia/Tokyo
 city,Santana,BR,-4662,-2353,America/Sao_Paulo
 city,Yelets,RU,3851,5261,Europe/Moscow
 city,Parla,ES,-377,4024,Europe/Madrid
+city,Mỹ Hào,VN,10608,2092,Asia/Bangkok
 city,Anliu,CN,11568,2370,Asia/Shanghai
 city,Chunga,ZM,2827,-1532,Africa/Lusaka
 city,Novo-Peredelkino,RU,3734,5565,Europe/Moscow
@@ -5219,7 +5038,6 @@ city,Tianfu,CN,12205,3726,Asia/Shanghai
 city,Arvada,US,-10509,3980,America/Denver
 city,Otaru,JP,14100,4319,Asia/Tokyo
 city,Inkisi,CD,1505,-513,Africa/Kinshasa
-city,Ajapnyak,AM,4447,4020,Asia/Yerevan
 city,Vacoas,MU,5748,-2030,Indian/Mauritius
 city,Beaumont,US,-9410,3009,America/Chicago
 city,Provo,US,-11166,4023,America/Denver
@@ -5231,10 +5049,12 @@ city,Mendoza,AR,-6885,-3289,America/Argentina/Mendoza
 city,Balkh,AF,6690,3676,Asia/Kabul
 city,Mingshui,CN,11750,3672,Asia/Shanghai
 city,Vila Medeiros,BR,-4658,-2349,America/Sao_Paulo
+city,Phong Điền,VN,10736,1658,Asia/Bangkok
 city,Botoşani,RO,2667,4775,Europe/Bucharest
 city,Carlsbad,US,-11735,3316,America/Los_Angeles
 city,Mandera,KE,4186,394,Africa/Nairobi
 city,Qiaotou,CN,10167,3694,Asia/Shanghai
+city,Gyumri,AM,4385,4079,Asia/Yerevan
 city,Mary,TM,6183,3759,Asia/Ashgabat
 city,Aryanah,TN,1019,3686,Africa/Tunis
 city,Ichinoseki,JP,14113,3892,Asia/Tokyo
@@ -5281,7 +5101,6 @@ city,Jandira,BR,-4690,-2353,America/Sao_Paulo
 city,Fujimino,JP,13952,3590,Asia/Tokyo
 city,Doncaster,GB,-113,5352,Europe/London
 city,Bình Thủy,VN,10574,1007,Asia/Ho_Chi_Minh
-city,Gyumri,AM,4385,4079,Asia/Yerevan
 city,Bremerhaven,DE,858,5355,Europe/Berlin
 city,Dumaguete,PH,12331,931,Asia/Manila
 city,Budapest XIII. kerület,HU,1908,4753,Europe/Budapest
@@ -5297,7 +5116,7 @@ city,Costa Mesa,US,-11792,3364,America/Los_Angeles
 city,Jhunjhunūn,IN,7540,2813,Asia/Kolkata
 city,Miami Gardens,US,-8025,2594,America/New_York
 city,Açailândia,BR,-4750,-495,America/Fortaleza
-city,Guaymas,MX,-11090,2792,America/Hermosillo
+city,Heroica Guaymas,MX,-11090,2792,America/Hermosillo
 city,Chesterfield,GB,-142,5325,Europe/London
 city,North Peoria,US,-8958,4072,America/Chicago
 city,Clearwater,US,-8280,2797,America/New_York
@@ -5337,7 +5156,7 @@ city,Kaiyuan,CN,12404,4253,Asia/Shanghai
 city,Kamalia,PK,7265,3073,Asia/Karachi
 city,Kisii,KE,3477,-68,Africa/Nairobi
 city,Ermelino Matarazzo,BR,-4647,-2349,America/Sao_Paulo
-city,Guanare,VE,-6974,904,America/Caracas
+city,Guanare,VE,-6973,904,America/Caracas
 city,Wuzhishan,CN,10950,1878,Asia/Shanghai
 city,Gravesend,US,-7397,4060,America/New_York
 city,Rochester,US,-9247,4402,America/Chicago
@@ -5556,7 +5375,6 @@ city,Shaping,CN,11296,2277,Asia/Shanghai
 city,Labé,GN,-1228,1132,Africa/Conakry
 city,Râmnicu Vâlcea,RO,2437,4510,Europe/Bucharest
 city,Alcobendas,ES,-364,4055,Europe/Madrid
-city,Araras,BR,-4738,-2236,America/Sao_Paulo
 city,Koszalin,PL,1617,5419,Europe/Warsaw
 city,Bolzano,IT,1134,4649,Europe/Rome
 city,South Fulton,US,-8467,3359,America/New_York
@@ -5598,6 +5416,7 @@ city,Broken Arrow,US,-9579,3605,America/Chicago
 city,Daly City,US,-12246,3771,America/Los_Angeles
 city,Cikarang,ID,10715,-626,Asia/Jakarta
 city,Arlit,NE,739,1874,Africa/Niamey
+city,Ba Đồn,VN,10642,1775,Asia/Bangkok
 city,Longjiang,CN,12320,4734,Asia/Shanghai
 city,Hwado,KR,12731,3765,Asia/Seoul
 city,Buhe,CN,11223,3029,Asia/Shanghai
@@ -5705,7 +5524,6 @@ city,Salaqi,CN,11051,4054,Asia/Shanghai
 city,Kalulushi,ZM,2809,-1284,Africa/Lusaka
 city,Lewisville,US,-9699,3305,America/Chicago
 city,Oued Zem,MA,-657,3286,Africa/Casablanca
-city,Zhuguang,CN,11396,2257,Asia/Shanghai
 city,Weldiya,ET,3959,1183,Africa/Addis_Ababa
 city,Soyībug,IN,7471,3408,Asia/Kolkata
 city,Izmaylovo,RU,3780,5579,Europe/Moscow
@@ -5767,7 +5585,6 @@ city,Amaravati,IN,8052,1651,Asia/Kolkata
 city,Bogorodskoye,RU,3772,5581,Europe/Moscow
 city,Lahān,NP,8648,2672,Asia/Kathmandu
 city,Liberec,CZ,1506,5077,Europe/Prague
-city,Zaoxia,CN,11380,2269,Asia/Shanghai
 city,Qurayyat,SA,3734,3133,Asia/Riyadh
 city,Buxar,IN,8398,2558,Asia/Kolkata
 city,Portmore,JM,-7689,1797,America/Jamaica
@@ -5866,6 +5683,7 @@ city,Albany,US,-7376,4265,America/New_York
 city,Barretos,BR,-4857,-2056,America/Sao_Paulo
 city,Medina Estates,GH,-16,567,Africa/Accra
 city,Chakwal,PK,7285,3293,Asia/Karachi
+city,Ngã Bảy,VN,10582,981,Asia/Ho_Chi_Minh
 city,Colatina,BR,-4063,-1954,America/Sao_Paulo
 city,Gillingham,GB,55,5139,Europe/London
 city,Teófilo Otoni,BR,-4151,-1786,America/Sao_Paulo
@@ -5913,7 +5731,7 @@ city,Kallithéa,GR,2370,3795,Europe/Athens
 city,Juan Díaz,PA,-7944,904,America/Panama
 city,Grogol,ID,11082,-760,Asia/Jakarta
 city,Nāḩiyat al Iskandarīyah,IQ,4435,3289,Asia/Baghdad
-city,Puerto Barrios,GT,-8859,1573,America/Guatemala
+city,Puerto Barrios,GT,-8860,1573,America/Guatemala
 city,Bakwa,CD,2740,413,Africa/Lubumbashi
 city,Itārsi,IN,7776,2261,Asia/Kolkata
 city,Chinatown,US,-12241,3780,America/Los_Angeles
@@ -5956,6 +5774,7 @@ city,Colonia Lindavista,MX,-9912,1949,America/Mexico_City
 city,Sentul,MY,10168,318,Asia/Kuala_Lumpur
 city,Seri Manjung,MY,10067,420,Asia/Kuala_Lumpur
 city,Bandar Mahkota Cheras,MY,10180,305,Asia/Kuala_Lumpur
+city,Model Town,PK,7433,3148,Asia/Karachi
 city,Subotica,RS,1967,4610,Europe/Belgrade
 city,Tekstil’shchiki,RU,3774,5570,Europe/Moscow
 city,Sabt Alalayah,SA,4196,1958,Asia/Riyadh
@@ -5967,7 +5786,7 @@ city,Hāgere Hiywet,ET,3785,898,Africa/Addis_Ababa
 city,Kambove,CD,2660,-1087,Africa/Lubumbashi
 city,Xixiang,CN,10776,3299,Asia/Shanghai
 city,Kenosha,US,-8782,4258,America/Chicago
-city,Salto,UY,-5797,-3138,America/Montevideo
+city,Salto,UY,-5796,-3139,America/Montevideo
 city,Chanthaburi,TH,10210,1261,Asia/Bangkok
 city,Dongsheng,CN,10998,3982,Asia/Shanghai
 city,Andria,IT,1630,4123,Europe/Rome
@@ -6044,6 +5863,7 @@ city,Słupsk,PL,1703,5446,Europe/Warsaw
 city,Tatuapé,BR,-4657,-2354,America/Sao_Paulo
 city,Renqiu,CN,11610,3871,Asia/Shanghai
 city,Būndi,IN,7564,2544,Asia/Kolkata
+city,Suifenhe,CN,13115,4440,Asia/Shanghai
 city,Mahuva,IN,7177,2109,Asia/Kolkata
 city,Cárdenas,CU,-8121,2304,America/Havana
 city,Bridgetown,BB,-5962,1311,America/Barbados
@@ -6056,7 +5876,6 @@ city,Xinshi,CN,11314,3105,Asia/Shanghai
 city,Vĩnh Thạnh,VN,10540,1022,Asia/Ho_Chi_Minh
 city,Landstraße,AT,1639,4820,Europe/Vienna
 city,Budapest IV. kerület,HU,1909,4756,Europe/Budapest
-city,Akbarābād,IR,5278,2925,Asia/Tehran
 city,Tuscaloosa,US,-8757,3321,America/Chicago
 city,League City,US,-9509,2951,America/Chicago
 city,Flint,US,-8369,4301,America/Detroit
@@ -6108,7 +5927,7 @@ city,Gambēla,ET,3458,825,Africa/Addis_Ababa
 city,Hammamet,TN,1062,3640,Africa/Tunis
 city,Hinganghāt,IN,7884,2055,Asia/Kolkata
 city,Rochdale,GB,-216,5362,Europe/London
-city,Comitán,MX,-9214,1625,America/Mexico_City
+city,Comitán,MX,-9214,1624,America/Merida
 city,Aguachica,CO,-7362,831,America/Bogota
 city,Trindade,BR,-4949,-1665,America/Sao_Paulo
 city,Arapongas,BR,-5142,-2342,America/Sao_Paulo
@@ -6141,7 +5960,7 @@ city,Fangshan,CN,11600,3969,Asia/Shanghai
 city,Maribor,SI,1565,4655,Europe/Ljubljana
 city,Chimaltenango,GT,-9082,1466,America/Guatemala
 city,Magway,MM,9493,2015,Asia/Yangon
-city,Tumbes,PE,-8045,-357,America/Lima
+city,Tumbes,PE,-8044,-356,America/Lima
 city,Bekobod,UZ,6927,4022,Asia/Tashkent
 city,Jinniu,CN,10057,2580,Asia/Shanghai
 city,Nāgaur,IN,7373,2720,Asia/Kolkata
@@ -6170,7 +5989,7 @@ city,Yên Bái,VN,10491,2172,Asia/Bangkok
 city,Corumbá,BR,-5765,-1901,America/Campo_Grande
 city,Gongguan,CN,10960,2180,Asia/Shanghai
 city,Pouytenga,BF,-43,1225,Africa/Ouagadougou
-city,Estelí,NI,-8635,1309,America/Managua
+city,Estelí,NI,-8636,1309,America/Managua
 city,South Gate,US,-11821,3395,America/Los_Angeles
 city,Chālisgaon,IN,7502,2046,Asia/Kolkata
 city,San Fernando,ES,-620,3648,Europe/Madrid
@@ -6187,6 +6006,7 @@ city,Kāshmar,IR,5847,3524,Asia/Tehran
 city,Limpio,PY,-5749,-2517,America/Asuncion
 city,Saint-Denis,FR,235,4894,Europe/Paris
 city,Khōst,AF,6992,3334,Asia/Kabul
+city,Avaré,BR,-4893,-2310,America/Sao_Paulo
 city,Sparks,US,-11975,3953,America/Los_Angeles
 city,Erechim,BR,-5228,-2763,America/Sao_Paulo
 city,Nanxi,CN,10498,2884,Asia/Shanghai
@@ -6223,6 +6043,7 @@ city,La Habana Vieja,CU,-8235,2313,America/Havana
 city,Brockton,US,-7102,4208,America/New_York
 city,Owendo,GA,950,29,Africa/Libreville
 city,Mons,BE,395,5045,Europe/Brussels
+city,Hương Thủy,VN,10764,1642,Asia/Bangkok
 city,Yotsukaidō,JP,14017,3565,Asia/Tokyo
 city,Boli,CN,13058,4575,Asia/Shanghai
 city,Gafsa,TN,878,3442,Africa/Tunis
@@ -6612,7 +6433,7 @@ city,Tuggeranong Administrative District,AU,14907,-3542,Australia/Sydney
 city,Ankleshwar,IN,7299,2163,Asia/Kolkata
 city,Fujin,CN,13203,4725,Asia/Shanghai
 city,Kadiri,IN,7816,1411,Asia/Kolkata
-city,Granada,NI,-8596,1193,America/Managua
+city,Granada,NI,-8595,1193,America/Managua
 city,Níkaia,GR,2365,3797,Europe/Athens
 city,Katwa,CD,2931,9,Africa/Lubumbashi
 city,Mulongo,CD,2700,-783,Africa/Lubumbashi
@@ -6773,7 +6594,6 @@ city,Jamūī,IN,8623,2493,Asia/Kolkata
 city,Launceston,AU,14713,-4144,Australia/Hobart
 city,Bishan New Town,SG,10385,135,Asia/Singapore
 city,Glyfáda,GR,2376,3786,Europe/Athens
-city,Shekou,CN,11392,2249,Asia/Shanghai
 city,New Plymouth,NZ,17408,-3907,Pacific/Auckland
 city,Igede-Ekiti,NG,513,767,Africa/Lagos
 city,Kirkland,US,-12221,4768,America/Los_Angeles
@@ -6914,7 +6734,6 @@ city,Obruchevo,RU,3752,5566,Europe/Moscow
 city,Adwa,ET,3890,1416,Africa/Addis_Ababa
 city,Chino,US,-11769,3401,America/Los_Angeles
 city,Arauca,CO,-7076,708,America/Bogota
-city,Hailin,CN,12939,4457,Asia/Shanghai
 city,El Bayadh,DZ,102,3368,Africa/Algiers
 city,Mukachevo,UA,2272,4844,Europe/Kyiv
 city,Krasnaya Glinka,RU,5294,5374,Asia/Yekaterinburg
@@ -6947,6 +6766,7 @@ city,Sekimachi,JP,13692,3548,Asia/Tokyo
 city,Dengzhou,CN,12076,3781,Asia/Shanghai
 city,Wedding,DE,1336,5255,Europe/Berlin
 city,Dapitan,PH,12342,866,Asia/Manila
+city,Shahr-e Jadīd-e Mehestan,IR,5075,3599,Asia/Tehran
 city,Yegor’yevsk,RU,3904,5538,Europe/Moscow
 city,Courbevoie,FR,226,4890,Europe/Paris
 city,Bellingham,US,-12249,4876,America/Los_Angeles
@@ -6957,7 +6777,7 @@ city,Iwamizawa,JP,14176,4320,Asia/Tokyo
 city,Camboriú,BR,-4865,-2703,America/Sao_Paulo
 city,Madrid,CO,-7426,473,America/Bogota
 city,O'Fallon,US,-9070,3881,America/Chicago
-city,Puerto Maldonado,PE,-6919,-1259,America/Lima
+city,Puerto Maldonado,PE,-6920,-1259,America/Lima
 city,Mohammed Bin Zayed City,AE,5455,2435,Asia/Dubai
 city,Rukban,JO,3870,3331,Asia/Amman
 city,Thakhèk,LA,10483,1741,Asia/Vientiane
@@ -6986,7 +6806,7 @@ city,Nakatsu,JP,13119,3360,Asia/Tokyo
 city,Sarandi,BR,-5187,-2344,America/Sao_Paulo
 city,Melbourne,US,-8061,2808,America/New_York
 city,Gamboru,NG,1421,1237,Africa/Lagos
-city,Tlaxcala,MX,-9820,1932,America/Mexico_City
+city,Tlaxcala,MX,-9824,1932,America/Mexico_City
 city,Hawr al ‘Anz,AE,5534,2528,Asia/Dubai
 city,Akhisar,TR,2784,3892,Europe/Istanbul
 city,Danbury,US,-7345,4139,America/New_York
@@ -7002,6 +6822,7 @@ city,St Albans,GB,-33,5175,Europe/London
 city,Fnidek,MA,-536,3585,Africa/Casablanca
 city,Dhoraji,IN,7045,2173,Asia/Kolkata
 city,East Norwalk,US,-7340,4111,America/New_York
+city,Gununo,ET,3765,692,Africa/Addis_Ababa
 city,Āreka,ET,3770,707,Africa/Addis_Ababa
 city,Edinburg,US,-9816,2630,America/Chicago
 city,Sunrise,US,-8011,2613,America/New_York
@@ -7040,7 +6861,6 @@ city,Kampung Sungai Kajang,MY,10117,342,Asia/Kuala_Lumpur
 city,Feni,BD,9140,2301,Asia/Dhaka
 city,Wanju,KR,12715,3585,Asia/Seoul
 city,Najībābād,IN,7834,2961,Asia/Kolkata
-city,Shahe,CN,11398,2255,Asia/Shanghai
 city,Wako,JP,13962,3579,Asia/Tokyo
 city,Binonga,PH,12298,1077,Asia/Manila
 city,Reinickendorf,DE,1334,5256,Europe/Berlin
@@ -7069,6 +6889,7 @@ city,Hamma Bouziane,DZ,660,3641,Africa/Algiers
 city,NIA Valencia,PH,12509,791,Asia/Manila
 city,Al Qanāţir al Khayrīyah,EG,3114,3019,Africa/Cairo
 city,San Pedro,US,-11829,3374,America/Los_Angeles
+city,Cam Lộ,VN,10699,1681,Asia/Bangkok
 city,Pori,FI,2178,6148,Europe/Helsinki
 city,Ahwatukee Foothills,US,-11198,3334,America/Phoenix
 city,Paris 10e Arrondissement,FR,236,4888,Europe/Paris
@@ -7124,6 +6945,7 @@ city,Kraljevo,RS,2069,4373,Europe/Belgrade
 city,Fayetteville,US,-9416,3606,America/Chicago
 city,Sioux City,US,-9640,4250,America/Chicago
 city,Yacuiba,BO,-6368,-2202,America/La_Paz
+city,Muhanga,RW,2971,-202,Africa/Kigali
 city,Shīrvān,IR,5793,3740,Asia/Tehran
 city,Marj Al Hamam,JO,3585,3190,Asia/Amman
 city,Ochota,PL,2099,5222,Europe/Warsaw
@@ -7171,7 +6993,6 @@ city,Sant Boi de Llobregat,ES,204,4134,Europe/Madrid
 city,Pozuelo de Alarcón,ES,-381,4043,Europe/Madrid
 city,Bagamoyo,TZ,3890,-644,Africa/Dar_es_Salaam
 city,Cukai,MY,10342,425,Asia/Kuala_Lumpur
-city,Shangzhi,CN,12800,4521,Asia/Shanghai
 city,Parit Sulung,MY,10288,198,Asia/Kuala_Lumpur
 city,Nangong,CN,11539,3735,Asia/Shanghai
 city,Mbalmayo,CM,1150,352,Africa/Douala
@@ -7242,6 +7063,7 @@ city,Lakewood,US,-11813,3385,America/Los_Angeles
 city,Guider,CM,1395,993,Africa/Douala
 city,Salmās,IR,4477,3820,Asia/Tehran
 city,Yirga ‘Alem,ET,3842,675,Africa/Addis_Ababa
+city,An Khê,VN,10865,1395,Asia/Ho_Chi_Minh
 city,Pontevedra,ES,-864,4243,Europe/Madrid
 city,Scunthorpe,GB,-65,5358,Europe/London
 city,Tiznit,MA,-973,2970,Africa/Casablanca
@@ -7258,7 +7080,6 @@ city,San Tan Valley,US,-11153,3319,America/Phoenix
 city,Bistriţa,RO,2450,4713,Europe/Bucharest
 city,Mount Pleasant,US,-7986,3279,America/New_York
 city,Athi River,KE,3698,-146,Africa/Nairobi
-city,Avaré,BR,-4893,-2310,America/Sao_Paulo
 city,Konstanz,DE,918,4766,Europe/Berlin
 city,Tatebayashi,JP,13953,3625,Asia/Tokyo
 city,Mweka,CD,2156,-485,Africa/Lubumbashi
@@ -7340,7 +7161,6 @@ city,Loushanguan,CN,10682,2814,Asia/Shanghai
 city,Tallaght,IE,-637,5329,Europe/Dublin
 city,Somerville,US,-7110,4239,America/New_York
 city,Baoying,CN,11931,3323,Asia/Shanghai
-city,Heping,CN,11379,2269,Asia/Shanghai
 city,Giugliano in Campania,IT,1420,4093,Europe/Rome
 city,Kedungwaru,ID,11192,-807,Asia/Jakarta
 city,Kendall,US,-8032,2568,America/New_York
@@ -7445,6 +7265,7 @@ city,Kashihara,JP,13562,3458,Asia/Tokyo
 city,Xiongzhou,CN,11430,2512,Asia/Shanghai
 city,Chaigou,CN,11962,3625,Asia/Shanghai
 city,Ponorogo,ID,11146,-787,Asia/Jakarta
+city,Bahārestān,IR,5177,3249,Asia/Tehran
 city,Arāria,IN,8751,2615,Asia/Kolkata
 city,Agulu,NG,706,610,Africa/Lagos
 city,Netrakona,BD,9073,2488,Asia/Dhaka
@@ -7455,94 +7276,261 @@ city,Catanzaro,IT,1660,3888,Europe/Rome
 city,Mossel Bay,ZA,2215,-3418,Africa/Johannesburg
 city,Nakatsugawa,JP,13750,3548,Asia/Tokyo
 city,Kennewick,US,-11914,4621,America/Los_Angeles
-city,Marburg an der Lahn,DE,877,5081,Europe/Berlin
-city,Marseille 08,FR,538,4327,Europe/Paris
-city,Xinzhou,CN,11480,3087,Asia/Shanghai
-city,Shitanjing,CN,10634,3923,Asia/Shanghai
-city,Chiang Rai,TH,9983,1991,Asia/Bangkok
-city,Deurne,BE,447,5122,Europe/Brussels
-city,Sagaing,MM,9598,2188,Asia/Yangon
-city,Koch Bihār,IN,8945,2633,Asia/Kolkata
-city,Mooka,JP,14002,3643,Asia/Tokyo
-city,Tumen,CN,12984,4297,Asia/Shanghai
-city,Natori-shi,JP,14088,3817,Asia/Tokyo
-city,Avilés,ES,-592,4355,Europe/Madrid
-city,Três Lagoas,BR,-5170,-2079,America/Campo_Grande
-city,Armant,EG,3254,2562,Africa/Cairo
-city,Gualeguaychú,AR,-5852,-3301,America/Argentina/Cordoba
-city,Doddaballapura,IN,7754,1329,Asia/Kolkata
-city,Isiolo,KE,3758,35,Africa/Nairobi
-city,Vyborg,RU,2875,6071,Europe/Moscow
-city,Alameda,US,-12226,3777,America/Los_Angeles
-city,Curepipe,MU,5753,-2032,Indian/Mauritius
-city,Danané,CI,-815,726,Africa/Abidjan
-city,Arona,ES,-1668,2810,Atlantic/Canary
-city,Waliso,ET,3797,853,Africa/Addis_Ababa
-city,Jurong East,SG,10374,133,Asia/Singapore
-city,Rockhampton,AU,15051,-2338,Australia/Brisbane
-city,São João del Rei,BR,-4426,-2114,America/Sao_Paulo
-city,Qinggang,CN,10624,2947,Asia/Shanghai
-city,Hengbei,CN,11573,2388,Asia/Shanghai
-city,Honjō,JP,13919,3624,Asia/Tokyo
-city,Bhadohi,IN,8257,2540,Asia/Kolkata
-city,Torrent,ES,-47,3944,Europe/Madrid
-city,Lins,BR,-4974,-2168,America/Sao_Paulo
-city,Carlisle,GB,-294,5490,Europe/London
-city,Town 'n' Country,US,-8258,2801,America/New_York
-city,Bellflower,US,-11812,3388,America/Los_Angeles
-city,Kőbánya,HU,1914,4748,Europe/Budapest
-city,Yishan,CN,11870,3622,Asia/Shanghai
-city,Kātoya,IN,8813,2365,Asia/Kolkata
-city,Youhao,CN,12884,4785,Asia/Shanghai
-city,Reutov,RU,3786,5576,Europe/Moscow
-city,Savarkundla,IN,7130,2134,Asia/Kolkata
-city,Toyooka,JP,13482,3554,Asia/Tokyo
-city,Putatan,MY,11606,593,Asia/Kuching
-city,Chino Hills,US,-11776,3399,America/Los_Angeles
-city,Bang Kruai,TH,10047,1381,Asia/Bangkok
-city,Denov,UZ,6790,3827,Asia/Samarkand
-city,Bloomington,US,-8899,4048,America/Chicago
-city,Santa Cruz del Quiché,GT,-9115,1503,America/Guatemala
-city,Daura,NG,1141,1155,Africa/Lagos
-city,Al Ḩayy,IQ,4604,3217,Asia/Baghdad
-city,Bamban,PH,12057,1527,Asia/Manila
-city,Pingyi,CN,11763,3550,Asia/Shanghai
-city,Budapest XVII. kerület,HU,1925,4748,Europe/Budapest
-city,Mogi Mirim,BR,-4696,-2243,America/Sao_Paulo
-city,Wulong,CN,10776,2932,Asia/Shanghai
-city,Valvedditturai,LK,8017,982,Asia/Colombo
-city,Rheinhausen,DE,671,5140,Europe/Berlin
-city,Linping,CN,12030,3042,Asia/Shanghai
-city,Sirs al Layyānah,EG,3097,3044,Africa/Cairo
-city,Ilioúpoli,GR,2377,3793,Europe/Athens
-city,San Juan,PE,-7328,-378,America/Lima
-city,Zahlé,LB,3590,3385,Asia/Beirut
-city,Daet,PH,12296,1411,Asia/Manila
-city,Kashiba,JP,13571,3453,Asia/Tokyo
-city,Alafaya,US,-8121,2856,America/New_York
-city,Wa,GH,-250,1006,Africa/Accra
-city,Donggongon,MY,11610,591,Asia/Kuching
-city,Abaetetuba,BR,-4888,-172,America/Belem
-city,Harihar,IN,7581,1451,Asia/Kolkata
-city,Szombathely,HU,1662,4723,Europe/Budapest
-city,Xixiang,CN,11389,2259,Asia/Shanghai
-city,Matala,AO,1503,-1473,Africa/Luanda
-city,Alekseyevka,RU,3780,5563,Europe/Moscow
-city,Kuacjok,SS,2798,830,Africa/Juba
-city,Mancherāl,IN,7943,1887,Asia/Kolkata
-city,Tanuku,IN,8168,1675,Asia/Kolkata
-city,Castrop-Rauxel,DE,731,5156,Europe/Berlin
-city,Marsala,IT,1244,3780,Europe/Rome
-city,Kizugawa,JP,13584,3474,Asia/Tokyo
-city,Tome,JP,14116,3871,Asia/Tokyo
-city,Bukit Timah Estate,SG,10378,134,Asia/Singapore
-city,Springdale,US,-9413,3619,America/Chicago
-city,Luleå,SE,2215,6558,Europe/Stockholm
-city,Daugavpils,LV,2653,5588,Europe/Riga
-city,Shap Pat Heung,HK,11404,2242,Asia/Hong_Kong
-city,Kadayanallur,IN,7734,907,Asia/Kolkata
-city,Marseille 15,FR,535,4337,Europe/Paris
-city,Huankou,CN,11667,3487,Asia/Shanghai
+timezone,ACDT - Australian Central Daylight Saving Time,,15750,0,UTC+10.5
+timezone,ACST - Australian Central Standard Time,,14250,0,UTC+9.5
+timezone,ACT - Acre Time,BR,-6781,-997,America/Rio_Branco
+timezone,ACT - ASEAN Common Time (proposed),,12000,0,UTC+8
+timezone,ACWST - Australian Central Western Standard Time (unofficial),,13125,0,UTC+8.75
+timezone,ADT - Atlantic Daylight Time,,-4500,0,UTC-3
+timezone,AEDT - Australian Eastern Daylight Saving Time,AU,14913,-3528,Australia/Sydney
+timezone,AEST - Australian Eastern Standard Time,AU,14913,-3528,Australia/Sydney
+timezone,AET (AEST/AEDT) - Australian Eastern Time,AU,14913,-3528,Australia/Sydney
+timezone,AFT - Afghanistan Time,AF,6917,3453,Asia/Kabul
+timezone,AKDT - Alaska Daylight Time,US,-14990,6122,America/Anchorage
+timezone,AKST - Alaska Standard Time,US,-14990,6122,America/Anchorage
+timezone,ALMT - Alma-Ata Time,,9000,0,UTC+6
+timezone,AMST - Amazon Summer Time (Brazil),BR,-4664,-2355,America/Sao_Paulo
+timezone,AMT - Amazon Time (Brazil),,-6000,0,UTC-4
+timezone,AMT - Armenia Time,AM,4451,4018,Asia/Yerevan
+timezone,ANAT - Anadyr Time,,18000,0,UTC+12
+timezone,AQTT - Aqtobe Time,,7500,0,UTC+5
+timezone,ART - Argentina Time,AR,-5838,-3461,America/Argentina/Buenos_Aires
+timezone,AST - Arabia Standard Time,,4500,0,UTC+3
+timezone,AST - Atlantic Standard Time,,-6000,0,UTC-4
+timezone,AWST - Australian Western Standard Time,,12000,0,UTC+8
+timezone,AZOST - Azores Summer Time,PT,-2567,3774,Atlantic/Azores
+timezone,AZOT - Azores Standard Time,PT,-2567,3774,Atlantic/Azores
+timezone,AZT - Azerbaijan Time,AZ,4989,4038,Asia/Baku
+timezone,BNT - Brunei Time,BN,11494,489,Asia/Brunei
+timezone,BIOT - British Indian Ocean Time,,9000,0,UTC+6
+timezone,BIT - Baker Island Time,,-18000,0,UTC-12
+timezone,BOT - Bolivia Time,BO,-6526,-1903,America/La_Paz
+timezone,BRST - Brasília Summer Time,,-3000,0,UTC-2
+timezone,BRT - Brasília Time,BR,-4793,-1578,America/Sao_Paulo
+timezone,BST - Bangladesh Standard Time,BD,9041,2371,Asia/Dhaka
+timezone,BST - Bougainville Standard Time,PG,15557,-623,Pacific/Bougainville
+timezone,BST - British Summer Time (British Standard Time from Mar 1968 to Oct 1971),,1500,0,UTC+1
+timezone,BTT - Bhutan Time,BT,8964,2747,Asia/Thimphu
+timezone,CAT - Central Africa Time,,3000,0,UTC+2
+timezone,CCT - Cocos Islands Time,CC,9682,-1216,Indian/Cocos
+timezone,CDT - Central Daylight Time (North America),,-7500,0,UTC-5
+timezone,CDT - Cuba Daylight Time,CU,-8238,2313,America/Havana
+timezone,CEST - Central European Summer Time,,3000,0,UTC+2
+timezone,CET - Central European Time,,1500,0,UTC+1
+timezone,CHADT - Chatham Daylight Time,,20625,0,UTC+13.75
+timezone,CHAST - Chatham Standard Time,,19125,0,UTC+12.75
+timezone,CHOT - Choibalsan Standard Time,,12000,0,UTC+8
+timezone,CHOST - Choibalsan Summer Time,,13500,0,UTC+9
+timezone,CHST - Chamorro Standard Time,,15000,0,UTC+10
+timezone,CHUT - Chuuk Time,FM,15184,745,Pacific/Chuuk
+timezone,CIST - Clipperton Island Standard Time,,-12000,0,UTC-8
+timezone,CKT - Cook Island Time,,-15000,0,UTC-10
+timezone,CLST - Chile Summer Time,CL,-7065,-3346,America/Santiago
+timezone,CLT - Chile Standard Time,CL,-7065,-3346,America/Santiago
+timezone,COST - Colombia Summer Time,CO,-7403,4088,America/New_York
+timezone,COT - Colombia Time,CO,-7403,4088,America/New_York
+timezone,CST - Central Standard Time (Central America),,-9000,0,UTC-6
+timezone,CST - China Standard Time,CN,11640,3991,Asia/Shanghai
+timezone,CST - Cuba Standard Time,CU,-8238,2313,America/Havana
+timezone,CT (CST/CDT) - Central Time,,-9000,0,UTC-6
+timezone,CVT - Cape Verde Time,,-1500,0,UTC-1
+timezone,CWST - Central Western Standard Time (Australia) unofficial,,13125,0,UTC+8.75
+timezone,CXT - Christmas Island Time,CX,10568,-1042,Indian/Christmas
+timezone,DAVT - Davis Time,,10500,0,UTC+7
+timezone,DDUT - Dumont d'Urville Time (in French Antarctic station),,15000,0,UTC+10
+timezone,DFT - AIX-specific equivalent of Central European Time,,1500,0,UTC+1
+timezone,EASST - Easter Island Summer Time,,-7500,0,UTC-5
+timezone,EAST - Easter Island Standard Time,,-9000,0,UTC-6
+timezone,EAT - East Africa Time,,4500,0,UTC+3
+timezone,ECT - Eastern Caribbean Time (does not recognise DST),,-6000,0,UTC-4
+timezone,ECT - Ecuador Time,EC,-7852,-23,America/Guayaquil
+timezone,EDT - Eastern Daylight Time (North America),,-6000,0,UTC-4
+timezone,EEST - Eastern European Summer Time,,4500,0,UTC+3
+timezone,EET - Eastern European Time,,3000,0,UTC+2
+timezone,EGST - Eastern Greenland Summer Time,,0,0,UTC+0
+timezone,EGT - Eastern Greenland Time,GL,-5172,6418,America/Nuuk
+timezone,EST - Eastern Standard Time (North America),,-7500,0,UTC-5
+timezone,ET (EST/EDT) - Eastern Time (North America),,-7500,0,UTC-5
+timezone,FET - Further-eastern European Time,,4500,0,UTC+3
+timezone,FJT - Fiji Time,FJ,17843,-1814,Pacific/Fiji
+timezone,FKST - Falkland Islands Summer Time,,-4500,0,UTC-3
+timezone,FKT - Falkland Islands Time,,-6000,0,UTC-4
+timezone,FNT - Fernando de Noronha Time,,-3000,0,UTC-2
+timezone,GALT - Galápagos Time,EC,-9031,-74,Pacific/Galapagos
+timezone,GAMT - Gambier Islands Time,,-13500,0,UTC-9
+timezone,GET - Georgia Standard Time,GE,4483,4169,Asia/Tbilisi
+timezone,GFT - French Guiana Time,GF,-5233,494,America/Cayenne
+timezone,GILT - Gilbert Island Time,,18000,0,UTC+12
+timezone,GIT - Gambier Island Time,,-13500,0,UTC-9
+timezone,GMT - Greenwich Mean Time,,0,0,UTC+0
+timezone,GST - South Georgia and the South Sandwich Islands Time,GS,-3651,-5428,Atlantic/South_Georgia
+timezone,GST - Gulf Standard Time,,6000,0,UTC+4
+timezone,GYT - Guyana Time,GY,-5816,680,America/Guyana
+timezone,HDT - Hawaii–Aleutian Daylight Time,,-13500,0,UTC-9
+timezone,HAEC - Heure Avancée d'Europe Centrale French-language name for CEST,,3000,0,UTC+2
+timezone,HST - Hawaii–Aleutian Standard Time,US,-15786,2131,Pacific/Honolulu
+timezone,HKT - Hong Kong Time,HK,11417,2228,Asia/Hong_Kong
+timezone,HMT - Heard and McDonald Islands Time,,7500,0,UTC+5
+timezone,HOVST - Hovd Summer Time (not used from 2017–present),,12000,0,UTC+8
+timezone,HOVT - Hovd Time,MN,9164,4801,Asia/Hovd
+timezone,ICT - Indochina Time,,10500,0,UTC+7
+timezone,IDLW - International Date Line West time zone,,-18000,0,UTC-12
+timezone,IDT - Israel Daylight Time,IL,3522,3177,Asia/Jerusalem
+timezone,IOT - Indian Ocean Time,,9000,0,UTC+6
+timezone,IRDT - Iran Daylight Time,,6750,0,UTC+4.5
+timezone,IRKT - Irkutsk Time,RU,10430,5230,Asia/Irkutsk
+timezone,IRST - Iran Standard Time,IR,5142,3569,Asia/Tehran
+timezone,IST - Indian Standard Time,IN,7721,2862,Asia/Kolkata
+timezone,IST - Irish Standard Time,,1500,0,UTC+1
+timezone,IST - Israel Standard Time,IL,3522,3177,Asia/Jerusalem
+timezone,JST - Japan Standard Time,JP,13969,3569,Asia/Tokyo
+timezone,KALT - Kaliningrad Time,RU,2051,5471,Europe/Kaliningrad
+timezone,KGT - Kyrgyzstan Time,KG,7459,4287,Asia/Bishkek
+timezone,KOST - Kosrae Time,FM,16301,532,Pacific/Kosrae
+timezone,KRAT - Krasnoyarsk Time,RU,9291,5603,Asia/Krasnoyarsk
+timezone,KST - Korea Standard Time,,13500,0,UTC+9
+timezone,LHST - Lord Howe Standard Time,,15750,0,UTC+10.5
+timezone,LHST - Lord Howe Summer Time,,16500,0,UTC+11
+timezone,LINT - Line Islands Time,KI,-15749,202,Pacific/Kiritimati
+timezone,MAGT - Magadan Time,,18000,0,UTC+12
+timezone,MART - Marquesas Islands Time,,-12750,0,UTC-8.5
+timezone,MAWT - Mawson Station Time,,7500,0,UTC+5
+timezone,MDT - Mountain Daylight Time (North America),,-9000,0,UTC-6
+timezone,MET - Middle European Time (same zone as CET),,1500,0,UTC+1
+timezone,MEST - Middle European Summer Time (same zone as CEST),,3000,0,UTC+2
+timezone,MHT - Marshall Islands Time,MH,17138,709,Pacific/Majuro
+timezone,MIST - Macquarie Island Station Time,,16500,0,UTC+11
+timezone,MIT - Marquesas Islands Time,,-12750,0,UTC-8.5
+timezone,MMT - Myanmar Standard Time,MM,9613,1975,Asia/Yangon
+timezone,MSK - Moscow Time,RU,3762,5575,Europe/Moscow
+timezone,MST - Malaysian Standard Time,MY,10169,314,Asia/Kuala_Lumpur
+timezone,MST - Mountain Standard Time (North America),,-10500,0,UTC-7
+timezone,MT (MST/MDT) - Mountain Time (North America),,-10500,0,UTC-7
+timezone,MUT - Mauritius Time,MU,5750,-2016,Indian/Mauritius
+timezone,MVT - Maldives Time,MV,7351,418,Indian/Maldives
+timezone,MYT - Malaysia Time,MY,10169,314,Asia/Kuala_Lumpur
+timezone,NCT - New Caledonia Time,NC,16645,-2227,Pacific/Noumea
+timezone,NDT - Newfoundland Daylight Time,,-2250,0,UTC-1.5
+timezone,NFT - Norfolk Island Time,,16500,0,UTC+11
+timezone,NOVT - Novosibirsk Time,RU,8294,5503,Asia/Novosibirsk
+timezone,NPT - Nepal Time,NP,8532,2770,Asia/Kathmandu
+timezone,NST - Newfoundland Standard Time,,-3750,0,UTC-2.5
+timezone,NT - Newfoundland Time,,-3750,0,UTC-2.5
+timezone,NUT - Niue Time,NU,-16992,-1905,Pacific/Niue
+timezone,NZDT - New Zealand Daylight Time,NZ,17478,-4129,Pacific/Auckland
+timezone,NZDST - New Zealand Daylight Saving Time,NZ,17478,-4129,Pacific/Auckland
+timezone,NZST - New Zealand Standard Time,NZ,17478,-4129,Pacific/Auckland
+timezone,OMST - Omsk Time,RU,7337,5499,Asia/Omsk
+timezone,ORAT - Oral Time,KZ,5137,5123,Asia/Oral
+timezone,PDT - Pacific Daylight Time (North America),,-10500,0,UTC-7
+timezone,PET - Peru Time,PE,-7703,-1204,America/Lima
+timezone,PETT - Kamchatka Time,RU,15863,5306,Asia/Kamchatka
+timezone,PGT - Papua New Guinea Time,PG,14715,-948,Pacific/Port_Moresby
+timezone,PHOT - Phoenix Island Time,,19500,0,UTC+13
+timezone,PHT - Philippine Time,,12000,0,UTC+8
+timezone,PHST - Philippine Standard Time,,12000,0,UTC+8
+timezone,PKT - Pakistan Standard Time,PK,7304,3372,Asia/Karachi
+timezone,PMDT - Saint Pierre and Miquelon Daylight Time,,-3000,0,UTC-2
+timezone,PMST - Saint Pierre and Miquelon Standard Time,,-4500,0,UTC-3
+timezone,PONT - Pohnpei Standard Time,,16500,0,UTC+11
+timezone,PST - Pacific Standard Time (North America),,-12000,0,UTC-8
+timezone,PT (PST/PDT) - Pacific Time (North America),,-12000,0,UTC-8
+timezone,PWT - Palau Time,PW,13447,734,Pacific/Palau
+timezone,PYST - Paraguay Summer Time,PY,-5765,-2529,America/Asuncion
+timezone,PYT - Paraguay Time,,-6000,0,UTC-4
+timezone,RET - Réunion Time,,6000,0,UTC+4
+timezone,ROTT - Rothera Research Station Time,,-4500,0,UTC-3
+timezone,SAKT - Sakhalin Island Time,,16500,0,UTC+11
+timezone,SAMT - Samara Time,RU,5015,5320,Europe/Samara
+timezone,SAST - South African Standard Time,ZA,2819,-2574,Africa/Johannesburg
+timezone,SBT - Solomon Islands Time,SB,15995,-943,Pacific/Guadalcanal
+timezone,SCT - Seychelles Time,,6000,0,UTC+4
+timezone,SDT - Samoa Daylight Time,,-15000,0,UTC-10
+timezone,SGT - Singapore Time,SG,10385,129,Asia/Singapore
+timezone,SLST - Sri Lanka Standard Time,LK,7985,694,Asia/Colombo
+timezone,SRET - Srednekolymsk Time,,16500,0,UTC+11
+timezone,SRT - Suriname Time,SR,-5517,587,America/Paramaribo
+timezone,SST - Samoa Standard Time,,-16500,0,UTC-11
+timezone,SYOT - Showa Station Time,,4500,0,UTC+3
+timezone,TAHT - Tahiti Time,,-15000,0,UTC-10
+timezone,THA - Thailand Standard Time,TH,10050,1375,Asia/Bangkok
+timezone,TFT - French Southern and Antarctic Time,,7500,0,UTC+5
+timezone,TJT - Tajikistan Time,TJ,6878,3854,Asia/Dushanbe
+timezone,TKT - Tokelau Time,TK,-17252,-854,Pacific/Fakaofo
+timezone,TLT - Timor Leste Time,TL,12557,-856,Asia/Dili
+timezone,TMT - Turkmenistan Time,TM,5838,3795,Asia/Ashgabat
+timezone,TRT - Turkey Time,TR,3285,3992,Europe/Istanbul
+timezone,TOT - Tonga Time,TO,-17520,-2114,Pacific/Tongatapu
+timezone,TST - Taiwan Standard Time,TW,12153,2505,Asia/Taipei
+timezone,TVT - Tuvalu Time,TV,17919,-852,Pacific/Funafuti
+timezone,ULAST - Ulaanbaatar Summer Time,,13500,0,UTC+9
+timezone,ULAT - Ulaanbaatar Standard Time,MN,10688,4791,Asia/Ulaanbaatar
+timezone,UTC - Coordinated Universal Time,,0,0,UTC+0
+timezone,UYST - Uruguay Summer Time,,-3000,0,UTC-2
+timezone,UYT - Uruguay Standard Time,UY,-5619,-3490,America/Montevideo
+timezone,UZT - Uzbekistan Time,UZ,6922,4126,Asia/Tashkent
+timezone,VET - Venezuelan Standard Time,VE,-6688,1049,America/Caracas
+timezone,VLAT - Vladivostok Time,RU,13187,4311,Asia/Vladivostok
+timezone,VOLT - Volgograd Time,RU,4450,4872,Europe/Volgograd
+timezone,VOST - Vostok Station Time,,9000,0,UTC+6
+timezone,VUT - Vanuatu Time,VU,16831,-1774,Pacific/Efate
+timezone,WAKT - Wake Island Time,,18000,0,UTC+12
+timezone,WAST - West Africa Summer Time,,3000,0,UTC+2
+timezone,WAT - West Africa Time,,1500,0,UTC+1
+timezone,WEST - Western European Summer Time,,1500,0,UTC+1
+timezone,WET - Western European Time,,0,0,UTC+0
+timezone,WIB - Western Indonesian Time,ID,10685,-621,Asia/Jakarta
+timezone,WIT - Eastern Indonesian Time,,13500,0,UTC+9
+timezone,WITA - Central Indonesia Time,,12000,0,UTC+8
+timezone,WGST - West Greenland Summer Time,GL,-5172,6418,America/Nuuk
+timezone,WGT - West Greenland Time,,-4500,0,UTC-3
+timezone,WST - Western Standard Time,,12000,0,UTC+8
+timezone,YAKT - Yakutsk Time,RU,12973,6203,Asia/Yakutsk
+timezone,YEKT - Yekaterinburg Time,RU,6061,5685,Asia/Yekaterinburg
+timezone,GMT-11,,-16500,0,UTC-11
+timezone,UTC-11,,-16500,0,UTC-11
+timezone,GMT-10,,-15000,0,UTC-10
+timezone,UTC-10,,-15000,0,UTC-10
+timezone,GMT-9,,-13500,0,UTC-9
+timezone,UTC-9,,-13500,0,UTC-9
+timezone,GMT-8,,-12000,0,UTC-8
+timezone,UTC-8,,-12000,0,UTC-8
+timezone,GMT-7,,-10500,0,UTC-7
+timezone,UTC-7,,-10500,0,UTC-7
+timezone,GMT-6,,-9000,0,UTC-6
+timezone,UTC-6,,-9000,0,UTC-6
+timezone,GMT-5,,-7500,0,UTC-5
+timezone,UTC-5,,-7500,0,UTC-5
+timezone,GMT-4,,-6000,0,UTC-4
+timezone,UTC-4,,-6000,0,UTC-4
+timezone,GMT-3,,-4500,0,UTC-3
+timezone,UTC-3,,-4500,0,UTC-3
+timezone,GMT-2,,-3000,0,UTC-2
+timezone,UTC-2,,-3000,0,UTC-2
+timezone,GMT-1,,-1500,0,UTC-1
+timezone,UTC-1,,-1500,0,UTC-1
+timezone,GMT+1,,1500,0,UTC+1
+timezone,UTC+1,,1500,0,UTC+1
+timezone,GMT+2,,3000,0,UTC+2
+timezone,UTC+2,,3000,0,UTC+2
+timezone,GMT+3,,4500,0,UTC+3
+timezone,UTC+3,,4500,0,UTC+3
+timezone,GMT+4,,6000,0,UTC+4
+timezone,UTC+4,,6000,0,UTC+4
+timezone,GMT+5,,7500,0,UTC+5
+timezone,UTC+5,,7500,0,UTC+5
+timezone,GMT+6,,9000,0,UTC+6
+timezone,UTC+6,,9000,0,UTC+6
+timezone,GMT+7,,10500,0,UTC+7
+timezone,UTC+7,,10500,0,UTC+7
+timezone,GMT+8,,12000,0,UTC+8
+timezone,UTC+8,,12000,0,UTC+8
+timezone,GMT+9,,13500,0,UTC+9
+timezone,UTC+9,,13500,0,UTC+9
+timezone,GMT+10,,15000,0,UTC+10
+timezone,UTC+10,,15000,0,UTC+10
+timezone,GMT+11,,16500,0,UTC+11
+timezone,UTC+11,,16500,0,UTC+11
 admin,Tibet,CN,9110,2965,Asia/Shanghai
 admin,Qinghai,CN,10176,3663,Asia/Shanghai
 admin,Ningxia,CN,10627,3847,Asia/Shanghai
@@ -7556,9 +7544,9 @@ admin,Shanxi,CN,11256,3787,Asia/Shanghai
 admin,Jiangxi,CN,11585,2868,Asia/Shanghai
 admin,Gansu,CN,10384,3606,Asia/Shanghai
 admin,Yunnan,CN,10272,2504,Asia/Shanghai
-admin,Heilongjiang,CN,12665,4575,Asia/Shanghai
 admin,Guangxi,CN,10832,2282,Asia/Shanghai
 admin,Fujian,CN,11808,2448,Asia/Shanghai
+admin,Heilongjiang,CN,12665,4575,Asia/Shanghai
 admin,Hunan,CN,11297,2820,Asia/Shanghai
 admin,Shaanxi,CN,10893,3426,Asia/Shanghai
 admin,Hebei,CN,11448,3804,Asia/Shanghai
@@ -7599,8 +7587,8 @@ admin,Nevada,US,-11514,3617,America/Los_Angeles
 admin,Utah,US,-11189,4076,America/Denver
 admin,Oklahoma,US,-9752,3547,America/Chicago
 admin,Louisiana,US,-9008,2995,America/Chicago
-admin,Oregon,US,-12268,4552,America/Los_Angeles
 admin,Alabama,US,-8659,3473,America/Chicago
+admin,Oregon,US,-12268,4552,America/Los_Angeles
 admin,Connecticut,US,-7319,4118,America/New_York
 admin,Kentucky,US,-8576,3825,America/Kentucky/Louisville
 admin,Missouri,US,-9458,3910,America/Chicago
@@ -7610,8 +7598,8 @@ admin,Indiana,US,-8616,3977,America/Indiana/Indianapolis
 admin,Colorado,US,-10498,3974,America/Denver
 admin,Georgia,US,-8439,3375,America/New_York
 admin,Tennessee,US,-8678,3617,America/Chicago
-admin,Maryland,US,-7661,3929,America/New_York
 admin,Virginia,US,-7598,3685,America/New_York
+admin,Maryland,US,-7661,3929,America/New_York
 admin,Michigan,US,-8305,4233,America/Detroit
 admin,Washington,US,-12233,4761,America/Los_Angeles
 admin,North Carolina,US,-8084,3523,America/New_York
@@ -7712,7 +7700,7 @@ admin,Orenburg Oblast,RU,5510,5177,Asia/Yekaterinburg
 admin,Primorye,RU,13187,4311,Asia/Vladivostok
 admin,Khabarovsk,RU,13508,4848,Asia/Vladivostok
 admin,Dagestan,RU,4750,4298,Europe/Moscow
-admin,Altai Krai,RU,8376,5336,Asia/Barnaul
+admin,Altai Krai,RU,8375,5336,Asia/Barnaul
 admin,Voronezh Oblast,RU,3918,5167,Europe/Moscow
 admin,Leningradskaya Oblast',RU,3039,6001,Europe/Moscow
 admin,Saratov Oblast,RU,4601,5154,Europe/Saratov
@@ -7735,33 +7723,33 @@ admin,Moscow Oblast,RU,3743,5590,Europe/Moscow
 admin,St.-Petersburg,RU,3031,5994,Europe/Moscow
 admin,Baja California Sur,MX,-11031,2414,America/Mazatlan
 admin,Colima,MX,-10434,1912,America/Mexico_City
-admin,Campeche,MX,-9053,1984,America/Merida
-admin,Nayarit,MX,-10490,2151,America/Mazatlan
+admin,Campeche,MX,-9052,1984,America/Merida
+admin,Nayarit,MX,-10489,2151,America/Mazatlan
 admin,Aguascalientes,MX,-10228,2188,America/Mexico_City
-admin,Tlaxcala,MX,-9820,1932,America/Mexico_City
+admin,Tlaxcala,MX,-9824,1932,America/Mexico_City
 admin,Zacatecas,MX,-10252,2275,America/Mexico_City
 admin,Quintana Roo,MX,-8685,2117,America/Cancun
 admin,Durango,MX,-10466,2402,America/Monterrey
-admin,Tabasco,MX,-9293,1799,America/Mexico_City
+admin,Tabasco,MX,-9294,1799,America/Merida
 admin,Morelos,MX,-9923,1893,America/Mexico_City
 admin,Hidalgo,MX,-9873,2012,America/Mexico_City
-admin,San Luis Potosí,MX,-10098,2215,America/Mexico_City
-admin,Yucatán,MX,-8962,2098,America/Merida
-admin,Sinaloa,MX,-10739,2479,America/Mazatlan
+admin,San Luis Potosí,MX,-10097,2215,America/Monterrey
+admin,Yucatán,MX,-8962,2097,America/Merida
+admin,Sinaloa,MX,-10739,2480,America/Mazatlan
 admin,Querétaro,MX,-10039,2059,America/Mexico_City
-admin,Sonora,MX,-11098,2910,America/Hermosillo
+admin,Sonora,MX,-11097,2909,America/Hermosillo
 admin,Guerrero,MX,-9991,1685,America/Mexico_City
-admin,Oaxaca,MX,-9672,1707,America/Mexico_City
+admin,Oaxaca,MX,-9673,1706,America/Mexico_City
 admin,Coahuila,MX,-10342,2554,America/Monterrey
-admin,Tamaulipas,MX,-9829,2608,America/Matamoros
+admin,Tamaulipas,MX,-9828,2608,America/Matamoros
 admin,Moscow,RU,3762,5575,Europe/Moscow
 admin,Chihuahua,MX,-10646,3172,America/Ciudad_Juarez
-admin,Chiapas,MX,-9311,1676,America/Mexico_City
+admin,Chiapas,MX,-9312,1675,America/Merida
 admin,Baja California,MX,-11700,3250,America/Tijuana
 admin,Michoacán,MX,-10118,1970,America/Mexico_City
 admin,Nuevo León,MX,-10032,2568,America/Monterrey
 admin,Guanajuato,MX,-10167,2113,America/Mexico_City
-admin,Puebla,MX,-9820,1904,America/Mexico_City
+admin,Puebla,MX,-9821,1905,America/Mexico_City
 admin,Veracruz,MX,-9614,1918,America/Mexico_City
 admin,Jalisco,MX,-10338,2072,America/Mexico_City
 admin,São Paulo,BR,-4664,-2355,America/Sao_Paulo
@@ -7827,22 +7815,113 @@ admin,Northern Territory,AU,13084,-1246,Australia/Darwin
 admin,Madrid,ES,-370,4042,Europe/Madrid
 admin,Tasmania,AU,14733,-4288,Australia/Hobart
 admin,Australian Capital Territory,AU,14913,-3528,Australia/Sydney
+admin,Sơn La Province,VN,10392,2133,Asia/Bangkok
+admin,Vĩnh Phúc Province,VN,10560,2131,Asia/Bangkok
+admin,Bắc Kạn Province,VN,10583,2215,Asia/Bangkok
+admin,Hà Nam Province,VN,10591,2055,Asia/Bangkok
+admin,Tuyên Quang Province,VN,10521,2182,Asia/Bangkok
+admin,Ninh Bình Province,VN,10598,2026,Asia/Bangkok
+admin,Lai Châu Province,VN,10346,2240,Asia/Bangkok
+admin,Lào Cai Province,VN,10397,2249,Asia/Bangkok
+admin,Thái Bình Province,VN,10634,2045,Asia/Bangkok
+admin,Đăk Nông Province,VN,10769,1200,Asia/Ho_Chi_Minh
+admin,Lạng Sơn Province,VN,10676,2185,Asia/Bangkok
+admin,Điện Biên Province,VN,10302,2139,Asia/Bangkok
+admin,Cao Bằng Province,VN,10626,2267,Asia/Bangkok
+admin,Ninh Thuận Province,VN,10899,1156,Asia/Ho_Chi_Minh
+admin,Hòa Bình Province,VN,10534,2082,Asia/Bangkok
+admin,Cà Mau Province,VN,10515,918,Asia/Ho_Chi_Minh
+admin,Trà Vinh Province,VN,10649,963,Asia/Ho_Chi_Minh
+admin,Bến Tre Province,VN,10638,1024,Asia/Ho_Chi_Minh
+admin,Hưng Yên Province,VN,10608,2092,Asia/Bangkok
+admin,Quảng Trị Province,VN,10699,1681,Asia/Bangkok
+admin,Phú Yên Province,VN,10922,1346,Asia/Ho_Chi_Minh
+admin,Hà Giang Province,VN,10487,2248,Asia/Bangkok
+admin,Yên Bái Province,VN,10491,2172,Asia/Bangkok
+admin,Kon Tum,VN,10801,1435,Asia/Ho_Chi_Minh
+admin,Bình Phước Province,VN,10664,1143,Asia/Ho_Chi_Minh
+admin,Hậu Giang,VN,10582,981,Asia/Ho_Chi_Minh
+admin,Nam Định Province,VN,10618,2043,Asia/Bangkok
+admin,Gia Lai Province,VN,10800,1398,Asia/Ho_Chi_Minh
+admin,Phú Thọ Province,VN,10540,2132,Asia/Bangkok
+admin,Vĩnh Long Province,VN,10597,1025,Asia/Ho_Chi_Minh
+admin,Quảng Ngãi Province,VN,10896,1481,Asia/Ho_Chi_Minh
+admin,Thái Nguyên Province,VN,10585,2159,Asia/Bangkok
+admin,Bạc Liêu Province,VN,10546,923,Asia/Ho_Chi_Minh
+admin,Quảng Bình Province,VN,10662,1747,Asia/Bangkok
+admin,Hải Dương Province,VN,10632,2107,Asia/Bangkok
+admin,Sóc Trăng Province,VN,10598,932,Asia/Ho_Chi_Minh
+admin,Đắk Lắk,VN,10804,1267,Asia/Ho_Chi_Minh
+admin,Bắc Ninh Province,VN,10608,2102,Asia/Bangkok
+admin,Bình Thuận Province,VN,10810,1093,Asia/Ho_Chi_Minh
+admin,Nghệ An Province,VN,10569,1867,Asia/Bangkok
+admin,Long An Povince,VN,10641,1054,Asia/Ho_Chi_Minh
+admin,Tiền Giang,VN,10612,1040,Asia/Ho_Chi_Minh
+admin,Bình Định Province,VN,10922,1378,Asia/Ho_Chi_Minh
+admin,Bắc Giang Province,VN,10613,2127,Asia/Bangkok
+admin,Hà Tĩnh Province,VN,10630,1806,Asia/Bangkok
+admin,Đồng Tháp Province,VN,10576,1029,Asia/Ho_Chi_Minh
+admin,Tây Ninh Province,VN,10636,1103,Asia/Ho_Chi_Minh
+admin,Quảng Nam Province,VN,10825,1589,Asia/Ho_Chi_Minh
+admin,Quảng Ninh,VN,10707,2095,Asia/Bangkok
+admin,Thừa Thiên Huế Province,VN,10760,1646,Asia/Bangkok
+admin,Thanh Hóa Province,VN,10583,1933,Asia/Ho_Chi_Minh
+admin,Bà Rịa–Vũng Tàu Province,VN,10708,1035,Asia/Ho_Chi_Minh
+admin,An Giang Province,VN,10544,1039,Asia/Ho_Chi_Minh
+admin,Lâm Đồng Province,VN,10844,1195,Asia/Ho_Chi_Minh
+admin,Khánh Hòa Province,VN,10919,1225,Asia/Ho_Chi_Minh
+admin,Kiên Giang Province,VN,10397,1022,Asia/Ho_Chi_Minh
 admin,South Australia,AU,13860,-3493,Australia/Adelaide
+admin,Haiphong,VN,10668,2086,Asia/Bangkok
+admin,Da Nang,VN,10822,1607,Asia/Ho_Chi_Minh
+admin,Đồng Nai Province,VN,10682,1094,Asia/Ho_Chi_Minh
+admin,Bình Dương Province,VN,10671,1092,Asia/Ho_Chi_Minh
+admin,Can Tho,VN,10579,1004,Asia/Ho_Chi_Minh
+admin,Guainía Department,CO,-6792,387,America/Bogota
+admin,Vaupés,CO,-7024,126,America/Bogota
+admin,Amazonas Department,CO,-6994,-421,America/Manaus
+admin,Vichada Department,CO,-6980,445,America/Bogota
+admin,San Andres y Providencia,CO,-8170,1258,America/Bogota
+admin,Guaviare Department,CO,-7264,257,America/Bogota
+admin,Arauca Department,CO,-7076,708,America/Bogota
 admin,Putrajaya,MY,10169,294,Asia/Kuala_Lumpur
 admin,Labuan,MY,11525,528,Asia/Kuala_Lumpur
+admin,Putumayo Department,CO,-7687,67,America/Bogota
 admin,Perlis,MY,10020,644,Asia/Kuala_Lumpur
+admin,Chocó,CO,-7666,569,America/Bogota
+admin,Caquetá,CO,-7560,162,America/Bogota
+admin,Casanare Department,CO,-7239,534,America/Bogota
+admin,Quindío Department,CO,-7567,454,America/Bogota
+admin,La Guajira Department,CO,-7291,1154,America/Bogota
+admin,Meta Department,CO,-7363,413,America/Bogota
 admin,Western Australia,AU,11586,-3195,Australia/Perth
+admin,Sucre Department,CO,-7539,930,America/Bogota
+admin,Boyacá,CO,-7336,554,America/Bogota
 admin,Terengganu,MY,10314,533,Asia/Kuala_Lumpur
+admin,Huila Department,CO,-7528,293,America/Bogota
+admin,Caldas Department,CO,-7551,507,America/Bogota
+admin,Cauca Department,CO,-7661,244,America/Bogota
+admin,Risaralda Department,CO,-7569,481,America/Bogota
+admin,Nariño,CO,-7728,121,America/Bogota
+admin,Cesar Department,CO,-7325,1047,America/Bogota
+admin,Magdalena Department,CO,-7419,1124,America/Bogota
 admin,Negeri Sembilan,MY,10194,273,Asia/Kuala_Lumpur
+admin,Córdoba,CO,-7588,875,America/Bogota
+admin,Norte de Santander Department,CO,-7250,791,America/Bogota
 admin,Melaka,MY,10224,220,Asia/Kuala_Lumpur
+admin,Tolima Department,CO,-7520,444,America/Bogota
 admin,Pahang,MY,10333,381,Asia/Kuala_Lumpur
 admin,Kelantan,MY,10224,612,Asia/Kuala_Lumpur
+admin,Cundinamarca,CO,-7422,458,America/Bogota
+admin,Bolívar,CO,-7549,1040,America/Bogota
+admin,Santander Department,CO,-7312,713,America/Bogota
 admin,Kwango,CD,1682,-648,Africa/Kinshasa
 admin,Tshuapa,CD,2088,-28,Africa/Kinshasa
 admin,Nord-Ubangi,CD,2100,428,Africa/Kinshasa
 admin,Bas-Uele,CD,2473,279,Africa/Lubumbashi
 admin,Sankuru,CD,2360,-352,Africa/Lubumbashi
 admin,Penang,MY,10028,537,Asia/Kuala_Lumpur
+admin,Atlántico,CO,-7478,1097,America/Bogota
 admin,Sabah,MY,11607,597,Asia/Kuching
 admin,Sud-Ubangi,CD,1977,326,Africa/Kinshasa
 admin,Mai-Ndombe,CD,1829,-193,Africa/Kinshasa
@@ -7865,80 +7944,22 @@ admin,Lualaba,CD,2547,-1071,Africa/Lubumbashi
 admin,Bas-Congo,CD,1346,-584,Africa/Kinshasa
 admin,Tshopo,CD,2519,52,Africa/Lubumbashi
 admin,Nord Kivu,CD,2923,-167,Africa/Lubumbashi
-admin,Bắc Kạn Province,VN,10583,2215,Asia/Bangkok
-admin,Vĩnh Phúc Province,VN,10560,2131,Asia/Bangkok
-admin,Sơn La Province,VN,10392,2133,Asia/Bangkok
-admin,Hậu Giang,VN,10547,978,Asia/Ho_Chi_Minh
 admin,Kuala Lumpur,MY,10169,314,Asia/Kuala_Lumpur
-admin,Hà Tĩnh Province,VN,10591,1834,Asia/Bangkok
-admin,Hà Nam Province,VN,10591,2055,Asia/Bangkok
-admin,Hà Giang Province,VN,10498,2282,Asia/Bangkok
-admin,Quảng Ngãi Province,VN,10879,1512,Asia/Ho_Chi_Minh
-admin,Tuyên Quang Province,VN,10521,2182,Asia/Bangkok
-admin,Ninh Bình Province,VN,10598,2026,Asia/Bangkok
-admin,Bình Phước Province,VN,10688,1153,Asia/Ho_Chi_Minh
-admin,Hưng Yên Province,VN,10605,2065,Asia/Bangkok
-admin,Lai Châu Province,VN,10346,2240,Asia/Bangkok
-admin,Lào Cai Province,VN,10397,2249,Asia/Bangkok
-admin,Thái Bình Province,VN,10634,2045,Asia/Bangkok
-admin,Quảng Trị Province,VN,10718,1675,Asia/Bangkok
-admin,Trà Vinh Province,VN,10634,995,Asia/Ho_Chi_Minh
-admin,Điện Biên Province,VN,10302,2139,Asia/Bangkok
-admin,Đăk Nông Province,VN,10769,1200,Asia/Ho_Chi_Minh
-admin,Lạng Sơn Province,VN,10676,2185,Asia/Bangkok
-admin,Bắc Giang Province,VN,10619,2127,Asia/Bangkok
-admin,Cao Bằng Province,VN,10626,2267,Asia/Bangkok
-admin,Ninh Thuận Province,VN,10899,1156,Asia/Ho_Chi_Minh
-admin,Hòa Bình Province,VN,10534,2082,Asia/Bangkok
-admin,Bạc Liêu Province,VN,10573,929,Asia/Ho_Chi_Minh
-admin,Cà Mau Province,VN,10515,918,Asia/Ho_Chi_Minh
-admin,Gia Lai Province,VN,10800,1398,Asia/Ho_Chi_Minh
-admin,Bắc Ninh Province,VN,10616,2119,Asia/Bangkok
-admin,Bến Tre Province,VN,10638,1024,Asia/Ho_Chi_Minh
-admin,Phú Thọ Province,VN,10540,2132,Asia/Bangkok
-admin,Phú Yên Province,VN,10922,1346,Asia/Ho_Chi_Minh
-admin,Yên Bái Province,VN,10491,2172,Asia/Bangkok
-admin,Thanh Hóa Province,VN,10577,1980,Asia/Bangkok
-admin,Quảng Bình Province,VN,10662,1747,Asia/Bangkok
-admin,Kon Tum,VN,10801,1435,Asia/Ho_Chi_Minh
-admin,Tây Ninh Province,VN,10610,1131,Asia/Ho_Chi_Minh
-admin,Nam Định Province,VN,10618,2043,Asia/Bangkok
-admin,Bình Định Province,VN,10922,1378,Asia/Ho_Chi_Minh
-admin,Tiền Giang,VN,10636,1036,Asia/Ho_Chi_Minh
-admin,Vĩnh Long Province,VN,10597,1025,Asia/Ho_Chi_Minh
-admin,Thái Nguyên Province,VN,10585,2159,Asia/Bangkok
-admin,Quảng Nam Province,VN,10847,1557,Asia/Ho_Chi_Minh
-admin,Hải Dương Province,VN,10632,2107,Asia/Bangkok
-admin,Nghệ An Province,VN,10569,1867,Asia/Bangkok
-admin,Đắk Lắk,VN,10804,1267,Asia/Ho_Chi_Minh
-admin,Sóc Trăng Province,VN,10598,932,Asia/Ho_Chi_Minh
-admin,An Giang Province,VN,10544,1039,Asia/Ho_Chi_Minh
-admin,Bình Thuận Province,VN,10810,1093,Asia/Ho_Chi_Minh
-admin,Bà Rịa–Vũng Tàu Province,VN,10708,1035,Asia/Ho_Chi_Minh
-admin,Thừa Thiên Huế Province,VN,10760,1646,Asia/Bangkok
-admin,Long An Povince,VN,10641,1054,Asia/Ho_Chi_Minh
-admin,Kiên Giang Province,VN,10508,1001,Asia/Ho_Chi_Minh
-admin,Kasaï-Oriental,CD,2359,-614,Africa/Lubumbashi
-admin,Đồng Tháp Province,VN,10576,1029,Asia/Ho_Chi_Minh
-admin,Quảng Ninh,VN,10707,2095,Asia/Bangkok
-admin,Lâm Đồng Province,VN,10844,1195,Asia/Ho_Chi_Minh
-admin,Khánh Hòa Province,VN,10919,1225,Asia/Ho_Chi_Minh
+admin,East Kasai,CD,2359,-614,Africa/Lubumbashi
 admin,Queensland,AU,15303,-2747,Australia/Brisbane
-admin,Đồng Nai Province,VN,10682,1094,Asia/Ho_Chi_Minh
-admin,Haiphong,VN,10668,2086,Asia/Bangkok
-admin,Da Nang,VN,10822,1607,Asia/Ho_Chi_Minh
-admin,Bình Dương Province,VN,10671,1092,Asia/Ho_Chi_Minh
+admin,Valle del Cauca Department,CO,-7652,343,America/Bogota
+admin,Antioquia,CO,-7557,625,America/Bogota
 admin,Haut-Katanga,CD,2748,-1166,Africa/Lubumbashi
 admin,Nunavut,CA,-6852,6375,America/Iqaluit
 admin,Yukon,CA,-13505,6072,America/Whitehorse
-admin,Northwest Territories,CA,-11437,6245,America/Yellowknife
+admin,Northwest Territories,CA,-11437,6245,America/Edmonton
 admin,Prince Edward Island,CA,-6313,4623,America/Halifax
-admin,Can Tho,VN,10579,1004,Asia/Ho_Chi_Minh
 admin,Newfoundland and Labrador,CA,-5271,4756,America/St_Johns
 admin,New Brunswick,CA,-6480,4609,America/Moncton
 admin,Saskatchewan,CA,-10667,5213,America/Regina
 admin,Nova Scotia,CA,-6358,4464,America/Halifax
 admin,Manitoba,CA,-9715,4988,America/Winnipeg
+admin,Hanoi,VN,10584,2102,Asia/Bangkok
 admin,Johor,MY,10376,147,Asia/Kuala_Lumpur
 admin,Volyn,UA,2534,5076,Europe/Kyiv
 admin,Ternopil,UA,2559,4955,Europe/Kyiv
@@ -7947,9 +7968,9 @@ admin,Sevastopol City,UA,3352,4461,Europe/Simferopol
 admin,Transcarpathia,UA,2229,4862,Europe/Kyiv
 admin,Kirovohrad,UA,3227,4851,Europe/Kyiv
 admin,Chernihiv,UA,3128,5151,Europe/Kyiv
-admin,Victoria,AU,14496,-3781,Australia/Melbourne
 admin,Zhytomyr,UA,2868,5026,Europe/Kyiv
 admin,Kherson,UA,3261,4664,Europe/Kyiv
+admin,Victoria,AU,14496,-3781,Australia/Melbourne
 admin,Sumy,UA,3480,5092,Europe/Kyiv
 admin,Ivano-Frankivsk,UA,2471,4892,Europe/Kyiv
 admin,Khmelnytskyi,UA,2698,4942,Europe/Kyiv
@@ -7958,6 +7979,7 @@ admin,Vinnytsia,UA,2847,4923,Europe/Kyiv
 admin,Poltava,UA,3455,4959,Europe/Kyiv
 admin,Chernivtsi,UA,2593,4829,Europe/Kyiv
 admin,Mykolaiv,UA,3199,4698,Europe/Kyiv
+admin,Bogota D.C.,CO,-7408,461,America/Bogota
 admin,Kiev,UA,3013,4980,Europe/Kyiv
 admin,Zaporizhzhia,UA,3512,4785,Europe/Kyiv
 admin,Lviv,UA,2402,4984,Europe/Kyiv
@@ -7969,12 +7991,11 @@ admin,New South Wales,AU,15121,-3387,Australia/Sydney
 admin,Odessa,UA,3074,4649,Europe/Kyiv
 admin,Dnipropetrovsk,UA,3504,4847,Europe/Kyiv
 admin,Kyiv City,UA,3052,5045,Europe/Kyiv
+admin,Ho Chi Minh,VN,10663,1082,Asia/Ho_Chi_Minh
 admin,Donetsk,UA,3780,4802,Europe/Kyiv
 admin,British Columbia,CA,-12312,4925,America/Vancouver
 admin,Selangor,MY,10161,311,Asia/Kuala_Lumpur
-admin,Hanoi,VN,10584,2102,Asia/Bangkok
 admin,Quebec,CA,-7359,4551,America/Toronto
-admin,Ho Chi Minh,VN,10663,1082,Asia/Ho_Chi_Minh
 admin,Tierra del Fuego,AR,-6832,-5481,America/Argentina/Ushuaia
 admin,Santa Cruz,AR,-6925,-5163,America/Argentina/Rio_Gallegos
 admin,La Rioja,AR,-6686,-2941,America/Argentina/La_Rioja
@@ -8001,35 +8022,35 @@ admin,Kinshasa,CD,1531,-433,Africa/Kinshasa
 admin,Buenos Aires F.D.,AR,-5838,-3461,America/Argentina/Buenos_Aires
 admin,Buenos Aires,AR,-5756,-3800,America/Argentina/Buenos_Aires
 admin,Ontario,CA,-7940,4371,America/Toronto
-admin,Aysén,CL,-7207,-4558,America/Santiago
-admin,Region of Magallanes,CL,-7091,-5315,America/Punta_Arenas
+admin,Aysén,CL,-7207,-4558,America/Coyhaique
+admin,Region of Magallanes,CL,-7091,-5316,America/Punta_Arenas
 admin,Atacama,CL,-7033,-2737,America/Santiago
 admin,Ñuble,CL,-7210,-3661,America/Santiago
 admin,Los Ríos Region,CL,-7325,-3981,America/Santiago
-admin,Arica y Parinacota Region,CL,-7030,-1847,America/Santiago
+admin,Arica y Parinacota Region,CL,-7030,-1848,America/Santiago
 admin,Tarapacá,CL,-7015,-2021,America/Santiago
 admin,O'Higgins Region,CL,-7074,-3417,America/Santiago
 admin,Coquimbo Region,CL,-7134,-2995,America/Santiago
 admin,Araucanía,CL,-7260,-3874,America/Santiago
 admin,Los Lagos Region,CL,-7294,-4147,America/Santiago
-admin,Maule Region,CL,-7166,-3543,America/Santiago
+admin,Maule Region,CL,-7165,-3542,America/Santiago
 admin,Antofagasta,CL,-7040,-2365,America/Santiago
 admin,Biobío,CL,-7312,-3672,America/Santiago
 admin,Valparaíso,CL,-7155,-3302,America/Santiago
 admin,Galápagos,EC,-9031,-74,Pacific/Galapagos
 admin,Sucumbíos,EC,-7690,9,America/Guayaquil
-admin,Napo,EC,-7781,-99,America/Guayaquil
-admin,Pastaza Province,EC,-7800,-148,America/Guayaquil
-admin,Zamora Chinchipe,EC,-7895,-407,America/Guayaquil
+admin,Napo,EC,-7781,-100,America/Guayaquil
+admin,Pastaza Province,EC,-7800,-149,America/Guayaquil
+admin,Zamora Chinchipe,EC,-7895,-406,America/Guayaquil
 admin,Bolívar,EC,-7900,-159,America/Guayaquil
-admin,Morona-Santiago Province,EC,-7811,-231,America/Guayaquil
-admin,Orellana Province,EC,-7699,-47,America/Guayaquil
+admin,Morona-Santiago Province,EC,-7812,-231,America/Guayaquil
+admin,Orellana Province,EC,-7700,-45,America/Guayaquil
 admin,Cañar,EC,-7934,-242,America/Guayaquil
 admin,Santa Elena,EC,-8095,-221,America/Guayaquil
 admin,Carchi,EC,-7772,81,America/Guayaquil
-admin,Cotopaxi,EC,-7862,-94,America/Guayaquil
+admin,Cotopaxi,EC,-7862,-93,America/Guayaquil
 admin,Imbabura,EC,-7812,35,America/Guayaquil
-admin,Chimborazo Province,EC,-7865,-167,America/Guayaquil
+admin,Chimborazo Province,EC,-7866,-167,America/Guayaquil
 admin,Esmeraldas,EC,-7965,96,America/Guayaquil
 admin,Loja,EC,-7920,-399,America/Guayaquil
 admin,Los Ríos,EC,-7946,-103,America/Guayaquil
@@ -8048,7 +8069,7 @@ admin,Abai Region,KZ,8027,5043,Asia/Almaty
 admin,Batys Qazaqstan,KZ,5137,5123,Asia/Oral
 admin,Aqmola,KZ,6940,5328,Asia/Almaty
 admin,Atyrau Oblisi,KZ,5188,4712,Asia/Atyrau
-admin,Manabí,EC,-8045,-105,America/Guayaquil
+admin,Manabí,EC,-8045,-106,America/Guayaquil
 admin,Qostanay,KZ,6362,5321,Asia/Qostanay
 admin,East Kazakhstan,KZ,8261,4997,Asia/Almaty
 admin,Pavlodar Region,KZ,7697,5228,Asia/Almaty
@@ -8132,12 +8153,12 @@ admin,Woqooyi Galbeed,SO,4407,956,Africa/Mogadishu
 admin,Auckland,NZ,17476,-3685,Pacific/Auckland
 admin,Banaadir,SO,4534,204,Africa/Mogadishu
 admin,Gaza Strip,PS,3447,3150,Asia/Gaza
-admin,East Aimak,MN,11573,4988,Asia/Choibalsan
+admin,East Aimak,MN,11573,4988,Asia/Ulaanbaatar
 admin,Govĭ-Sumber,MN,10836,4636,Asia/Ulaanbaatar
 admin,Middle Govĭ,MN,10627,4576,Asia/Ulaanbaatar
 admin,Bulgan,MN,10353,4881,Asia/Ulaanbaatar
 admin,Govi-Altai Province,MN,9626,4637,Asia/Hovd
-admin,Sühbaatar,MN,11328,4668,Asia/Choibalsan
+admin,Sühbaatar,MN,11328,4668,Asia/Ulaanbaatar
 admin,East Gobi Aymag,MN,11012,4488,Asia/Ulaanbaatar
 admin,Arkhangai Province,MN,10145,4748,Asia/Ulaanbaatar
 admin,Hentiy,MN,11066,4732,Asia/Ulaanbaatar
@@ -8168,24 +8189,3 @@ admin,Milne Bay Province,PG,15046,-1032,Pacific/Port_Moresby
 admin,New Ireland,PG,15080,-257,Pacific/Port_Moresby
 admin,Sandaun Province,PG,14130,-268,Pacific/Port_Moresby
 admin,West New Britain Province,PG,15014,-555,Pacific/Port_Moresby
-admin,East Sepik Province,PG,14363,-355,Pacific/Port_Moresby
-admin,Eastern Highlands Province,PG,14539,-608,Pacific/Port_Moresby
-admin,Madang Province,PG,14579,-522,Pacific/Port_Moresby
-admin,Western Province,PG,14321,-908,Pacific/Port_Moresby
-admin,Southern Highlands Province,PG,14366,-615,Pacific/Port_Moresby
-admin,Western Highlands Province,PG,14423,-586,Pacific/Port_Moresby
-admin,East New Britain Province,PG,15227,-434,Pacific/Port_Moresby
-admin,Oro Province,PG,14823,-877,Pacific/Port_Moresby
-admin,Bougainville,PG,15557,-623,Pacific/Bougainville
-admin,Ulaanbaatar,MN,10688,4791,Asia/Ulaanbaatar
-admin,Morobe Province,PG,14700,-672,Pacific/Port_Moresby
-admin,Nicosia,CY,3336,3518,Asia/Nicosia
-admin,National Capital,PG,14715,-948,Pacific/Port_Moresby
-admin,Îles Tuamotu-Gambier,PF,-13497,-2312,Pacific/Gambier
-admin,Îles Australes,PF,-15134,-2245,Pacific/Tahiti
-admin,Îles Marquises,PF,-13904,-980,Pacific/Marquesas
-admin,Leeward Islands,PF,-15175,-1651,Pacific/Tahiti
-admin,Line Islands,KI,-15749,202,Pacific/Kiritimati
-admin,Yap State,FM,13812,952,Pacific/Chuuk
-admin,Rongelap Atoll,MH,16689,1116,Pacific/Majuro
-admin,Jabat Island,MH,16898,775,Pacific/Kwajalein

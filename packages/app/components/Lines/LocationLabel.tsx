@@ -1,12 +1,12 @@
-import React from "react";
-import { styled } from "@linaria/react";
 import { css } from "@linaria/core";
-import { useStore } from "../../store/store";
+import { styled } from "@linaria/react";
+import type { ILocation } from "@tzr/location-index";
+import React from "react";
 import { getFlagEmoji } from "../../flags/emoji";
 import { formatOffset } from "../../intl/format";
-import { getTimezoneOffset } from "../../timezone/timezone";
-import type { ILocation } from "@tzr/location-index";
+import { useStore } from "../../store/store";
 import { stringify } from "../../store/utils-stringify";
+import { getTimezoneOffset } from "../../timezone/timezone";
 
 type Props = { location: ILocation; locations: ILocation[] };
 export const LocationLabel = ({ location, locations }: Props) => {
@@ -27,7 +27,7 @@ export const LocationLabel = ({ location, locations }: Props) => {
       <Name htmlFor={`location-item-${location.key}`}>{location.name}</Name>
 
       <Flag>
-        {location.type !== "timezone" ? getFlagEmoji(location.countryCode) : ""}
+        {location.countryCode ? getFlagEmoji(location.countryCode) : ""}
       </Flag>
 
       <Offset />

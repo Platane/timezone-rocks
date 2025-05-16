@@ -1,6 +1,6 @@
-import * as unzipper from "unzipper";
+import { isNonNull } from "@tzr/utils/utils-array";
 import { load as CheerioLoad } from "cheerio";
-import { pruneUndefined } from "@tzr/utils/utils-array";
+import * as unzipper from "unzipper";
 import { limit } from "./options";
 
 export const getTimezoneAbbreviations = async () => {
@@ -10,32 +10,31 @@ export const getTimezoneAbbreviations = async () => {
 
   const $ = CheerioLoad(text);
 
-  return pruneUndefined(
-    $(".wikitable.sortable tr")
-      .toArray()
-      .map((row) => {
-        const [abbreviation, name, offsetLiteral] = $(row)
-          .find("td")
-          .toArray()
-          .map((el) =>
-            $(el)
-              .text()
-              .replace(/\[.+\]/g, "")
-              .trim()
-          );
+  return $(".wikitable.sortable tr")
+    .toArray()
+    .map((row) => {
+      const [abbreviation, name, offsetLiteral] = $(row)
+        .find("td")
+        .toArray()
+        .map((el) =>
+          $(el)
+            .text()
+            .replace(/\[.+\]/g, "")
+            .trim()
+        );
 
-        if (!name) return null;
+      if (!name) return undefined;
 
-        const [h, m] = offsetLiteral
-          .replace("UTC", "")
-          .replace("±", "+")
-          .replace("−", "-")
-          .split(":");
-        const offset = Number.parseInt(h) + Number.parseInt(m ?? "0") / 60;
+      const [h, m] = offsetLiteral
+        .replace("UTC", "")
+        .replace("±", "+")
+        .replace("−", "-")
+        .split(":");
+      const offset = Number.parseInt(h) + Number.parseInt(m ?? "0") / 60;
 
-        return { abbreviation, name, offset };
-      })
-  );
+      return { abbreviation, name, offset };
+    })
+    .filter(isNonNull);
 };
 
 export const getCountries = async () => {
@@ -130,16 +129,15 @@ export const getTimeZones = async () => {
     "http://download.geonames.org/export/dump/timeZones.txt"
   ).then((res) => res.text());
 
-  return pruneUndefined(
-    text
-      .split("\n")
-      .slice(1)
-      .map((s) => {
-        const [, timezone, offset, offsetDST] = s.split("\t");
-        if (!timezone) return null;
-        return { timezone, offset: +offset, offsetDST: +offsetDST };
-      })
-  );
+  return text
+    .split("\n")
+    .slice(1)
+    .map((s) => {
+      const [, timezone, offset, offsetDST] = s.split("\t");
+      if (!timezone) return undefined;
+      return { timezone, offset: +offset, offsetDST: +offsetDST };
+    })
+    .filter(isNonNull);
 };
 
 export const getLocations = async (limit: number = Infinity) => {
@@ -152,26 +150,25 @@ export const getLocations = async (limit: number = Infinity) => {
       getTimeZones(),
     ]);
 
-  const locationCountry = pruneUndefined(
-    countries
-      .sort((a, b) => b.population - a.population)
-      .map((country) => {
-        const mainCity =
-          cities.find((c) => c.name === country.capitalName) ||
-          cities.find((c) => c.countryCode === country.countryCode)!;
+  const locationCountry = countries
+    .sort((a, b) => b.population - a.population)
+    .map((country) => {
+      const mainCity =
+        cities.find((c) => c.name === country.capitalName) ||
+        cities.find((c) => c.countryCode === country.countryCode)!;
 
-        if (!mainCity) return null;
+      if (!mainCity) return undefined;
 
-        return {
-          type: "country" as const,
-          name: country.name,
-          countryCode: country.countryCode,
-          longitude: mainCity.longitude,
-          latitude: mainCity.latitude,
-          timezone: mainCity.timezone,
-        };
-      })
-  );
+      return {
+        type: "country" as const,
+        name: country.name,
+        countryCode: country.countryCode,
+        longitude: mainCity.longitude,
+        latitude: mainCity.latitude,
+        timezone: mainCity.timezone,
+      };
+    })
+    .filter(isNonNull);
 
   const locationCity = cities
     .sort((a, b) => b.population - a.population)
@@ -194,17 +191,16 @@ export const getLocations = async (limit: number = Infinity) => {
 
       // list the admin zone in the country
       // ignore the one that don't have a known city
-      const countryAdmins = pruneUndefined(
-        admins
-          .filter((a) => a.countryCode === country.countryCode)
-          .map((admin) => {
-            const mainCity = countryCities.find(
-              (city) => city.adminCode === admin.adminCode
-            );
+      const countryAdmins = admins
+        .filter((a) => a.countryCode === country.countryCode)
+        .map((admin) => {
+          const mainCity = countryCities.find(
+            (city) => city.adminCode === admin.adminCode
+          );
 
-            if (mainCity) return { ...mainCity, ...admin };
-          })
-      );
+          if (mainCity) return { ...mainCity, ...admin };
+        })
+        .filter(isNonNull);
 
       // if the country don't span over multiple timezone, don't include the admin level
       if (!countryAdmins.some((a) => a.timezone !== countryAdmins[0].timezone))
@@ -232,72 +228,61 @@ export const getLocations = async (limit: number = Infinity) => {
       timezone: admin.timezone,
     }));
 
-  const locationTimezoneAbbreviations = pruneUndefined(
-    timezoneAbbreviations.map((ab) => {
-      const ts = timezones
-        .filter((t) => t.offset === ab.offset || t.offsetDST === ab.offset)
-        .map((t) => t.timezone);
+  const getFixedTimezone = (offset: number) =>
+    `UTC${offset < 0 ? "-" : "+"}${Math.abs(offset)}`;
 
-      const l =
-        locationCountry.find(
-          (l) => ab.name.includes(l.name) && ts.includes(l.timezone)
-        ) ??
-        locationAdmin.find(
-          (l) => ab.name.includes(l.name) && ts.includes(l.timezone)
-        ) ??
-        locationCity.find(
-          (l) => ab.name.includes(l.name) && ts.includes(l.timezone)
-        ) ??
-        locationCountry.find((l) => ts.includes(l.timezone));
+  const getFixedTimezonePosition = (offset: number) => ({
+    latitude: 0,
+    longitude: (offset / 12) * 180,
+  });
 
-      if (l)
-        return {
-          ...l,
-          type: "timezone" as const,
-          name: ab.abbreviation + " - " + ab.name,
-        };
-    })
-  );
+  const locationTimezoneAbbreviations = timezoneAbbreviations.map((ab) => {
+    // find known timezones that matches the offset
+    const ts = timezones
+      .filter((t) => t.offset === ab.offset || t.offsetDST === ab.offset)
+      .map((t) => t.timezone);
 
-  const locationTimezoneNumeral = pruneUndefined(
-    Array.from({ length: 24 }, (_, i) => {
-      const offset = i - 11;
-      if (offset === 0) return undefined;
+    // find a country that match the abbreviation name somehow
+    const l = locationCountry.find(
+      (l) => ab.name.includes(l.name) && ts.includes(l.timezone)
+    ) ??
+      locationAdmin.find(
+        (l) => ab.name.includes(l.name) && ts.includes(l.timezone)
+      ) ??
+      locationCity.find(
+        (l) => ab.name.includes(l.name) && ts.includes(l.timezone)
+      ) ?? {
+        countryCode: null,
+        timezone: getFixedTimezone(ab.offset),
+        ...getFixedTimezonePosition(ab.offset),
+      };
 
-      const l =
-        locationCountry.find((l) =>
-          timezones.some(
-            (t) => t.timezone === l.timezone && t.offset === offset
-          )
-        ) ??
-        locationAdmin.find((l) =>
-          timezones.some(
-            (t) => t.timezone === l.timezone && t.offset === offset
-          )
-        ) ??
-        locationCity.find((l) =>
-          timezones.some(
-            (t) => t.timezone === l.timezone && t.offset === offset
-          )
-        );
+    return {
+      ...l,
+      type: "timezone" as const,
+      name: ab.abbreviation + " - " + ab.name,
+    };
+  });
 
-      if (l)
-        return {
-          ...l,
-          type: "timezone" as const,
-          name: `GMT${offset < 0 ? "-" : "+"}${Math.abs(offset)}`,
-          offset,
-          offsetDST: offset,
-        };
-    })
-  );
+  const locationTimezoneNumeral = Array.from({ length: 23 }, (_, i) => {
+    const offset = i - 11;
+    if (offset === 0) return [];
+
+    const l = {
+      type: "timezone" as const,
+      countryCode: null,
+      timezone: getFixedTimezone(offset),
+      ...getFixedTimezonePosition(offset),
+    };
+
+    return [
+      { name: `GMT${offset < 0 ? "-" : "+"}${Math.abs(offset)}`, ...l },
+      { name: `UTC${offset < 0 ? "-" : "+"}${Math.abs(offset)}`, ...l },
+    ];
+  }).flat();
 
   const locations = [
     ...locationCountry,
-
-    ...locationTimezoneAbbreviations,
-
-    ...locationTimezoneNumeral,
 
     ...locationCity.slice(
       0,
@@ -309,6 +294,10 @@ export const getLocations = async (limit: number = Infinity) => {
           locationTimezoneAbbreviations.length
       )
     ),
+
+    ...locationTimezoneAbbreviations,
+
+    ...locationTimezoneNumeral,
 
     ...locationAdmin,
   ].slice(0, limit);
@@ -322,7 +311,7 @@ export const build = async () => {
       [
         l.type,
         l.name.replace(/\s*\,\s*/g, " "),
-        l.countryCode,
+        l.countryCode ?? "",
         Math.round(l.longitude * 100),
         Math.round(l.latitude * 100),
         l.timezone,

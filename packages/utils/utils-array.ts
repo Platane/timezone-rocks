@@ -2,7 +2,10 @@
  * prune undefined or null values from the array
  */
 export const pruneUndefined = <T>(arr: (T | undefined | null)[]) =>
-  arr.filter((a) => a !== undefined && a !== null) as T[];
+  arr.filter(isNonNull) satisfies T[];
+
+export const isNonNull = <T>(x: T): x is NonNullable<T> =>
+  x !== null && x !== undefined;
 
 /**
  * shallow equal on each item of the array
