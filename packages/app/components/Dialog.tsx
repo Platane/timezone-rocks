@@ -12,7 +12,11 @@ export const DialogModal = ({
   }, [open]);
 
   return (
-    <DialogModalContainer ref={ref} {...props} onClick={onClickOutSideClose} />
+    <DialogModalContainer
+      ref={ref}
+      {...(props as any)}
+      onClick={onClickOutSideClose}
+    />
   );
 };
 
@@ -73,7 +77,7 @@ export const closeDialog = (e: React.MouseEvent) => {
 
 export const CloseDialogButton = (props: React.ComponentProps<"button">) => (
   <CloseDialogButtonContainer onClick={closeDialog}>
-    {props.children ?? "×"}
+    {(props.children as any) ?? "×"}
   </CloseDialogButtonContainer>
 );
 

@@ -162,9 +162,7 @@ const LabelContainer = ({ domContainer }: { domContainer: HTMLDivElement }) => {
     const c = createRoot(domContainer);
     c.render(<Labels />);
 
-    return () => {
-      ReactDOM.unmountComponentAtNode(domContainer);
-    };
+    return () => c.unmount();
   }, [domContainer]);
 
   return null;

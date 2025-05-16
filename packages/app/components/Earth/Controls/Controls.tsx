@@ -6,7 +6,10 @@ import { useSubscribe } from "../../../store/useSubscribe";
 import { isStable, stepSpring } from "@tzr/utils/utils-spring";
 import { setLatLng } from "../Locations/utils-latLng";
 import { MathUtils } from "three";
-import type { OrbitControls as IOrbitControls } from "three-stdlib";
+import type { ForwardRefComponent } from "@react-three/drei/helpers/ts-utils";
+
+type Impl<T> = T extends ForwardRefComponent<infer _, infer I> ? I : never;
+type IOrbitControls = Impl<typeof OrbitControls>;
 
 export const Controls = () => {
   const { camera } = useThree();
@@ -43,7 +46,7 @@ export const Controls = () => {
   );
 
   // handle orbit control
-  const orbitControlsRef = useRef<IOrbitControls>(null);
+  const orbitControlsRef = useRef<IOrbitControls | null>(null);
   useEffect(() => {
     const onStart = () => {
       state.current.orbitControlsActive = true;

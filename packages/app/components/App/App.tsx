@@ -1,21 +1,27 @@
-import React from "react";
-import { styled } from "@linaria/react";
 import { css } from "@linaria/core";
-import loadable from "@loadable/component";
+import { styled } from "@linaria/react";
+import React from "react";
+import { useStore } from "../../store/store";
+import { AvatarApp } from "../AvatarApp/AvatarApp";
+import { DatePicker } from "../DatePicker";
+import { Header } from "../Header/Header";
+import { InfoDialog } from "../Info/InfoDialog";
 import { Lines } from "../Lines/Lines";
 import { Search } from "../Search";
-import { useStore } from "../../store/store";
-import { DatePicker } from "../DatePicker";
-import { InfoDialog } from "../Info/InfoDialog";
 import { useNavigate, useUrl } from "./router";
-import { Header } from "../Header/Header";
-import { AvatarApp } from "../AvatarApp/AvatarApp";
 
-const LazyEarthScene = loadable(() => import("../Earth/Scene"));
-LazyEarthScene.preload();
+const usePromiseResult = <T,>(promise: Promise<T>) => {
+  const [res, setRes] = React.useState<T>();
+  React.useEffect(() => {
+    promise.then(setRes);
+  }, []);
+  return res;
+};
 
 export const App = () => {
   const locationStoreReady = useStore((s) => s.locationStoreReady);
+
+  const EarthScene = usePromiseResult(import("../Earth/Scene"))?.Scene;
 
   const url = useUrl();
   const navigate = useNavigate();
@@ -29,9 +35,7 @@ export const App = () => {
       <Header />
 
       <TopContainer>
-        <EarthContainer>
-          <LazyEarthScene />
-        </EarthContainer>
+        <EarthContainer>{EarthScene && <EarthScene />}</EarthContainer>
       </TopContainer>
 
       <Search />

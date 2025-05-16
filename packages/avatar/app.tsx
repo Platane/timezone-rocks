@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import { Avatar } from ".";
 
 export const App = () => {
@@ -38,5 +38,5 @@ export const App = () => {
   );
 };
 
-const root = document.getElementById("root");
-render(<App />, root);
+const root = createRoot(document.getElementById("root")!);
+root.render(<App />);

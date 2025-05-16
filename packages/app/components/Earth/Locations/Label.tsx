@@ -27,7 +27,9 @@ export const Label = ({ location }: { location: ILocation }) => {
     <Container>
       <Avatar location={location} />
       <LabelHour ref={hourLabelRef} />
-      <LabelFlag>{getFlagEmoji(location.countryCode)}</LabelFlag>
+      {location.countryCode && (
+        <LabelFlag>{getFlagEmoji(location.countryCode)}</LabelFlag>
+      )}
     </Container>
   );
 };

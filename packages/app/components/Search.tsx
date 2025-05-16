@@ -1,14 +1,13 @@
-import React, { useRef, useState } from "react";
 import { styled } from "@linaria/react";
-import { css } from "@linaria/core";
-import { getFlagEmoji } from "../flags/emoji";
-import { useSearchResults } from "../store/useSearchLocation";
-import { useSubscribe } from "../store/useSubscribe";
-import { useStore } from "../store/store";
-import { usePreviousUntilTruthy } from "../hooks/usePreviousUntilTruthy";
-import { useExtendedTruthiness } from "../hooks/useExtendedTruthiness";
 import type { ILocation } from "@tzr/location-index";
 import type { TextFragments } from "@tzr/location-index/search/splitFragments";
+import React, { useRef, useState } from "react";
+import { getFlagEmoji } from "../flags/emoji";
+import { useExtendedTruthiness } from "../hooks/useExtendedTruthiness";
+import { usePreviousUntilTruthy } from "../hooks/usePreviousUntilTruthy";
+import { useStore } from "../store/store";
+import { useSearchResults } from "../store/useSearchLocation";
+import { useSubscribe } from "../store/useSubscribe";
 
 export const Search = () => {
   const focused = useStore((s) => s.searchFocused);
@@ -135,10 +134,12 @@ const SuggestionContent = ({
         if (subName.length > 0) {
           subName.push(f);
         } else {
-          const i = f.text.indexOf("-");
-          if (i === -1) {
+          const r = new RegExp(/ -/);
+
+          if (f.text.match(r)) {
             name.push(f);
           } else {
+            const i = r.lastIndex - 1;
             name.push({ ...f, text: f.text.substring(0, i) });
             subName.push({ ...f, text: f.text.substring(i) });
           }
@@ -166,7 +167,9 @@ const SuggestionContent = ({
     case "city":
       return (
         <>
-          <SuggestionFlag>{getFlagEmoji(location.countryCode)}</SuggestionFlag>
+          <SuggestionFlag>
+            {location.countryCode ? getFlagEmoji(location.countryCode) : ""}
+          </SuggestionFlag>
           <SuggestionType title={location.type}>
             {getEmojiType(location.type)}
           </SuggestionType>
@@ -229,11 +232,11 @@ const SuggestionSubName = styled.span`
     font-weight:bold;
     background-color: #71799c33;
     border-radius: 2px;
-    
+
   }
 `;
 
-const Input = styled.input`
+const Input = (styled.input as any)`
   font-size: 1.2em;
   padding: 10px 16px;
   height: 50px;
@@ -247,4 +250,4 @@ const Input = styled.input`
     box-shadow: 0 0 0 2px -webkit-focus-ring-color;
     box-shadow: 0 0 0 2px Highlight;
   }
-`;
+` as (props: React.ComponentProps<"input">) => any;

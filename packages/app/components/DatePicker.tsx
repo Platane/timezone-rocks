@@ -1,10 +1,10 @@
-import React, { useCallback, useRef, useState } from "react";
 import { styled } from "@linaria/react";
-import { useStore } from "../store/store";
 import { DateTime } from "luxon";
-import { EditIcon } from "./Icons/EditIcon";
-import { useExtendedTruthiness } from "../hooks/useExtendedTruthiness";
+import React, { useCallback, useRef, useState } from "react";
 import { useClickOutside } from "../hooks/useClickOutside";
+import { useExtendedTruthiness } from "../hooks/useExtendedTruthiness";
+import { useStore } from "../store/store";
+import { EditIcon } from "./Icons/EditIcon";
 
 export const DatePicker = () => {
   const timezone = useStore(
@@ -177,6 +177,6 @@ const FormButton = styled.button`
   height: 100%;
   min-width: 60px;
 `;
-const FormInput = styled.input`
+const FormInput = (styled.input as any)`
   height: 100%;
 `;

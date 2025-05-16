@@ -1,11 +1,11 @@
-import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Sun } from "./Sun/Sun";
-import { Locations } from "./Locations/Locations";
-import { useStore } from "../../store/store";
-import { Controls } from "./Controls/Controls";
-import { AppearScaleNode } from "./AppearScaleNode";
+import React, { Suspense } from "react";
 import { EarthGlobe } from "../../../earth-globe";
+import { useStore } from "../../store/store";
+import { AppearScaleNode } from "./AppearScaleNode";
+import { Controls } from "./Controls/Controls";
+import { Locations } from "./Locations/Locations";
+import { Sun } from "./Sun/Sun";
 
 export const Scene = () => {
   const ready = useStore((s) => s.earthReady);
