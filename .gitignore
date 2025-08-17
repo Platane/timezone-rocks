@@ -4,3 +4,4 @@ dist-info
 .env
 /packages/e2e/playwright-report
 /packages/e2e/playwright-screenshots
+/packages/e2e/test-results
