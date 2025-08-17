@@ -5,8 +5,8 @@
   "dependencies": {
     "@linaria/core": "6.3.0",
     "@linaria/react": "6.3.0",
-    "@react-three/drei": "10.0.7",
-    "@react-three/fiber": "9.1.2",
+    "@react-three/drei": "10.7.2",
+    "@react-three/fiber": "9.3.0",
     "@tzr/avatar": "0.0.1",
     "@tzr/location-index": "0.0.1",
     "@tzr/utils": "0.0.1",
@@ -17,7 +17,7 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "reselect": "5.1.1",
-    "three": "0.176.0",
+    "three": "0.179.1",
     "three-stdlib": "2.36.0",
     "zustand": "5.0.4"
   },
@@ -27,6 +27,6 @@
     "@types/luxon": "3.6.2",
     "@types/react": "19.1.4",
     "@types/react-dom": "19.1.5",
-    "@types/three": "0.176.0"
+    "@types/three": "0.179.0"
   }
 }
