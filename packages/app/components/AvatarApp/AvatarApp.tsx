@@ -1,7 +1,7 @@
-import React from "react";
 import { styled } from "@linaria/react";
-import { getColors } from "../Earth/Locations/Label";
 import { Avatar, Pose } from "@tzr/avatar";
+import React from "react";
+import { getColors } from "../Earth/Locations/Label";
 
 const poses: Pose[] = ["afternoon", "day", "morning", "night"];
 
@@ -29,7 +29,7 @@ export const AvatarApp = () => {
         <legend>Avatar pose</legend>
         <div>
           {poses.map((p) => (
-            <>
+            <React.Fragment key={p}>
               <input
                 type="radio"
                 id={p}
@@ -41,7 +41,7 @@ export const AvatarApp = () => {
                 }}
               />
               <label htmlFor={p}>{p}</label>
-            </>
+            </React.Fragment>
           ))}
         </div>
       </fieldset>
