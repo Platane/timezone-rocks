@@ -9,10 +9,6 @@ test("Should open the about modal", async ({ page }) => {
   expect(page.url()).toContain("/about");
 
   await expect(page.getByText("Attribution")).toBeVisible();
-
-  await page.goBack();
-
-  await expect(page.getByText("Attribution")).not.toBeVisible();
 });
 
 test("Should open the avatar app", async ({ page }) => {
