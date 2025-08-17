@@ -12,10 +12,10 @@
     "@tzr/utils": "0.0.1",
     "ical.js": "2.1.0",
     "lodash.deburr": "4.1.0",
-    "luxon": "3.6.1",
+    "luxon": "3.7.1",
     "park-miller": "2.0.0",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
     "reselect": "5.1.1",
     "three": "0.179.1",
     "three-stdlib": "2.36.0",
@@ -23,9 +23,9 @@
   },
   "devDependencies": {
     "@types/lodash.deburr": "4.1.9",
-    "@types/luxon": "3.6.2",
-    "@types/react": "19.1.4",
-    "@types/react-dom": "19.1.5",
+    "@types/luxon": "3.7.1",
+    "@types/react": "19.1.10",
+    "@types/react-dom": "19.1.7",
     "@types/three": "0.179.0"
   }
 }
