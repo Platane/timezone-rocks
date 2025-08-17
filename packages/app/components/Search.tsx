@@ -124,7 +124,9 @@ const SuggestionContainer = styled.div`
 
 const SuggestionContent = ({
   location,
-}: { location: ILocation & { fragments: TextFragments } }) => {
+}: {
+  location: ILocation & { fragments: TextFragments };
+}) => {
   switch (location.type) {
     case "timezone": {
       const name: TextFragments = [];

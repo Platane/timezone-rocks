@@ -4,7 +4,10 @@ import { CloseDialogButton, DialogModal } from "../Dialog";
 export const InfoDialog = ({
   open,
   onOpenChange,
-}: { open: boolean; onOpenChange: (o: boolean) => void }) => (
+}: {
+  open: boolean;
+  onOpenChange: (o: boolean) => void;
+}) => (
   <InfoDialogModal open={open} onClose={() => onOpenChange(false)}>
     <CloseDialogButton />
     <h1>Usage</h1>
