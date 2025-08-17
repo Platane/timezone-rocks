@@ -5,16 +5,18 @@ export const DialogModal = ({
   open,
   ...props
 }: React.ComponentProps<"dialog">) => {
-  const ref = React.useRef<HTMLDialogElement | null>(null);
-  React.useLayoutEffect(() => {
-    if (open) ref.current?.showModal();
-    else ref.current?.close();
-  }, [open]);
-
+  console.log(open, props);
   return (
     <DialogModalContainer
-      ref={ref}
       {...(props as any)}
+      ref={React.useCallback(
+        (dialog: HTMLDialogElement | null) => {
+          if (!dialog) return;
+          if (open) dialog.showModal();
+          else dialog.close();
+        },
+        [open]
+      )}
       onClick={onClickOutSideClose}
     />
   );

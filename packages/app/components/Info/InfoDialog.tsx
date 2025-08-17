@@ -9,18 +9,7 @@ export const InfoDialog = ({
   open: boolean;
   onOpenChange: (o: boolean) => void;
 }) => (
-  <InfoDialogModal
-    data-open={open}
-    ref={React.useCallback(
-      (dialog: HTMLDialogElement | null) => {
-        if (!dialog) return;
-        if (open) dialog.showModal();
-        else dialog.close();
-      },
-      [open]
-    )}
-    onClose={() => onOpenChange(false)}
-  >
+  <InfoDialogModal open={open} onClose={() => onOpenChange(false)}>
     <CloseDialogButton />
     <h1>Usage</h1>
     Timezone.rocks allows to visualize different timezones all around the globe.
