@@ -3,15 +3,15 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
-    "@babel/core": "7.27.1",
+    "@babel/core": "7.28.3",
     "@babel/preset-react": "7.27.1",
     "@babel/preset-typescript": "7.27.1",
     "@linaria/rollup": "5.0.4",
-    "@vitejs/plugin-react": "4.4.1",
-    "rollup": "4.40.2",
-    "rollup-plugin-visualizer": "5.14.0",
+    "@vitejs/plugin-react": "4.5.1",
+    "rollup": "4.46.2",
+    "rollup-plugin-visualizer": "6.0.3",
     "vite": "6.3.5",
-    "@wyw-in-js/vite": "0.6.0"
+    "@wyw-in-js/vite": "0.7.0"
   },
   "scripts": {
     "dev": "vite",

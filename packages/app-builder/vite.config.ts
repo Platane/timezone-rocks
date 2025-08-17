@@ -1,8 +1,8 @@
-import { type Plugin, defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import { visualizer } from "rollup-plugin-visualizer";
 import { execSync } from "node:child_process";
+import react from "@vitejs/plugin-react";
 import wyw from "@wyw-in-js/vite";
+import { visualizer } from "rollup-plugin-visualizer";
+import { type Plugin, type UserConfig } from "vite";
 import { prefetchChunk } from "./prefetchChunk";
 
 const getVersion = () =>
@@ -11,7 +11,7 @@ const getVersion = () =>
     execSync("git rev-parse --short HEAD").toString().trim(),
   ].join("-");
 
-export default defineConfig(() => ({
+export default {
   root: "../app/",
   assetsInclude: [
     "**/*.svg",
@@ -26,7 +26,7 @@ export default defineConfig(() => ({
       filename: "../../dist-info/bundle-stats.html",
       template: "treemap",
     }) as Plugin,
-    react(),
+    react() as any,
     wyw({
       include: ["**/*.tsx"],
       exclude: ["**/node_modules/**"],
@@ -43,4 +43,4 @@ export default defineConfig(() => ({
     reportCompressedSize: false,
     outDir: "../../dist",
   },
-}));
+} satisfies UserConfig;

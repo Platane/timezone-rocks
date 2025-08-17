@@ -3,6 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
-    "@playwright/test": "1.52.0"
+    "@playwright/test": "1.54.2"
   }
 }

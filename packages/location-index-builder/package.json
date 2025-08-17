@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@tzr/utils": "0.0.1",
-    "cheerio": "1.0.0",
+    "cheerio": "1.1.2",
     "unzipper": "0.12.3"
   },
   "devDependencies": {

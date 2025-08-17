@@ -10,7 +10,7 @@
     "@tzr/avatar": "0.0.1",
     "@tzr/location-index": "0.0.1",
     "@tzr/utils": "0.0.1",
-    "ical.js": "2.1.0",
+    "ical.js": "2.2.1",
     "lodash.deburr": "4.1.0",
     "luxon": "3.7.1",
     "park-miller": "2.0.0",
@@ -19,7 +19,7 @@
     "reselect": "5.1.1",
     "three": "0.179.1",
     "three-stdlib": "2.36.0",
-    "zustand": "5.0.4"
+    "zustand": "5.0.7"
   },
   "devDependencies": {
     "@types/lodash.deburr": "4.1.9",
