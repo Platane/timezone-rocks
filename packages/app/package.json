@@ -22,7 +22,6 @@
     "zustand": "5.0.4"
   },
   "devDependencies": {
-    "@types/loadable__component": "5.13.9",
     "@types/lodash.deburr": "4.1.9",
     "@types/luxon": "3.6.2",
     "@types/react": "19.1.4",
