@@ -17,7 +17,7 @@
     "type": "tsc --noEmit",
     "lint": "npx @biomejs/biome format .",
     "test": "bun test packages/app packages/location-",
-    "test:e2e": "( cd packages/e2e/ ; bunx playwright test )",
+    "test:e2e": "( cd packages/e2e/ ; bunx playwright test --project chromium )",
     "build:locations": "( cd packages/location-index-builder ; bun run build )",
     "dev": "( cd packages/app-builder ; bunx vite )",
     "build:app": "( cd packages/app-builder ; bunx vite build )"
