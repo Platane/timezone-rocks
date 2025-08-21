@@ -22,12 +22,20 @@ export const InfoDialog = ({
         The earth model is a slightly modified version of this{" "}
         <a href="https://sketchfab.com/3d-models/earth-0caafb7e837047a688a3e504c0ea74af">
           model
-        </a>
-        .
+        </a>{" "}
+        by <a href="https://sketchfab.com/karinkreeft8">BamPistache</a>
+        <span className="license">
+          (
+          <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC</a>
+          )
+        </span>
       </li>
       <li>
         Locations names and positions are pulled from{" "}
-        <a href="http://www.geonames.org/">geonames.org</a>.
+        <a href="http://www.geonames.org/">geonames.org</a>
+        <span className="license">
+          (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY</a>)
+        </span>
       </li>
     </ul>
     <br />
@@ -45,8 +53,16 @@ const InfoDialogModal = styled(DialogModal)`
 
 min-height: min(360px, 60vh);
 
+user-select: text;
 
 & li {
   margin-bottom: 8px;
+}
+.license {
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 0.8em;
+  position: relative;
+  top: -0.1em;
 }
 `;
