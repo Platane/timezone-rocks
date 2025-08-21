@@ -5,7 +5,6 @@ export const DialogModal = ({
   open,
   ...props
 }: React.ComponentProps<"dialog">) => {
-  console.log(open, props);
   return (
     <DialogModalContainer
       {...(props as any)}
