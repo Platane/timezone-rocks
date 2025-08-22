@@ -49,6 +49,7 @@ export const DatePicker = () => {
         style={{
           opacity: focus ? 1 : 0,
           pointerEvents: focus ? "auto" : "none",
+          visibility: focus ? "visible" : "hidden",
         }}
         onKeyDown={(e) => {
           if (e.code === "Escape") setFocus(false);
