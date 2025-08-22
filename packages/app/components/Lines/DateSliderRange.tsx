@@ -61,6 +61,7 @@ export const DateSliderRange = () => {
         min={tWindow[0]}
         max={tWindow[1]}
         defaultValue={now}
+        aria-label="date slider"
         onFocus={() => startDragDateCursor()}
         onBlur={() => endDragDateCursor()}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
