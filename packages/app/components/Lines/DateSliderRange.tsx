@@ -87,6 +87,7 @@ const InputRange = styled.input<any>`
 
    background-color: #ddd4;
 
+   touch-action: pan-x;
 
    position: relative;
    left: calc( -1 * var(--caret-width) / 2);
