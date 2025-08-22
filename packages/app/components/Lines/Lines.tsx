@@ -1,14 +1,14 @@
 import { styled } from "@linaria/react";
 import React from "react";
-import { useStore } from "../../store/store";
 import { selectLocations, selectT, selectTWindow } from "../../store/selector";
+import { useStore } from "../../store/store";
 import { useSubscribe } from "../../store/useSubscribe";
 import { getBlocks } from "../../timezone/interval";
-import { LocationLabel, update as updateLocationLabel } from "./LocationLabel";
-import { FlyingLabel, update as updateFlyingLabel } from "./FlyingLabel";
-import { useWidth } from "./useWidth";
-import { DateSlider } from "./DateSlider";
 import { accentColor } from "../theme";
+import { DateSliderRange } from "./DateSliderRange";
+import { FlyingLabel, update as updateFlyingLabel } from "./FlyingLabel";
+import { LocationLabel, update as updateLocationLabel } from "./LocationLabel";
+import { useWidth } from "./useWidth";
 
 export const Lines = () => {
   const locations = useStore(selectLocations);
@@ -65,7 +65,7 @@ export const Lines = () => {
 
   return (
     <>
-      <DateSlider />
+      <DateSliderRange />
 
       <Container role="list" ref={ref}>
         <CursorArm />

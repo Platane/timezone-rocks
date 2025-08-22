@@ -1,17 +1,21 @@
+import type { ILocation } from "@tzr/location-index";
 import { create, StateCreator } from "zustand";
 import { subscribeWithSelector } from "zustand/middleware";
-import type { ILocation } from "@tzr/location-index";
 import { init } from "./persist";
 
 const t = Date.now();
 const day = 24 * 60 * 60 * 1000;
+const fifteenMinutes = 15 * 60 * 1000;
 
 const w = Math.max(2.3, Math.min(3, window.innerWidth / 300));
 
 const stateCreator: StateCreator<State & Api> = (set) => ({
   t,
   now: t,
-  tWindow: [t - (day * w) / 2, t + (day * w) / 2] as [number, number],
+  tWindow: [
+    Math.round((t - (day * w) / 2) / fifteenMinutes) * fifteenMinutes,
+    Math.round((t + (day * w) / 2) / fifteenMinutes) * fifteenMinutes,
+  ] as [number, number],
   locations: [],
   locationStoreReady: false,
   dateCursorDragged: false,
