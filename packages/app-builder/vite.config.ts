@@ -1,6 +1,5 @@
 import { execSync } from "node:child_process";
 import react from "@vitejs/plugin-react";
-import wyw from "@wyw-in-js/vite";
 import { visualizer } from "rollup-plugin-visualizer";
 import { type Plugin, type UserConfig } from "vite";
 import { prefetchChunk } from "./prefetchChunk";
@@ -27,13 +26,6 @@ export default {
       template: "treemap",
     }) as Plugin,
     react() as any,
-    wyw({
-      include: ["**/*.tsx"],
-      exclude: ["**/node_modules/**"],
-      babelOptions: {
-        presets: ["@babel/preset-typescript", "@babel/preset-react"],
-      },
-    }),
     prefetchChunk(),
   ],
   define: { "process.env.APP_VERSION": JSON.stringify(getVersion()) },

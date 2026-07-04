@@ -1,53 +1,24 @@
-import { styled } from "@linaria/react";
 import githubLogoUrl from "./github-mark-white.svg";
 import infoUrl from "./info.svg";
 import avatarUrl from "./avatar.svg";
+import s from "./Header.module.css";
 
 export const Header = () => (
-  <Container>
-    <Link
+  <header className={s.container}>
+    <a
+      className={s.link}
       href="https://github.com/Platane/timezone-rocks"
       title="github repository"
     >
-      <Icon src={githubLogoUrl} alt="github logo" />
-    </Link>
+      <img className={s.icon} src={githubLogoUrl} alt="github logo" />
+    </a>
 
-    <Link href="/about" title="about">
-      <Icon src={infoUrl} alt="info icon" />
-    </Link>
+    <a className={s.link} href="/about" title="about">
+      <img className={s.icon} src={infoUrl} alt="info icon" />
+    </a>
 
-    <Link href="/avatar" title="avatar animation">
-      <Icon src={avatarUrl} alt="avatar icon" />
-    </Link>
-  </Container>
+    <a className={s.link} href="/avatar" title="avatar animation">
+      <img className={s.icon} src={avatarUrl} alt="avatar icon" />
+    </a>
+  </header>
 );
-
-const Link = styled.a`
-display: flex;
-
-opacity:0.6;
-border-radius: 50%;
-
-&:hover,
-&:focus-visible{
-    opacity:1;
-}
-pointer-events: auto;
-`;
-
-const Container = styled.header`
-position:fixed;
-top:0;
-right:0;
-display: flex;
-flex-direction: row;
-gap:24px;
-padding: 8px 24px;
-z-index: 10;
-pointer-events: none;
-`;
-
-const Icon = styled.img`
-width:24px;
-height:24px;
-`;

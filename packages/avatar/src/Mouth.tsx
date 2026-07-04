@@ -1,78 +1,17 @@
-import { styled } from "@linaria/react";
 import { Props } from "./type";
+import s from "./Mouth.module.css";
 
 export const Mouth = ({ pose, className, transform }: Props) => (
   <g className={className} transform={transform}>
-    <Jitter className={pose}>
+    <g className={s.jitter} data-pose={pose}>
       <path
         d={mouthPaths[pose]}
         fill="#333"
         transform="matrix( 1.48944091796875, 0, 0, 1.48944091796875, -74,-155)"
       />
-    </Jitter>
+    </g>
   </g>
 );
-
-const Jitter = styled.g`
-  &.afternoon {
-    animation: afternoon 1s linear infinite;
-  }
-  &.day {
-    animation: day 600ms linear infinite;
-  }
-  &.night {
-    transform: rotate(-122deg) scale(3, 1) rotate(122deg);
-    animation: night 2.5s linear infinite;
-  }
-  &.morning {
-    transform: scale(0.3);
-  }
-
-  @keyframes afternoon {
-    0% {
-      transform: scale(0.9);
-    }
-    60% {
-      transform: scale(1.1);
-    }
-    100% {
-      transform: scale(0.9);
-    }
-  }
-
-  @keyframes day {
-    0% {
-      transform: translate(0, 0) scale(1);
-    }
-    60% {
-      transform: translate(-1px, 3px) scale(0.95);
-    }
-    100% {
-      transform: translate(0, 0) scale(1);
-    }
-  }
-
-  @keyframes night {
-    0% {
-      transform: rotate(-110deg) scale(0.2, 1) rotate(110deg);
-    }
-    35% {
-      transform: translate(4px, 0) rotate(-110deg) scale(1.2, 1) rotate(110deg);
-    }
-    42% {
-      transform: rotate(-110deg) scale(0.4, 1) rotate(110deg);
-    }
-    48% {
-      transform: rotate(-110deg) scale(1.05, 1) rotate(110deg);
-    }
-    55% {
-      transform: rotate(-110deg) scale(0.34, 1) rotate(110deg);
-    }
-    100% {
-      transform: rotate(-110deg) scale(0.2, 1) rotate(110deg);
-    }
-  }
-`;
 
 const mouthPaths = {
   afternoon:

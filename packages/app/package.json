@@ -3,8 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "@linaria/core": "6.3.0",
-    "@linaria/react": "6.3.0",
     "@react-three/drei": "10.7.2",
     "@react-three/fiber": "9.3.0",
     "@tzr/avatar": "0.0.1",

@@ -1,10 +1,10 @@
-import { styled } from "@linaria/react";
 import { DateTime } from "luxon";
-import React, { useCallback, useRef, useState } from "react";
-import { useClickOutside } from "../hooks/useClickOutside";
-import { useExtendedTruthiness } from "../hooks/useExtendedTruthiness";
-import { useStore } from "../store/store";
-import { EditIcon } from "./Icons/EditIcon";
+import { useCallback, useRef, useState } from "react";
+import { useClickOutside } from "../../hooks/useClickOutside";
+import { useExtendedTruthiness } from "../../hooks/useExtendedTruthiness";
+import { useStore } from "../../store/store";
+import { EditIcon } from "../Icons/EditIcon";
+import s from "./DatePicker.module.css";
 
 export const DatePicker = () => {
   const timezone = useStore(
@@ -28,9 +28,10 @@ export const DatePicker = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   return (
-    <Container>
+    <div className={s.container}>
       {!focus && (
-        <Label
+        <a
+          className={s.label}
           href="#"
           aria-label="Open date picker"
           onClick={(e) => {
@@ -40,12 +41,13 @@ export const DatePicker = () => {
           }}
         >
           {formatInterval(timezone, tWindow)}
-          <Icon color="#fff" />
-        </Label>
+          <EditIcon className={s.icon} color="#fff" />
+        </a>
       )}
 
-      <Form
+      <form
         {...clickOutsideContainer}
+        className={`${s.form} ${clickOutsideContainer.className}`}
         style={{
           opacity: focus ? 1 : 0,
           pointerEvents: focus ? "auto" : "none",
@@ -70,7 +72,8 @@ export const DatePicker = () => {
           useStore.getState().setTWindowOrigin(d);
         }}
       >
-        <FormInput
+        <input
+          className={s.formInput}
           ref={inputRef}
           tabIndex={focus ? 0 : -1}
           name="date"
@@ -78,18 +81,23 @@ export const DatePicker = () => {
           aria-label="date picker"
           defaultValue={defaultValue ?? undefined}
         />
-        <FormSubmitButton type="submit" tabIndex={focus ? 0 : -1}>
+        <button
+          className={s.formButton}
+          type="submit"
+          tabIndex={focus ? 0 : -1}
+        >
           ok
-        </FormSubmitButton>
-        <FormButton
+        </button>
+        <button
+          className={s.formButton}
           type="button"
           tabIndex={focus ? 0 : -1}
           onClick={() => setFocus(false)}
         >
           cancel
-        </FormButton>
-      </Form>
-    </Container>
+        </button>
+      </form>
+    </div>
   );
 };
 
@@ -130,54 +138,3 @@ export const formatInterval = (timezone: string, [a, b]: [number, number]) => {
 
   return da.toLocaleString({ year: "numeric", month: "long", day: "numeric" });
 };
-
-const Icon = styled(EditIcon)`
-  width: 18px;
-  height: 18px;
-  margin-left: 10px;
-`;
-
-const Container = styled.div`
-  position: relative;
-  height: 28px;
-  margin: 10px;
-  /* display: flex;
-  flex-direction: column; */
-`;
-const Label = styled.a`
-  font-size: 1.2em;
-  font-family: monospace;
-  color: #fff;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 1), 0 0 4px rgba(0, 0, 0, 1);
-  display: inline-block;
-
-  > svg {
-    opacity: 0;
-  }
-  &:hover > svg {
-    transition: opacity 120ms;
-    opacity: 1;
-  }
-  &:focus > svg {
-    opacity: 1;
-  }
-`;
-
-const Form = styled.form`
-  position: absolute;
-  height: 100%;
-  left: 0;
-  top: 0;
-  /* z-index: 1000; */
-`;
-const FormSubmitButton = styled.button`
-  height: 100%;
-  min-width: 60px;
-`;
-const FormButton = styled.button`
-  height: 100%;
-  min-width: 60px;
-`;
-const FormInput = (styled.input as any)`
-  height: 100%;
-`;

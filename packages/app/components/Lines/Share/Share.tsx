@@ -1,5 +1,4 @@
-import React, { useMemo } from "react";
-import { styled } from "@linaria/react";
+import { useMemo } from "react";
 import { useStore } from "../../../store/store";
 import { selectLocations } from "../../../store/selector";
 import { stringify } from "../../../store/utils-stringify";
@@ -7,6 +6,7 @@ import { usePreviousUntilTruthy } from "../../../hooks/usePreviousUntilTruthy";
 import { useExtendedTruthiness } from "../../../hooks/useExtendedTruthiness";
 import { ShareUrl } from "./ShareUrl";
 import { ShareICal } from "./ShareICal";
+import s from "./Share.module.css";
 
 export const Share = () => {
   const visible = useStore((s) => !s.dateCursorDragged);
@@ -30,15 +30,9 @@ const Inside = ({ visible }: { visible: boolean }) => {
   }, [locations, t]);
 
   return (
-    <Container>
+    <div className={s.container}>
       <ShareUrl visible={visible} url={url} />
       <ShareICal visible={visible} url={url} startDate={t} />
-    </Container>
+    </div>
   );
 };
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  position: relative;
-`;

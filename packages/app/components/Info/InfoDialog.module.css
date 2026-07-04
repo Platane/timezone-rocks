@@ -1,0 +1,16 @@
+.infoDialogModal {
+  min-height: min(360px, 60vh);
+
+  user-select: text;
+
+  & li {
+    margin-bottom: 8px;
+  }
+  :global(.license) {
+    display: inline-block;
+    margin-left: 4px;
+    font-size: 0.8em;
+    position: relative;
+    top: -0.1em;
+  }
+}

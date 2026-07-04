@@ -1,0 +1,38 @@
+.buttonUrl {
+  user-drag: none;
+}
+
+.shareIcon {
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+}
+
+.copiedHint {
+  position: absolute;
+  opacity: 0;
+  background-color: #ddd;
+  padding: 6px;
+  border-radius: 4px;
+
+  animation: copiedHint 1000ms linear;
+  pointer-events: none;
+}
+
+@keyframes copiedHint {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.8);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.8);
+  }
+}

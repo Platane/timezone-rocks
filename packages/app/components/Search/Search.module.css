@@ -1,0 +1,77 @@
+.container {
+  position: relative;
+  margin: 0 10px 10px 10px;
+  width: calc(100% - 20px);
+}
+
+.suggestionContainer {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  box-shadow: 2px 4px 5px 0 #3333;
+  border-radius: 0 0 2px 2px;
+  background-color: #fff;
+  padding: 6px 0;
+  z-index: 3;
+}
+
+.suggestionItem {
+  display: block;
+  padding: 6px 4px 6px 4px;
+  font-size: 1.1em;
+
+  &[data-hovered="true"] {
+    background-color: -webkit-focus-ring-color;
+    background-color: Highlight;
+  }
+}
+
+.suggestionFlag {
+  display: inline-block;
+  width: 24px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.suggestionType {
+  display: inline-block;
+  width: 24px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.suggestionName {
+  font-size: 1.1em;
+  margin-left: 2px;
+  & > [data-fragment-match] {
+    font-weight: bold;
+    background-color: #71799c33;
+    border-radius: 2px;
+  }
+}
+
+.suggestionSubName {
+  font-size: 0.9em;
+  & > [data-fragment-match] {
+    font-weight: bold;
+    background-color: #71799c33;
+    border-radius: 2px;
+  }
+}
+
+.input {
+  font-size: 1.2em;
+  padding: 10px 16px;
+  height: 50px;
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  user-select: auto;
+
+  &:focus {
+    box-shadow: 0 0 0 2px -webkit-focus-ring-color;
+    box-shadow: 0 0 0 2px Highlight;
+  }
+}

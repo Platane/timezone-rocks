@@ -1,0 +1,46 @@
+.labelHour {
+  position: absolute;
+
+  color: #fff;
+  font-family: monospace;
+  font-size: 0.92em;
+  text-shadow:
+    0 0 2px rgba(0, 0, 0, 1),
+    0 0 4px rgba(0, 0, 0, 1);
+
+  right: 6px;
+  top: 10px;
+}
+.labelFlag {
+  position: absolute;
+
+  font-size: 22px;
+
+  right: 14px;
+  bottom: 0px;
+}
+
+.container {
+  position: absolute;
+
+  left: -30px;
+  top: -24px;
+  height: 56px;
+  width: 104px;
+
+  pointer-events: none;
+  transition: opacity 200ms;
+
+  & > * {
+    animation: appear 200ms ease-out;
+  }
+}
+
+@keyframes appear {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

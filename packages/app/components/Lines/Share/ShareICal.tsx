@@ -1,8 +1,8 @@
-import React, { useMemo } from "react";
-import { styled } from "@linaria/react";
+import { useMemo } from "react";
 import { appearAnimation, Button, disappearAnimation } from "./buttons";
 import { useShare } from "../../../hooks/useShare";
 import { generateICal } from "./utils-ical";
+import s from "./ShareICal.module.css";
 
 export const ShareICal = ({
   url,
@@ -32,17 +32,19 @@ export const ShareICal = ({
   const share = useShare({ files, title: "invite" });
 
   return (
-    <ButtonICal
+    <Button
       tabIndex={-1}
       href={dataUri}
       download={"invite.ics"}
       target="_self"
       title="download iCal invite"
-      className={visible ? appearAnimation : disappearAnimation}
+      className={`${s.buttonICal} ${
+        visible ? appearAnimation : disappearAnimation
+      }`}
       onClick={share ? preventDefault(share) : undefined}
     >
       iCal
-    </ButtonICal>
+    </Button>
   );
 };
 
@@ -50,8 +52,3 @@ const preventDefault = (fn: (e: Event) => void) => (e: any) => {
   e.preventDefault();
   return fn(e);
 };
-
-const ButtonICal = styled(Button)`
-  user-select: none;
-  user-drag: none;
-`;

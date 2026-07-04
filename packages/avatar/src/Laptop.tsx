@@ -1,10 +1,9 @@
-import { styled } from "@linaria/react";
-import React from "react";
 import { Props } from "./type";
+import s from "./Laptop.module.css";
 
 export const Laptop = (props: Props) => (
-  <GroupJitter className={props.pose}>
-    <GroupPosition className={props.pose}>
+  <g className={s.groupJitter} data-pose={props.pose}>
+    <g className={s.groupPosition} data-pose={props.pose}>
       <g transform="scale(3.5) translate( -80, -95 )">
         <path
           fill="#9baac6"
@@ -31,61 +30,6 @@ export const Laptop = (props: Props) => (
           d="m 91.308421,68.952952 q -18.997083,-1.403377 -37.994167,0 l -1.89177,3.624792 q 18.551012,-1.913165 37.517916,0 z"
         />
       </g>
-    </GroupPosition>
-  </GroupJitter>
+    </g>
+  </g>
 );
-
-const GroupPosition = styled.g`
-  /* display: none; */
-
-  @keyframes disappear {
-    0% {
-      visibility: visible;
-      opacity: 1;
-    }
-
-    100% {
-      visibility: visible;
-      opacity: 0;
-    }
-  }
-  @keyframes appear {
-    0% {
-      opacity: 0;
-    }
-
-    100% {
-      opacity: 1;
-    }
-  }
-
-  visibility: hidden;
-  opacity: 0;
-  animation: disappear 0.2s ease-out;
-  transition: transform 0.3s ease-out;
-  transform: translate(190px, 460px) scale(0.75) rotate(45deg);
-  &.day {
-    visibility: visible;
-    opacity: 1;
-    animation: appear 0.2s ease-in-out;
-    display: block;
-    transform: translate(190px, 320px);
-  }
-`;
-const GroupJitter = styled.g`
-  &.day {
-    animation: day 300ms linear infinite;
-  }
-
-  @keyframes day {
-    0% {
-      transform: translate(0, 0);
-    }
-    70% {
-      transform: translate(0, -2px);
-    }
-    100% {
-      transform: translate(0, 0);
-    }
-  }
-`;

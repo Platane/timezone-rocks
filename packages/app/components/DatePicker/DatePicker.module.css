@@ -1,0 +1,46 @@
+.icon {
+  width: 18px;
+  height: 18px;
+  margin-left: 10px;
+}
+
+.container {
+  position: relative;
+  height: 28px;
+  margin: 10px;
+}
+
+.label {
+  font-size: 1.2em;
+  font-family: monospace;
+  color: #fff;
+  text-shadow:
+    0 0 2px rgba(0, 0, 0, 1),
+    0 0 4px rgba(0, 0, 0, 1);
+  display: inline-block;
+
+  > svg {
+    opacity: 0;
+  }
+  &:hover > svg {
+    transition: opacity 120ms;
+    opacity: 1;
+  }
+  &:focus > svg {
+    opacity: 1;
+  }
+}
+
+.form {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+.formButton {
+  height: 100%;
+  min-width: 60px;
+}
+.formInput {
+  height: 100%;
+}

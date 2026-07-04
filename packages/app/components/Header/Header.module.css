@@ -1,0 +1,29 @@
+.link {
+  display: flex;
+
+  opacity: 0.6;
+  border-radius: 50%;
+
+  &:hover,
+  &:focus-visible {
+    opacity: 1;
+  }
+  pointer-events: auto;
+}
+
+.container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  padding: 8px 24px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}

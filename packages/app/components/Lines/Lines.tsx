@@ -1,14 +1,13 @@
-import { styled } from "@linaria/react";
 import React from "react";
 import { selectLocations, selectT, selectTWindow } from "../../store/selector";
 import { useStore } from "../../store/store";
 import { useSubscribe } from "../../store/useSubscribe";
 import { getBlocks } from "../../timezone/interval";
-import { accentColor } from "../theme";
 import { DateSliderRange } from "./DateSliderRange";
 import { FlyingLabel, update as updateFlyingLabel } from "./FlyingLabel";
 import { LocationLabel, update as updateLocationLabel } from "./LocationLabel";
 import { useWidth } from "./useWidth";
+import s from "./Lines.module.css";
 
 export const Lines = () => {
   const locations = useStore(selectLocations);
@@ -54,7 +53,7 @@ export const Lines = () => {
 
           for (let k = 3; k--; )
             row.children[1 + j * 3 + k].classList[primary ? "add" : "remove"](
-              "primary"
+              s.primary
             );
         }
       });
@@ -67,14 +66,15 @@ export const Lines = () => {
     <>
       <DateSliderRange />
 
-      <Container role="list" ref={ref}>
-        <CursorArm />
+      <div className={s.container} role="list" ref={ref}>
+        <div className={s.cursorArm} />
 
         {locations.map((location, i) => (
           <React.Fragment key={location.key}>
             <LocationLabel location={location} locations={locations} />
 
-            <Row
+            <div
+              className={s.row}
               role="listitem"
               id={`location-item-${location.key}`}
               onClick={() => selectLocation(location)}
@@ -83,26 +83,27 @@ export const Lines = () => {
 
               {blocks[i].map(({ day, awake, office }, i) => (
                 <React.Fragment key={i}>
-                  <DayBlock style={toPosition(toScreenSpace, day, 2)} />
-                  <AwakeBlock style={toPosition(toScreenSpace, awake)} />
-                  <OfficeBlock style={toPosition(toScreenSpace, office)} />
+                  <div
+                    className={`${s.block} ${s.dayBlock}`}
+                    style={toPosition(toScreenSpace, day, 2)}
+                  />
+                  <div
+                    className={`${s.block} ${s.awakeBlock}`}
+                    style={toPosition(toScreenSpace, awake)}
+                  />
+                  <div
+                    className={`${s.block} ${s.officeBlock}`}
+                    style={toPosition(toScreenSpace, office)}
+                  />
                 </React.Fragment>
               ))}
-            </Row>
+            </div>
           </React.Fragment>
         ))}
-      </Container>
+      </div>
     </>
   );
 };
-
-const Container = styled.div`
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  min-height: 220px;
-  padding-bottom: 24px;
-`;
 
 const toPosition = (
   toScreenSpace: (x: number) => number,
@@ -114,53 +115,3 @@ const toPosition = (
 
   return { left: sa + "px", right: sb + "px", width: sb - sa + "px" };
 };
-
-const LINE_HEIGHT = 32;
-
-const Row = styled.div`
-  height: ${LINE_HEIGHT}px;
-  overflow: hidden;
-  position: relative;
-`;
-
-const BLOCK_HEIGHT = 34;
-
-const Block = styled.div`
-  position: absolute;
-  border-radius: 4px;
-  transition: filter 100ms;
-  height: ${BLOCK_HEIGHT}px;
-  top: ${(LINE_HEIGHT - BLOCK_HEIGHT) / 2}px;
-`;
-
-const DayBlock = styled(Block)`
-  background-color: #aaa6;
-  margin-bottom: 4px;
-`;
-const AwakeBlock = styled(Block)`
-  transition: background-color 200ms;
-  background-color: #8e928b;
-  &.primary {
-    background-color: #86a45d;
-    /* box-shadow: 0 0 0 1px orange; */
-  }
-`;
-const OfficeBlock = styled(Block)`
-  border-radius: 0px;
-  transition: background-color 200ms;
-  background-color: #848881;
-  &.primary {
-    background-color: #7d9c56;
-  }
-`;
-
-export const CursorArm = styled.div`
-  position: absolute;
-  width: 2px;
-  height: calc(100% + 14px);
-  background-color: ${accentColor};
-  left: -1px;
-  top: -4px;
-  z-index: 2;
-  pointer-events: none;
-`;
