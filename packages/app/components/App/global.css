@@ -1,0 +1,23 @@
+html {
+  box-sizing: border-box;
+  user-select: none;
+  font-family: Helvetica, Arial, sans-serif;
+  background-color: #203b53;
+}
+
+body {
+  margin: 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  user-select: inherit;
+}
+
+@media (max-width: 500px) {
+  #root {
+    padding-bottom: 360px;
+  }
+}

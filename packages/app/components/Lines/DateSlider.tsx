@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import React from "react";
 import { useSlide } from "./useSlide";
 import { useStore } from "../../store/store";
@@ -6,7 +5,7 @@ import { selectT, selectTWindow } from "../../store/selector";
 import { useSubscribe } from "../../store/useSubscribe";
 import { useWidth } from "./useWidth";
 import { Share } from "./Share/Share";
-import { accentColor } from "../theme";
+import s from "./DateSlider.module.css";
 
 const setT = (x: number) => {
   const {
@@ -55,81 +54,26 @@ export const DateSlider = () => {
   });
 
   return (
-    <Container>
-      <NowButton
+    <div className={s.container}>
+      <div
+        className={s.nowButton}
         title="Reset to now"
         onClick={resetT}
         style={{
           transform: `translateX(${toScreenSpace(now)}px)`,
         }}
       >
-        <NowCarret />
-        <NowLabel>now</NowLabel>
-      </NowButton>
+        <div className={s.nowCarret} />
+        <div className={s.nowLabel}>now</div>
+      </div>
 
-      <CursorContainer {...bind}>
-        <Caret ref={cursorRef} aria-label="date slider" />
-      </CursorContainer>
+      <div className={s.cursorContainer} {...bind}>
+        <div className={s.caret} ref={cursorRef} aria-label="date slider" />
+      </div>
 
-      <ShareContainer ref={shareRef}>
+      <div className={s.shareContainer} ref={shareRef}>
         <Share />
-      </ShareContainer>
-    </Container>
+      </div>
+    </div>
   );
 };
-
-const CursorContainer = styled.div`
-  background-color: #ddd4;
-  height: 32px;
-  width: 100%;
-  cursor: pointer;
-  user-select: none;
-`;
-const ShareContainer = styled.div`
-  position: absolute;
-  top: 22px;
-  left: 28px;
-  height: 32px;
-  user-select: none;
-`;
-
-const Container = styled.div`
-  overflow: hidden;
-  position: relative;
-  padding-top: 22px;
-  padding-bottom: 0px;
-  width: 100%;
-  touch-action: pan-y;
-`;
-const Caret = styled.div`
-  left: -${40 / 2}px;
-  position: absolute;
-  width: 40px;
-  height: 32px;
-  border-radius: 2px;
-  background-color: ${accentColor};
-  pointer-events: none;
-  display: inline-block;
-`;
-
-const nowColor = "#ddd";
-const NowButton = styled.div`
-  top: 0px;
-  position: absolute;
-`;
-
-const NowCarret = styled.div`
-  width: 16px;
-  height: 16px;
-  border-radius: 8px 6px 2px 6px;
-  left: -${16 / 2}px;
-  top: 0px;
-  background-color: ${nowColor};
-  position: absolute;
-  transform: rotate(45deg);
-`;
-
-const NowLabel = styled.div`
-  color: ${nowColor};
-  margin-left: 10px;
-`;

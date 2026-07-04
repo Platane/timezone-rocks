@@ -1,12 +1,15 @@
 {
   "compilerOptions": {
     "jsx": "preserve",
-    "moduleResolution": "node",
+    "module": "esnext",
+    "target": "ES2022",
+    "moduleResolution": "bundler",
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
-    "lib": ["dom", "ES2022", "WebWorker"]
+    "lib": ["dom", "ES2022", "WebWorker"],
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "exclude": ["node_modules"]
 }

@@ -5,6 +5,11 @@
       "trailingCommas": "es5"
     }
   },
+  "css": {
+    "parser": {
+      "cssModules": true
+    }
+  },
   "formatter": {
     "indentStyle": "space",
     "indentWidth": 2

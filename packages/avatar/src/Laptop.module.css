@@ -1,0 +1,52 @@
+.groupPosition {
+  visibility: hidden;
+  opacity: 0;
+  animation: disappear 0.2s ease-out;
+  transition: transform 0.3s ease-out;
+  transform: translate(190px, 460px) scale(0.75) rotate(45deg);
+  &[data-pose="day"] {
+    visibility: visible;
+    opacity: 1;
+    animation: appear 0.2s ease-in-out;
+    display: block;
+    transform: translate(190px, 320px);
+  }
+}
+
+.groupJitter {
+  &[data-pose="day"] {
+    animation: day 300ms linear infinite;
+  }
+}
+
+@keyframes disappear {
+  0% {
+    visibility: visible;
+    opacity: 1;
+  }
+  100% {
+    visibility: visible;
+    opacity: 0;
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes day {
+  0% {
+    transform: translate(0, 0);
+  }
+  70% {
+    transform: translate(0, -2px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}

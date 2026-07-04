@@ -1,0 +1,52 @@
+.container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 220px;
+  padding-bottom: 24px;
+}
+
+.row {
+  height: 32px;
+  overflow: hidden;
+  position: relative;
+}
+
+.block {
+  position: absolute;
+  border-radius: 4px;
+  transition: filter 100ms;
+  height: 34px;
+  top: -1px;
+}
+
+.dayBlock {
+  background-color: #aaa6;
+  margin-bottom: 4px;
+}
+.awakeBlock {
+  transition: background-color 200ms;
+  background-color: #8e928b;
+  &.primary {
+    background-color: #86a45d;
+  }
+}
+.officeBlock {
+  border-radius: 0px;
+  transition: background-color 200ms;
+  background-color: #848881;
+  &.primary {
+    background-color: #7d9c56;
+  }
+}
+
+.cursorArm {
+  position: absolute;
+  width: 2px;
+  height: calc(100% + 14px);
+  background-color: #e88a28;
+  left: -1px;
+  top: -4px;
+  z-index: 2;
+  pointer-events: none;
+}

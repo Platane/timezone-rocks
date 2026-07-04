@@ -1,0 +1,51 @@
+.groupPosition {
+  transition: transform 0.5s ease-out;
+
+  transform: translate(280px, 295px);
+
+  &[data-pose="night"] {
+    transform: translate(368px, 156px) rotate(-40deg);
+  }
+  &[data-pose="morning"] {
+    transform: translate(280px, 301px);
+  }
+  &[data-pose="day"] {
+    transform: translate(320px, 235px) rotate(-70deg);
+  }
+  &[data-pose="afternoon"] {
+    transform: translate(390px, 260px) rotate(102deg) scale(1, 0.85);
+  }
+}
+
+.groupJitter {
+  &[data-pose="day"] {
+    animation: day 300ms linear infinite;
+  }
+  &[data-pose="afternoon"] {
+    animation: afternoon 600ms linear infinite;
+  }
+}
+
+@keyframes day {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-25px, 66px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes afternoon {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(15px, -66px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}

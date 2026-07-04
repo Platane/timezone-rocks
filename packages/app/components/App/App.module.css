@@ -1,0 +1,17 @@
+.topContainer {
+  width: 100%;
+  overflow: hidden;
+}
+
+.earthContainer {
+  position: relative;
+  height: 500px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+
+  @media (max-width: 500px) {
+    height: 300px;
+    max-width: 400px;
+  }
+}

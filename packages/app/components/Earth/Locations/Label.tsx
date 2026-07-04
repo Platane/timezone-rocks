@@ -7,11 +7,11 @@ import { formatTime } from "../../../intl/format";
 import { Avatar as AnimatedAvatar } from "@tzr/avatar";
 import { getFlagEmoji } from "../../../flags/emoji";
 import ParkMiller from "park-miller";
-import { styled } from "@linaria/react";
 import { CheapAvatar } from "../../CheapAvatar";
 import { useDebouncedValue } from "../../../hooks/useDebouncedValue";
 import { ILocation } from "@tzr/location-index";
 import { getPoseAtHour } from "./avatarPose";
+import s from "./Label.module.css";
 
 export const Label = ({ location }: { location: ILocation }) => {
   const hourLabelRef = React.useRef<HTMLDivElement | null>(null);
@@ -24,13 +24,13 @@ export const Label = ({ location }: { location: ILocation }) => {
   }, selectHour);
 
   return (
-    <Container>
+    <div className={s.container}>
       <Avatar location={location} />
-      <LabelHour ref={hourLabelRef} />
+      <div className={s.labelHour} ref={hourLabelRef} />
       {location.countryCode && (
-        <LabelFlag>{getFlagEmoji(location.countryCode)}</LabelFlag>
+        <div className={s.labelFlag}>{getFlagEmoji(location.countryCode)}</div>
       )}
-    </Container>
+    </div>
   );
 };
 
@@ -95,51 +95,3 @@ export const labelBox = {
   min: { x: -30, y: -24 },
   max: { x: 74, y: 32 },
 };
-
-const LabelHour = styled.div`
-  position: absolute;
-
-  color: #fff;
-  font-family: monospace;
-  font-size: 0.92em;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 1), 0 0 4px rgba(0, 0, 0, 1);
-
-  right: 6px;
-  top: 10px;
-`;
-const LabelFlag = styled.div`
-  position: absolute;
-
-  font-size: 22px;
-  /* text-shadow: 0 0 2px rgba(0, 0, 0, 1), 0 0 4px rgba(0, 0, 0, 1); */
-
-  right: 14px;
-  bottom: 0px;
-`;
-
-const Container = styled.div`
-  position: absolute;
-
-  left: ${labelBox.min.x}px;
-  top: ${labelBox.min.y}px;
-  height: ${labelBox.max.y - labelBox.min.y}px;
-  width: ${labelBox.max.x - labelBox.min.x}px;
-
-  /* opacity: 0.2; */
-  /* box-shadow: 0 0 0 1px orange; */
-
-  pointer-events: none;
-  transition: opacity 200ms;
-
-  & > * {
-    @keyframes appear {
-      0% {
-        transform: scale(0);
-      }
-      100% {
-        transform: scale(1);
-      }
-    }
-    animation: appear 200ms ease-out;
-  }
-`;

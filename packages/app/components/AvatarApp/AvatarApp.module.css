@@ -1,0 +1,26 @@
+.backLink {
+  align-self: self-start;
+  &:hover,
+  &:active,
+  &:visited {
+    color: #fff;
+  }
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  padding: 16px;
+  gap: 16px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: #fff;
+}
+
+:global(#root):has(.container) {
+  padding-bottom: 0;
+}

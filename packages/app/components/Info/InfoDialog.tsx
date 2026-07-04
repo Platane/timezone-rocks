@@ -1,6 +1,5 @@
-import { styled } from "@linaria/react";
-import React from "react";
-import { CloseDialogButton, DialogModal } from "../Dialog";
+import { CloseDialogButton, DialogModal } from "../Dialog/Dialog";
+import s from "./InfoDialog.module.css";
 
 export const InfoDialog = ({
   open,
@@ -9,7 +8,11 @@ export const InfoDialog = ({
   open: boolean;
   onOpenChange: (o: boolean) => void;
 }) => (
-  <InfoDialogModal open={open} onClose={() => onOpenChange(false)}>
+  <DialogModal
+    className={s.infoDialogModal}
+    open={open}
+    onClose={() => onOpenChange(false)}
+  >
     <CloseDialogButton />
     <h1>Usage</h1>
     Timezone.rocks allows to visualize different timezones all around the globe.
@@ -45,24 +48,5 @@ export const InfoDialog = ({
     <a href="https://github.com/Platane/timezone-rocks">
       github.com/Platane/timezone-rocks
     </a>
-  </InfoDialogModal>
+  </DialogModal>
 );
-
-const InfoDialogModal = styled(DialogModal)`
-
-
-min-height: min(360px, 60vh);
-
-user-select: text;
-
-& li {
-  margin-bottom: 8px;
-}
-.license {
-  display: inline-block;
-  margin-left: 4px;
-  font-size: 0.8em;
-  position: relative;
-  top: -0.1em;
-}
-`;

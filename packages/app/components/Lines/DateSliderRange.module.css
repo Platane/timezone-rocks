@@ -1,0 +1,96 @@
+.inputRange {
+  --caret-width: 40px;
+  --caret-height: 32px;
+
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+
+  background-color: #ddd4;
+
+  touch-action: pan-x;
+
+  position: relative;
+  left: calc(-1 * var(--caret-width) / 2);
+  width: calc(100vw + var(--caret-width));
+  /* otherwise the flexbox don't want with>100% (??) */
+  min-width: calc(100vw + var(--caret-width));
+  border: none;
+  margin: 0;
+  height: 32px;
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    background: #e88a28;
+    border: none;
+    width: var(--caret-width);
+    height: var(--caret-height);
+    border-radius: 2px;
+  }
+
+  &::-moz-range-thumb {
+    appearance: none;
+    background: #e88a28;
+    border: none;
+    width: var(--caret-width);
+    height: var(--caret-height);
+    border-radius: 2px;
+  }
+
+  /* for the focus ring color */
+  color: white;
+
+  &:focus-visible,
+  &:focus {
+    outline: none;
+
+    &::-webkit-slider-thumb {
+      outline: -webkit-focus-ring-color auto 1px;
+      outline-offset: 2px;
+    }
+
+    &::-moz-range-thumb {
+      outline: Highlight auto 1px;
+      outline-offset: 2px;
+    }
+  }
+}
+
+.container {
+  overflow: hidden;
+  position: relative;
+  padding-top: 22px;
+  /* for the focus ring */
+  padding-bottom: 4px;
+  width: 100%;
+  display: flex;
+}
+
+.shareContainer {
+  position: absolute;
+  top: 22px;
+  left: 28px;
+  height: 32px;
+  user-select: none;
+}
+
+.nowButton {
+  top: 0px;
+  position: absolute;
+}
+
+.nowCaret {
+  width: 16px;
+  height: 16px;
+  border-radius: 8px 6px 2px 6px;
+  left: -8px;
+  top: 0px;
+  background-color: #ddd;
+  position: absolute;
+  transform: rotate(45deg);
+}
+
+.nowLabel {
+  color: #ddd;
+  margin-left: 10px;
+}

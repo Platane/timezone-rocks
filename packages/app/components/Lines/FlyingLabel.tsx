@@ -1,19 +1,18 @@
-import { styled } from "@linaria/react";
 import React from "react";
 import { DateTime } from "luxon";
 import type { ILocation } from "@tzr/location-index";
-import { css } from "@linaria/core";
+import s from "./FlyingLabel.module.css";
 
 type Props = { location: ILocation; t: number };
-export const FlyingLabel = (props: React.ComponentProps<typeof Container>) => (
-  <Container {...props}>
+export const FlyingLabel = (props: React.ComponentProps<"div">) => (
+  <div {...props} className={`${s.container} ${props.className ?? ""}`}>
     <span />
     <span />
     <span />
     <span />
     <span />
     <span />
-  </Container>
+  </div>
 );
 
 /**
@@ -71,43 +70,12 @@ export const update = (domElement: Element, { location, t }: Props) => {
     const el = domElement.children[i] as HTMLElement;
     el.innerText = parts[i]?.text ?? "";
 
-    el.classList.remove(dateClassName);
-    el.classList.remove(timeClassName);
-    el.classList.remove(literalClassName);
+    el.classList.remove(s.date);
+    el.classList.remove(s.time);
+    el.classList.remove(s.literal);
 
-    if (parts[i]?.type === "literal") el.classList.add(literalClassName);
-    if (parts[i]?.type === "date") el.classList.add(dateClassName);
-    if (parts[i]?.type === "time") el.classList.add(timeClassName);
+    if (parts[i]?.type === "literal") el.classList.add(s.literal);
+    if (parts[i]?.type === "date") el.classList.add(s.date);
+    if (parts[i]?.type === "time") el.classList.add(s.time);
   }
 };
-
-const dateClassName = css`
-  white-space: pre;
-  font-size: 0.72em;
-`;
-const timeClassName = css`
-  white-space: pre;
-`;
-const literalClassName = css`
-  font-size: 0.72em;
-  white-space: pre;
-`;
-
-const Container = styled.div`
-  padding-left: 4px;
-  white-space: nowrap;
-  position: absolute;
-  left: 0;
-  font-size: 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  padding-bottom:2px ;
-  z-index: 2;
-  height: 100%;
-  pointer-events: none;
-  font-size: 1.4em;
-  font-family: monospace;
-  color: #fff;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 1), 0 0 4px rgba(0, 0, 0, 1), 0 0 8px rgba(0, 0, 0, 1);
-`;

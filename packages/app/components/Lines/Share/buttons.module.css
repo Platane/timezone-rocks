@@ -1,0 +1,98 @@
+.button {
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 4px;
+  border: solid 2px #e88a28;
+  width: 38px;
+  height: 28px;
+  margin: 2px 4px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #3332;
+  color: #e88a28;
+  font-size: 0.8em;
+}
+
+.appearAnimation {
+  animation-duration: 440ms;
+
+  &:nth-child(1) {
+    animation-name: appear1;
+  }
+
+  &:nth-child(2),
+  &:nth-child(3) {
+    animation-name: appear2;
+  }
+}
+
+@keyframes appear1 {
+  0% {
+    transform: scale(0);
+  }
+  33% {
+    transform: scale(0);
+  }
+  66% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes appear2 {
+  0% {
+    transform: scale(0);
+  }
+  33% {
+    transform: scale(0);
+  }
+  66% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.disappearAnimation {
+  transform: scale(0);
+  animation-duration: 120ms;
+
+  &:nth-child(1) {
+    animation-name: disappear1;
+  }
+
+  &:nth-child(2),
+  &:nth-child(3) {
+    animation-name: disappear2;
+  }
+}
+
+@keyframes disappear1 {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes disappear2 {
+  0% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(0);
+  }
+}

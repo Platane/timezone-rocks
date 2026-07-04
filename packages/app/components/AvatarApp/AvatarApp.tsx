@@ -1,7 +1,7 @@
-import { styled } from "@linaria/react";
 import { Avatar, Pose } from "@tzr/avatar";
 import React from "react";
 import { getColors } from "../Earth/Locations/Label";
+import s from "./AvatarApp.module.css";
 
 const poses: Pose[] = ["afternoon", "day", "morning", "night"];
 
@@ -13,8 +13,10 @@ export const AvatarApp = () => {
   const [pose, setPose] = React.useState<Pose>("afternoon");
 
   return (
-    <Container>
-      <BackLink href="/">{"<"} back to the app</BackLink>
+    <div className={s.container}>
+      <a className={s.backLink} href="/">
+        {"<"} back to the app
+      </a>
 
       <Avatar
         pose={pose}
@@ -45,38 +47,6 @@ export const AvatarApp = () => {
           ))}
         </div>
       </fieldset>
-    </Container>
+    </div>
   );
 };
-
-const BackLink = styled.a`
-align-self: self-start;
-&:hover,
-&:active,
-&:visited{
-  color:#fff;
-}
-
-`;
-
-const Container = styled.div`
-  width:100vw;
-  height:  100vh ;
-  padding: 16px;
-  gap: 16px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-
-color:#fff;
-
-
-::global(){
-  #root,#root{
-    padding-bottom:0;
-  }
-}
-`;

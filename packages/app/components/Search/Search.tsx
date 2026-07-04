@@ -1,13 +1,13 @@
-import { styled } from "@linaria/react";
 import type { ILocation } from "@tzr/location-index";
 import type { TextFragments } from "@tzr/location-index/search/splitFragments";
-import React, { useRef, useState } from "react";
-import { getFlagEmoji } from "../flags/emoji";
-import { useExtendedTruthiness } from "../hooks/useExtendedTruthiness";
-import { usePreviousUntilTruthy } from "../hooks/usePreviousUntilTruthy";
-import { useStore } from "../store/store";
-import { useSearchResults } from "../store/useSearchLocation";
-import { useSubscribe } from "../store/useSubscribe";
+import { useRef, useState } from "react";
+import { getFlagEmoji } from "../../flags/emoji";
+import { useExtendedTruthiness } from "../../hooks/useExtendedTruthiness";
+import { usePreviousUntilTruthy } from "../../hooks/usePreviousUntilTruthy";
+import { useStore } from "../../store/store";
+import { useSearchResults } from "../../store/useSearchLocation";
+import { useSubscribe } from "../../store/useSubscribe";
+import s from "./Search.module.css";
 
 export const Search = () => {
   const focused = useStore((s) => s.searchFocused);
@@ -36,7 +36,8 @@ export const Search = () => {
   );
 
   return (
-    <Container
+    <form
+      className={s.container}
       ref={ref}
       onSubmit={(e) => {
         e.preventDefault();
@@ -48,7 +49,8 @@ export const Search = () => {
         }
       }}
     >
-      <Input
+      <input
+        className={s.input}
         type="search"
         placeholder="Add your teammate's timezone"
         spellCheck={false}
@@ -74,9 +76,13 @@ export const Search = () => {
       />
 
       {results.length > 0 && focusedPlus && (
-        <SuggestionContainer onMouseLeave={() => setHoveredKey(undefined)}>
+        <div
+          className={s.suggestionContainer}
+          onMouseLeave={() => setHoveredKey(undefined)}
+        >
           {results.map((c) => (
-            <SuggestionItem
+            <a
+              className={s.suggestionItem}
               href="#"
               key={c.key}
               data-hovered={hoveredKey === c.key}
@@ -89,11 +95,11 @@ export const Search = () => {
               }}
             >
               <SuggestionContent location={c} />
-            </SuggestionItem>
+            </a>
           ))}
-        </SuggestionContainer>
+        </div>
       )}
-    </Container>
+    </form>
   );
 };
 
@@ -103,24 +109,6 @@ const getEmojiType = (type: ILocation["type"]) => {
   if (type === "country") return "🌐";
   if (type === "timezone") return "🕒";
 };
-
-const Container = styled.form`
-  position: relative;
-  margin: 0 10px 10px 10px;
-  width: calc(100% - 20px);
-`;
-
-const SuggestionContainer = styled.div`
-  position: absolute;
-  top: 40px;
-  left: 0;
-  right: 0;
-  box-shadow: 2px 4px 5px 0 #3333;
-  border-radius: 0 0 2px 2px;
-  background-color: #fff;
-  padding: 6px 0;
-  z-index: 3;
-`;
 
 const SuggestionContent = ({
   location,
@@ -150,16 +138,16 @@ const SuggestionContent = ({
 
       return (
         <>
-          <SuggestionFlag />
-          <SuggestionType title={location.type}>
+          <span className={s.suggestionFlag} />
+          <span className={s.suggestionType} title={location.type}>
             {getEmojiType(location.type)}
-          </SuggestionType>
-          <SuggestionName>
+          </span>
+          <span className={s.suggestionName}>
             <FragmentedText fragments={name} />
-          </SuggestionName>
-          <SuggestionSubName>
+          </span>
+          <span className={s.suggestionSubName}>
             <FragmentedText fragments={subName} />
-          </SuggestionSubName>
+          </span>
         </>
       );
     }
@@ -169,15 +157,15 @@ const SuggestionContent = ({
     case "city":
       return (
         <>
-          <SuggestionFlag>
+          <span className={s.suggestionFlag}>
             {location.countryCode ? getFlagEmoji(location.countryCode) : ""}
-          </SuggestionFlag>
-          <SuggestionType title={location.type}>
+          </span>
+          <span className={s.suggestionType} title={location.type}>
             {getEmojiType(location.type)}
-          </SuggestionType>
-          <SuggestionName>
+          </span>
+          <span className={s.suggestionName}>
             <FragmentedText fragments={location.fragments} />
-          </SuggestionName>
+          </span>
         </>
       );
   }
@@ -196,60 +184,3 @@ const FragmentedText = ({ fragments }: { fragments: TextFragments }) => (
     )}
   </>
 );
-
-const SuggestionItem = styled.a<{ "data-hovered": boolean }>`
-  display: block;
-  padding: 6px 4px 6px 4px;
-  font-size: 1.1em;
-
-  &[data-hovered="true"]{
-    background-color: -webkit-focus-ring-color;
-    background-color: Highlight;
-  }
-`;
-const SuggestionFlag = styled.span`
-  display: inline-block;
-  width: 24px;
-  text-align: center;
-  font-size: 18px;
-`;
-const SuggestionType = styled.span`
-  display: inline-block;
-  width: 24px;
-  text-align: center;
-  font-size: 18px;
-`;
-const SuggestionName = styled.span`
-  font-size: 1.1em;
-  margin-left: 2px;
-  & > [data-fragment-match]{
-    font-weight:bold;
-    background-color: #71799c33;
-    border-radius: 2px;
-  }
-`;
-const SuggestionSubName = styled.span`
-  font-size: 0.9em;
-  & > [data-fragment-match]{
-    font-weight:bold;
-    background-color: #71799c33;
-    border-radius: 2px;
-
-  }
-`;
-
-const Input = (styled.input as any)`
-  font-size: 1.2em;
-  padding: 10px 16px;
-  height: 50px;
-  width: 100%;
-  border: none;
-  outline: none;
-  border-radius: 2px;
-  user-select: auto;
-
-  &:focus {
-    box-shadow: 0 0 0 2px -webkit-focus-ring-color;
-    box-shadow: 0 0 0 2px Highlight;
-  }
-` as (props: React.ComponentProps<"input">) => any;
