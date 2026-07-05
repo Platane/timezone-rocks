@@ -1,5 +1,4 @@
 import React from "react";
-import { useStore } from "../../store/store";
 import "./global.css";
 import s from "./App.module.css";
 import { AvatarApp } from "../AvatarApp/AvatarApp";
@@ -9,6 +8,8 @@ import { InfoDialog } from "../Info/InfoDialog";
 import { Lines } from "../Lines/Lines";
 import { Search } from "../Search/Search";
 import { useNavigate, useUrl } from "./router";
+import { LocationSearcher } from "@tzr/location-index";
+import { Store } from "../../store/store";
 
 const usePromiseResult = <T,>(promise: Promise<T>) => {
   const [res, setRes] = React.useState<T>();
@@ -18,9 +19,13 @@ const usePromiseResult = <T,>(promise: Promise<T>) => {
   return res;
 };
 
-export const App = () => {
-  const locationStoreReady = useStore((s) => s.locationStoreReady);
-
+export const App = ({
+  locationSearcher,
+  store,
+}: {
+  locationSearcher: LocationSearcher;
+  store: Store;
+}) => {
   const EarthScene = usePromiseResult(import("../Earth/Scene"))?.Scene;
 
   const url = useUrl();
@@ -28,21 +33,21 @@ export const App = () => {
 
   if (url === "/avatar") return <AvatarApp />;
 
-  if (!locationStoreReady) return null;
-
   return (
     <>
       <Header />
 
       <div className={s.topContainer}>
-        <div className={s.earthContainer}>{EarthScene && <EarthScene />}</div>
+        <div className={s.earthContainer}>
+          {EarthScene && <EarthScene store={store} />}
+        </div>
       </div>
 
-      <Search />
+      <Search store={store} locationSearcher={locationSearcher} />
 
-      <DatePicker />
+      <DatePicker store={store} />
 
-      <Lines />
+      <Lines store={store} />
 
       <InfoDialog
         open={url === "/about"}

@@ -3,15 +3,14 @@ import { DateTime } from "luxon";
 import type { ILocation } from "@tzr/location-index";
 import s from "./FlyingLabel.module.css";
 
-type Props = { location: ILocation; t: number };
-export const FlyingLabel = (props: React.ComponentProps<"div">) => (
-  <div {...props} className={`${s.container} ${props.className ?? ""}`}>
-    <span />
-    <span />
-    <span />
-    <span />
-    <span />
-    <span />
+type Props = { location: ILocation; t: number } & React.ComponentProps<"div">;
+export const FlyingLabel = ({ location, t, className, ...props }: Props) => (
+  <div {...props} className={`${s.container} ${className ?? ""}`}>
+    {formatDateTime(location.timezone, t).map((part, i) => (
+      <span key={i} className={s[part.type]}>
+        {part.text}
+      </span>
+    ))}
   </div>
 );
 
@@ -61,21 +60,4 @@ const formatDateTime = (timezone: string, t: number) => {
   }
 
   return looseParts;
-};
-
-export const update = (domElement: Element, { location, t }: Props) => {
-  const parts = formatDateTime(location.timezone, t);
-
-  for (let i = 0; i < domElement.children.length; i++) {
-    const el = domElement.children[i] as HTMLElement;
-    el.innerText = parts[i]?.text ?? "";
-
-    el.classList.remove(s.date);
-    el.classList.remove(s.time);
-    el.classList.remove(s.literal);
-
-    if (parts[i]?.type === "literal") el.classList.add(s.literal);
-    if (parts[i]?.type === "date") el.classList.add(s.date);
-    if (parts[i]?.type === "time") el.classList.add(s.time);
-  }
 };

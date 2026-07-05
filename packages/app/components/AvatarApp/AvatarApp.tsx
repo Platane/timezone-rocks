@@ -1,6 +1,6 @@
 import { Avatar, Pose } from "@tzr/avatar";
 import React from "react";
-import { getColors } from "../Earth/Locations/Label";
+import { getColors } from "../Earth/Locations/getColors";
 import s from "./AvatarApp.module.css";
 
 const poses: Pose[] = ["afternoon", "day", "morning", "night"];

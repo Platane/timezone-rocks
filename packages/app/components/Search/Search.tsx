@@ -1,39 +1,42 @@
-import type { ILocation } from "@tzr/location-index";
+import type { ILocation, LocationSearcher } from "@tzr/location-index";
 import type { TextFragments } from "@tzr/location-index/search/splitFragments";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getFlagEmoji } from "../../flags/emoji";
 import { useExtendedTruthiness } from "../../hooks/useExtendedTruthiness";
 import { usePreviousUntilTruthy } from "../../hooks/usePreviousUntilTruthy";
-import { useStore } from "../../store/store";
+import { addPin } from "../../store/mutators";
+import type { Store } from "../../store/store";
 import { useSearchResults } from "../../store/useSearchLocation";
-import { useSubscribe } from "../../store/useSubscribe";
 import s from "./Search.module.css";
 
-export const Search = () => {
-  const focused = useStore((s) => s.searchFocused);
-  const focusSearch = useStore((s) => s.focusSearch);
-  const blurSearch = useStore((s) => s.blurSearch);
-  const addLocation = useStore((s) => s.addLocation);
+export const Search = ({
+  store,
+  locationSearcher,
+}: {
+  store: Store;
+  locationSearcher: LocationSearcher;
+}) => {
+  const [focused, setFocused] = useState(false);
   const [query, setQuery] = useState("");
   const focusedPlus = useExtendedTruthiness(focused, 100);
   const [hoveredKey, setHoveredKey] = useState<string>();
-  const results = usePreviousUntilTruthy(useSearchResults(query), [])!;
+  const results = usePreviousUntilTruthy(
+    useSearchResults(locationSearcher, query),
+    []
+  )!;
 
   const ref = useRef<HTMLFormElement | null>(null);
-  useSubscribe(
-    (focus) => {
-      if (
-        focus &&
-        ref.current &&
-        // likely a device with a virtual keyboard
-        "ontouchend" in document
-      ) {
-        const y = ref.current.getBoundingClientRect().top + window.scrollY - 10;
-        window.scrollTo(0, y);
-      }
-    },
-    (s) => s.searchFocused
-  );
+  useEffect(() => {
+    if (
+      focused &&
+      ref.current &&
+      // likely a device with a virtual keyboard
+      "ontouchend" in document
+    ) {
+      const y = ref.current.getBoundingClientRect().top + window.scrollY - 10;
+      window.scrollTo(0, y);
+    }
+  }, [focused]);
 
   return (
     <form
@@ -43,7 +46,7 @@ export const Search = () => {
         e.preventDefault();
         const top = results.find((r) => r.key === hoveredKey) ?? results[0];
         if (top) {
-          addLocation(top);
+          store.setState(addPin(top));
           setQuery("");
           setHoveredKey(undefined);
         }
@@ -56,8 +59,8 @@ export const Search = () => {
         spellCheck={false}
         value={query}
         onChange={(event) => setQuery(event.target.value)}
-        onFocus={focusSearch}
-        onBlur={blurSearch}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
         onKeyDownCapture={(e) => {
           switch (e.code) {
             case "ArrowUp":
@@ -89,7 +92,7 @@ export const Search = () => {
               onMouseEnter={() => setHoveredKey(c.key)}
               onClick={(event) => {
                 event.preventDefault();
-                addLocation(c);
+                store.setState(addPin(c));
                 setQuery("");
                 setHoveredKey(undefined);
               }}

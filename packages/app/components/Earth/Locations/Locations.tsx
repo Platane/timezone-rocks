@@ -1,15 +1,15 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import ReactDOM from "react-dom";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import { useStore } from "../../../store/store";
-import { selectLocations } from "../../../store/selector";
+import { useValue } from "../../../store/hooks";
+import { selectPins } from "../../../store/selectors";
+import type { Store } from "../../../store/store";
 import { latLngToWorld } from "./utils-latLng";
 import { NodeU, step } from "./physical";
 import { Label, labelBox } from "./Label";
 
-export const Locations = () => {
+export const Locations = ({ store }: { store: Store }) => {
   const ref = React.useRef<THREE.Group | null>(null);
 
   //
@@ -135,8 +135,8 @@ export const Locations = () => {
   return (
     <>
       <group ref={ref}>
-        {useStore(selectLocations).map((location) => (
-          <group key={location.key} position={latLngToWorld(location)}>
+        {useValue(store, selectPins).map((pin) => (
+          <group key={pin.id} position={latLngToWorld(pin.location)}>
             <mesh>
               <sphereGeometry args={[0.008, 6, 6]} />
               <meshBasicMaterial color={"#000"} />
@@ -152,26 +152,32 @@ export const Locations = () => {
           </group>
         ))}
       </group>
-      <LabelContainer domContainer={domContainer} />
+      <LabelContainer domContainer={domContainer} store={store} />
     </>
   );
 };
 
-const LabelContainer = ({ domContainer }: { domContainer: HTMLDivElement }) => {
+const LabelContainer = ({
+  domContainer,
+  store,
+}: {
+  domContainer: HTMLDivElement;
+  store: Store;
+}) => {
   React.useLayoutEffect(() => {
     const c = createRoot(domContainer);
-    c.render(<Labels />);
+    c.render(<Labels store={store} />);
 
     return () => c.unmount();
-  }, [domContainer]);
+  }, [domContainer, store]);
 
   return null;
 };
 
-const Labels = () => (
+const Labels = ({ store }: { store: Store }) => (
   <>
-    {useStore(selectLocations).map((location) => (
-      <Label key={location.key} location={location} />
+    {useValue(store, selectPins).map((pin) => (
+      <Label key={pin.id} store={store} pin={pin} />
     ))}
   </>
 );

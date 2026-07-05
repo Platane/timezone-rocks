@@ -1,10 +1,10 @@
-type API = Record<string, (...args: any[]) => any>;
-
 const symbol = "worker-rpc__";
+
+type GenericApi = Record<string, (...args: any[]) => any>;
 
 let i = 0;
 
-export const createRpcServer = (api: API) =>
+export const createRpcServer = <API extends GenericApi>(api: API) =>
   self.addEventListener("message", async (event) => {
     if (event.data?.symbol === symbol) {
       try {
@@ -16,7 +16,7 @@ export const createRpcServer = (api: API) =>
     }
   });
 
-export const createRpcClient = <API_ extends API>(worker: Worker) => {
+export const createRpcClient = <API extends GenericApi>(worker: Worker) => {
   const originalTerminate = worker.terminate;
   worker.terminate = () => {
     worker.dispatchEvent(new Event("terminate"));
@@ -25,9 +25,9 @@ export const createRpcClient = <API_ extends API>(worker: Worker) => {
 
   return new Proxy(
     {} as {
-      [K in keyof API_]: (
-        ...args: Parameters<API_[K]>
-      ) => Promise<Awaited<ReturnType<API_[K]>>>;
+      [K in keyof API]: (
+        ...args: Parameters<API[K]>
+      ) => Promise<Awaited<ReturnType<API[K]>>>;
     },
     {
       get:

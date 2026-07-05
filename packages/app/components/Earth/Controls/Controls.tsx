@@ -1,8 +1,8 @@
 import * as THREE from "three";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { OrbitControls } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
-import { useSubscribe } from "../../../store/useSubscribe";
+import { subscribeToValue, type Store } from "../../../store/store";
 import { isStable, stepSpring } from "@tzr/utils/utils-spring";
 import { setLatLng } from "../Locations/utils-latLng";
 import { MathUtils } from "three";
@@ -11,7 +11,7 @@ import type { ForwardRefComponent } from "@react-three/drei/helpers/ts-utils";
 type Impl<T> = T extends ForwardRefComponent<infer _, infer I> ? I : never;
 type IOrbitControls = Impl<typeof OrbitControls>;
 
-export const Controls = () => {
+export const Controls = ({ store }: { store: Store }) => {
   const { camera } = useThree();
 
   const state = useRef({
@@ -22,27 +22,32 @@ export const Controls = () => {
     theta: { x: 0, v: 0, target: 0 },
   });
 
-  useSubscribe(
-    (location: any) => {
-      if (!location) return;
+  useLayoutEffect(
+    () =>
+      subscribeToValue(
+        store,
+        (s) => s.selectedPin,
+        (selectedPin) => {
+          if (!selectedPin) return;
 
-      setLatLng(s, location[0]);
-      state.current.phi.target = Math.max(
-        Math.PI / 5,
-        Math.min(Math.PI - Math.PI / 4, s.phi)
-      );
-      state.current.theta.target = s.theta;
+          setLatLng(s, selectedPin.pin.location);
+          state.current.phi.target = Math.max(
+            Math.PI / 5,
+            Math.min(Math.PI - Math.PI / 4, s.phi)
+          );
+          state.current.theta.target = s.theta;
 
-      if (!state.current.travelAnimationRunning) {
-        s.setFromVector3(camera.position);
+          if (!state.current.travelAnimationRunning) {
+            s.setFromVector3(camera.position);
 
-        state.current.phi.x = s.phi;
-        state.current.theta.x = s.theta;
-      }
+            state.current.phi.x = s.phi;
+            state.current.theta.x = s.theta;
+          }
 
-      state.current.travelAnimationRunning = true;
-    },
-    (s) => s.selectedLocation
+          state.current.travelAnimationRunning = true;
+        }
+      ),
+    [store]
   );
 
   // handle orbit control

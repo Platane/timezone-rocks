@@ -1,8 +1,8 @@
-import { getMatchingLocation } from "@tzr/location-index";
+import type { LocationSearcher } from "@tzr/location-index";
 import { useAsyncMemo } from "../hooks/useAsyncMemo";
 
-export const useSearchResults = (query = "") =>
+export const useSearchResults = (searcher: LocationSearcher, query = "") =>
   useAsyncMemo(
-    () => (query.trim().length ? getMatchingLocation(query) : []),
+    () => (query.trim().length ? searcher.getMatchingLocation(query) : []),
     [query]
   );

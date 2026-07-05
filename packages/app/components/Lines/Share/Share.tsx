@@ -1,6 +1,7 @@
 import { useMemo } from "react";
-import { useStore } from "../../../store/store";
-import { selectLocations } from "../../../store/selector";
+import { selectPins, selectT } from "../../../store/selectors";
+import { useValue } from "../../../store/hooks";
+import type { Store } from "../../../store/store";
 import { stringify } from "../../../store/utils-stringify";
 import { usePreviousUntilTruthy } from "../../../hooks/usePreviousUntilTruthy";
 import { useExtendedTruthiness } from "../../../hooks/useExtendedTruthiness";
@@ -8,26 +9,26 @@ import { ShareUrl } from "./ShareUrl";
 import { ShareICal } from "./ShareICal";
 import s from "./Share.module.css";
 
-export const Share = () => {
-  const visible = useStore((s) => !s.dateCursorDragged);
+type Props = { store: Store; visible: boolean };
+export const Share = ({ store, visible }: Props) => {
   const visiblePlus = useExtendedTruthiness(visible, 200);
 
   if (!visiblePlus) return null;
-  else return <Inside visible={visible} />;
+  else return <Inside store={store} visible={visible} />;
 };
 
-const Inside = ({ visible }: { visible: boolean }) => {
-  const locations = useStore(selectLocations);
+const Inside = ({ store, visible }: Props) => {
+  const pins = useValue(store, selectPins);
 
-  const t = usePreviousUntilTruthy(
-    useStore((s) => (s.dateCursorDragged ? null : s.t))
-  )!;
+  // freeze the shared time while the cursor is being dragged
+  const liveT = useValue(store, selectT);
+  const t = usePreviousUntilTruthy(visible ? liveT : null)!;
 
   const url = useMemo(() => {
     const u = new URL(window.location.href);
-    u.hash = stringify({ locations, t });
+    u.hash = stringify({ pins, t });
     return u.toString();
-  }, [locations, t]);
+  }, [pins, t]);
 
   return (
     <div className={s.container}>

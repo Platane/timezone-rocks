@@ -2,17 +2,18 @@ import { DateTime } from "luxon";
 import { useCallback, useRef, useState } from "react";
 import { useClickOutside } from "../../hooks/useClickOutside";
 import { useExtendedTruthiness } from "../../hooks/useExtendedTruthiness";
-import { useStore } from "../../store/store";
+import { useValue } from "../../store/hooks";
+import { selectTOrigin, selectTWindow } from "../../store/selectors";
+import type { Store } from "../../store/store";
+import { getClientTimezone } from "../../intl/getClientTimezone";
 import { EditIcon } from "../Icons/EditIcon";
 import s from "./DatePicker.module.css";
 
-export const DatePicker = () => {
-  const timezone = useStore(
-    (s) => s.locations[0]?.timezone ?? "Europe/Stockholm"
-  );
-  const t = useStore((s) => (s.tWindow[1] + s.tWindow[0]) / 2);
-  const tWindow = useStore((s) => s.tWindow);
+export const DatePicker = ({ store }: { store: Store }) => {
+  const t = useValue(store, selectTOrigin);
+  const tWindow = useValue(store, selectTWindow);
 
+  const timezone = getClientTimezone();
   const defaultValue = DateTime.fromMillis(t, { zone: timezone }).toISODate();
 
   const [focus, setFocus] = useState(false);
@@ -69,7 +70,7 @@ export const DatePicker = () => {
             .set({ hour: 12 })
             .toMillis();
 
-          useStore.getState().setTWindowOrigin(d);
+          store.setState({ t: d, tOrigin: d });
         }}
       >
         <input

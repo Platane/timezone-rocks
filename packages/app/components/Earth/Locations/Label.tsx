@@ -1,31 +1,39 @@
 import React from "react";
 import { getDate } from "../../../timezone/timezone";
-import { selectT, selectUseCheapAvatar } from "../../../store/selector";
-import { State, useStore } from "../../../store/store";
-import { useSubscribe } from "../../../store/useSubscribe";
+import { useValue } from "../../../store/hooks";
+import {
+  subscribeToValue,
+  type Pin,
+  type State,
+  type Store,
+} from "../../../store/store";
 import { formatTime } from "../../../intl/format";
 import { Avatar as AnimatedAvatar } from "@tzr/avatar";
 import { getFlagEmoji } from "../../../flags/emoji";
-import ParkMiller from "park-miller";
-import { CheapAvatar } from "../../CheapAvatar";
 import { useDebouncedValue } from "../../../hooks/useDebouncedValue";
 import { ILocation } from "@tzr/location-index";
+import { getColors } from "./getColors";
 import { getPoseAtHour } from "./avatarPose";
 import s from "./Label.module.css";
 
-export const Label = ({ location }: { location: ILocation }) => {
+export const Label = ({ store, pin }: { store: Store; pin: Pin }) => {
+  const { location } = pin;
   const hourLabelRef = React.useRef<HTMLDivElement | null>(null);
-  const selectHour = React.useCallback(
-    (s: State) => formatTime(getDate(location.timezone, selectT(s)).hour),
-    [location.timezone]
-  );
-  useSubscribe((hour) => {
-    if (hourLabelRef.current) hourLabelRef.current.innerText = hour;
-  }, selectHour);
+
+  React.useLayoutEffect(() => {
+    // diff on the formatted hour so the DOM only updates when it changes
+    const selectHour = (s: State) =>
+      formatTime(getDate(location.timezone, s.t).hour);
+    const update = (hour: string) => {
+      if (hourLabelRef.current) hourLabelRef.current.innerText = hour;
+    };
+    update(selectHour(store.getState()));
+    return subscribeToValue(store, selectHour, update);
+  }, [store, location.timezone]);
 
   return (
     <div className={s.container}>
-      <Avatar location={location} />
+      <Avatar store={store} location={location} />
       <div className={s.labelHour} ref={hourLabelRef} />
       {location.countryCode && (
         <div className={s.labelFlag}>{getFlagEmoji(location.countryCode)}</div>
@@ -34,9 +42,9 @@ export const Label = ({ location }: { location: ILocation }) => {
   );
 };
 
-const Avatar = ({ location }: { location: ILocation }) => {
+const Avatar = ({ store, location }: { store: Store; location: ILocation }) => {
   const selectPose = React.useCallback(
-    (s: State) => getPoseAtHour(getDate(location.timezone, selectT(s)).hour),
+    (s: State) => getPoseAtHour(getDate(location.timezone, s.t).hour),
     [location.timezone]
   );
 
@@ -47,20 +55,7 @@ const Avatar = ({ location }: { location: ILocation }) => {
     return { delay, colors };
   }, [location.key]);
 
-  const pose = useDebouncedValue(useStore(selectPose), delay);
-
-  if (useStore(selectUseCheapAvatar))
-    return (
-      <CheapAvatar
-        pose={pose}
-        style={{
-          fontSize: "32px",
-          position: "absolute",
-          left: "5px",
-          top: "5px",
-        }}
-      />
-    );
+  const pose = useDebouncedValue(useValue(store, selectPose), delay);
 
   return (
     <AnimatedAvatar
@@ -74,21 +69,6 @@ const Avatar = ({ location }: { location: ILocation }) => {
       }}
     />
   );
-};
-
-export const getColors = (seed: number) => {
-  const pm = new ParkMiller(28113299 + seed ** 7 + seed);
-  pm.float();
-  pm.float();
-  pm.float();
-  pm.float();
-  const h = pm.float() * 130 + 160;
-  const s = pm.float() * 28 + 50;
-
-  return {
-    color: `hsl(${h},${s}%,56%)`,
-    colorDark: `hsl(${h - 3},${s - 9}%,38%)`,
-  };
 };
 
 export const labelBox = {

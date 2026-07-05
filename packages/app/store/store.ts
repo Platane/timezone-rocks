@@ -1,107 +1,100 @@
-import type { ILocation } from "@tzr/location-index";
-import { create, StateCreator } from "zustand";
-import { subscribeWithSelector } from "zustand/middleware";
-import { init } from "./persist";
+import type { ILocation, LocationSearcher } from "@tzr/location-index";
+import { parse, stringify } from "./utils-stringify";
+import {
+  getClientLocaleCountryCode,
+  getClientTimezone,
+} from "../intl/getClientTimezone";
+import { createSubscribable } from "./subscribable";
 
-const t = Date.now();
 const day = 24 * 60 * 60 * 1000;
-const fifteenMinutes = 15 * 60 * 1000;
 
-const w = Math.max(2.3, Math.min(3, window.innerWidth / 300));
+export type Pin = { id: number; label?: string; location: ILocation };
 
-const stateCreator: StateCreator<State & Api> = (set) => ({
-  t,
-  now: t,
-  tWindow: [
-    Math.round((t - (day * w) / 2) / fifteenMinutes) * fifteenMinutes,
-    Math.round((t + (day * w) / 2) / fifteenMinutes) * fifteenMinutes,
-  ] as [number, number],
-  locations: [],
-  locationStoreReady: false,
-  dateCursorDragged: false,
-  searchFocused: false,
-  earthReady: false,
-  selectedLocation: null,
-
-  setTWindowOrigin: (t) =>
-    set(({ tWindow: [a, b] }) => ({
-      t,
-      tWindow: [t - (b - a) / 2, t + (b - a) / 2],
-    })),
-  setT: (t) => set({ t }),
-  initLocations: (locations, t) => {
-    if (t)
-      set({
-        t: t as number,
-        tWindow: [t - (day * w) / 2, t + (day * w) / 2],
-        locations,
-        locationStoreReady: true,
-        selectedLocation: [locations[0], 1],
-      });
-    else
-      set({
-        locations,
-        locationStoreReady: true,
-        selectedLocation: [locations[0], 1],
-      });
-  },
-  onEarthReady: () => set({ earthReady: true }),
-  addLocation: (location) =>
-    set((s) => ({
-      selectedLocation: [location, (s.selectedLocation?.[1] ?? 1) + 1],
-      locations: [
-        location,
-        ...s.locations.filter((l) => l.key !== location.key),
-      ],
-    })),
-  removeLocation: (location) =>
-    set((s) => ({
-      selectedLocation:
-        s.selectedLocation?.[0] === location ? null : s.selectedLocation,
-      locations: s.locations.filter((l) => l.key !== location.key),
-    })),
-
-  selectLocation: (selectedLocation) =>
-    set((s) => ({
-      selectedLocation: [selectedLocation, (s.selectedLocation?.[1] ?? 1) + 1],
-    })),
-  focusSearch: () => set({ searchFocused: true }),
-  blurSearch: () => set({ searchFocused: false }),
-  startDragDateCursor: () => set({ dateCursorDragged: true }),
-  endDragDateCursor: () =>
-    set((s) => {
-      const r = 15 * 60 * 1000;
-      const t = Math.round(s.t / r) * r;
-      return { dateCursorDragged: false, t };
-    }),
-});
-
-export const useStore = create(subscribeWithSelector(stateCreator));
-
-init(useStore);
-
-export type Api = {
-  setT: (t: number) => void;
-  setTWindowOrigin: (t: number) => void;
-  onEarthReady: () => void;
-  initLocations: (locations: ILocation[], t: number | undefined) => void;
-  addLocation: (location: ILocation) => void;
-  removeLocation: (location: ILocation) => void;
-  selectLocation: (location: ILocation) => void;
-  focusSearch: () => void;
-  blurSearch: () => void;
-  startDragDateCursor: () => void;
-  endDragDateCursor: () => void;
-};
 export type State = {
   t: number;
-  now: number;
-  locationStoreReady: boolean;
-  searchFocused: boolean;
-  dateCursorDragged: boolean;
-  earthReady: boolean;
-  tWindow: [number, number];
-  locations: ILocation[];
-  selectedLocation: [ILocation, number] | null;
+  tOrigin: number;
+  tWindowWidth: number;
+  pins: Pin[];
+  selectedPin: { pin: Pin; generation: number } | null;
 };
-export type Store = typeof useStore;
+
+export const createStore = (state0: State) => {
+  let state = state0;
+  const { subscribe, dispatch } = createSubscribable();
+
+  const setState = (s: Partial<State> | ((s: State) => Partial<State>)) => {
+    state = { ...state, ...(typeof s === "function" ? s(state) : s) };
+    dispatch();
+  };
+  const getState = () => state;
+
+  return { subscribe, getState, setState };
+};
+
+export type Store = ReturnType<typeof createStore>;
+
+/**
+ * Fire `listener` whenever the selected slice changes (Object.is). Returns an
+ * unsubscribe. Plain function — the caller owns the initial call / lifecycle.
+ */
+export const subscribeToValue = <T>(
+  store: Store,
+  selector: (s: State) => T,
+  listener: (value: T) => void
+) => {
+  let prev = selector(store.getState());
+  return store.subscribe(() => {
+    const next = selector(store.getState());
+    if (!Object.is(next, prev)) {
+      prev = next;
+      listener(next);
+    }
+  });
+};
+
+export const createInitialState = async (searcher: LocationSearcher) => {
+  const { pins: rawPins, t = Date.now() } = parse(window.location.hash);
+  let pins: Pin[] = [];
+
+  if (rawPins?.length) {
+    const locations = await searcher.getLocationsByKey(
+      rawPins.map((p) => p.key)
+    );
+    pins = rawPins
+      .map(({ label }, i) => ({ id: i, label, location: locations[i]! }))
+      .filter((p) => p.location !== undefined);
+  }
+
+  if (!pins.length) {
+    const location = await searcher.getLocationByTimezoneAndCountryCode(
+      getClientTimezone(),
+      getClientLocaleCountryCode()
+    );
+    pins.push({ id: 0, location });
+  }
+
+  const tWindowWidth =
+    Math.max(2.3, Math.min(3, window.innerWidth / 300)) * day;
+
+  return {
+    t,
+    tOrigin: t,
+    tWindowWidth,
+    pins,
+    selectedPin: null,
+  } satisfies State;
+};
+
+export const subscribeHashUpdate = (store: Store) => {
+  const update = () => {
+    const hash = stringify({ pins: store.getState().pins });
+    window.history.replaceState(
+      null,
+      "",
+      window.location.pathname + window.location.search + "#" + hash
+    );
+  };
+  update();
+  // the hash only tracks pins, so only wake on pin changes
+  return subscribeToValue(store, (s) => s.pins, update);
+};

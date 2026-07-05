@@ -1,30 +1,30 @@
-import type { ILocation } from "@tzr/location-index";
 import { getFlagEmoji } from "../../flags/emoji";
 import { formatOffset } from "../../intl/format";
-import { useStore } from "../../store/store";
+import { removePin, selectPin } from "../../store/mutators";
+import { useValue } from "../../store/hooks";
+import type { Pin, State, Store } from "../../store/store";
 import { stringify } from "../../store/utils-stringify";
 import { getTimezoneOffset } from "../../timezone/timezone";
 import s from "./LocationLabel.module.css";
 
-type Props = { location: ILocation; locations: ILocation[] };
-export const LocationLabel = ({ location, locations }: Props) => {
-  const selectLocation = useStore((s) => s.selectLocation);
-  const selectedLocation = useStore((s) => s.selectedLocation?.[0]);
-  const removeLocation = useStore((s) => s.removeLocation);
+const selectSelectedPin = (state: State) => state.selectedPin;
+
+type Props = { store: Store; pin: Pin; pins: Pin[]; t: number; itemId: string };
+export const LocationLabel = ({ store, pin, pins, t, itemId }: Props) => {
+  const { location } = pin;
+  const selected = useValue(store, selectSelectedPin)?.pin === pin;
 
   return (
     <div
       onClick={(e) => {
         e.preventDefault();
-        selectLocation(location);
+        store.setState(selectPin(pin));
       }}
       className={
-        selectedLocation === location
-          ? `${s.container} ${s.locationLabelSelected}`
-          : s.container
+        selected ? `${s.container} ${s.locationLabelSelected}` : s.container
       }
     >
-      <label className={s.name} htmlFor={`location-item-${location.key}`}>
+      <label className={s.name} htmlFor={itemId}>
         {location.name}
       </label>
 
@@ -32,35 +32,23 @@ export const LocationLabel = ({ location, locations }: Props) => {
         {location.countryCode ? getFlagEmoji(location.countryCode) : ""}
       </span>
 
-      <span className={s.offset} />
+      <span className={s.offset}>
+        {formatOffset(getTimezoneOffset(location.timezone, t))}
+      </span>
 
       <a
         className={s.removeButton}
         role="button"
         aria-label="remove location"
-        href={
-          "#" +
-          stringify({
-            locations: locations.filter((l) => l.key !== location.key),
-          })
-        }
+        href={"#" + stringify({ pins: pins.filter((p) => p !== pin) })}
         title="remove location"
         onClick={(e) => {
           e.preventDefault();
-          removeLocation(location);
+          store.setState(removePin(pin));
         }}
       >
         ×
       </a>
     </div>
-  );
-};
-
-export const update = (
-  domElement: Element,
-  { location, t }: { location: ILocation; t: number }
-) => {
-  domElement.children[2].innerHTML = formatOffset(
-    getTimezoneOffset(location.timezone, t)
   );
 };

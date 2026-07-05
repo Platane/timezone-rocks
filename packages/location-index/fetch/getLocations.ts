@@ -1,10 +1,7 @@
-import locationListPath from "../assets/locations.csv";
 import { generateUniqueKey } from "./generateUniqueKey";
 import { parseLocations } from "./parseLocations";
 
-export const listVersion = locationListPath.slice(-7, -4);
-
-export const getLocations = () =>
-  fetch(locationListPath)
+export const getLocations = (uri: string) =>
+  fetch(uri)
     .then((res) => res.text())
     .then((t) => generateUniqueKey(parseLocations(t)));

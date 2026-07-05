@@ -3,6 +3,7 @@ import { getLocationByTimezoneAndCountryCode as getLocationByTimezoneAndCountryC
 import { getLocationsByKey as getLocationsByKey_ } from "./search/getLocationsByKey";
 import { createSearch } from "./search/search";
 import { createRpcServer } from "./rpc";
+import { ILocation } from "./fetch/parseLocations";
 
 const getLocationByTimezoneAndCountryCode = async (
   timezone: string,
@@ -19,11 +20,15 @@ const getLocationsByKey = async (keys: string[]) =>
 const getMatchingLocation = async (query: string) =>
   (await searchPromise)(query);
 
-const locationsPromise = getLocations();
-
-const searchPromise = locationsPromise.then(createSearch);
+let locationsPromise: Promise<ILocation[]>;
+let searchPromise: Promise<ReturnType<typeof createSearch>>;
 
 const api = {
+  init: async (locationUri: string) => {
+    locationsPromise = getLocations(locationUri);
+    searchPromise = locationsPromise.then(createSearch);
+    await locationsPromise;
+  },
   getLocationsByKey,
   getLocationByTimezoneAndCountryCode,
   getMatchingLocation,

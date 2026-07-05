@@ -2,13 +2,19 @@ import { DateTime } from "luxon";
 
 export const stringify = ({
   t,
-  locations,
+  pins,
 }: {
   t?: number;
-  locations: { key: string }[];
+  pins: { location: { key: string }; label?: string }[];
 }) => {
   let s = "";
-  if (locations.length) s += locations.map(({ key }) => key).join("-");
+  if (pins.length)
+    s += pins
+      .map(
+        ({ location, label }) =>
+          location.key + (label ? "=" + encodeURIComponent(label) : "")
+      )
+      .join("-");
 
   if (Number.isFinite(t) && t) {
     const dateLiteral = DateTime.fromMillis(t)
@@ -26,14 +32,17 @@ export const stringify = ({
 };
 
 export const parse = (hash: string) => {
-  const [lkeys, dateLiteral] = hash.replace(/^#/, "").split("--");
+  const [lpins, dateLiteral] = hash.replace(/^#/, "").split("--");
 
-  const keys = lkeys.split("-");
+  const pins = lpins.split("-").map((p) => {
+    const [key, label] = p.split("=");
+    return { key, label: label ? decodeURIComponent(label) : undefined };
+  });
 
   try {
     const t = DateTime.fromISO(dateLiteral).toMillis();
-    if (Number.isFinite(t)) return { keys, t };
+    if (Number.isFinite(t)) return { pins, t };
   } catch (err) {}
 
-  return { keys };
+  return { pins };
 };
