@@ -1,4 +1,4 @@
-import type { ILocation, LocationSearcher } from "@tzr/location-index";
+import type { LocationSearcher } from "@tzr/location-index";
 import type { TextFragments } from "@tzr/location-index/search/splitFragments";
 import { useEffect, useRef, useState } from "react";
 import { getFlagEmoji } from "../../flags/emoji";
@@ -84,21 +84,26 @@ export const Search = ({
           onMouseLeave={() => setHoveredKey(undefined)}
         >
           {results.map((c) => (
-            <a
+            <button
               className={s.suggestionItem}
-              href="#"
+              type="button"
               key={c.key}
               data-hovered={hoveredKey === c.key}
               onMouseEnter={() => setHoveredKey(c.key)}
-              onClick={(event) => {
-                event.preventDefault();
+              onClick={() => {
                 store.setState(addPin(c));
                 setQuery("");
                 setHoveredKey(undefined);
               }}
             >
-              <SuggestionContent location={c} />
-            </a>
+              <span className={s.suggestionFlag}>
+                {c.type === "timezone" ? "🕒" : getFlagEmoji(c.countryCode)}
+              </span>
+              <span className={s.suggestionName}>
+                <FragmentedText fragments={c.fragments} />
+              </span>
+              <span className={s.suggestionType}>{typeLabel[c.type]}</span>
+            </button>
           ))}
         </div>
       )}
@@ -106,73 +111,12 @@ export const Search = ({
   );
 };
 
-const getEmojiType = (type: ILocation["type"]) => {
-  if (type === "city") return "🏙";
-  if (type === "admin") return "🏛";
-  if (type === "country") return "🌐";
-  if (type === "timezone") return "🕒";
-};
-
-const SuggestionContent = ({
-  location,
-}: {
-  location: ILocation & { fragments: TextFragments };
-}) => {
-  switch (location.type) {
-    case "timezone": {
-      const name: TextFragments = [];
-      const subName: TextFragments = [];
-
-      for (const f of location.fragments) {
-        if (subName.length > 0) {
-          subName.push(f);
-        } else {
-          const r = new RegExp(/ -/);
-
-          if (f.text.match(r)) {
-            name.push(f);
-          } else {
-            const i = r.lastIndex - 1;
-            name.push({ ...f, text: f.text.substring(0, i) });
-            subName.push({ ...f, text: f.text.substring(i) });
-          }
-        }
-      }
-
-      return (
-        <>
-          <span className={s.suggestionFlag} />
-          <span className={s.suggestionType} title={location.type}>
-            {getEmojiType(location.type)}
-          </span>
-          <span className={s.suggestionName}>
-            <FragmentedText fragments={name} />
-          </span>
-          <span className={s.suggestionSubName}>
-            <FragmentedText fragments={subName} />
-          </span>
-        </>
-      );
-    }
-
-    case "country":
-    case "admin":
-    case "city":
-      return (
-        <>
-          <span className={s.suggestionFlag}>
-            {location.countryCode ? getFlagEmoji(location.countryCode) : ""}
-          </span>
-          <span className={s.suggestionType} title={location.type}>
-            {getEmojiType(location.type)}
-          </span>
-          <span className={s.suggestionName}>
-            <FragmentedText fragments={location.fragments} />
-          </span>
-        </>
-      );
-  }
-};
+const typeLabel = {
+  city: "city",
+  admin: "state",
+  country: "country",
+  timezone: "timezone",
+} as const;
 
 const FragmentedText = ({ fragments }: { fragments: TextFragments }) => (
   <>
