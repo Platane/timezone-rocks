@@ -3,27 +3,27 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "@react-three/drei": "10.7.2",
-    "@react-three/fiber": "9.3.0",
+    "@react-three/drei": "10.7.7",
+    "@react-three/fiber": "9.6.1",
     "@tzr/avatar": "0.0.1",
     "@tzr/location-index": "0.0.1",
     "@tzr/utils": "0.0.1",
     "ical.js": "2.2.1",
     "lodash.deburr": "4.1.0",
-    "luxon": "3.7.1",
-    "park-miller": "2.0.0",
-    "react": "19.1.1",
-    "react-dom": "19.1.1",
-    "reselect": "5.1.1",
-    "three": "0.179.1",
-    "three-stdlib": "2.36.0",
-    "zustand": "5.0.7"
+    "luxon": "3.7.2",
+    "park-miller": "2.0.1",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "reselect": "5.2.0",
+    "three": "0.185.1",
+    "three-stdlib": "2.36.1",
+    "zustand": "5.0.14"
   },
   "devDependencies": {
     "@types/lodash.deburr": "4.1.9",
-    "@types/luxon": "3.7.1",
-    "@types/react": "19.1.10",
-    "@types/react-dom": "19.1.7",
-    "@types/three": "0.179.0"
+    "@types/luxon": "3.7.2",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "@types/three": "0.185.0"
   }
 }

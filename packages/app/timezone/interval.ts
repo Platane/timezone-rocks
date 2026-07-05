@@ -9,7 +9,7 @@ export const OFFICE_HOURS = [9, 18] as Interval;
 export const getDays = (timezone: string, [min, max]: Interval) => {
   const days: Interval[] = [];
 
-  let d = DateTime.fromMillis(min).setZone(timezone);
+  let d: DateTime = DateTime.fromMillis(min).setZone(timezone);
   d = setHour(d, 0);
 
   do {
@@ -28,7 +28,7 @@ export const getDays = (timezone: string, [min, max]: Interval) => {
 export const getBlocks = (timezone: string, [min, max]: Interval) => {
   const blocks: Block[] = [];
 
-  let d = DateTime.fromMillis(min).setZone(timezone);
+  let d: DateTime = DateTime.fromMillis(min).setZone(timezone);
   d = setHour(d, 0);
 
   do {
