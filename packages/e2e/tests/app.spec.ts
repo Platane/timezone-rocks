@@ -14,6 +14,27 @@ const readListItemLabels = (page: Page) =>
       )
     );
 
+/**
+ * search results resolve asynchronously (worker round-trip), and the
+ * suggestion list keeps showing the previous query's results until the new
+ * ones arrive. Wait for the top suggestion to match the query before
+ * submitting, otherwise Enter may add whatever was previously suggested.
+ */
+const searchAndAddLocation = async (
+  page: Page,
+  query: string,
+  expectedSuggestionText: string | RegExp
+) => {
+  const searchInputLocator = page.getByPlaceholder(
+    "Add your teammate's timezone"
+  );
+  await searchInputLocator.fill(query);
+  await expect(
+    page.getByRole("link", { name: expectedSuggestionText }).first()
+  ).toBeVisible();
+  await searchInputLocator.press("Enter");
+};
+
 test("Should load the app", async ({ page }) => {
   page.on("console", (msg) => console.log(msg.text()));
 
@@ -46,19 +67,10 @@ test("Should add, duplicate, persist and remove timezones", async ({
 }) => {
   await page.goto("/");
 
-  const searchInputLocator = page.getByPlaceholder(
-    "Add your teammate's timezone"
-  );
-
   await test.step("add two cities, one of them twice (duplicates allowed)", async () => {
-    await searchInputLocator.fill("malmo");
-    await searchInputLocator.press("Enter");
-
-    await searchInputLocator.fill("goteborg");
-    await searchInputLocator.press("Enter");
-
-    await searchInputLocator.fill("malmo");
-    await searchInputLocator.press("Enter");
+    await searchAndAddLocation(page, "malmo", "Malmö");
+    await searchAndAddLocation(page, "goteborg", "Göteborg");
+    await searchAndAddLocation(page, "malmo", "Malmö");
 
     await expect(page.getByRole("listitem")).toHaveCount(4);
     expect(await readListItemLabels(page)).toEqual([
@@ -111,9 +123,6 @@ test("Should set the date, move the slider and share the state", async ({
 }) => {
   await page.goto("/");
 
-  const searchInputLocator = page.getByPlaceholder(
-    "Add your teammate's timezone"
-  );
   const flyingDate = page.locator(`[data-test-id="flying-date"]`).first();
   const expectFlyingDate = (text: string) =>
     expect
@@ -148,8 +157,7 @@ test("Should set the date, move the slider and share the state", async ({
 
   await test.step("share the pins and time via url", async () => {
     // add a city so the share url carries multiple pins
-    await searchInputLocator.fill("malmo");
-    await searchInputLocator.press("Enter");
+    await searchAndAddLocation(page, "malmo", "Malmö");
     await expect(page.getByRole("listitem")).toHaveCount(2);
 
     // the share url encodes the pins and the selected time (unlike the address
