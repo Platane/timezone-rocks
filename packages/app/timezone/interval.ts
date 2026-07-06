@@ -58,7 +58,7 @@ const getBlock = (d: DateTime) => ({
 
 type Block = ReturnType<typeof getBlock>;
 
-const setHour = (d: DateTime, hour: number = 0) =>
+const setHour = <D extends DateTime>(d: D, hour: number = 0) =>
   d.set({
     year: d.year,
     month: d.month,
