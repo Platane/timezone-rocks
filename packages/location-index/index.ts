@@ -4,11 +4,12 @@ export type { ILocation } from "./fetch/parseLocations";
 
 import locationsUri from "./assets/locations.csv";
 
-// @ts-ignore
-import MyWorker from "./worker?worker";
-
 export const createLocationSearcher = () => {
-  const worker = new MyWorker();
+  const worker = new Worker(
+    //
+    new URL("./worker.ts", import.meta.url),
+    { type: "module" }
+  );
   const api = createRpcClient<API>(worker);
 
   api.init(locationsUri);
