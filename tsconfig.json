@@ -8,8 +8,9 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
-    "lib": ["dom", "ES2022", "WebWorker"],
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+    "lib": ["dom", "esnext", "WebWorker"],
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
+    "types": ["bun"]
   },
   "exclude": ["node_modules"]
 }
