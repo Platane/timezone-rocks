@@ -1,7 +1,7 @@
 import React from "react";
 import { useValue } from "../../store/hooks";
 import { selectT, selectTWindow } from "../../store/selectors";
-import type { Store } from "../../store/store";
+import { step, type Store } from "../../store/store";
 import { Share } from "./Share/Share";
 import s from "./DateSliderRange.module.css";
 
@@ -12,13 +12,11 @@ export const DateSliderRange = ({ store }: { store: Store }) => {
   const tWindow = useValue(store, selectTWindow);
   const t = useValue(store, selectT);
 
-  const [now] = React.useState(() => Date.now());
+  const [now] = React.useState(() => Math.round(Date.now() / step) * step);
   const [focused, setFocused] = React.useState(false);
   const [dragging, setDragging] = React.useState(false);
 
   const toRatio = (x: number) => (x - tWindow[0]) / (tWindow[1] - tWindow[0]);
-
-  const step = 15 * 60 * 1000; // 15 minutes
 
   // the input is widened so the thumb centre sits at k*100%; trail the share
   // buttons just to the right of it

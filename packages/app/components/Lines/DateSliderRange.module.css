@@ -12,9 +12,11 @@
 
   position: relative;
   left: calc(-1 * var(--caret-width) / 2);
-  width: calc(100vw + var(--caret-width));
+  /* width the track off the container (100%) not the viewport (100vw), so the
+     thumb tracks the caret line even when a scrollbar narrows the content box */
+  width: calc(100% + var(--caret-width));
   /* otherwise the flexbox don't want with>100% (??) */
-  min-width: calc(100vw + var(--caret-width));
+  min-width: calc(100% + var(--caret-width));
   border: none;
   margin: 0;
   height: 32px;

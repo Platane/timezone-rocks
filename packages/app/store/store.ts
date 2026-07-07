@@ -8,6 +8,10 @@ import { createSubscribable } from "./subscribable";
 
 const day = 24 * 60 * 60 * 1000;
 
+// the slider snaps to this granularity; keep `t` on the same grid so the native
+// thumb (which rounds to `step`) lines up with the caret line and FlyingLabel
+export const step = 15 * 60 * 1000;
+
 export type Pin = { id: number; label?: string; location: ILocation };
 
 export type State = {
@@ -53,7 +57,8 @@ export const subscribeToValue = <T>(
 };
 
 export const createInitialState = async (searcher: LocationSearcher) => {
-  const { pins: rawPins, t = Date.now() } = parse(window.location.hash);
+  const { pins: rawPins, t: rawT = Date.now() } = parse(window.location.hash);
+  const t = Math.round(rawT / step) * step;
   let pins: Pin[] = [];
 
   if (rawPins?.length) {

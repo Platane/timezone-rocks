@@ -1,5 +1,8 @@
 .container {
-  display: inline-block;
+  display: inline-flex;
+  vertical-align: top;
+  align-items: center;
+  min-height: 28px;
   text-shadow: 0 0 2px #000;
   font-size: 1.06em;
   color: #fff;

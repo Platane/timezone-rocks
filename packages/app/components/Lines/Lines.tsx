@@ -6,7 +6,7 @@ import type { Store } from "../../store/store";
 import { getBlocks } from "../../timezone/interval";
 import { DateSliderRange } from "./DateSliderRange";
 import { FlyingLabel } from "./FlyingLabel";
-import { LocationLabel } from "./LocationLabel";
+import { LocationLabel } from "./LocationLabel/LocationLabel";
 import s from "./Lines.module.css";
 
 export const Lines = ({ store }: { store: Store }) => {
