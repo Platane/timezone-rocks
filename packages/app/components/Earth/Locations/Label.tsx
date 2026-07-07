@@ -35,9 +35,14 @@ export const Label = ({ store, pin }: { store: Store; pin: Pin }) => {
     <div className={s.container}>
       <Avatar store={store} location={location} />
       <div className={s.labelHour} ref={hourLabelRef} />
-      {location.countryCode && (
-        <div className={s.labelFlag}>{getFlagEmoji(location.countryCode)}</div>
-      )}
+      <div className={s.labelFooter}>
+        {pin.label && <span className={s.labelCustom}>{" " + pin.label}</span>}
+        {location.countryCode && (
+          <span className={s.labelFlag}>
+            {getFlagEmoji(location.countryCode)}
+          </span>
+        )}
+      </div>
     </div>
   );
 };

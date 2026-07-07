@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export const useClickOutside = (onClickOutside?: () => void) => {
-  const [className] = React.useState(genrateClassName);
+  const [className] = React.useState(generateClassName);
   const ref = React.useRef(onClickOutside);
   ref.current = onClickOutside;
 
@@ -18,4 +18,4 @@ export const useClickOutside = (onClickOutside?: () => void) => {
   return { className };
 };
 
-const genrateClassName = () => "inside-" + Math.random().toString(36);
+const generateClassName = () => "inside-" + Math.random().toString(36).slice(2);

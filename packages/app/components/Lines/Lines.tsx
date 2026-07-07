@@ -33,19 +33,13 @@ export const Lines = ({ store }: { store: Store }) => {
 
         {pins.map((pin, i) => (
           <React.Fragment key={pin.id}>
-            <LocationLabel
-              store={store}
-              pin={pin}
-              pins={pins}
-              t={t}
-              itemId={`location-item-${pin.id}`}
-            />
+            <LocationLabel store={store} pin={pin} pins={pins} t={t} />
 
             <div
               className={s.row}
               role="listitem"
-              id={`location-item-${pin.id}`}
-              onClick={() => store.setState(selectPin(pin))}
+              id={"pin-" + pin.id}
+              onClick={() => store.setState(selectPin(pin.id))}
             >
               <FlyingLabel
                 data-test-id="flying-date"

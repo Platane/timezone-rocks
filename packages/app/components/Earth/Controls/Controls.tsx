@@ -30,7 +30,12 @@ export const Controls = ({ store }: { store: Store }) => {
         (selectedPin) => {
           if (!selectedPin) return;
 
-          setLatLng(s, selectedPin.pin.location);
+          const pin = store
+            .getState()
+            .pins.find((p) => p.id === selectedPin.pinId);
+          if (!pin) return;
+
+          setLatLng(s, pin.location);
           state.current.phi.target = Math.max(
             Math.PI / 5,
             Math.min(Math.PI - Math.PI / 4, s.phi)

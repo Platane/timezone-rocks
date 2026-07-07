@@ -15,7 +15,7 @@ export type State = {
   tOrigin: number;
   tWindowWidth: number;
   pins: Pin[];
-  selectedPin: { pin: Pin; generation: number } | null;
+  selectedPin: { pinId: number; generation: number } | null;
 };
 
 export const createStore = (state0: State) => {

@@ -12,7 +12,8 @@ export const DateSliderRange = ({ store }: { store: Store }) => {
   const tWindow = useValue(store, selectTWindow);
   const t = useValue(store, selectT);
 
-  const now = React.useMemo(() => Date.now(), []);
+  const [now] = React.useState(() => Date.now());
+  const [focused, setFocused] = React.useState(false);
   const [dragging, setDragging] = React.useState(false);
 
   const toRatio = (x: number) => (x - tWindow[0]) / (tWindow[1] - tWindow[0]);
@@ -38,17 +39,20 @@ export const DateSliderRange = ({ store }: { store: Store }) => {
       <input
         className={s.inputRange}
         type="range"
-        step={step}
+        step={dragging && focused ? 1 : step}
         min={tWindow[0]}
         max={tWindow[1]}
         value={t}
         aria-label="date slider"
-        onFocus={() => setDragging(true)}
+        onFocus={() => setFocused(true)}
         onBlur={() => {
+          setFocused(false);
           setDragging(false);
           // snap to the nearest absolute 15-min boundary once dragging ends
           store.setState((s) => ({ t: Math.round(s.t / step) * step }));
         }}
+        onPointerDown={() => setDragging(true)}
+        onPointerUp={() => setDragging(false)}
         onChange={(e) => store.setState({ t: +e.target.value })}
       />
 
@@ -56,7 +60,7 @@ export const DateSliderRange = ({ store }: { store: Store }) => {
         className={s.shareContainer}
         style={{ left: `calc(${k * 100}% + ${shareOffset}px)` }}
       >
-        <Share store={store} visible={!dragging} />
+        <Share store={store} visible={!focused} />
       </div>
     </div>
   );
