@@ -7,9 +7,9 @@ import { Header } from "../Header/Header";
 import { InfoDialog } from "../Info/InfoDialog";
 import { Lines } from "../Lines/Lines";
 import { Search } from "../Search/Search";
-import { useNavigate, useUrl } from "./router";
-import { LocationSearcher } from "@tzr/location-index";
-import { Store } from "../../store/store";
+import type { LocationSearcher } from "@tzr/location-index";
+import type { Store } from "../../store/store";
+import { parseUrl, type Router } from "./router";
 
 const usePromiseResult = <T,>(promise: Promise<T>) => {
   const [res, setRes] = React.useState<T>();
@@ -20,16 +20,21 @@ const usePromiseResult = <T,>(promise: Promise<T>) => {
 };
 
 export const App = ({
+  router,
   locationSearcher,
   store,
 }: {
   locationSearcher: LocationSearcher;
   store: Store;
+  router: Router;
 }) => {
   const EarthScene = usePromiseResult(import("../Earth/Scene"))?.Scene;
 
-  const url = useUrl();
-  const navigate = useNavigate();
+  const [url, setUrl] = React.useState(parseUrl(router.getUrl()));
+  React.useEffect(
+    () => router.subscribe(() => setUrl(parseUrl(router.getUrl()))),
+    [router]
+  );
 
   if (url === "/avatar") return <AvatarApp />;
 
@@ -51,7 +56,7 @@ export const App = ({
 
       <InfoDialog
         open={url === "/about"}
-        onOpenChange={() => navigate("/", { orBack: true })}
+        onOpenChange={() => router.navigate("/", { orBack: true })}
       />
     </>
   );

@@ -6,15 +6,14 @@ import s from "./AvatarApp.module.css";
 const poses: Pose[] = ["afternoon", "day", "morning", "night"];
 
 export const AvatarApp = () => {
-  const colors = React.useMemo(
-    () => getColors(Math.floor(Math.random() * 1000000)),
-    []
+  const [colors] = React.useState(() =>
+    getColors(Math.floor(Math.random() * 1000000))
   );
   const [pose, setPose] = React.useState<Pose>("afternoon");
 
   return (
     <div className={s.container}>
-      <a className={s.backLink} href="/">
+      <a className={s.backLink} href="/" data-or-back>
         {"<"} back to the app
       </a>
 

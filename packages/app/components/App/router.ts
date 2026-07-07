@@ -1,6 +1,6 @@
-import { create, StateCreator } from "zustand";
+export const parseUrl = (url: string) => {
+  const { pathname } = new URL(url, "http://a");
 
-const parseUrl = (pathname: string) => {
   if (pathname === "/avatar") return "/avatar" as const;
   if (pathname === "/about") return "/about" as const;
   return "/" as const;
@@ -8,78 +8,81 @@ const parseUrl = (pathname: string) => {
 
 type Route = ReturnType<typeof parseUrl>;
 
-const initialUrl = parseUrl(window.location.pathname);
-
-if (initialUrl !== window.location.pathname) {
-  history.replaceState({}, "", initialUrl);
-}
-
-const urlStore = create(() => ({ url: initialUrl }));
-
-window.addEventListener("popstate", () => {
-  const url = parseUrl(window.location.pathname);
-  urlStore.setState({ url });
-});
-
 const navigate = (
-  pathname: Route,
+  pathname: string,
   options: { replace?: boolean; orBack?: boolean }
 ) => {
   const internalHistory: string[] = history.state?.internalHistory ?? [];
 
-  let i = 0;
-  if (options.orBack && (i = internalHistory.lastIndexOf(pathname)) !== -1) {
-    history.go(-(internalHistory.length - i));
-  } else {
-    const m = options?.replace ? "replaceState" : "pushState";
+  if (options.orBack) {
+    const lastIndex = internalHistory.lastIndexOf(pathname);
 
-    const nextInternalHistory = options?.replace
-      ? [...internalHistory.slice(0, -1), window.location.pathname]
-      : [...internalHistory, window.location.pathname];
-
-    const url = new URL(
-      pathname + window.location.hash,
-      window.location.origin
-    ).toString();
-
-    history[m]({ internalHistory: nextInternalHistory }, "", url);
+    if (lastIndex !== -1) {
+      history.go(-(internalHistory.length - lastIndex));
+      return;
+    }
   }
 
-  urlStore.setState({ url: pathname });
+  const m = options?.replace ? "replaceState" : "pushState";
+
+  const nextState = {
+    ...history.state,
+    internalHistory: [
+      ...(options?.replace ? internalHistory.slice(0, -1) : internalHistory),
+      window.location.pathname,
+    ],
+  };
+
+  const nextUrl = pathname + window.location.hash;
+
+  if (options.replace) {
+    history.replaceState(nextState, "", nextUrl);
+  } else {
+    history.pushState(nextState, "", nextUrl);
+  }
+
+  window.dispatchEvent(new Event("popstate"));
 };
 
-/**
- * intercept click event on anchor element
- * prevent default and call navigate instead
- */
-document.addEventListener("click", (event) => {
-  let el = event.target as HTMLElement | null;
-  while (el && !isAnchorElement(el)) el = el.parentElement;
+export const createRouter = () => {
+  // rely on native event for subscription
+  const subscribe = (h: () => void) => {
+    window.addEventListener("popstate", h);
+    return () => window.addEventListener("popstate", h);
+  };
 
-  if (
-    isAnchorElement(el) &&
-    !event.ctrlKey &&
-    !event.altKey &&
-    event.button === 0 &&
-    !event.defaultPrevented &&
-    !(el.target === "_blank") &&
-    isInternalUrl(el.href)
-  ) {
-    event.preventDefault();
-    const { pathname } = new URL(el.href);
-    navigate(pathname as Route, {
-      replace: !!el.hasAttribute("data-replace"),
-      orBack: !!el.hasAttribute("data-or-back"),
-    });
-  }
-});
+  // intercept click event on anchor element
+  // prevent default and call navigate instead
+  document.addEventListener("click", (event) => {
+    const anchorEl = (event.target as HTMLElement | null)?.closest("a");
 
-const isAnchorElement = (x: any): x is HTMLAnchorElement => x?.nodeName === "A";
+    if (
+      anchorEl &&
+      !event.ctrlKey &&
+      !event.altKey &&
+      !event.metaKey &&
+      event.button === 0 &&
+      !event.defaultPrevented &&
+      !(anchorEl.target === "_blank") &&
+      isInternalUrl(anchorEl.href)
+    ) {
+      event.preventDefault();
+      const { pathname } = new URL(anchorEl.href, window.location.href);
+      navigate(pathname, {
+        replace: !!anchorEl.hasAttribute("data-replace"),
+        orBack: !!anchorEl.hasAttribute("data-or-back"),
+      });
+    }
+  });
+
+  const getUrl = () => window.location.pathname;
+
+  return { subscribe, navigate, getUrl };
+};
+
+export type Router = ReturnType<typeof createRouter>;
 
 const isInternalUrl = (href: string) => {
   const u = new URL(href, window.location.href);
   return u.origin === window.location.origin;
 };
-
-export const useUrl = () => urlStore().url;
-export const useNavigate = () => navigate;
