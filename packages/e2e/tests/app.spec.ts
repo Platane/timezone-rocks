@@ -116,6 +116,25 @@ test("Should add, persist and remove pins", async ({ page }) => {
   });
 });
 
+test("Should add pin label", async ({ page }) => {
+  await page.goto("/");
+
+  await test.step("editing label", async () => {
+    await page.getByRole("button", { name: "rename location" }).click();
+
+    await page.getByPlaceholder("Stockholm").fill("Charles");
+    await page.getByPlaceholder("Stockholm").press("Enter");
+
+    await expect(page.getByText("Charles")).toHaveCount(2);
+  });
+
+  await test.step("a reload persists the labels", async () => {
+    await page.reload();
+
+    await expect(page.getByText("Charles")).toHaveCount(2);
+  });
+});
+
 test("Should set the date, move the slider and share the state", async ({
   page,
 }) => {
