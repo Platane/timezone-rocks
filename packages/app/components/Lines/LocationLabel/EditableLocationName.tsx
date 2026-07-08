@@ -62,7 +62,7 @@ export const EditableLocationName = ({
           startEditing();
         }}
       >
-        {name}
+        <label htmlFor={`pin-` + pin.id}>{name}</label>
         {pin.label && <span className={s.subName}>{location.name}</span>}
         <EditIcon className={s.icon} />
       </button>

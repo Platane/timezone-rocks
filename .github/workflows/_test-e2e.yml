@@ -49,7 +49,7 @@ jobs:
           bunx playwright test \
             --project ${{ matrix.browser }} \
             --shard ${{ matrix.shardIndex }}/${{ env.shardTotal }} \
-            --reporter github,blob \
+            --reporter github,blob,list \
             --forbid-only \
             --workers 1
         working-directory: packages/e2e

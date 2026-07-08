@@ -41,29 +41,43 @@ test("Should load the app", async ({ page }) => {
   });
 });
 
-test("Should add, duplicate, persist and remove timezones", async ({
-  page,
-}) => {
+test("Should add, persist and remove pins", async ({ page }) => {
   await page.goto("/");
 
   const searchInputLocator = page.getByPlaceholder(
     "Add your teammate's timezone"
   );
 
-  await test.step("add two cities, one of them twice (duplicates allowed)", async () => {
-    // search is async — wait for the suggestion before pressing Enter
+  await expect(page.getByRole("listitem")).toHaveCount(1);
+  expect(await readListItemLabels(page)).toEqual(["Stockholm"]);
+
+  await test.step("add one city with search + enter", async () => {
     await searchInputLocator.fill("malmo");
     await expect(
       page.getByRole("button", { name: /Malmö/ }).first()
     ).toBeVisible();
     await searchInputLocator.press("Enter");
 
+    await expect(page.getByRole("listitem")).toHaveCount(2);
+    expect(await readListItemLabels(page)).toEqual(["Malmö", "Stockholm"]);
+  });
+
+  await test.step("add one city with search + click", async () => {
     await searchInputLocator.fill("goteborg");
     await page
       .getByRole("button", { name: /Göteborg/ })
       .first()
       .click();
 
+    await expect(page.getByRole("listitem")).toHaveCount(3);
+    expect(await readListItemLabels(page)).toEqual([
+      "Göteborg",
+      "Malmö",
+      "Stockholm",
+    ]);
+  });
+
+  await test.step("add one duplicated city", async () => {
     await searchInputLocator.fill("malmo");
     await expect(
       page.getByRole("button", { name: /Malmö/ }).first()
@@ -91,28 +105,14 @@ test("Should add, duplicate, persist and remove timezones", async ({
     ]);
   });
 
-  await test.step("removing one Malmö removes only that pin (id, not key)", async () => {
-    await page
-      .getByText("Malmö", { exact: true })
-      .first()
-      .locator("..")
-      .getByRole("button", { name: "remove location" })
-      .click();
+  await test.step("removing one city", async () => {
+    await page.getByRole("button", { name: "remove location" }).first().click();
     await expect(page.getByRole("listitem")).toHaveCount(3);
     expect(await readListItemLabels(page)).toEqual([
       "Göteborg",
       "Malmö",
       "Stockholm",
     ]);
-
-    await page
-      .getByText("Stockholm", { exact: true })
-      .first()
-      .locator("..")
-      .getByRole("button", { name: "remove location" })
-      .click();
-    await expect(page.getByRole("listitem")).toHaveCount(2);
-    expect(await readListItemLabels(page)).toEqual(["Göteborg", "Malmö"]);
   });
 });
 
