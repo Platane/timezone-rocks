@@ -4,13 +4,13 @@
   "private": true,
   "dependencies": {
     "@tzr/utils": "0.0.1",
-    "cheerio": "1.1.2",
-    "unzipper": "0.12.3"
+    "cheerio": "1.2.0",
+    "unzipper": "0.12.5"
   },
   "devDependencies": {
     "@types/unzipper": "0.10.11"
   },
   "scripts": {
-    "build": "bun --eval \"require('./build.ts').build().then(res=>require('fs').writeFileSync('../location-index/assets/locations.csv',res))\" "
+    "build": "bun --eval \"Bun.write('../location-index/assets/locations.csv',await require('./build.ts').build())\" "
   }
 }

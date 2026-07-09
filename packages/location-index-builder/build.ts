@@ -1,7 +1,7 @@
-import { isNonNull } from "@tzr/utils/utils-array";
 import { load as CheerioLoad } from "cheerio";
 import * as unzipper from "unzipper";
 import { limit } from "./options";
+import { fetch } from "./cached-fetch";
 
 export const getTimezoneAbbreviations = async () => {
   const text = await fetch(
@@ -34,7 +34,7 @@ export const getTimezoneAbbreviations = async () => {
 
       return { abbreviation, name, offset };
     })
-    .filter(isNonNull);
+    .filter((x) => x !== undefined);
 };
 
 export const getCountries = async () => {
@@ -137,7 +137,7 @@ export const getTimeZones = async () => {
       if (!timezone) return undefined;
       return { timezone, offset: +offset, offsetDST: +offsetDST };
     })
-    .filter(isNonNull);
+    .filter((x) => x !== undefined);
 };
 
 export const getLocations = async (limit: number = Infinity) => {
@@ -168,7 +168,7 @@ export const getLocations = async (limit: number = Infinity) => {
         timezone: mainCity.timezone,
       };
     })
-    .filter(isNonNull);
+    .filter((x) => x !== undefined);
 
   const locationCity = cities
     .sort((a, b) => b.population - a.population)
@@ -200,7 +200,7 @@ export const getLocations = async (limit: number = Infinity) => {
 
           if (mainCity) return { ...mainCity, ...admin };
         })
-        .filter(isNonNull);
+        .filter((x) => x !== undefined);
 
       // if the country don't span over multiple timezone, don't include the admin level
       if (!countryAdmins.some((a) => a.timezone !== countryAdmins[0].timezone))
