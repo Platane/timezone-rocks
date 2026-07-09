@@ -31,5 +31,5 @@ npm run dev
 
 ```sh
 # set the tag "live" to the current commit
-git tag live -f ; git push --tags -f
+git tag live -f && git push -f origin live
 ```
