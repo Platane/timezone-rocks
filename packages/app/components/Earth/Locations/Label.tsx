@@ -9,7 +9,7 @@ import {
 } from "../../../store/store";
 import { formatTime } from "../../../intl/format";
 import { Avatar as AnimatedAvatar } from "@tzr/avatar";
-import { getFlagEmoji } from "../../../flags/emoji";
+import { Flag } from "../../../flags/Flag";
 import { useDebouncedValue } from "../../../hooks/useDebouncedValue";
 import { ILocation } from "@tzr/location-index";
 import { getColors } from "./getColors";
@@ -38,9 +38,7 @@ export const Label = ({ store, pin }: { store: Store; pin: Pin }) => {
       <div className={s.labelFooter}>
         {pin.label && <span className={s.labelCustom}>{" " + pin.label}</span>}
         {location.countryCode && (
-          <span className={s.labelFlag}>
-            {getFlagEmoji(location.countryCode)}
-          </span>
+          <Flag countryCode={location.countryCode} className={s.labelFlag} />
         )}
       </div>
     </div>

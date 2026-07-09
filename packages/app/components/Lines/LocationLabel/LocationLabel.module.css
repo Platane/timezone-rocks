@@ -18,8 +18,12 @@
 .flag {
   display: inline-block;
   margin-top: auto;
-  font-size: 12px;
+  margin-bottom: 2px;
   margin-left: 8px;
+  width: 16px;
+  height: auto;
+  border-radius: 2px;
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.15);
 }
 .name {
   display: inline-block;

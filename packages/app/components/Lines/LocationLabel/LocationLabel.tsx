@@ -1,4 +1,4 @@
-import { getFlagEmoji } from "../../../flags/emoji";
+import { Flag } from "../../../flags/Flag";
 import { formatOffset } from "../../../intl/format";
 import { removePin, selectPin } from "../../../store/mutators";
 import { useValue } from "../../../store/hooks";
@@ -35,11 +35,12 @@ export const LocationLabel = ({ store, pin, pins, t }: Props) => {
 
       {!editing && (
         <>
-          <span className={s.flag}>
-            {pin.location.countryCode
-              ? getFlagEmoji(pin.location.countryCode)
-              : ""}
-          </span>
+          {pin.location.countryCode && (
+            <Flag
+              countryCode={pin.location.countryCode}
+              className={s.flag}
+            />
+          )}
 
           <span className={s.offset}>
             {formatOffset(getTimezoneOffset(pin.location.timezone, t))}

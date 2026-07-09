@@ -1,7 +1,7 @@
 import type { LocationSearcher } from "@tzr/location-index";
 import type { TextFragments } from "@tzr/location-index/search/splitFragments";
 import { useEffect, useRef, useState } from "react";
-import { getFlagEmoji } from "../../flags/emoji";
+import { Flag } from "../../flags/Flag";
 import { useExtendedTruthiness } from "../../hooks/useExtendedTruthiness";
 import { usePreviousUntilTruthy } from "../../hooks/usePreviousUntilTruthy";
 import { addPin } from "../../store/mutators";
@@ -97,7 +97,11 @@ export const Search = ({
               }}
             >
               <span className={s.suggestionFlag}>
-                {c.type === "timezone" ? "🕒" : getFlagEmoji(c.countryCode)}
+                {c.type === "timezone" ? (
+                  "🕒"
+                ) : (
+                  <Flag countryCode={c.countryCode} className={s.flagIcon} />
+                )}
               </span>
               <span className={s.suggestionName}>
                 <FragmentedText fragments={c.fragments} />

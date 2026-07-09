@@ -8,6 +8,7 @@
     "@tzr/avatar": "0.0.1",
     "@tzr/location-index": "0.0.1",
     "@tzr/utils": "0.0.1",
+    "country-flag-icons": "^1.6.20",
     "ical.js": "2.2.1",
     "lodash.deburr": "4.1.0",
     "luxon": "3.7.2",
@@ -23,6 +24,7 @@
     "@types/luxon": "3.7.2",
     "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
-    "@types/three": "0.185.0"
+    "@types/three": "0.185.0",
+    "svgo": "^4.0.1"
   }
 }
