@@ -1,7 +1,7 @@
 import React from "react";
 import { selectPin } from "../../store/mutators";
 import { selectPins, selectT, selectTWindow } from "../../store/selectors";
-import { useValue } from "../../store/hooks";
+import { useValue, useValueAnimationFrameBound } from "../../store/hooks";
 import type { Store } from "../../store/store";
 import { getBlocks } from "../../timezone/interval";
 import { DateSliderRange } from "./DateSliderRange";
@@ -12,7 +12,7 @@ import s from "./Lines.module.css";
 export const Lines = ({ store }: { store: Store }) => {
   const pins = useValue(store, selectPins);
   const tWindow = useValue(store, selectTWindow);
-  const t = useValue(store, selectT);
+  const t = useValueAnimationFrameBound(store, selectT);
 
   const toRatio = (x: number) => (x - tWindow[0]) / (tWindow[1] - tWindow[0]);
 

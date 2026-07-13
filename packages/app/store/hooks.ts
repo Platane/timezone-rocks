@@ -25,3 +25,40 @@ export const useValue = <T>(store: Store, selector: (s: State) => T) => {
 
   return ref.current!.value;
 };
+
+/**
+ * same as useValue, but tied to raf
+ */
+export const useValueAnimationFrameBound = <T>(
+  store: Store,
+  selector: (s: State) => T
+) => {
+  const ref = React.useRef<{ value: T; selector: (s: State) => T }>(undefined);
+
+  if (ref.current?.selector !== selector) {
+    ref.current = { selector, value: selector(store.getState()) };
+  }
+
+  const [, refresh] = React.useReducer((x) => x + 1, 0);
+
+  React.useEffect(() => {
+    let raf: number;
+
+    const unsubscribe = store.subscribe(() => {
+      const r = ref.current!;
+      const nextValue = r.selector(store.getState());
+      if (!Object.is(nextValue, r.value)) {
+        r.value = nextValue;
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(refresh);
+      }
+    });
+
+    return () => {
+      cancelAnimationFrame(raf);
+      unsubscribe();
+    };
+  }, [store]);
+
+  return ref.current!.value;
+};
