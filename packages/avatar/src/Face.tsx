@@ -6,9 +6,9 @@ import s from "./Face.module.css";
 export const Face = (props: Props) => (
   <>
     <g transform="translate(280,200)">
-      <g className={s.groupJitter} data-pose={props.pose}>
-        <g className={s.groupPosition} data-pose={props.pose}>
-          <g className={s.groupPillowPosition} data-pose={props.pose}>
+      <g className={s.groupJitter}>
+        <g className={s.groupPosition}>
+          <g className={s.groupPillowPosition}>
             <Pillow {...props} />
           </g>
 
@@ -37,7 +37,6 @@ export const Face = (props: Props) => (
 
 const Eye = ({
   side,
-  pose,
   transform,
   color,
   colorDark,
@@ -45,7 +44,7 @@ const Eye = ({
   <g transform={transform}>
     <circle cx={0} cy={0} r={26} fill="#E4E1C3" />
 
-    <g className={s.groupCheek} data-pose={pose} data-side={side}>
+    <g className={s.groupCheek} data-side={side}>
       <path
         transform="scale(1.4)"
         fill={color}
@@ -54,7 +53,7 @@ const Eye = ({
       />
     </g>
 
-    <g className={s.groupBrow} data-pose={pose}>
+    <g className={s.groupBrow}>
       <path
         transform="scale(1.4)"
         fill={colorDark}

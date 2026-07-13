@@ -5,15 +5,19 @@ import { Props } from "./type";
 import s from "./HandRight.module.css";
 
 export const HandRight = (props: Props) => (
-  <g className={s.groupJitter} data-pose={props.pose}>
-    <g className={s.groupPosition} data-pose={props.pose}>
-      {props.pose === "morning" && <FistHand {...props} />}
-      {props.pose === "afternoon" && <BeerHand {...props} />}
-      {props.pose === "day" && (
+  <g className={s.groupJitter}>
+    <g className={s.groupPosition}>
+      <g data-pose-when="morning">
+        <FistHand {...props} />
+      </g>
+      <g data-pose-when="afternoon">
+        <BeerHand {...props} />
+      </g>
+      <g data-pose-when="day">
         <g transform="scale(1,-1)">
           <PointyHand {...props} />
         </g>
-      )}
+      </g>
     </g>
   </g>
 );

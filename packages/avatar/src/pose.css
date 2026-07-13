@@ -1,0 +1,12 @@
+/* Pose-based visibility, in one place.
+ * The root <svg> carries the active pose in `data-avatar-pose`; a part is shown
+ * only for the pose(s) listed in its `data-pose-when` (space-separated). */
+[data-pose-when] {
+  display: none;
+}
+svg[data-avatar-pose="night"] [data-pose-when~="night"],
+svg[data-avatar-pose="morning"] [data-pose-when~="morning"],
+svg[data-avatar-pose="day"] [data-pose-when~="day"],
+svg[data-avatar-pose="afternoon"] [data-pose-when~="afternoon"] {
+  display: block;
+}

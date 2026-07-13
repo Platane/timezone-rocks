@@ -1,15 +1,15 @@
 .jitter {
-  &[data-pose="afternoon"] {
+  svg[data-avatar-pose="afternoon"] & {
     animation: afternoon 1s linear infinite;
   }
-  &[data-pose="day"] {
+  svg[data-avatar-pose="day"] & {
     animation: day 600ms linear infinite;
   }
-  &[data-pose="night"] {
+  svg[data-avatar-pose="night"] & {
     transform: rotate(-122deg) scale(3, 1) rotate(122deg);
     animation: night 2.5s linear infinite;
   }
-  &[data-pose="morning"] {
+  svg[data-avatar-pose="morning"] & {
     transform: scale(0.3);
   }
 }

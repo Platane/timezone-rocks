@@ -3,25 +3,25 @@
 
   transform: translate(130px, 270px);
 
-  &[data-pose="night"] {
+  svg[data-avatar-pose="night"] & {
     transform: translate(237px, 273px);
   }
-  &[data-pose="morning"] {
+  svg[data-avatar-pose="morning"] & {
     transform: translate(130px, 270px);
   }
-  &[data-pose="day"] {
+  svg[data-avatar-pose="day"] & {
     transform: translate(120px, 270px) rotate(-108deg);
   }
-  &[data-pose="afternoon"] {
+  svg[data-avatar-pose="afternoon"] & {
     transform: translate(150px, 160px) rotate(10deg);
   }
 }
 
 .groupJitter {
-  &[data-pose="day"] {
+  svg[data-avatar-pose="day"] & {
     animation: day 300ms linear infinite;
   }
-  &[data-pose="afternoon"] {
+  svg[data-avatar-pose="afternoon"] & {
     animation: afternoon 1200ms linear infinite;
   }
 }

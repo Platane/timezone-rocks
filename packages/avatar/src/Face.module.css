@@ -4,7 +4,7 @@
   animation: disappear 0.2s ease-out;
   transition: transform 0.4s ease-out;
   transform: translate(-240px, 0) rotate(-45deg);
-  &[data-pose="night"] {
+  svg[data-avatar-pose="night"] & {
     visibility: visible;
     opacity: 1;
     animation: appear 0.4s ease-in-out;
@@ -36,15 +36,15 @@
   transform: translate(0, 0);
   transition: transform 400ms linear;
 
-  &[data-pose="night"] {
+  svg[data-avatar-pose="night"] & {
     transform: translate(10px, -22px) scale(1, 1.5);
   }
 
-  &[data-pose="day"] {
+  svg[data-avatar-pose="day"] & {
     transform: translate(0, 24px) scale(1, 0.4);
   }
 
-  &[data-pose="afternoon"] {
+  svg[data-avatar-pose="afternoon"] & {
     &[data-side="eye-right"] {
       transform: translate(5px, -10px) scale(1.05, 1.1);
     }
@@ -54,7 +54,7 @@
     }
   }
 
-  &[data-pose="morning"] {
+  svg[data-avatar-pose="morning"] & {
     transform: translate(0, -5.5px);
     animation: cheekMorning 3.1s linear infinite;
   }
@@ -115,15 +115,15 @@
   transform: translate(0, 0);
   transition: transform 300ms linear;
 
-  &[data-pose="night"] {
+  svg[data-avatar-pose="night"] & {
     transform: translate(0, 5px);
   }
 
-  &[data-pose="day"] {
+  svg[data-avatar-pose="day"] & {
     transform: translate(0, -22px) scale(0.9, 0.7);
   }
 
-  &[data-pose="morning"] {
+  svg[data-avatar-pose="morning"] & {
     transform: translate(0, 12.5px) scale(1.1, 1.15);
     animation: browMorning 3.1s linear infinite;
   }
@@ -162,26 +162,26 @@
 .groupPosition {
   transition: transform 400ms linear;
 
-  &[data-pose="night"] {
+  svg[data-avatar-pose="night"] & {
     transform: translate(0, -30px) rotate(-75deg) scale(0.9, 1);
   }
 }
 
 .groupJitter {
-  &[data-pose="day"] {
+  svg[data-avatar-pose="day"] & {
     animation: day 800ms linear infinite;
   }
 
-  &[data-pose="afternoon"] {
+  svg[data-avatar-pose="afternoon"] & {
     animation: afternoon 800ms linear infinite;
   }
 
-  &[data-pose="night"] {
+  svg[data-avatar-pose="night"] & {
     animation: night 2.5s linear infinite;
     transform: translate(-118px, 0);
   }
 
-  &[data-pose="morning"] {
+  svg[data-avatar-pose="morning"] & {
     animation: faceMorning 3.1s linear infinite;
   }
 }
