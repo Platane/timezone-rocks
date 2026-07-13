@@ -103,8 +103,11 @@ export const Locations = ({ store }: { store: Store }) => {
         const el = domContainer.children[i] as HTMLElement;
 
         const { p, z } = node.userData as NodeU;
-        const x = p.x;
-        const y = p.y;
+        // snap to whole pixels: a fractional translate composites the label
+        // (and its flag) off the pixel grid, resampling the flag's edges into a
+        // pale fringe that reads as a white border.
+        const x = Math.round(p.x);
+        const y = Math.round(p.y);
         el.style.transform = `translate(${x}px, ${y}px)`;
 
         const zIndex =

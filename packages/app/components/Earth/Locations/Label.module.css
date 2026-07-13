@@ -22,7 +22,10 @@
   gap: 4px;
 }
 .labelFlag {
-  font-size: 22px;
+  width: 24px;
+  aspect-ratio: 3 / 2;
+  border-radius: 2px;
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.15);
 }
 .labelCustom {
   max-width: 80px;
