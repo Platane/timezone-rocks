@@ -1,5 +1,3 @@
-
-
 ## TODO
 
 - [x] 3d on earth avatar
@@ -10,4 +8,5 @@
 - [x] improve cloudflare deployment process ([ref](https://medium.com/swlh/using-cloudflare-workers-and-github-actions-to-deploy-statically-generated-sites-c96b502d49c4))
 - [x] use a input=range in place of the slider for accessibility [ref](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/slider_role)
 - [ ] improve label phy engine
-- [ ] use svg flags instead of emojis, [those](https://www.npmjs.com/package/country-flag-icons) are nice
+- [ ] speed up rendering, avoid react render loop for critical update [draft](https://github.com/Platane/timezone-rocks/pull/22)
+- [ ] use svg flags instead of emojis, [those](https://www.npmjs.com/package/country-flag-icons) are nice [draft](https://github.com/Platane/timezone-rocks/pull/21)
