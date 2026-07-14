@@ -4,7 +4,7 @@
   animation: disappear 0.2s ease-out;
   transition: transform 0.3s ease-out;
   transform: translate(190px, 460px) scale(0.75) rotate(45deg);
-  &[data-pose="day"] {
+  svg[data-avatar-pose="day"] & {
     visibility: visible;
     opacity: 1;
     animation: appear 0.2s ease-in-out;
@@ -14,7 +14,7 @@
 }
 
 .groupJitter {
-  &[data-pose="day"] {
+  svg[data-avatar-pose="day"] & {
     animation: day 300ms linear infinite;
   }
 }

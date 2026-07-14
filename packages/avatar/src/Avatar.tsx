@@ -1,4 +1,5 @@
 import React from "react";
+import "./pose.css";
 import { Face } from "./Face";
 import { Props } from "./type";
 import { Laptop } from "./Laptop";
@@ -13,6 +14,7 @@ export const Avatar = ({ className, style, ...props }: Props) => {
       style={style}
       viewBox="28 25 420 335"
       className={className}
+      data-avatar-pose={props.pose}
       role="img"
       aria-label={`avatar in the pose ${props.pose}`}
     >

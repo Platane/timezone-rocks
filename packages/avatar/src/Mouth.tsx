@@ -1,14 +1,20 @@
-import { Props } from "./type";
+import { Pose, Props } from "./type";
 import s from "./Mouth.module.css";
 
-export const Mouth = ({ pose, className, transform }: Props) => (
+const poses: Pose[] = ["afternoon", "morning", "day", "night"];
+
+export const Mouth = ({ className, transform }: Props) => (
   <g className={className} transform={transform}>
-    <g className={s.jitter} data-pose={pose}>
-      <path
-        d={mouthPaths[pose]}
-        fill="#333"
-        transform="matrix( 1.48944091796875, 0, 0, 1.48944091796875, -74,-155)"
-      />
+    <g className={s.jitter}>
+      {poses.map((pose) => (
+        <path
+          key={pose}
+          data-pose-when={pose}
+          d={mouthPaths[pose]}
+          fill="#333"
+          transform="matrix( 1.48944091796875, 0, 0, 1.48944091796875, -74,-155)"
+        />
+      ))}
     </g>
   </g>
 );

@@ -4,12 +4,14 @@ import { Props } from "./type";
 import s from "./HandLeft.module.css";
 
 export const HandLeft = (props: Props) => (
-  <g className={s.groupJitter} data-pose={props.pose}>
-    <g className={s.groupPosition} data-pose={props.pose}>
-      {props.pose === "morning" && <TeaCup {...props} />}
-      {(props.pose === "day" || props.pose === "afternoon") && (
+  <g className={s.groupJitter}>
+    <g className={s.groupPosition}>
+      <g data-pose-when="morning">
+        <TeaCup {...props} />
+      </g>
+      <g data-pose-when="day afternoon">
         <PointyHand {...props} />
-      )}
+      </g>
     </g>
   </g>
 );

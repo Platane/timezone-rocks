@@ -1,9 +1,9 @@
 import { Props } from "./type";
 import s from "./Laptop.module.css";
 
-export const Laptop = (props: Props) => (
-  <g className={s.groupJitter} data-pose={props.pose}>
-    <g className={s.groupPosition} data-pose={props.pose}>
+export const Laptop = (_props: Props) => (
+  <g className={s.groupJitter}>
+    <g className={s.groupPosition}>
       <g transform="scale(3.5) translate( -80, -95 )">
         <path
           fill="#9baac6"
